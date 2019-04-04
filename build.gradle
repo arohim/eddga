@@ -53,6 +53,7 @@ group "com.robohorse.robopojogenerator"
 version "1.9.1"
 
 intellij {
+    version '2018.1.6'
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
     //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
