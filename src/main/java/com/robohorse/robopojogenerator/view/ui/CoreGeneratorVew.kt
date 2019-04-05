@@ -8,18 +8,20 @@ import javax.swing.*
 import java.io.IOException
 
 class CoreGeneratorVew {
-    val rootView: JPanel? = null
-    val generateButton: JButton? = null
-    private var textArea: RSyntaxTextArea? = null
-    private var scrollView: JScrollPane? = null
-    val genRogueCheckBox: JCheckBox? = null
-    val genDataCheckBox: JCheckBox? = null
-    val genDomainCheckBox: JCheckBox? = null
-    val genCacheCheckBox: JCheckBox? = null
-    val domainPath: JTextField? = null
-    val dataPath: JTextField? = null
-    val cachePath: JTextField? = null
-    val roguePath: JTextField? = null
+    var rootView: JPanel? = null
+    var generateButton: JButton? = null
+    var textArea: RSyntaxTextArea? = null
+    var scrollView: JScrollPane? = null
+    var genRogueCheckBox: JCheckBox? = null
+    var genDataCheckBox: JCheckBox? = null
+    var genDomainCheckBox: JCheckBox? = null
+    var genCacheCheckBox: JCheckBox? = null
+    var domainPath: JTextField? = null
+    var dataPath: JTextField? = null
+    var cachePath: JTextField? = null
+    var roguePath: JTextField? = null
+    var languageGroup: ButtonGroup? = null
+    var typeButtonGroup: ButtonGroup? = null
 
     fun getTextArea(): JTextArea? {
         return textArea

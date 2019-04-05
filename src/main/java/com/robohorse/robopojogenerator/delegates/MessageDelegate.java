@@ -52,7 +52,7 @@ public class MessageDelegate {
         });
     }
 
-    private void showMessage(String message, String header) {
+    public void showMessage(String message, String header) {
         Messages.showDialog(message, header, new String[]{"OK"}, -1, null);
     }
 }

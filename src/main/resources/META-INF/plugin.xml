@@ -80,9 +80,9 @@
                description="Kaidee Plugin">
             <add-to-group group-id="MainMenu" anchor="last"/>
 
-            <action id="com.robohorse.robopojogenerator.actions.CorePOJOAction"
+            <action id="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"
                     icon="/icons/pojo.png"
-                    class="com.robohorse.robopojogenerator.actions.CorePOJOAction" text="Core POJO from JSON"
+                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction" text="Core POJO from JSON"
                     description="CorePOJOAction">
                 <add-to-group group-id="NewGroup" anchor="last"/>
             </action>
