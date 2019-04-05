@@ -73,4 +73,19 @@
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
     </actions>
+
+    <actions>
+        <group id="MyPlugin.TopMenu"
+               text="Kaidee Plugin"
+               description="Kaidee Plugin">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+
+            <action id="com.robohorse.robopojogenerator.actions.CorePOJOAction"
+                    icon="/icons/pojo.png"
+                    class="com.robohorse.robopojogenerator.actions.CorePOJOAction" text="Core POJO from JSON"
+                    description="CorePOJOAction">
+                <add-to-group group-id="NewGroup" anchor="last"/>
+            </action>
+        </group>
+    </actions>
 </idea-plugin>
