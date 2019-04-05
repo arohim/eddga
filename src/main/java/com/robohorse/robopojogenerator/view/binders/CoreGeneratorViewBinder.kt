@@ -16,13 +16,14 @@ constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: GuiFormEventListener) {
         val generatorVew = CoreGeneratorVew()
+        val basePath = event.project?.basePath
 
         val actionListener = CoreGenerateActionListener(generatorVew, event, eventListener)
         generatorVew.generateButton.addActionListener(actionListener)
-        generatorVew.domainPathButton.addActionListener(object : ChooseFileActionListener(event.project?.basePath, generatorVew.domainPath) {})
-        generatorVew.cachePathButton.addActionListener(object : ChooseFileActionListener(event.project?.basePath, generatorVew.cachePath) {})
-        generatorVew.dataPathButton.addActionListener(object : ChooseFileActionListener(event.project?.basePath, generatorVew.dataPath) {})
-        generatorVew.roguePathButton.addActionListener(object : ChooseFileActionListener(event.project?.basePath, generatorVew.roguePath) {})
+        generatorVew.domainPathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.domainPath) {})
+        generatorVew.cachePathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.cachePath) {})
+        generatorVew.dataPathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.dataPath) {})
+        generatorVew.roguePathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.roguePath) {})
 
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
