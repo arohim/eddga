@@ -33,7 +33,7 @@ open class CoreGeneratorActionController @Inject constructor() {
         val dialogBuilder = DialogBuilder()
         val window = dialogBuilder.window
 
-        coreGeneratorViewBinder.bindView(dialogBuilder, GuiFormEventListener {
+        coreGeneratorViewBinder.bindView(dialogBuilder, event, GuiFormEventListener {
             window.dispose()
         })
     }

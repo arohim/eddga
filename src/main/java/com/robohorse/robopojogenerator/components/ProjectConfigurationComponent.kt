@@ -15,10 +15,10 @@ class ProjectConfigurationComponent(project: Project? = null) :
         Serializable,
         PersistentStateComponent<ProjectConfigurationComponent> {
 
-    val roguePath: String? = null
-    val remotePath: String? = null
-    val dataPath: String? = null
-    val domainPath: String? = null
+    var cachePath: String = ""
+    var dataPath: String = ""
+    var domainPath: String = ""
+    var roguePath: String = ""
 
     override fun getState(): ProjectConfigurationComponent? = this
 

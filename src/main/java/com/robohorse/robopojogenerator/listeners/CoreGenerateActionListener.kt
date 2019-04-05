@@ -1,5 +1,7 @@
 package com.robohorse.robopojogenerator.listeners
 
+import com.intellij.openapi.actionSystem.AnActionEvent
+import com.robohorse.robopojogenerator.components.ProjectConfigurationComponent
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
@@ -13,6 +15,7 @@ import javax.inject.Inject
  * Created by vadim on 24.09.16.
  */
 class CoreGenerateActionListener(private val generatorVew: CoreGeneratorVew,
+                                 private val event: AnActionEvent,
                                  private val eventListener: GuiFormEventListener) : ActionListener {
 
     @Inject
@@ -28,6 +31,14 @@ class CoreGenerateActionListener(private val generatorVew: CoreGeneratorVew,
     override fun actionPerformed(e: ActionEvent) {
         //        final JTextArea textArea = generatorVew.getTextArea();
         val annotationEnum = resolveAnnotationItem()
+
+        event.project?.let {
+            val component = ProjectConfigurationComponent.getInstance(it)
+            component.domainPath = generatorVew.domainPath.text
+            component.dataPath = generatorVew.dataPath.text
+            component.cachePath = generatorVew.cachePath.text
+            component.roguePath = generatorVew.roguePath.text
+        }
     }
 
     private fun resolveAnnotationItem(): AnnotationEnum {
