@@ -65,7 +65,9 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <editable value="true"/>
+                    </properties>
                   </component>
                   <component id="ae5c0" class="javax.swing.JTextField" binding="dataPath">
                     <constraints>
@@ -89,7 +91,9 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <editable value="true"/>
+                    </properties>
                   </component>
                   <component id="f501b" class="javax.swing.JCheckBox" binding="genDataCheckBox">
                     <constraints>

@@ -3,9 +3,9 @@ package com.robohorse.robopojogenerator.view.ui
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants
 import org.fife.ui.rsyntaxtextarea.Theme
-
-import javax.swing.*
 import java.io.IOException
+import javax.swing.*
+
 
 class CoreGeneratorVew {
     var rootView: JPanel? = null
@@ -34,10 +34,9 @@ class CoreGeneratorVew {
         scrollView = JScrollPane(textArea)
         try {
             val theme = Theme.load(javaClass.getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"))
-            theme.apply(textArea!!)
+            theme.apply(textArea)
         } catch (ioe: IOException) {
             ioe.printStackTrace()
         }
-
     }
 }
