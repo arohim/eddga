@@ -5,7 +5,7 @@ import java.awt.event.ActionListener
 import javax.swing.JFileChooser
 import javax.swing.JTextField
 
-open class MouseListenerClicked(private val destinationTextField: JTextField) : ActionListener {
+open class ChooseFile(private val destinationTextField: JTextField) : ActionListener {
     override fun actionPerformed(e: ActionEvent?) {
         val chooser = JFileChooser()
         chooser.fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
