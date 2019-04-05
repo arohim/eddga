@@ -8,20 +8,24 @@ import javax.swing.*
 
 
 class CoreGeneratorVew {
-    var rootView: JPanel? = null
-    var generateButton: JButton? = null
-    var textArea: RSyntaxTextArea? = null
-    var scrollView: JScrollPane? = null
-    var genRogueCheckBox: JCheckBox? = null
-    var genDataCheckBox: JCheckBox? = null
-    var genDomainCheckBox: JCheckBox? = null
-    var genCacheCheckBox: JCheckBox? = null
-    var domainPath: JTextField? = null
-    var dataPath: JTextField? = null
-    var cachePath: JTextField? = null
-    var roguePath: JTextField? = null
-    var languageGroup: ButtonGroup? = null
-    var typeButtonGroup: ButtonGroup? = null
+    lateinit var rootView: JPanel
+    lateinit var generateButton: JButton
+    lateinit var textArea: RSyntaxTextArea
+    lateinit var scrollView: JScrollPane
+    lateinit var genRogueCheckBox: JCheckBox
+    lateinit var genDataCheckBox: JCheckBox
+    lateinit var genDomainCheckBox: JCheckBox
+    lateinit var genCacheCheckBox: JCheckBox
+    lateinit var domainPath: JTextField
+    lateinit var domainPathButton: JButton
+    lateinit var dataPath: JTextField
+    lateinit var dataPathButton: JButton
+    lateinit var cachePath: JTextField
+    lateinit var cachePathButton: JButton
+    lateinit var roguePath: JTextField
+    lateinit var roguePathButton: JButton
+    lateinit var languageGroup: ButtonGroup
+    lateinit var typeButtonGroup: ButtonGroup
 
     fun getTextArea(): JTextArea? {
         return textArea
@@ -29,8 +33,8 @@ class CoreGeneratorVew {
 
     private fun createUIComponents() {
         textArea = RSyntaxTextArea()
-        textArea?.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JSON
-        textArea?.isCodeFoldingEnabled = true
+        textArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JSON
+        textArea.isCodeFoldingEnabled = true
         scrollView = JScrollPane(textArea)
         try {
             val theme = Theme.load(javaClass.getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"))

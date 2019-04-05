@@ -16,23 +16,11 @@ constructor() {
         val generatorVew = CoreGeneratorVew()
 
         val actionListener = CoreGenerateActionListener(generatorVew, eventListener)
-        generatorVew.generateButton?.addActionListener(actionListener)
-
-        generatorVew.domainPath?.let {
-            it.addMouseListener(object : MouseListenerClicked(it) {})
-        }
-
-        generatorVew.cachePath?.let {
-            it.addMouseListener(object : MouseListenerClicked(it) {})
-        }
-
-        generatorVew.dataPath?.let {
-            it.addMouseListener(object : MouseListenerClicked(it) {})
-        }
-
-        generatorVew.roguePath?.let {
-            it.addMouseListener(object : MouseListenerClicked(it) {})
-        }
+        generatorVew.generateButton.addActionListener(actionListener)
+        generatorVew.domainPathButton.addActionListener(object : MouseListenerClicked(generatorVew.domainPath) {})
+        generatorVew.cachePathButton.addActionListener(object : MouseListenerClicked(generatorVew.cachePath) {})
+        generatorVew.dataPathButton.addActionListener(object : MouseListenerClicked(generatorVew.dataPath) {})
+        generatorVew.roguePathButton.addActionListener(object : MouseListenerClicked(generatorVew.roguePath) {})
 
         builder.setCenterPanel(generatorVew.rootView)
         builder.setTitle("Core Generator")
