@@ -22,7 +22,7 @@ constructor() {
         generatorVew.generateButton?.addActionListener(actionListener)
 
         builder.setCenterPanel(generatorVew.rootView)
-        builder.setTitle("RoboPOJOGenerator")
+        builder.setTitle("Core Generator")
         builder.removeAllActions()
         builder.show()
     }

@@ -54,7 +54,7 @@ version "1.9.1"
 
 intellij {
     version '2018.1.6'
-    pluginName "RoboPOJOGenerator"
+    pluginName "Android Clean Architecture Generator"
     intellij.updateSinceUntilBuild false
     //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
