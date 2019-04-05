@@ -82,7 +82,8 @@
 
             <action id="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"
                     icon="/icons/pojo.png"
-                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction" text="Core POJO from JSON"
+                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"
+                    text="Core POJO &amp; Mapper Generator"
                     description="CorePOJOAction">
                 <add-to-group group-id="NewGroup" anchor="last"/>
             </action>
