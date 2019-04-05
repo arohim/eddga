@@ -44,5 +44,33 @@
                 description="GeneratePOJOAction">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="RoguePOJOAction" class="com.robohorse.robopojogenerator.actions.RoguePOJOAction"
+                icon="/icons/pojo.png"
+                text="Rogue POJO from JSON"
+                description="Rogue POJO from JSON">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.DataLayerPOJOAction"
+                icon="/icons/pojo.png"
+                text="Data Layer POJO from JSON"
+                description="Data Layer POJO from JSON">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.CacheLayerPOJOAction"
+                icon="/icons/pojo.png"
+                text="Cache Layer POJO from JSON"
+                description="Cache Layer POJO from JSON">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DomainLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.DomainLayerPOJOAction"
+                icon="/icons/pojo.png"
+                text="Domain Layer POJO from JSON"
+                description="Domain Layer POJO from JSON">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 </idea-plugin>
