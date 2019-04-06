@@ -40,7 +40,7 @@ open class ClassProcessor @Inject constructor() {
                     val classField = ClassField(className)
                     val item = JsonItem(jsonObject as JSONObject, jsonObjectKey)
 
-                    classItem.addClassField(fieldClassName, classField)
+                    classItem.addClassField(jsonObjectKey, classField)
                     proceed(item, itemMap, prefix, suffix)
                 }
 
