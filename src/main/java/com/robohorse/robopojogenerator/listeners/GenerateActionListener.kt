@@ -35,11 +35,11 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
         val textField = generatorVew.classNameTextField
 
         val coreLayerEnum = resolveCoreLayerItem()
-        val useKotlin = generatorVew.kotlinCheckBox.isSelected
-        val rewriteClasses = generatorVew.rewriteExistingClassesCheckBox.isSelected
-        val useSetters = generatorVew.useSettersCheckBox.isSelected
-        val useGetters = generatorVew.useGettersCheckBox.isSelected
-        val useStrings = generatorVew.useStringCheckBox.isSelected
+        val useKotlin = true
+        val rewriteClasses = true
+        val useSetters = false
+        val useGetters = false
+        val useStrings = false
 
         var content = textArea.text
         val className = textField.text

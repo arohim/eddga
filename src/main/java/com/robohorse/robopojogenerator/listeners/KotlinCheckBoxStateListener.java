@@ -26,9 +26,6 @@ public class KotlinCheckBoxStateListener implements ItemListener {
     }
 
     private void enableCheckBoxes(GeneratorVew generatorVew, boolean kotlinEnabled) {
-        generatorVew.getUseGettersCheckBox().setEnabled(!kotlinEnabled);
-        generatorVew.getUseSettersCheckBox().setEnabled(!kotlinEnabled);
-        generatorVew.getUseStringCheckBox().setEnabled(!kotlinEnabled);
     }
 
     private void enableRadioButton(GeneratorVew generatorVew, boolean enable) {

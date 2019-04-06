@@ -22,9 +22,5 @@ public class AutoValueSelectionListener implements ItemListener {
     }
 
     private void enableCheckBoxes(GeneratorVew generatorVew, boolean autoValueEnabled) {
-        generatorVew.getUseGettersCheckBox().setEnabled(!autoValueEnabled);
-        generatorVew.getUseSettersCheckBox().setEnabled(!autoValueEnabled);
-        generatorVew.getUseStringCheckBox().setEnabled(!autoValueEnabled);
-        generatorVew.getKotlinCheckBox().setEnabled(!autoValueEnabled);
     }
 }

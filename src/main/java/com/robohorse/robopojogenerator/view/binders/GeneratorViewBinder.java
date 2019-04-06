@@ -25,7 +25,6 @@ public class GeneratorViewBinder {
         final GeneratorVew generatorVew = new GeneratorVew();
         final GenerateActionListener actionListener = new GenerateActionListener(generatorVew, eventListener);
         generatorVew.getGenerateButton().addActionListener(actionListener);
-        generatorVew.getKotlinCheckBox().addItemListener(new KotlinCheckBoxStateListener(generatorVew));
 
         bindGroupViews(generatorVew.getTypeButtonGroup(), generatorVew);
 

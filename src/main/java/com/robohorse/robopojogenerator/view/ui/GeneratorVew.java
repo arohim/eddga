@@ -18,27 +18,10 @@ public class GeneratorVew {
     private JRadioButton RemoteRadioButton;
     private JRadioButton CacheRadioButton;
     private JRadioButton DataRadioButton;
-    private JCheckBox rewriteExistingClassesCheckBox;
     private JTextField className;
     private JScrollPane scrollView;
-    private JCheckBox useSettersCheckBox;
-    private JCheckBox useGettersCheckBox;
-    private JCheckBox kotlinCheckBox;
-    private JCheckBox useStringCheckBox;
     private ButtonGroup languageGroup;
     private ButtonGroup typeButtonGroup;
-
-    public JCheckBox getKotlinCheckBox() {
-        return kotlinCheckBox;
-    }
-
-    public JCheckBox getUseSettersCheckBox() {
-        return useSettersCheckBox;
-    }
-
-    public JCheckBox getUseGettersCheckBox() {
-        return useGettersCheckBox;
-    }
 
     public JPanel getRootView() {
         return rootView;
@@ -74,14 +57,6 @@ public class GeneratorVew {
 
     public JRadioButton getDataRadioButton() {
         return DataRadioButton;
-    }
-
-    public JCheckBox getRewriteExistingClassesCheckBox() {
-        return rewriteExistingClassesCheckBox;
-    }
-
-    public JCheckBox getUseStringCheckBox() {
-        return useStringCheckBox;
     }
 
     private void createUIComponents() {
