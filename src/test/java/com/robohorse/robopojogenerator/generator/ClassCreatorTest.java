@@ -21,10 +21,13 @@ import static org.mockito.Mockito.when;
  * Created by vadim on 22.10.16.
  */
 public class ClassCreatorTest {
+
     @InjectMocks
     ClassCreator classCreator;
+
     @Mock
     RoboPOJOGenerator roboPOJOGenerator;
+
     @Mock
     FileWriterDelegate fileWriterDelegate;
 
@@ -40,14 +43,14 @@ public class ClassCreatorTest {
         classItemSet.add(classItem);
         final GenerationModel generationModel = new GenerationModel
                 .Builder()
+                .setContent("{}")
                 .build();
         final ProjectModel projectModel = new ProjectModel
                 .Builder()
                 .build();
-        when(roboPOJOGenerator.generate(generationModel))
-                .thenReturn(classItemSet);
+
+        when(roboPOJOGenerator.generate(generationModel)).thenReturn(classItemSet);
         classCreator.generateFiles(generationModel, projectModel);
-        verify(fileWriterDelegate)
-                .writeFile(classItem, generationModel, projectModel);
+        verify(fileWriterDelegate).writeFile(classItem, generationModel, projectModel);
     }
 }

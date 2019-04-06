@@ -20,6 +20,7 @@ import static junit.framework.Assert.assertNotNull;
 public class RoboPOJOGeneratorTest {
     @InjectMocks
     RoboPOJOGenerator roboPOJOGenerator;
+
     @Mock
     ClassProcessor classProcessor;
 

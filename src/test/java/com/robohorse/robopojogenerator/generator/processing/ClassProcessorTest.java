@@ -30,6 +30,7 @@ public class ClassProcessorTest {
 
     @InjectMocks
     ClassProcessor classProcessor;
+
     @Mock
     ClassGenerateHelper classGenerateHelper;
 
@@ -48,7 +49,7 @@ public class ClassProcessorTest {
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap, model.getPrefix(), model.getSuffix());
+        classProcessor.proceed(jsonItem, classItemMap);
         assertTrue(classItemMap.size() == 1);
 
         Iterator iterator = classItemMap.values().iterator();
@@ -74,7 +75,7 @@ public class ClassProcessorTest {
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap, model.getPrefix(), model.getSuffix());
+        classProcessor.proceed(jsonItem, classItemMap);
         assertTrue(classItemMap.size() == 2);
 
         for (ClassItem classItem : classItemMap.values()) {
@@ -103,7 +104,7 @@ public class ClassProcessorTest {
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
 
-        classProcessor.proceed(jsonItem, classItemMap, model.getPrefix(), model.getSuffix());
+        classProcessor.proceed(jsonItem, classItemMap);
         assertTrue(classItemMap.size() == 1);
 
         Iterator iterator = classItemMap.values().iterator();
@@ -133,7 +134,7 @@ public class ClassProcessorTest {
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap, model.getPrefix(), model.getSuffix());
+        classProcessor.proceed(jsonItem, classItemMap);
 
         assertTrue(classItemMap.size() == 1);
 
@@ -168,7 +169,7 @@ public class ClassProcessorTest {
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap, model.getPrefix(), model.getSuffix());
+        classProcessor.proceed(jsonItem, classItemMap);
 
         assertTrue(classItemMap.size() == 2);
 

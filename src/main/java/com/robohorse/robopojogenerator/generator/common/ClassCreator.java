@@ -16,6 +16,7 @@ import java.util.Set;
 public class ClassCreator {
     @Inject
     RoboPOJOGenerator roboPOJOGenerator;
+
     @Inject
     FileWriterDelegate fileWriterDelegate;
 
