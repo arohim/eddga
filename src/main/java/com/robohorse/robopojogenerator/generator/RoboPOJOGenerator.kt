@@ -20,7 +20,7 @@ open class RoboPOJOGenerator @Inject constructor() {
 
     fun generate(model: GenerationModel): Set<ClassItem> {
         val jsonObject = JSONObject(model.content)
-        var map = HashMap<String, ClassItem>()
+        val map = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, model.rootClassName)
         processor.proceed(jsonItem, map, model.prefix, model.suffix)
         return HashSet(map.values)
