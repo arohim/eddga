@@ -1,24 +1,19 @@
 package com.robohorse.robopojogenerator.generator.processing
 
-import com.robohorse.robopojogenerator.generator.common.ClassField
 import com.robohorse.robopojogenerator.generator.common.ClassItem
 import com.robohorse.robopojogenerator.generator.common.JsonItem
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
-import org.json.JSONArray
-import org.json.JSONObject
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import testutils.JsonReader
-
-import java.util.HashMap
-
-import org.junit.Assert.*
-import org.mockito.ArgumentMatchers.anyString
-import org.mockito.Mockito.`when`
+import java.util.*
 
 /**
  * Created by vadim on 02.10.16.
@@ -46,11 +41,11 @@ class ClassProcessorTest {
         val prefix = "Prefix"
         val suffix = "Suffix"
 
-        `when`(classGenerateHelper!!.formatClassName(name)).thenReturn(name)
+        `when`(classGenerateHelper.formatClassName(name)).thenReturn(name)
 
         val classItemMap = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, name)
-        classProcessor!!.proceed(jsonItem, classItemMap, prefix, suffix)
+        classProcessor.proceed(jsonItem, classItemMap, prefix, suffix)
         assertTrue(classItemMap.size == 1)
 
         val iterator = classItemMap.values.iterator()

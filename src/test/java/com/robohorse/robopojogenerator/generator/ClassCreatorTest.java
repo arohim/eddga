@@ -57,7 +57,7 @@ public class ClassCreatorTest {
         when(roboPOJOGenerator.generate(generationModel)).thenReturn(classItemSet);
 
         classCreator.generateFiles(generationModel, projectModel);
-        
+
         verify(fileWriterDelegate).writeFile(classItem, generationModel, projectModel);
     }
 }
