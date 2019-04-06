@@ -49,6 +49,14 @@ public class GenerationModel {
         return useStrings;
     }
 
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
     public static class Builder {
         private GenerationModel instance;
 
