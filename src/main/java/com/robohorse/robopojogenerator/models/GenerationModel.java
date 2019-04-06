@@ -11,6 +11,8 @@ public class GenerationModel {
     private AnnotationEnum annotationEnum;
     private String rootClassName;
     private String content;
+    private String suffix;
+    private String prefix;
     private boolean useSetters;
     private boolean useGetters;
     private boolean useStrings;
@@ -83,12 +85,24 @@ public class GenerationModel {
             instance.useGetters = available;
             return this;
         }
+
         public Builder setToStringAvailable(boolean available) {
             instance.useStrings = available;
             return this;
         }
+
         public Builder setContent(String content) {
             instance.content = content;
+            return this;
+        }
+
+        public Builder setPrefix(String prefix) {
+            instance.prefix = prefix;
+            return this;
+        }
+
+        public Builder setSuffix(String suffix) {
+            instance.suffix = suffix;
             return this;
         }
 

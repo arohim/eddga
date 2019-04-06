@@ -44,12 +44,9 @@ public class GeneratePOJOActionController {
         final DialogBuilder dialogBuilder = new DialogBuilder();
         final Window window = dialogBuilder.getWindow();
 
-        generatorViewBinder.bindView(dialogBuilder, new GuiFormEventListener() {
-            @Override
-            public void onJsonDataObtained(GenerationModel generationModel) {
-                window.dispose();
-                generationDelegate.runGenerationTask(generationModel, projectModel);
-            }
+        generatorViewBinder.bindView(dialogBuilder, generationModel -> {
+            window.dispose();
+            generationDelegate.runGenerationTask(generationModel, projectModel);
         });
     }
 }

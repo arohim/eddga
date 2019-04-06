@@ -29,7 +29,7 @@ constructor() {
     fun obtainProjectModel(event: AnActionEvent): ProjectModel {
         val directoryPath = checkPath(event)
         val project = event.project
-        val virtualFolder: VirtualFile? = makeVirtualFile(directoryPath)
+        val virtualFolder: VirtualFile? = event.project?.baseDir
 
         val packageName = virtualFolder?.let {
             ProjectRootManager
@@ -48,7 +48,7 @@ constructor() {
 
     fun refreshProject(projectModel: ProjectModel) {
         ProjectView.getInstance(projectModel.project).refresh()
-        projectModel.virtualFolder.refresh(false, true)
+        projectModel.virtualFolder?.refresh(false, true)
     }
 
     @Throws(RoboPluginException::class)

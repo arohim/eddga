@@ -2,6 +2,7 @@ package com.robohorse.robopojogenerator.view.binders;
 
 import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
+import com.robohorse.robopojogenerator.generator.consts.annotations.CoreLayerEnum;
 import com.robohorse.robopojogenerator.listeners.AutoValueSelectionListener;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
@@ -36,13 +37,10 @@ public class GeneratorViewBinder {
 
     private void bindGroupViews(ButtonGroup buttonGroup, GeneratorVew generatorVew) {
         final Enumeration<AbstractButton> buttons = buttonGroup.getElements();
-        for (AnnotationEnum annotationItems : AnnotationEnum.values()) {
+        for (CoreLayerEnum annotationItems : CoreLayerEnum.values()) {
             if (buttons.hasMoreElements()) {
                 final AbstractButton button = buttons.nextElement();
                 button.setText(annotationItems.getText());
-                if (annotationItems == AnnotationEnum.AUTO_VALUE_GSON) {
-                    button.addItemListener(new AutoValueSelectionListener(generatorVew));
-                }
             } else {
                 break;
             }

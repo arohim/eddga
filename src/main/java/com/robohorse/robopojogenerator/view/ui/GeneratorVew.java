@@ -14,20 +14,17 @@ public class GeneratorVew {
     private JPanel rootView;
     private JButton generateButton;
     private RSyntaxTextArea textArea;
-    private JRadioButton NONERadioButton;
-    private JRadioButton jackson2RadioButton;
-    private JRadioButton loganSquareRadioButton;
-    private JRadioButton GSONRadioButton;
+    private JRadioButton DomainRadioButton;
+    private JRadioButton RemoteRadioButton;
+    private JRadioButton CacheRadioButton;
+    private JRadioButton DataRadioButton;
     private JCheckBox rewriteExistingClassesCheckBox;
     private JTextField className;
     private JScrollPane scrollView;
     private JCheckBox useSettersCheckBox;
     private JCheckBox useGettersCheckBox;
-    private JRadioButton autoValueGsonButton;
     private JCheckBox kotlinCheckBox;
     private JCheckBox useStringCheckBox;
-    private JRadioButton fastJSONRadioButton;
-    private JRadioButton Moshi;
     private ButtonGroup languageGroup;
     private ButtonGroup typeButtonGroup;
 
@@ -63,20 +60,20 @@ public class GeneratorVew {
         return textArea;
     }
 
-    public JRadioButton getNONERadioButton() {
-        return NONERadioButton;
+    public JRadioButton getDomainRadioButton() {
+        return DomainRadioButton;
     }
 
-    public JRadioButton getJackson2RadioButton() {
-        return jackson2RadioButton;
+    public JRadioButton getRemoteRadioButton() {
+        return RemoteRadioButton;
     }
 
-    public JRadioButton getLoganSquareRadioButton() {
-        return loganSquareRadioButton;
+    public JRadioButton getCacheRadioButton() {
+        return CacheRadioButton;
     }
 
-    public JRadioButton getGSONRadioButton() {
-        return GSONRadioButton;
+    public JRadioButton getDataRadioButton() {
+        return DataRadioButton;
     }
 
     public JCheckBox getRewriteExistingClassesCheckBox() {
