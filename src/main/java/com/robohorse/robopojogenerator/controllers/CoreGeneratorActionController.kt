@@ -2,9 +2,7 @@ package com.robohorse.robopojogenerator.controllers
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.DialogBuilder
-import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
-import com.robohorse.robopojogenerator.delegates.GenerationDelegate
-import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.*
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
 import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder
@@ -13,7 +11,7 @@ import javax.inject.Inject
 open class CoreGeneratorActionController @Inject constructor() {
 
     @Inject
-    lateinit var environmentDelegate: EnvironmentDelegate
+    lateinit var environmentDelegate: CoreEnvironmentDelegate
 
     @Inject
     lateinit var messageDelegate: MessageDelegate
@@ -22,7 +20,7 @@ open class CoreGeneratorActionController @Inject constructor() {
     lateinit var coreGeneratorViewBinder: CoreGeneratorViewBinder
 
     @Inject
-    lateinit var generationDelegate: GenerationDelegate
+    lateinit var generationDelegate: CoreGenerationDelegate
 
     fun onActionHandled(event: AnActionEvent) {
         try {

@@ -12,6 +12,7 @@ public class ProjectModel {
     private String packageName;
     private VirtualFile virtualFolder;
     private Project project;
+    private String directoryPath;
 
     public PsiDirectory getDirectory() {
         return directory;
@@ -29,6 +30,14 @@ public class ProjectModel {
         return project;
     }
 
+    public String getDirectoryPath() {
+        return directoryPath;
+    }
+
+    public void setDirectoryPath(String directoryPath) {
+        this.directoryPath = directoryPath;
+    }
+
     public static class Builder {
         private ProjectModel instance;
 
@@ -38,6 +47,11 @@ public class ProjectModel {
 
         public Builder setDirectory(PsiDirectory directory) {
             instance.directory = directory;
+            return this;
+        }
+
+        public Builder setDirectoryPath(String directory) {
+            instance.directoryPath = directory;
             return this;
         }
 

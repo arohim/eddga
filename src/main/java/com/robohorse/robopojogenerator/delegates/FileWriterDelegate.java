@@ -28,7 +28,7 @@ public class FileWriterDelegate {
 
     public void writeFile(ClassItem classItem, GenerationModel generationModel,
                           ProjectModel projectModel) throws RoboPluginException {
-        final String path = projectModel.getDirectory().getVirtualFile().getPath();
+        final String path = projectModel.getDirectoryPath();
         final String fileName = classItem.getClassName()
                 + (generationModel.isUseKotlin() ? ".kt" : ".java");
         final File file = new File(path + File.separator + fileName);

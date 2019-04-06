@@ -14,22 +14,32 @@ import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.models.ProjectModel
 
 import javax.inject.Inject
+import com.intellij.openapi.vfs.VfsUtil.findFileByIoFile
+import java.util.concurrent.atomic.AtomicReference
+import com.intellij.openapi.project.ProjectLocator
+import com.intellij.openapi.util.io.FileUtil
+import com.intellij.openapi.vfs.LocalFileSystem
+import java.io.File
+
 
 class CoreEnvironmentDelegate @Inject
 constructor() {
 
     @Throws(RoboPluginException::class)
     fun obtainProjectModel(event: AnActionEvent): ProjectModel {
-        val directory = checkPath(event)
+        val directoryPath = checkPath(event)
         val project = event.project
-        val virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE)
+        val virtualFolder: VirtualFile? = makeVirtualFile(directoryPath)
 
-        val packageName = ProjectRootManager
-                .getInstance(project!!)
-                .fileIndex
-                .getPackageNameByDirectory(virtualFolder!!)
+        val packageName = virtualFolder?.let {
+            ProjectRootManager
+                    .getInstance(project!!)
+                    .fileIndex
+                    .getPackageNameByDirectory(it)
+        }
+
         return ProjectModel.Builder()
-                .setDirectory(directory)
+                .setDirectoryPath(directoryPath)
                 .setPackageName(packageName)
                 .setProject(project)
                 .setVirtualFolder(virtualFolder)
@@ -42,7 +52,7 @@ constructor() {
     }
 
     @Throws(RoboPluginException::class)
-    private fun checkPath(event: AnActionEvent): PsiDirectory {
+    private fun checkPath(event: AnActionEvent): String {
         val component = event.project?.let {
             ProjectConfigurationComponent.getInstance(it)
         } ?: throw PathException()
@@ -55,12 +65,28 @@ constructor() {
             throw PathException()
         }
 
-        val pathItem = event.getData(CommonDataKeys.NAVIGATABLE)
-        if (pathItem != null) {
-            if (pathItem is PsiDirectory) {
-                return pathItem
+        return component.domainPath
+    }
+
+    private fun makeVirtualFile(file: String): VirtualFile? {
+        val localFileSystem = LocalFileSystem.getInstance()
+        return localFileSystem.findFileByIoFile(File(file))
+    }
+
+    private fun findProject(file: String): Project {
+        val localFileSystem = LocalFileSystem.getInstance()
+        val projectLocator = ProjectLocator.getInstance()
+        val ret = AtomicReference<Project>()
+        FileUtil.processFilesRecursively(
+                File(file)
+        ) FileUtil@{ f ->
+            val vf = localFileSystem.findFileByIoFile(f)
+            if (vf != null) {
+                ret.set(projectLocator.guessProjectForFile(vf))
+                return@FileUtil false
             }
+            true
         }
-        throw PathException()
+        return ret.get()
     }
 }

@@ -1,8 +1,8 @@
 <idea-plugin>
-    <id>com.robohorse.robopojogenerator</id>
-    <name>RoboPOJOGenerator</name>
-    <version>1.9.1</version>
-    <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
+    <id>com.my.boilerplate</id>
+    <name>Core Generator</name>
+    <version>0.0.1</version>
+    <vendor email="robohorsed@gmail.com" url="https://github.com/arohim/eddga">eddga</vendor>
 
     <description><![CDATA[
       Generate Java and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, empty annotations template.<br>

@@ -33,6 +33,7 @@ public class EnvironmentDelegate {
                 .getPackageNameByDirectory(virtualFolder);
         return new ProjectModel.Builder()
                 .setDirectory(directory)
+                .setDirectoryPath(directory.getVirtualFile().getPath())
                 .setPackageName(packageName)
                 .setProject(project)
                 .setVirtualFolder(virtualFolder)
