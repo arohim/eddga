@@ -21,7 +21,7 @@ open class ClassProcessor @Inject constructor() {
     @Inject
     lateinit var classGenerateHelper: ClassGenerateHelper
 
-    fun proceed(jsonItem: JsonItem, itemMap: MutableMap<String, ClassItem>, prefix: String, suffix: String) {
+    fun proceed(jsonItem: JsonItem, itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
 
         val formatClassName = prefix + classGenerateHelper.formatClassName(jsonItem.key) + suffix
         val classItem = ClassItem(formatClassName)
@@ -76,7 +76,7 @@ open class ClassProcessor @Inject constructor() {
 
     private fun proceedArray(jsonItemArray: JsonItemArray,
                              classField: ClassField,
-                             itemMap: MutableMap<String, ClassItem>, prefix: String, suffix: String) {
+                             itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
         val itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonItemArray.key, prefix, suffix)
         if (jsonItemArray.jsonArray.length() != 0) {
             val `object` = jsonItemArray.jsonArray.get(0)

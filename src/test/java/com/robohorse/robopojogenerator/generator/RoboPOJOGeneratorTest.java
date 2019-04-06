@@ -2,6 +2,7 @@ package com.robohorse.robopojogenerator.generator;
 
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor;
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -23,6 +24,9 @@ public class RoboPOJOGeneratorTest {
 
     @Mock
     ClassProcessor classProcessor;
+
+    @Mock
+    ClassGenerateHelper classGenerateHelper;
 
     @Before
     public void setUp() {
