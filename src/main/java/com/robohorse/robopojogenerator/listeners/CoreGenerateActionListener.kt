@@ -3,9 +3,11 @@ package com.robohorse.robopojogenerator.listeners
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.robohorse.robopojogenerator.components.ProjectConfigurationComponent
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.injections.Injector
+import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.view.ui.CoreGeneratorVew
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -29,9 +31,39 @@ class CoreGenerateActionListener(private val generatorVew: CoreGeneratorVew,
     }
 
     override fun actionPerformed(e: ActionEvent) {
-        //        final JTextArea textArea = generatorVew.getTextArea();
-        val annotationEnum = AnnotationEnum.GSON
+        val textArea = generatorVew.getTextArea()
 
+        val annotationEnum = AnnotationEnum.GSON
+        saveConfiguration()
+
+        val useKotlin = true
+        val rewriteClasses = true
+        val useSetters = false
+        val useGetters = false
+        val useStrings = false
+
+        var content = textArea?.text
+        val className = "Response"
+
+        try {
+            content = classGenerateHelper.validateJsonContent(content)
+            eventListener.onJsonDataObtained(GenerationModel.Builder()
+                    .useKotlin(useKotlin)
+                    .setAnnotationItem(annotationEnum)
+                    .setContent(content)
+                    .setSettersAvailable(useSetters)
+                    .setGettersAvailable(useGetters)
+                    .setToStringAvailable(useStrings)
+                    .setRootClassName(className)
+                    .setRewriteClasses(rewriteClasses)
+                    .build())
+
+        } catch (exception: RoboPluginException) {
+            messageDelegate.onPluginExceptionHandled(exception)
+        }
+    }
+
+    private fun saveConfiguration() {
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
             component.domainPath = generatorVew.domainPath.text
@@ -39,21 +71,5 @@ class CoreGenerateActionListener(private val generatorVew: CoreGeneratorVew,
             component.cachePath = generatorVew.cachePath.text
             component.roguePath = generatorVew.roguePath.text
         }
-    }
-
-    private fun resolveAnnotationItem(): AnnotationEnum {
-        val buttonGroup = generatorVew.typeButtonGroup
-        val buttons = buttonGroup!!.elements
-        while (buttons.hasMoreElements()) {
-            val button = buttons.nextElement()
-            if (button.isSelected) {
-                for (annotationEnum in AnnotationEnum.values()) {
-                    if (annotationEnum.text == button.text) {
-                        return annotationEnum
-                    }
-                }
-            }
-        }
-        return AnnotationEnum.NONE
     }
 }

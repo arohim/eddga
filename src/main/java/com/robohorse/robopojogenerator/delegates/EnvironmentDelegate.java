@@ -26,6 +26,7 @@ public class EnvironmentDelegate {
         final PsiDirectory directory = checkPath(event);
         final Project project = event.getProject();
         final VirtualFile virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE);
+
         final String packageName = ProjectRootManager
                 .getInstance(project)
                 .getFileIndex()
