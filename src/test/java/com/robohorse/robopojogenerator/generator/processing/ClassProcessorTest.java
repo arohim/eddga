@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 /**
@@ -43,18 +44,21 @@ public class ClassProcessorTest {
     public void testSingleObjectGeneration_isCorrect() throws Exception {
         final JSONObject jsonObject = jsonReader.read("single_object.json");
         final String name = "Response";
+        String prefix = "Prefix";
+        String suffix = "Suffix";
 
-        when(classGenerateHelper.formatClassName(name))
-                .thenReturn(name);
+        when(classGenerateHelper.formatClassName(name)).thenReturn(name);
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap);
+        classProcessor.proceed(jsonItem, classItemMap, prefix, suffix);
         assertTrue(classItemMap.size() == 1);
 
         Iterator iterator = classItemMap.values().iterator();
         ClassItem classItem = (ClassItem) iterator.next();
-        assertEquals(classItem.getClassName(), name);
+        String className = classItem.getClassName();
+        String actualName = prefix + name + suffix;
+        assertEquals(className, actualName);
 
         final Map<String, ClassField> fields = classItem.getClassFields();
         assertNotNull(fields);
@@ -75,7 +79,7 @@ public class ClassProcessorTest {
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap);
+        classProcessor.proceed(jsonItem, classItemMap, "", "");
         assertTrue(classItemMap.size() == 2);
 
         for (ClassItem classItem : classItemMap.values()) {
@@ -104,7 +108,7 @@ public class ClassProcessorTest {
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
 
-        classProcessor.proceed(jsonItem, classItemMap);
+        classProcessor.proceed(jsonItem, classItemMap, "", "");
         assertTrue(classItemMap.size() == 1);
 
         Iterator iterator = classItemMap.values().iterator();
@@ -134,7 +138,7 @@ public class ClassProcessorTest {
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap);
+        classProcessor.proceed(jsonItem, classItemMap, "", "");
 
         assertTrue(classItemMap.size() == 1);
 
@@ -164,12 +168,11 @@ public class ClassProcessorTest {
 
         when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
-        when(classGenerateHelper.getClassNameWithItemPostfix(Mockito.anyString()))
-                .thenReturn("DataItem");
+        when(classGenerateHelper.getClassNameWithItemPostfix(Mockito.anyString(), anyString(), anyString())).thenReturn("DataItem");
 
         final Map<String, ClassItem> classItemMap = new HashMap<>();
         final JsonItem jsonItem = new JsonItem(jsonObject, name);
-        classProcessor.proceed(jsonItem, classItemMap);
+        classProcessor.proceed(jsonItem, classItemMap, "", "");
 
         assertTrue(classItemMap.size() == 2);
 
