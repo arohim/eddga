@@ -28,7 +28,7 @@ public class RoboPOJOGenerator {
         final JSONObject jsonObject = new JSONObject(model.getContent());
         final Map<String, ClassItem> map = new HashMap<String, ClassItem>();
         final JsonItem jsonItem = new JsonItem(jsonObject, model.getRootClassName());
-        processor.proceed(jsonItem, map);
+        processor.proceed(jsonItem, map, model.getPrefix(), model.getSuffix());
         return new HashSet<ClassItem>(map.values());
     }
 }

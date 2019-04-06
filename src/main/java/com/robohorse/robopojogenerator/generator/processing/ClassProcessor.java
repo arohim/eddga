@@ -25,8 +25,8 @@ public class ClassProcessor {
     public ClassProcessor() {
     }
 
-    public void proceed(JsonItem jsonItem, final Map<String, ClassItem> itemMap) {
-        final ClassItem classItem = new ClassItem(classGenerateHelper.formatClassName(jsonItem.getKey()));
+    public void proceed(JsonItem jsonItem, final Map<String, ClassItem> itemMap, String prefix, String suffix) {
+        final ClassItem classItem = new ClassItem(classGenerateHelper.formatClassName(prefix + jsonItem.getKey() + suffix));
         for (final String jsonObjectKey : jsonItem.getJsonObject().keySet()) {
             final Object object = jsonItem.getJsonObject().get(jsonObjectKey);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
@@ -43,7 +43,7 @@ public class ClassProcessor {
                     final JsonItem jsonItem = new JsonItem((JSONObject) object, jsonObjectKey);
 
                     classItem.addClassField(jsonObjectKey, classField);
-                    proceed(jsonItem, itemMap);
+                    proceed(jsonItem, itemMap, prefix, suffix);
                 }
 
                 @Override
@@ -58,7 +58,7 @@ public class ClassProcessor {
 
                     } else {
                         final JsonItemArray jsonItemArray = new JsonItemArray((JSONArray) object, jsonObjectKey);
-                        proceedArray(jsonItemArray, classField, itemMap);
+                        proceedArray(jsonItemArray, classField, itemMap, prefix, suffix);
                         classItem.addClassField(jsonObjectKey, classField);
                     }
                 }
@@ -79,8 +79,8 @@ public class ClassProcessor {
 
     private void proceedArray(final JsonItemArray jsonItemArray,
                               final ClassField classField,
-                              final Map<String, ClassItem> itemMap) {
-        final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonItemArray.getKey());
+                              final Map<String, ClassItem> itemMap, String prefix, String suffix) {
+        final String itemName = classGenerateHelper.getClassNameWithItemPostfix(prefix + jsonItemArray.getKey() + suffix);
         if (jsonItemArray.getJsonArray().length() != 0) {
             final Object object = jsonItemArray.getJsonArray().get(0);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
@@ -97,7 +97,7 @@ public class ClassProcessor {
                     for (int index = 0; index < size; index++) {
                         final JSONObject jsonObject = (JSONObject) jsonItemArray.getJsonArray().get(index);
                         final JsonItem jsonItem = new JsonItem(jsonObject, itemName);
-                        proceed(jsonItem, innerItemsMap);
+                        proceed(jsonItem, innerItemsMap, prefix, suffix);
                     }
                     classField.setClassField(new ClassField(itemName));
                     itemMap.putAll(innerItemsMap);
@@ -107,7 +107,7 @@ public class ClassProcessor {
                 public void onJsonArrayIdentified() {
                     classField.setClassField(new ClassField());
                     final JsonItemArray jsonItemArray = new JsonItemArray((JSONArray) object, itemName);
-                    proceedArray(jsonItemArray, classField, itemMap);
+                    proceedArray(jsonItemArray, classField, itemMap, prefix, suffix);
                 }
             };
             innerObjectResolver.resolveClassType(object);
