@@ -67,8 +67,9 @@ public class ClassGenerateHelper {
         return upperCaseFirst(proceedField(name));
     }
 
-    public String getClassNameWithItemPostfix(String name) {
-        return String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(name)));
+    public String getClassNameWithItemPostfix(String key, String prefix, String suffix) {
+        String format = String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(key)));
+        return prefix + format + suffix;
     }
 
     public String upperCaseFirst(String name) {
