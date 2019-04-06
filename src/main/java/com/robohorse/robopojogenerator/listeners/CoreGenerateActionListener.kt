@@ -30,7 +30,7 @@ class CoreGenerateActionListener(private val generatorVew: CoreGeneratorVew,
 
     override fun actionPerformed(e: ActionEvent) {
         //        final JTextArea textArea = generatorVew.getTextArea();
-        val annotationEnum = resolveAnnotationItem()
+        val annotationEnum = AnnotationEnum.GSON
 
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
