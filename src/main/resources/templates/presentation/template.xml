@@ -1,0 +1,19 @@
+<template format="4"
+          revision="1"
+          name="New Contract"
+          description="Creates a new Contract class">
+
+    <category value="Other"/>
+
+    <parameter id="CLASS_NAME"
+               name="New Contract"
+               type="string"
+               constraints="class|unique|nonempty"
+               default="MyContract"
+               help="The name of Contract class"/>
+
+    <globals file="globals.xml.ftl"/>
+
+    <execute file="recipe.xml.ftl"/>
+
+</template>
