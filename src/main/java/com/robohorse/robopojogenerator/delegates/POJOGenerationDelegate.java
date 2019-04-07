@@ -14,7 +14,7 @@ import javax.inject.Inject;
 /**
  * Created by vadim on 02.10.16.
  */
-public class GenerationDelegate {
+public class POJOGenerationDelegate {
     @Inject
     ClassCreator classCreator;
     @Inject
@@ -23,7 +23,7 @@ public class GenerationDelegate {
     MessageDelegate messageDelegate;
 
     @Inject
-    public GenerationDelegate() {
+    public POJOGenerationDelegate() {
     }
 
     public void runGenerationTask(final GenerationModel generationModel,

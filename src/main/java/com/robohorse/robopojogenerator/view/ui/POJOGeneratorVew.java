@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by vadim on 24.09.16.
  */
-public class CorePOJOGeneratorVew {
+public class POJOGeneratorVew {
     private JPanel rootView;
     private JButton generateButton;
     private RSyntaxTextArea textArea;

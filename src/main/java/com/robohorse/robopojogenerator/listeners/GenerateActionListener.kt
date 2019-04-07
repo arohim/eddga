@@ -9,7 +9,7 @@ import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate.FIELD_KOTLIN_DTO
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO
-import com.robohorse.robopojogenerator.view.ui.CorePOJOGeneratorVew
+import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew
 
 import javax.inject.Inject
 import java.awt.event.ActionEvent
@@ -18,7 +18,7 @@ import java.awt.event.ActionListener
 /**
  * Created by vadim on 24.09.16.
  */
-open class GenerateActionListener(private val generatorVew: CorePOJOGeneratorVew,
+open class GenerateActionListener(private val generatorVew: POJOGeneratorVew,
                                   private val eventListener: GuiFormEventListener) : ActionListener {
 
     @Inject

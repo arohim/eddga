@@ -2,7 +2,7 @@ package com.robohorse.robopojogenerator.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.robohorse.robopojogenerator.controllers.CorePOJOGeneratorActionController
+import com.robohorse.robopojogenerator.controllers.POJOGeneratorActionController
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.injections.Injector
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class DataLayerPOJOAction : AnAction() {
 
     @Inject
-    lateinit var generatePOJOActionController: CorePOJOGeneratorActionController
+    lateinit var generatePOJOActionController: POJOGeneratorActionController
 
     init {
         Injector.initModules()

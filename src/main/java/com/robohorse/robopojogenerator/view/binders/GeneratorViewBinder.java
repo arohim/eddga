@@ -4,7 +4,7 @@ import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.generator.consts.annotations.CoreLayerEnum;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
-import com.robohorse.robopojogenerator.view.ui.CorePOJOGeneratorVew;
+import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew;
 
 import javax.inject.Inject;
 import javax.swing.*;
@@ -19,7 +19,7 @@ public class GeneratorViewBinder {
     }
 
     public void bindView(DialogBuilder builder, GuiFormEventListener eventListener) {
-        final CorePOJOGeneratorVew generatorVew = new CorePOJOGeneratorVew();
+        final POJOGeneratorVew generatorVew = new POJOGeneratorVew();
         final GenerateActionListener actionListener = new GenerateActionListener(generatorVew, eventListener);
         generatorVew.getGenerateButton().addActionListener(actionListener);
 
@@ -31,7 +31,7 @@ public class GeneratorViewBinder {
         builder.show();
     }
 
-    private void bindGroupViews(ButtonGroup buttonGroup, CorePOJOGeneratorVew generatorVew) {
+    private void bindGroupViews(ButtonGroup buttonGroup, POJOGeneratorVew generatorVew) {
         final Enumeration<AbstractButton> buttons = buttonGroup.getElements();
         for (CoreLayerEnum annotationItems : CoreLayerEnum.values()) {
             if (buttons.hasMoreElements()) {

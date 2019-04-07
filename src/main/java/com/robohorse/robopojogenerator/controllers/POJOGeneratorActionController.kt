@@ -9,7 +9,7 @@ import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.view.binders.CorePOJOGeneratorViewBinder
 import javax.inject.Inject
 
-open class CorePOJOGeneratorActionController @Inject constructor() {
+open class POJOGeneratorActionController @Inject constructor() {
 
     @Inject
     lateinit var environmentDelegate: EnvironmentDelegate
@@ -21,7 +21,7 @@ open class CorePOJOGeneratorActionController @Inject constructor() {
     lateinit var coreGeneratorViewBinder: CorePOJOGeneratorViewBinder
 
     @Inject
-    lateinit var generationDelegate: GenerationDelegate
+    lateinit var generationDelegate: POJOGenerationDelegate
 
     fun onActionHandled(event: AnActionEvent, generationModel: GenerationModel) {
         try {

@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.ui.CorePOJOGeneratorVew
+import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by vadim on 24.09.16.
  */
-class CoreGenerateActionListener(private val generatorVew: CorePOJOGeneratorVew,
+class POJOGenerateActionListener(private val generatorVew: POJOGeneratorVew,
                                  private val event: AnActionEvent,
                                  private val generationModel: GenerationModel,
                                  private val eventListener: GuiFormEventListener) : ActionListener {

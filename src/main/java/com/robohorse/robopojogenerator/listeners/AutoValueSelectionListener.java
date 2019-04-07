@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.listeners;
 
-import com.robohorse.robopojogenerator.view.ui.CorePOJOGeneratorVew;
+import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -9,9 +9,9 @@ import java.awt.event.ItemListener;
  * Created by vadim on 28.02.17.
  */
 public class AutoValueSelectionListener implements ItemListener {
-    private CorePOJOGeneratorVew generatorVew;
+    private POJOGeneratorVew generatorVew;
 
-    public AutoValueSelectionListener(CorePOJOGeneratorVew generatorVew) {
+    public AutoValueSelectionListener(POJOGeneratorVew generatorVew) {
         this.generatorVew = generatorVew;
     }
 
@@ -21,6 +21,6 @@ public class AutoValueSelectionListener implements ItemListener {
         enableCheckBoxes(generatorVew, autoValueEnabled);
     }
 
-    private void enableCheckBoxes(CorePOJOGeneratorVew generatorVew, boolean autoValueEnabled) {
+    private void enableCheckBoxes(POJOGeneratorVew generatorVew, boolean autoValueEnabled) {
     }
 }

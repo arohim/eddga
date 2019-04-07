@@ -2,14 +2,14 @@ package com.robohorse.robopojogenerator.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.robohorse.robopojogenerator.controllers.CorePOJOGeneratorActionController
+import com.robohorse.robopojogenerator.controllers.POJOGeneratorActionController
 import com.robohorse.robopojogenerator.injections.Injector
 import javax.inject.Inject
 
 class CoreGeneratorAction : AnAction() {
 
     @Inject
-    lateinit var corePOJOGeneratorActionController: CorePOJOGeneratorActionController
+    lateinit var corePOJOGeneratorActionController: POJOGeneratorActionController
 
     init {
         Injector.initModules()

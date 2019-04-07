@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.listeners;
 
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
-import com.robohorse.robopojogenerator.view.ui.CorePOJOGeneratorVew;
+import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
@@ -12,9 +12,9 @@ import java.util.Enumeration;
  * Created by vadim on 29.10.16.
  */
 public class KotlinCheckBoxStateListener implements ItemListener {
-    private CorePOJOGeneratorVew generatorVew;
+    private POJOGeneratorVew generatorVew;
 
-    public KotlinCheckBoxStateListener(CorePOJOGeneratorVew generatorVew) {
+    public KotlinCheckBoxStateListener(POJOGeneratorVew generatorVew) {
         this.generatorVew = generatorVew;
     }
 
@@ -25,10 +25,10 @@ public class KotlinCheckBoxStateListener implements ItemListener {
         enableCheckBoxes(generatorVew, kotlinEnabled);
     }
 
-    private void enableCheckBoxes(CorePOJOGeneratorVew generatorVew, boolean kotlinEnabled) {
+    private void enableCheckBoxes(POJOGeneratorVew generatorVew, boolean kotlinEnabled) {
     }
 
-    private void enableRadioButton(CorePOJOGeneratorVew generatorVew, boolean enable) {
+    private void enableRadioButton(POJOGeneratorVew generatorVew, boolean enable) {
         final ButtonGroup buttonGroup = generatorVew.getTypeButtonGroup();
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons
                 .hasMoreElements(); ) {

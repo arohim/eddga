@@ -5,7 +5,7 @@ import com.intellij.openapi.ui.DialogBuilder
 import com.robohorse.robopojogenerator.components.ProjectConfigurationComponent
 import com.robohorse.robopojogenerator.listeners.*
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.ui.CorePOJOGeneratorVew
+import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew
 
 import javax.inject.Inject
 
@@ -15,10 +15,10 @@ import javax.inject.Inject
 class CorePOJOGeneratorViewBinder @Inject constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, generationModel: GenerationModel, eventListener: GuiFormEventListener) {
-        val generatorVew = CorePOJOGeneratorVew()
+        val generatorVew = POJOGeneratorVew()
         val basePath = event.project?.basePath
 
-        val actionListener = CoreGenerateActionListener(generatorVew, event, generationModel, eventListener)
+        val actionListener = POJOGenerateActionListener(generatorVew, event, generationModel, eventListener)
         generatorVew.generateButton.addActionListener(actionListener)
 
         event.project?.let {

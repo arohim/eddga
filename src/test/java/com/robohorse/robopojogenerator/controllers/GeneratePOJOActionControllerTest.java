@@ -2,11 +2,13 @@ package com.robohorse.robopojogenerator.controllers;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
+import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate;
-import com.robohorse.robopojogenerator.delegates.GenerationDelegate;
+import com.robohorse.robopojogenerator.delegates.POJOGenerationDelegate;
 import com.robohorse.robopojogenerator.delegates.MessageDelegate;
 import com.robohorse.robopojogenerator.view.binders.GeneratorViewBinder;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -22,8 +24,9 @@ import static org.mockito.Mockito.when;
  * Created by vadim on 22.10.16.
  */
 public class GeneratePOJOActionControllerTest {
+
     @InjectMocks
-    GeneratePOJOActionController generatePOJOActionController;
+    POJOGeneratorActionController generatePOJOActionController;
 
     @Mock
     EnvironmentDelegate environmentDelegate;
@@ -32,7 +35,7 @@ public class GeneratePOJOActionControllerTest {
     @Mock
     GeneratorViewBinder generatorViewBinder;
     @Mock
-    GenerationDelegate generationDelegate;
+    POJOGenerationDelegate generationDelegate;
 
     @Before
     public void setUp() {
@@ -45,10 +48,10 @@ public class GeneratePOJOActionControllerTest {
                 .Builder()
                 .build();
         AnActionEvent event = Mockito.mock(AnActionEvent.class);
+        GenerationModel generationModel = new GenerationModel.Builder().build();
 
-        when(environmentDelegate.obtainProjectModel(event))
-                .thenReturn(projectModel);
-        generatePOJOActionController.onActionHandled(event);
+        when(environmentDelegate.obtainProjectModel(event)).thenReturn(projectModel);
+        generatePOJOActionController.onActionHandled(event, generationModel);
         verify(generatorViewBinder).bindView(any(), any());
     }
 
@@ -56,10 +59,10 @@ public class GeneratePOJOActionControllerTest {
     public void onActionHandled_withError() throws Exception {
         final RoboPluginException exception = new RoboPluginException("", "");
         AnActionEvent event = Mockito.mock(AnActionEvent.class);
+        GenerationModel generationModel = new GenerationModel.Builder().build();
 
-        when(environmentDelegate.obtainProjectModel(event))
-                .thenThrow(exception);
-        generatePOJOActionController.onActionHandled(event);
+        when(environmentDelegate.obtainProjectModel(event)).thenThrow(exception);
+        generatePOJOActionController.onActionHandled(event, generationModel);
         verify(messageDelegate).onPluginExceptionHandled(exception);
     }
 }
