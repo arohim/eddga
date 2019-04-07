@@ -35,8 +35,7 @@ open class ClassProcessor @Inject constructor() {
                 }
 
                 override fun onJsonObjectIdentified() {
-                    val fieldClassName = prefix + jsonObjectKey + suffix
-                    val className = classGenerateHelper.formatClassName(fieldClassName)
+                    val className = prefix + classGenerateHelper.formatClassName(jsonObjectKey) + suffix
                     val classField = ClassField(className)
                     val item = JsonItem(jsonObject as JSONObject, jsonObjectKey)
 
