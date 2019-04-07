@@ -6,7 +6,9 @@
 
     <description><![CDATA[
         This is an internal plugin but openly to use, I make for using very specific Android Clean Architecture [https://github.com/bufferapp/android-clean-architecture-boilerplate] <br>
-        The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
+        this can be make you more productive<br>
+
+           The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
         Currently, Generate Kotlin POJO files from JSON <br>
           - Domain POJO <br>
           - Data POJO <br>
