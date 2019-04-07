@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
-    <name>Android Clean Generator</name>
+    <name>Android Clean Architecture Generator</name>
     <version>0.1.0</version>
     <vendor email="robohorsed@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
