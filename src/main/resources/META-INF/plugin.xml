@@ -1,14 +1,23 @@
 <idea-plugin>
-    <id>com.my.boilerplate</id>
-    <name>Core Generator</name>
-    <version>0.0.1</version>
-    <vendor email="robohorsed@gmail.com" url="https://github.com/arohim/eddga">eddga</vendor>
+    <id>com.him.core.generator</id>
+    <name>Android Clean Architecture Generator</name>
+    <version>0.1.1</version>
+    <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
-      Generate Java and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, empty annotations template.<br>
-      Supports: primitive types, multiple inner JSONArrays.
+        This is an internal plugin but openly to use, I make for using very specific Android Clean Architecture [https://github.com/bufferapp/android-clean-architecture-boilerplate] <br>
+        this can be make you more productive<br>
 
-      key words: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi
+           The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
+        Currently, Generate Kotlin POJO files from JSON <br>
+          - Domain POJO <br>
+          - Data POJO <br>
+          - Cache POJO <br>
+          - Remote POJO <br>
+          And Generate mapper with Unit testing is coming soon.
+
+          This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
+          Thank you to Vadim Shchenev to make me easier to extend.
     ]]></description>
 
     <change-notes><![CDATA[
@@ -37,10 +46,10 @@
     </extensions>
 
     <actions>
-        <action id="RoguePOJOAction" class="com.robohorse.robopojogenerator.actions.RoguePOJOAction"
+        <action id="RoguePOJOAction" class="com.robohorse.robopojogenerator.actions.RemotePOJOAction"
                 icon="/icons/pojo.png"
-                text="Rogue POJO from JSON"
-                description="Rogue POJO from JSON">
+                text="Remote POJO from JSON"
+                description="Remote POJO from JSON">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
