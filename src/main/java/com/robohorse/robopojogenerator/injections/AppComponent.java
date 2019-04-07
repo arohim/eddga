@@ -27,7 +27,7 @@ public interface AppComponent {
 
     void inject(DataLayerPOJOAction item);
 
-    void inject(RoguePOJOAction item);
+    void inject(RemotePOJOAction item);
 
     void inject(DomainLayerPOJOAction item);
 

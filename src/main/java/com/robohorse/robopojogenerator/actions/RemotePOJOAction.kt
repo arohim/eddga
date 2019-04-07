@@ -10,7 +10,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.GenerationModel
 import javax.inject.Inject
 
-class RoguePOJOAction : AnAction() {
+class RemotePOJOAction : AnAction() {
 
     @Inject
     lateinit var generatePOJOActionController: POJOGeneratorActionController
