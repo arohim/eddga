@@ -22,7 +22,7 @@ import com.intellij.openapi.vfs.LocalFileSystem
 import java.io.File
 
 
-class CoreEnvironmentDelegate @Inject
+class CorePOJOEnvironmentDelegate @Inject
 constructor() {
 
     @Throws(RoboPluginException::class)

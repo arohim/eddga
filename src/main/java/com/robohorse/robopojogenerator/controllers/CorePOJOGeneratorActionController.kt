@@ -5,22 +5,22 @@ import com.intellij.openapi.ui.DialogBuilder
 import com.robohorse.robopojogenerator.delegates.*
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
-import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder
+import com.robohorse.robopojogenerator.view.binders.CorePOJOGeneratorViewBinder
 import javax.inject.Inject
 
-open class CoreGeneratorActionController @Inject constructor() {
+open class CorePOJOGeneratorActionController @Inject constructor() {
 
     @Inject
-    lateinit var environmentDelegate: CoreEnvironmentDelegate
+    lateinit var environmentDelegate: CorePOJOEnvironmentDelegate
 
     @Inject
     lateinit var messageDelegate: MessageDelegate
 
     @Inject
-    lateinit var coreGeneratorViewBinder: CoreGeneratorViewBinder
+    lateinit var coreGeneratorViewBinder: CorePOJOGeneratorViewBinder
 
     @Inject
-    lateinit var generationDelegate: CoreGenerationDelegate
+    lateinit var generationDelegate: CorePOJOGenerationDelegate
 
     fun onActionHandled(event: AnActionEvent) {
         try {

@@ -10,11 +10,11 @@ import com.robohorse.robopojogenerator.models.ProjectModel
 
 import javax.inject.Inject
 
-open class CoreGenerationDelegate @Inject constructor() {
+open class CorePOJOGenerationDelegate @Inject constructor() {
     @Inject
     lateinit var classCreator: ClassCreator
     @Inject
-    lateinit var environmentDelegate: CoreEnvironmentDelegate
+    lateinit var environmentDelegate: CorePOJOEnvironmentDelegate
     @Inject
     lateinit var messageDelegate: MessageDelegate
 

@@ -11,8 +11,7 @@ import javax.inject.Inject
 /**
  * Created by vadim on 24.09.16.
  */
-class CoreGeneratorViewBinder @Inject
-constructor() {
+class CorePOJOGeneratorViewBinder @Inject constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: GuiFormEventListener) {
         val generatorVew = CoreGeneratorVew()

@@ -38,12 +38,12 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.actions.GeneratePOJOAction"
-                icon="/icons/pojo.png"
-                text="Generate POJO from JSON"
-                description="GeneratePOJOAction">
-            <add-to-group group-id="NewGroup" anchor="last"/>
-        </action>
+        <!--        <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.actions.GeneratePOJOAction"-->
+        <!--                icon="/icons/pojo.png"-->
+        <!--                text="Generate POJO from JSON"-->
+        <!--                description="GeneratePOJOAction">-->
+        <!--            <add-to-group group-id="NewGroup" anchor="last"/>-->
+        <!--        </action>-->
 
         <action id="RoguePOJOAction" class="com.robohorse.robopojogenerator.actions.RoguePOJOAction"
                 icon="/icons/pojo.png"

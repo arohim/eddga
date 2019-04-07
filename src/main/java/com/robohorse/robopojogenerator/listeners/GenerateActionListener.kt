@@ -37,12 +37,13 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
         val textField = generatorVew.classNameTextField
 
         val coreLayerEnum = resolveCoreLayerItem()
+        val annotation = resolveAnnotationEnum(coreLayerEnum)
+        val fieldDTOFormat = resolveFieldDTOFormat(coreLayerEnum)
         val useKotlin = true
         val rewriteClasses = true
         val useSetters = false
         val useGetters = false
         val useStrings = false
-        val fieldDTOFormat = resolveFieldDTOFormat(coreLayerEnum)
 
         var content = textArea.text
         val className = textField.text
@@ -51,7 +52,7 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
             content = classGenerateHelper.validateJsonContent(content)
             eventListener.onJsonDataObtained(GenerationModel.Builder()
                     .useKotlin(useKotlin)
-                    .setAnnotationItem(AnnotationEnum.GSON)
+                    .setAnnotationItem(annotation)
                     .setContent(content)
                     .setSettersAvailable(useSetters)
                     .setGettersAvailable(useGetters)
@@ -67,6 +68,17 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
             messageDelegate.onPluginExceptionHandled(exception)
         }
 
+    }
+
+    private fun resolveAnnotationEnum(coreLayerEnum: CoreLayerEnum): AnnotationEnum {
+        return when (coreLayerEnum) {
+            CoreLayerEnum.Remote -> {
+                AnnotationEnum.GSON
+            }
+            else -> {
+                AnnotationEnum.NONE
+            }
+        }
     }
 
     private fun resolveFieldDTOFormat(coreLayerEnum: CoreLayerEnum): String {
