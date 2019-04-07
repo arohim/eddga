@@ -50,7 +50,7 @@ repositories {
 }
 
 group "com.him.core.generator"
-version "1.0.0"
+version "1.0.1"
 
 intellij {
     version '2018.1.6'
