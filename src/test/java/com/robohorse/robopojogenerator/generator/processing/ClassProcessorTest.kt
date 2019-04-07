@@ -6,7 +6,6 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -172,7 +171,7 @@ class ClassProcessorTest {
 
         `when`(classGenerateHelper!!.formatClassName(name))
                 .thenReturn(name)
-        `when`(classGenerateHelper!!.getClassNameWithItemPostfix(Mockito.anyString(), anyString(), anyString())).thenReturn("DataItem")
+        `when`(classGenerateHelper!!.getClassNameWithItemPostfix(Mockito.anyString())).thenReturn("DataItem")
 
         val classItemMap = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, name)

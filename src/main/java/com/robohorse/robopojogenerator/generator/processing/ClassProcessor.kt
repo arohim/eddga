@@ -77,7 +77,8 @@ open class ClassProcessor @Inject constructor() {
     private fun proceedArray(jsonItemArray: JsonItemArray,
                              classField: ClassField,
                              itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
-        val itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonItemArray.key, prefix, suffix)
+        val keyName = classGenerateHelper.getClassNameWithItemPostfix(jsonItemArray.key)
+        val itemName = prefix + keyName + suffix
         if (jsonItemArray.jsonArray.length() != 0) {
             val `object` = jsonItemArray.jsonArray.get(0)
             val innerObjectResolver = object : InnerObjectResolver() {
@@ -91,8 +92,8 @@ open class ClassProcessor @Inject constructor() {
                     val innerItemsMap = HashMap<String, ClassItem>()
                     for (index in 0 until size) {
                         val jsonObject = jsonItemArray.jsonArray.get(index) as JSONObject
-                        val jsonItem = JsonItem(jsonObject, itemName)
-                        proceed(jsonItem, innerItemsMap, "", "")
+                        val jsonItem = JsonItem(jsonObject, keyName)
+                        proceed(jsonItem, innerItemsMap, prefix, suffix)
                     }
                     classField.setClassField(ClassField(itemName))
                     itemMap.putAll(innerItemsMap)
