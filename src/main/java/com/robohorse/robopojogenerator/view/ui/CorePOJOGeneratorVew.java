@@ -10,14 +10,10 @@ import java.io.IOException;
 /**
  * Created by vadim on 24.09.16.
  */
-public class GeneratorVew {
+public class CorePOJOGeneratorVew {
     private JPanel rootView;
     private JButton generateButton;
     private RSyntaxTextArea textArea;
-    private JRadioButton DomainRadioButton;
-    private JRadioButton RemoteRadioButton;
-    private JRadioButton CacheRadioButton;
-    private JRadioButton DataRadioButton;
     private JTextField className;
     private JScrollPane scrollView;
     private ButtonGroup languageGroup;
@@ -41,22 +37,6 @@ public class GeneratorVew {
 
     public JTextArea getTextArea() {
         return textArea;
-    }
-
-    public JRadioButton getDomainRadioButton() {
-        return DomainRadioButton;
-    }
-
-    public JRadioButton getRemoteRadioButton() {
-        return RemoteRadioButton;
-    }
-
-    public JRadioButton getCacheRadioButton() {
-        return CacheRadioButton;
-    }
-
-    public JRadioButton getDataRadioButton() {
-        return DataRadioButton;
     }
 
     private void createUIComponents() {
