@@ -5,7 +5,7 @@
     <vendor email="robohorsed@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
-        This is the plugin I make for using very specific Android Clean Architecture [https://github.com/bufferapp/android-clean-architecture-boilerplate]
+        This is an internal plugin I make for using very specific Android Clean Architecture [https://github.com/bufferapp/android-clean-architecture-boilerplate]
         The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer
         Currently, Generate Kotlin POJO files from JSON <br>
           - Domain POJO <br>
