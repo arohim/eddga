@@ -1,0 +1,14 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.data.shared.mapper.HeaderMapper
+import com.app.kaidee.domain.shared.model.Header
+import io.reactivex.Single
+import javax.inject.Inject
+
+open class ${CLASS_NAME}DataRepository @Inject constructor(
+        private val factory: ${CLASS_NAME}DataStoreFactory,
+        private val headerMapper: HeaderMapper)
+    : ${CLASS_NAME}Repository {
+
+    TODO("Implement the interface")
+}
