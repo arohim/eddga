@@ -1,9 +1,10 @@
-package ${packageName};
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 
 import com.app.dealfish.di.AutoInject
 import javax.inject.Inject
 
 @AutoInject
+#parse("File Header.java")
 open class ${CLASS_NAME}Fragment @Inject constructor() : Fragment(), ${CLASS_NAME}Contract.View {
 
     @Inject

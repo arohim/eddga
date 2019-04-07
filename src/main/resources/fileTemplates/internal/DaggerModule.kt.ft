@@ -1,4 +1,4 @@
-package ${packageName};
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 
 import javax.inject.Inject
 import com.app.dealfish.di.scopes.PerActivity
@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
+#parse("File Header.java")
 class ${CLASS_NAME}Module {
 
     @PerActivity

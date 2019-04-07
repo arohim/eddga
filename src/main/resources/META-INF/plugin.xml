@@ -73,6 +73,14 @@
                 description="Domain Layer POJO from JSON">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+
+        <action id="TestTemplate" class="com.robohorse.robopojogenerator.actions.TestTemplateAction"
+                icon="/icons/pojo.png"
+                text="Template"
+                description="TestTemplate">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
     <actions>

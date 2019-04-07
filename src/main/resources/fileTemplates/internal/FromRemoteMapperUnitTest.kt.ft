@@ -1,0 +1,32 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+import kotlin.test.assertEquals
+
+#parse("File Header.java")
+@RunWith(JUnit4::class)
+class ${CLASS_NAME}EntityMapperTest {
+
+    private lateinit var mapper: ${CLASS_NAME}EntityMapper
+
+    @Before
+    fun setUp() {
+        mapper = ${CLASS_NAME}EntityMapper()
+    }
+
+    @Test
+    fun `map from remote`() {
+        // GIVEN
+        val model = TODO("make a factory")
+
+        // WHEN
+        val entity = mapper.mapFromRemote(model)
+
+        // THEN
+        // assertEquals(model.attrName, entity.attrName)
+        TODO("more asserts")
+    }
+}
