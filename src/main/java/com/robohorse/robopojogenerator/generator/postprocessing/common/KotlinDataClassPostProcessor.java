@@ -43,11 +43,13 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
         final StringBuilder classBodyBuilder = new StringBuilder();
         final Map<String, ClassField> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
+            final ClassField classField = classFields.get(objectName);
+            classField.setListFormat(generationModel.getListFormat());
             classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
                     new FieldModel.Builder()
                             .setFieldName(objectName)
                             .setFieldDTOFormat(generationModel.getFieldDTOFormat())
-                            .setClassType(getClassType(generationModel.isNullable(), classFields, objectName))
+                            .setClassType(classField.getKotlinItem())
                             .setAnnotation(classItem.getAnnotation())
                             .setFieldNameFormatted(generateHelper.formatClassField(objectName))
                             .build()
@@ -55,14 +57,6 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
         }
         generateHelper.updateClassModel(classBodyBuilder);
         return classBodyBuilder.toString();
-    }
-
-    private String getClassType(boolean isNullable, Map<String, ClassField> classFields, String objectName) {
-        String kotlinItem = classFields.get(objectName).getKotlinItem();
-        if (isNullable) {
-            return kotlinItem.replace(">", "?>");
-        }
-        return kotlinItem;
     }
 
     @Override

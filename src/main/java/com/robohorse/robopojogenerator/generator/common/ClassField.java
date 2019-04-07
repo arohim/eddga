@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.generator.common;
 
-import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
 
 /**
@@ -10,6 +9,7 @@ public class ClassField {
     private ClassEnum classEnum;
     private String className;
     private ClassField classField;
+    private String listFormat;
 
     public ClassField() {
     }
@@ -31,6 +31,14 @@ public class ClassField {
         }
     }
 
+    public String getListFormat() {
+        return listFormat;
+    }
+
+    public void setListFormat(String listFormat) {
+        this.listFormat = listFormat;
+    }
+
     public String getJavaItem() {
         return null != classField ? wrapListJava() :
                 (null != className ? className : classEnum.getPrimitive());
@@ -42,11 +50,11 @@ public class ClassField {
     }
 
     private String wrapListJava() {
-        return String.format(ArrayItemsTemplate.LIST_OF_ITEM, classField.getJavaBoxed());
+        return String.format(listFormat, classField.getJavaBoxed());
     }
 
     private String wrapListKotlin() {
-        return String.format(ArrayItemsTemplate.LIST_OF_ITEM, classField.getKotlinItem());
+        return String.format(listFormat, classField.getKotlinItem());
     }
 
     private String getJavaBoxed() {

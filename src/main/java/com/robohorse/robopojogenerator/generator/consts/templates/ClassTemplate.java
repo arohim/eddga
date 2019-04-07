@@ -43,7 +43,7 @@ public interface ClassTemplate {
 
     String FIELD_AUTO_VALUE = TAB + "public abstract %1$s %2$s();" + NEW_LINE;
 
-    String FIELD_KOTLIN_DTO = TAB + "val %1$s: %2$s? = null" + "," + NEW_LINE;
+    String NULLABLE_FIELD_KOTLIN_DTO = TAB + "val %1$s: %2$s? = null" + "," + NEW_LINE;
 
     String NON_NULL_FIELD_KOTLIN_DTO = TAB + "val %1$s: %2$s" + "," + NEW_LINE;
 
