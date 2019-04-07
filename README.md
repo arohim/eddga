@@ -1,32 +1,46 @@
-# RoboPOJOGenerator
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RoboPOJOGenerator-green.svg?style=true)](https://android-arsenal.com/details/1/4429) [![Build Status](https://travis-ci.org/robohorse/RoboPOJOGenerator.svg?branch=master)](https://travis-ci.org/robohorse/RoboPOJOGenerator) [![Coverage Status](https://coveralls.io/repos/github/robohorse/RoboPOJOGenerator/badge.svg?branch=master)](https://coveralls.io/github/robohorse/RoboPOJOGenerator?branch=master)
+# Android Clean Architecture Generator
 
 Intellij Idea, Android Studio plugin for JSON to POJO conversion.
 
-Generate Java and Kotlin POJO files from JSON: [GSON](https://github.com/google/gson), [AutoValue](https://github.com/google/auto/blob/master/value/userguide/index.md), [Logan Square](https://github.com/bluelinelabs/LoganSquare), [FastJSON](https://github.com/alibaba/fastjson), [Jackson](https://github.com/FasterXML/jackson), [Moshi](https://github.com/square/moshi), empty annotations template.
+This is an internal plugin but openly to use, I make for using very specific Android Clean Architecture [https://github.com/bufferapp/android-clean-architecture-boilerplate]
+        The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extend to generate android UI template
+        Currently, Generate Kotlin POJO files from JSON <br>
+          - Domain POJO <br>
+          - Data POJO <br>
+          - Cache POJO <br>
+          - Remote POJO <br>
+          And Generate mapper with Unit testing is coming soon.
+
+          This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
+          Thank you to Vadim Shchenev to make me easier to extend.
+          
 Supports: primitive types, multiple inner JSONArrays.
 
 <p><img src="images/tutorial_v3.gif" width="100%" height="50%"></p>
 
 
 # Download
-get it and install from <a href="https://plugins.jetbrains.com/plugin/8634">plugin repository</a> or simply find it in "Preferences" -> "Plugins" -> "Browse Repositories" -> "RoboPOJOGenerator"
+get it and install from <a href="https://plugins.jetbrains.com/plugin/12213-android-clean-architecture-generator">plugin repository</a> or simply find it in "Preferences" -> "Plugins" -> "Browse Repositories" -> "Android Clean Architecture Generator"
 
-<p><img src="images/install_v3.png" width="100%" height="70%"></p>
+<p>
+Waiting for image
+</p>
 
 # How to use
 
-Select target package -> new -> Generate POJO from JSON
+Select target package -> new -> Domain POJO from JSON
+Select target package -> new -> Data POJO from JSON
+Select target package -> new -> Cache POJO from JSON
+Select target package -> new -> Remote POJO from JSON
 
 <p>
-<img src="images/plugin_start_v4.png" height="300">
+Waiting for image
 </p>
 
 put JSON into window and select target POJO type
 
 <p>
-<img src="images/plugin_window_v4.png" height="300">
+Waiting for image
 </p>
 
 see log of changes
@@ -37,6 +51,9 @@ see log of changes
 
 # People, who help
 <ul>
+<li>
+<a href="https://github.com/arohim">a-rohim</a> - Rewrite as needed
+</li>
 <li>
 <a href="https://github.com/wafer-li">wafer-li</a> - Kotlin support (release 1.7)
 </li>
