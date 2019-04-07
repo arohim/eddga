@@ -7,5 +7,7 @@ public interface ArrayItemsTemplate {
 
     String ITEM_NAME = "%sItem";
 
-    String LIST_OF_ITEM = "List<%s>";
+    String NON_NULL_LIST_OF_ITEM = "List<%s>";
+
+    String NULLABLE_LIST_OF_ITEM = "List<%s?>";
 }

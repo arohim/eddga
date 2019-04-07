@@ -26,7 +26,7 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
         }
 
         builder.setCenterPanel(generatorVew.rootView)
-        builder.setTitle("Core POJO & Mapper Generator")
+        builder.setTitle(generationModel.dialogTitle)
         builder.removeAllActions()
         builder.show()
     }

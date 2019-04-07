@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.models;
 
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -18,7 +19,8 @@ public class GenerationModel {
     private boolean useGetters;
     private boolean useStrings;
     private String fieldDTOFormat;
-    private boolean isNullable;
+    private String listFormat;
+    private String dialogTitle;
 
     public boolean isRewriteClasses() {
         return rewriteClasses;
@@ -64,8 +66,8 @@ public class GenerationModel {
         return fieldDTOFormat;
     }
 
-    public boolean isNullable() {
-        return isNullable;
+    public String getListFormat() {
+        return listFormat;
     }
 
     public void setContent(@Nullable String content) {
@@ -74,6 +76,10 @@ public class GenerationModel {
 
     public void setRootClassName(String rootClassName) {
         this.rootClassName = rootClassName;
+    }
+
+    public String getDialogTitle() {
+        return dialogTitle;
     }
 
     public static class Builder {
@@ -138,8 +144,15 @@ public class GenerationModel {
             return this;
         }
 
-        public Builder setNullAble(boolean isNullable) {
-            instance.isNullable = isNullable;
+        @NotNull
+        public Builder setListFormat(@NotNull String listFormat) {
+            instance.listFormat = listFormat;
+            return this;
+        }
+
+        @NotNull
+        public Builder setDialogTitle(@NotNull String title) {
+            instance.dialogTitle = title;
             return this;
         }
 

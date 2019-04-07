@@ -7,7 +7,8 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
-import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate.FIELD_KOTLIN_DTO
+import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate.NULLABLE_FIELD_KOTLIN_DTO
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO
 import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew
 
@@ -37,7 +38,6 @@ open class GenerateActionListener(private val generatorVew: POJOGeneratorVew,
         val coreLayerEnum = resolveCoreLayerItem()
         val annotation = resolveAnnotationEnum(coreLayerEnum)
         val fieldDTOFormat = resolveFieldDTOFormat(coreLayerEnum)
-        val isNullable = resolveIsNullAble(coreLayerEnum)
         val useKotlin = true
         val rewriteClasses = true
         val useSetters = false
@@ -61,7 +61,7 @@ open class GenerateActionListener(private val generatorVew: POJOGeneratorVew,
                     .setPrefix(getPrefixName(coreLayerEnum))
                     .setSuffix(getSuffixName(coreLayerEnum))
                     .setFieldDTOFormat(fieldDTOFormat)
-                    .setNullAble(isNullable)
+                    .setListFormat(ArrayItemsTemplate.NULLABLE_LIST_OF_ITEM)
                     .build())
 
         } catch (exception: RoboPluginException) {
@@ -95,7 +95,7 @@ open class GenerateActionListener(private val generatorVew: POJOGeneratorVew,
     private fun resolveFieldDTOFormat(coreLayerEnum: CoreLayerEnum): String {
         return when (coreLayerEnum) {
             CoreLayerEnum.Remote -> {
-                FIELD_KOTLIN_DTO
+                NULLABLE_FIELD_KOTLIN_DTO
             }
             else -> {
                 NON_NULL_FIELD_KOTLIN_DTO
