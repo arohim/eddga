@@ -46,6 +46,7 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
             classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
                     new FieldModel.Builder()
                             .setFieldName(objectName)
+                            .setFieldDTOFormat(generationModel.getFieldDTOFormat())
                             .setClassType(classFields.get(objectName).getKotlinItem())
                             .setAnnotation(classItem.getAnnotation())
                             .setFieldNameFormatted(generateHelper.formatClassField(objectName))

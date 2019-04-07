@@ -7,6 +7,8 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate.FIELD_KOTLIN_DTO
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO
 import com.robohorse.robopojogenerator.view.ui.GeneratorVew
 
 import javax.inject.Inject
@@ -40,6 +42,7 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
         val useSetters = false
         val useGetters = false
         val useStrings = false
+        val fieldDTOFormat = resolveFieldDTOFormat(coreLayerEnum)
 
         var content = textArea.text
         val className = textField.text
@@ -57,12 +60,24 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
                     .setRewriteClasses(rewriteClasses)
                     .setPrefix(getPrefixName(coreLayerEnum))
                     .setSuffix(getSuffixName(coreLayerEnum))
+                    .setFieldDTOFormat(fieldDTOFormat)
                     .build())
 
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
         }
 
+    }
+
+    private fun resolveFieldDTOFormat(coreLayerEnum: CoreLayerEnum): String {
+        return when (coreLayerEnum) {
+            CoreLayerEnum.Remote -> {
+                FIELD_KOTLIN_DTO
+            }
+            else -> {
+                NON_NULL_FIELD_KOTLIN_DTO
+            }
+        }
     }
 
     private fun getSuffixName(coreLayerEnum: CoreLayerEnum): String {

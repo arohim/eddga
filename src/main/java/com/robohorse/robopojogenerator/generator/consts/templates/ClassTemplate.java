@@ -45,6 +45,8 @@ public interface ClassTemplate {
 
     String FIELD_KOTLIN_DTO = TAB + "val %1$s: %2$s? = null" + "," + NEW_LINE;
 
+    String NON_NULL_FIELD_KOTLIN_DTO = TAB + "val %1$s: %2$s" + "," + NEW_LINE;
+
     String FIELD_KOTLIN_DOT_DEFAULT = TAB + "val any: Any? = null";
 
     String FIELD_ANNOTATED = NEW_LINE + TAB + "%1$s" + NEW_LINE + "%2$s";
@@ -66,14 +68,14 @@ public interface ClassTemplate {
             TAB + TAB + "return %2$s;" + NEW_LINE
             + TAB + "}" + NEW_LINE;
 
-    String TO_STRING = TAB + "@Override"+NEW_LINE+" "+TAB +
-            "public String toString(){"+NEW_LINE+
-            TAB + TAB + "return "+NEW_LINE
-            +TAB+ TAB + TAB +"\"%1$s{\" + " + NEW_LINE
+    String TO_STRING = TAB + "@Override" + NEW_LINE + " " + TAB +
+            "public String toString(){" + NEW_LINE +
+            TAB + TAB + "return " + NEW_LINE
+            + TAB + TAB + TAB + "\"%1$s{\" + " + NEW_LINE
             + "%2$s"
-            +TAB + TAB + TAB + "\"}\";" + NEW_LINE
-            +TAB + TAB + "}";
+            + TAB + TAB + TAB + "\"}\";" + NEW_LINE
+            + TAB + TAB + "}";
 
-    String TO_STRING_LINE = TAB + TAB + TAB + "\"%3$s%1$s = \'\" + "+"%2$s + \'\\\'\' + " + NEW_LINE;
+    String TO_STRING_LINE = TAB + TAB + TAB + "\"%3$s%1$s = \'\" + " + "%2$s + \'\\\'\' + " + NEW_LINE;
 
 }

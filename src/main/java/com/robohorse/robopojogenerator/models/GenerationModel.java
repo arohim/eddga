@@ -16,6 +16,7 @@ public class GenerationModel {
     private boolean useSetters;
     private boolean useGetters;
     private boolean useStrings;
+    private String fieldDTOFormat;
 
     public boolean isRewriteClasses() {
         return rewriteClasses;
@@ -55,6 +56,10 @@ public class GenerationModel {
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getFieldDTOFormat() {
+        return fieldDTOFormat;
     }
 
     public static class Builder {
@@ -111,6 +116,11 @@ public class GenerationModel {
 
         public Builder setSuffix(String suffix) {
             instance.suffix = suffix;
+            return this;
+        }
+
+        public Builder setFieldDTOFormat(String fieldDTOFormat) {
+            instance.fieldDTOFormat = fieldDTOFormat;
             return this;
         }
 

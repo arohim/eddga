@@ -8,6 +8,7 @@ public class FieldModel {
     private String fieldName;
     private String fieldNameFormatted;
     private String annotation;
+    private String fieldDTOFormat;
 
     public String getClassType() {
         return classType;
@@ -23,6 +24,10 @@ public class FieldModel {
 
     public String getAnnotation() {
         return annotation;
+    }
+
+    public String getFieldDTOFormat() {
+        return fieldDTOFormat;
     }
 
     public static class Builder {
@@ -49,6 +54,11 @@ public class FieldModel {
 
         public Builder setAnnotation(String annotation) {
             instance.annotation = annotation;
+            return this;
+        }
+
+        public Builder setFieldDTOFormat(String fieldDTOFormat) {
+            instance.fieldDTOFormat = fieldDTOFormat;
             return this;
         }
 
