@@ -125,7 +125,7 @@ class ClassProcessorTest {
 
         val targetObjectType = classItem.classFields["data"]
 
-        assertEquals("List<Object>", targetObjectType?.getJavaItem())
+        assertEquals("List<Object>", targetObjectType?.javaItem)
     }
 
     @Test
@@ -135,12 +135,11 @@ class ClassProcessorTest {
         val name = "Response"
         val targetType = "List<Integer>"
 
-        `when`(classGenerateHelper!!.formatClassName(name))
-                .thenReturn(name)
+        `when`(classGenerateHelper.formatClassName(name)).thenReturn(name)
 
         val classItemMap = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, name)
-        classProcessor!!.proceed(jsonItem, classItemMap, "", "")
+        classProcessor.proceed(jsonItem, classItemMap, "", "")
 
         assertTrue(classItemMap.size == 1)
 
@@ -157,7 +156,7 @@ class ClassProcessorTest {
 
         val actualType = classItem.classFields["data"]
 
-        assertEquals(targetType, actualType?.getJavaItem())
+        assertEquals(targetType, actualType?.javaItem)
     }
 
     @Test
