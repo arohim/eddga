@@ -39,6 +39,7 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
         val coreLayerEnum = resolveCoreLayerItem()
         val annotation = resolveAnnotationEnum(coreLayerEnum)
         val fieldDTOFormat = resolveFieldDTOFormat(coreLayerEnum)
+        val isNullable = resolveIsNullAble(coreLayerEnum)
         val useKotlin = true
         val rewriteClasses = true
         val useSetters = false
@@ -62,12 +63,24 @@ open class GenerateActionListener(private val generatorVew: GeneratorVew,
                     .setPrefix(getPrefixName(coreLayerEnum))
                     .setSuffix(getSuffixName(coreLayerEnum))
                     .setFieldDTOFormat(fieldDTOFormat)
+                    .setNullAble(isNullable)
                     .build())
 
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
         }
 
+    }
+
+    private fun resolveIsNullAble(coreLayerEnum: CoreLayerEnum): Boolean {
+        return when (coreLayerEnum) {
+            CoreLayerEnum.Remote -> {
+                true
+            }
+            else -> {
+                false
+            }
+        }
     }
 
     private fun resolveAnnotationEnum(coreLayerEnum: CoreLayerEnum): AnnotationEnum {

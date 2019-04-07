@@ -31,8 +31,7 @@ public abstract class BasePostProcessor {
     public abstract String createClassTemplate(ClassItem classItem, String classBody);
 
     private String proceedClass(ClassItem classItem, GenerationModel generationModel) {
-        final String classBody = generateHelper.updateClassBody(
-                proceedClassBody(classItem, generationModel));
+        final String classBody = generateHelper.updateClassBody(proceedClassBody(classItem, generationModel));
         final String classTemplate = createClassTemplate(classItem, classBody);
         final StringBuilder importsBuilder = proceedClassImports(classItem);
 

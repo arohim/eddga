@@ -17,6 +17,7 @@ public class GenerationModel {
     private boolean useGetters;
     private boolean useStrings;
     private String fieldDTOFormat;
+    private boolean isNullable;
 
     public boolean isRewriteClasses() {
         return rewriteClasses;
@@ -60,6 +61,10 @@ public class GenerationModel {
 
     public String getFieldDTOFormat() {
         return fieldDTOFormat;
+    }
+
+    public boolean isNullable() {
+        return isNullable;
     }
 
     public static class Builder {
@@ -121,6 +126,11 @@ public class GenerationModel {
 
         public Builder setFieldDTOFormat(String fieldDTOFormat) {
             instance.fieldDTOFormat = fieldDTOFormat;
+            return this;
+        }
+
+        public Builder setNullAble(boolean isNullable) {
+            instance.isNullable = isNullable;
             return this;
         }
 

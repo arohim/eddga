@@ -75,7 +75,7 @@ public class ClassTemplateHelper {
     public String createKotlinDataClassField(FieldModel model) {
         final String field = String.format(model.getFieldDTOFormat(),
                 model.getFieldNameFormatted(),
-                model.getClassType()).replace(">", "?>");
+                model.getClassType());
         return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
