@@ -1,8 +1,6 @@
 package com.robohorse.robopojogenerator.injections;
 
-import com.robohorse.robopojogenerator.actions.CoreGeneratorAction;
-import com.robohorse.robopojogenerator.actions.DataLayerPOJOAction;
-import com.robohorse.robopojogenerator.actions.RoguePOJOAction;
+import com.robohorse.robopojogenerator.actions.*;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.CommonJavaPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDataClassPostProcessor;
@@ -30,6 +28,10 @@ public interface AppComponent {
     void inject(DataLayerPOJOAction item);
 
     void inject(RoguePOJOAction item);
+
+    void inject(DomainLayerPOJOAction item);
+
+    void inject(CacheLayerPOJOAction item);
 
     CommonJavaPostProcessor newCommonJavaPostProcessor();
 
