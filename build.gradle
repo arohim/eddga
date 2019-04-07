@@ -49,8 +49,8 @@ repositories {
     mavenCentral()
 }
 
-group "com.robohorse.robopojogenerator"
-version "1.9.1"
+group "com.him.core.generator"
+version "1.0.0"
 
 intellij {
     version '2018.1.6'
