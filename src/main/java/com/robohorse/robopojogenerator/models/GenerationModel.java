@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.models;
 
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by vadim on 28.09.16.
@@ -65,6 +66,14 @@ public class GenerationModel {
 
     public boolean isNullable() {
         return isNullable;
+    }
+
+    public void setContent(@Nullable String content) {
+        this.content = content;
+    }
+
+    public void setRootClassName(String rootClassName) {
+        this.rootClassName = rootClassName;
     }
 
     public static class Builder {

@@ -17,6 +17,6 @@ class CoreGeneratorAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        corePOJOGeneratorActionController.onActionHandled(e)
+//        corePOJOGeneratorActionController.onActionHandled(e, generationModel)
     }
 }

@@ -4,7 +4,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.DialogBuilder
 import com.robohorse.robopojogenerator.components.ProjectConfigurationComponent
 import com.robohorse.robopojogenerator.listeners.*
-import com.robohorse.robopojogenerator.view.ui.CoreGeneratorVew
+import com.robohorse.robopojogenerator.models.GenerationModel
+import com.robohorse.robopojogenerator.view.ui.GeneratorVew
 
 import javax.inject.Inject
 
@@ -13,23 +14,15 @@ import javax.inject.Inject
  */
 class CorePOJOGeneratorViewBinder @Inject constructor() {
 
-    fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: GuiFormEventListener) {
-        val generatorVew = CoreGeneratorVew()
+    fun bindView(builder: DialogBuilder, event: AnActionEvent, generationModel: GenerationModel, eventListener: GuiFormEventListener) {
+        val generatorVew = GeneratorVew()
         val basePath = event.project?.basePath
 
-        val actionListener = CoreGenerateActionListener(generatorVew, event, eventListener)
+        val actionListener = CoreGenerateActionListener(generatorVew, event, generationModel, eventListener)
         generatorVew.generateButton.addActionListener(actionListener)
-        generatorVew.domainPathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.domainPath) {})
-        generatorVew.cachePathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.cachePath) {})
-        generatorVew.dataPathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.dataPath) {})
-        generatorVew.roguePathButton.addActionListener(object : ChooseFileActionListener(basePath, generatorVew.roguePath) {})
 
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
-            generatorVew.domainPath.text = component.domainPath
-            generatorVew.dataPath.text = component.dataPath
-            generatorVew.cachePath.text = component.cachePath
-            generatorVew.roguePath.text = component.roguePath
         }
 
         builder.setCenterPanel(generatorVew.rootView)

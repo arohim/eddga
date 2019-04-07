@@ -35,7 +35,6 @@ public class GenerationDelegate {
                 try {
                     classCreator.generateFiles(generationModel, projectModel);
                     messageDelegate.showSuccessMessage();
-
                 } catch (RoboPluginException e) {
                     messageDelegate.onPluginExceptionHandled(e);
                 } finally {

@@ -11,6 +11,7 @@ import javax.inject.Inject;
  * Created by vadim on 26.09.16.
  */
 public class GeneratePOJOAction extends AnAction {
+    
     @Inject
     GeneratePOJOActionController generatePOJOActionController;
 
