@@ -5,7 +5,7 @@ This is an internal plugin but openly to use, I make for using very specific And
 # Road map
 The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
 Currently, Generate Kotlin POJO files from JSON <br>
-   Domain POJO <br>
+  - Domain POJO <br>
   - Data POJO <br>
   - Cache POJO <br>
   - Remote POJO <br>
