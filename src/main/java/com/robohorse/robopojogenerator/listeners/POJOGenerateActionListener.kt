@@ -15,10 +15,10 @@ import javax.inject.Inject
 /**
  * Created by vadim on 24.09.16.
  */
-class POJOGenerateActionListener(private val generatorVew: POJOGeneratorVew,
-                                 private val event: AnActionEvent,
-                                 private val generationModel: GenerationModel,
-                                 private val eventListener: GuiFormEventListener) : ActionListener {
+open class POJOGenerateActionListener @Inject constructor(private val generatorVew: POJOGeneratorVew,
+                                                          private val event: AnActionEvent,
+                                                          private val generationModel: GenerationModel,
+                                                          private val eventListener: GuiFormEventListener) : ActionListener {
 
     @Inject
     lateinit var messageDelegate: MessageDelegate

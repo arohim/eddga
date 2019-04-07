@@ -43,7 +43,7 @@ class RoboPOJOGeneratorTest {
                 .build()
 
         val jsonItem = JsonItem(JSONObject(), "Response")
-        `when`(classProcessor.proceed(any(), any(), any(), any())).thenReturn(null)
+//        `when`(classProcessor.proceed(any(), any(), any(), any())).thenReturn(null)
         `when`(classGenerateHelper.formatClassName(anyString())).thenReturn("name")
 
         //        when(classProcessor.proceed(ArgumentMatchers.anyObject(), ArgumentMatchers.anyObject(),

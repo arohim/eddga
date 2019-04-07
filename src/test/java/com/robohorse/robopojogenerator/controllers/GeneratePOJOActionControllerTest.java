@@ -7,6 +7,7 @@ import com.robohorse.robopojogenerator.models.ProjectModel;
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate;
 import com.robohorse.robopojogenerator.delegates.POJOGenerationDelegate;
 import com.robohorse.robopojogenerator.delegates.MessageDelegate;
+import com.robohorse.robopojogenerator.view.binders.CorePOJOGeneratorViewBinder;
 import com.robohorse.robopojogenerator.view.binders.GeneratorViewBinder;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -33,7 +34,7 @@ public class GeneratePOJOActionControllerTest {
     @Mock
     MessageDelegate messageDelegate;
     @Mock
-    GeneratorViewBinder generatorViewBinder;
+    CorePOJOGeneratorViewBinder generatorViewBinder;
     @Mock
     POJOGenerationDelegate generationDelegate;
 
@@ -52,7 +53,7 @@ public class GeneratePOJOActionControllerTest {
 
         when(environmentDelegate.obtainProjectModel(event)).thenReturn(projectModel);
         generatePOJOActionController.onActionHandled(event, generationModel);
-        verify(generatorViewBinder).bindView(any(), any());
+        verify(generatorViewBinder).bindView(any(), any(), any(), any());
     }
 
     @Test
