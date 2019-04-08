@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.actions.*;
-import com.robohorse.robopojogenerator.controllers.NewMapperActionController;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.CommonJavaPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDataClassPostProcessor;

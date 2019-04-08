@@ -2,14 +2,15 @@ package com.robohorse.robopojogenerator.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.robohorse.robopojogenerator.controllers.NewMapperActionController
+import com.robohorse.robopojogenerator.controllers.ClassNameTemplateActionController
 import com.robohorse.robopojogenerator.injections.Injector
+import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import javax.inject.Inject
 
 class FromRemoteAction : AnAction() {
 
     @Inject
-    lateinit var newMapperActionController: NewMapperActionController
+    lateinit var newMapperActionController: ClassNameTemplateActionController
 
     init {
         Injector.initModules()
@@ -17,6 +18,10 @@ class FromRemoteAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        newMapperActionController.onActionHandled(e)
+        val classNameTemplateModel = ClassNameTemplateModel(
+                "From remote mapper",
+                "FromRemoteMapper"
+        )
+        newMapperActionController.onActionHandled(e, classNameTemplateModel)
     }
 }
