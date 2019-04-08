@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>0.1.2</version>
+    <version>1.1.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -46,48 +46,94 @@
     </extensions>
 
     <actions>
-        <action id="RoguePOJOAction" class="com.robohorse.robopojogenerator.actions.RemotePOJOAction"
+        <action id="RoguePOJOAction" class="com.robohorse.robopojogenerator.actions.pojo.RemotePOJOAction"
                 icon="/icons/pojo.png"
                 text="Remote POJO from JSON"
                 description="Remote POJO from JSON">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="DataLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.DataLayerPOJOAction"
+        <action id="DataLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.pojo.DataLayerPOJOAction"
                 icon="/icons/pojo.png"
                 text="Data Layer POJO from JSON"
                 description="Data Layer POJO from JSON">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="CacheLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.CacheLayerPOJOAction"
+        <action id="CacheLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.pojo.CacheLayerPOJOAction"
                 icon="/icons/pojo.png"
                 text="Cache Layer POJO from JSON"
                 description="Cache Layer POJO from JSON">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="DomainLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.DomainLayerPOJOAction"
+        <action id="DomainLayerPOJOAction" class="com.robohorse.robopojogenerator.actions.pojo.DomainLayerPOJOAction"
                 icon="/icons/pojo.png"
                 text="Domain Layer POJO from JSON"
                 description="Domain Layer POJO from JSON">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="FromRemoteMapperAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperAction"
+                icon="/icons/pojo.png"
+                text="From remote Mapper"
+                description="From remote Mapper">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="FromRemoteMapperUnitTestAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperUnitTestAction"
+                icon="/icons/pojo.png"
+                text="From remote Mapper Unit Test"
+                description="From remote Mapper Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ToRemoteMapperAction" class="com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperAction"
+                icon="/icons/pojo.png"
+                text="To remote Mapper"
+                description="To remote Mapper">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ToRemoteMapperUnitTestAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperUnitTestAction"
+                icon="/icons/pojo.png"
+                text="To remote Mapper Unit Test"
+                description="To remote Mapper Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheMapperAction" class="com.robohorse.robopojogenerator.actions.mapper.CacheMapperAction"
+                icon="/icons/pojo.png"
+                text="Cache Mapper"
+                description="Cache Mapper">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheMapperUnitTestAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.CacheMapperUnitTestAction"
+                icon="/icons/pojo.png"
+                text="Cache Mapper Unit Test"
+                description="Cache Mapper Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
-    <actions>
-        <group id="MyPlugin.TopMenu"
-               text="Kaidee Plugin"
-               description="Kaidee Plugin">
-            <add-to-group group-id="MainMenu" anchor="last"/>
+    <!--    <actions>-->
+    <!--        <group id="MyPlugin.TopMenu"-->
+    <!--               text="Kaidee Plugin"-->
+    <!--               description="Kaidee Plugin">-->
+    <!--            <add-to-group group-id="MainMenu" anchor="last"/>-->
 
-            <action id="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"
-                    icon="/icons/pojo.png"
-                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"
-                    text="Core POJO &amp; Mapper Generator"
-                    description="CorePOJOAction">
-                <add-to-group group-id="NewGroup" anchor="last"/>
-            </action>
-        </group>
-    </actions>
+    <!--            <action id="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
+    <!--                    icon="/icons/pojo.png"-->
+    <!--                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
+    <!--                    text="Core POJO &amp; Mapper Generator"-->
+    <!--                    description="CorePOJOAction">-->
+    <!--                <add-to-group group-id="NewGroup" anchor="last"/>-->
+    <!--            </action>-->
+    <!--        </group>-->
+    <!--    </actions>-->
 </idea-plugin>

@@ -1,0 +1,12 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.remote.base.mapper.ModelMapper
+import javax.inject.Inject
+
+#parse("File Header.java")
+open class ${CLASS_NAME}ModelMapper @Inject constructor()
+    : ModelMapper<${CLASS_NAME}Entity, ${CLASS_NAME}Model> {
+    override fun mapToRemote(type: ${CLASS_NAME}Entity): ${CLASS_NAME}Model {
+        return ${CLASS_NAME}Model()
+    }
+}

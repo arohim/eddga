@@ -1,15 +1,13 @@
 package com.robohorse.robopojogenerator.controllers;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate;
+import com.robohorse.robopojogenerator.delegates.MessageDelegate;
+import com.robohorse.robopojogenerator.delegates.POJOGenerationDelegate;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
-import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate;
-import com.robohorse.robopojogenerator.delegates.POJOGenerationDelegate;
-import com.robohorse.robopojogenerator.delegates.MessageDelegate;
 import com.robohorse.robopojogenerator.view.binders.CorePOJOGeneratorViewBinder;
-import com.robohorse.robopojogenerator.view.binders.GeneratorViewBinder;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

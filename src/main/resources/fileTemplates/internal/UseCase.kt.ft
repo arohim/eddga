@@ -1,0 +1,17 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.domain.base.interactor.SingleUseCase
+import io.reactivex.Single
+import com.app.kaidee.domain.base.executor.PostExecutionThread
+import com.app.kaidee.domain.base.executor.ThreadExecutor
+import com.app.kaidee.domain.shared.model.Request
+import javax.inject.Inject
+
+class ${CLASS_NAME} @Inject constructor(threadExecutor: ThreadExecutor,
+                                            postExecutionThread: PostExecutionThread) :
+        SingleUseCase<${RESPONSE_DTO}, Request<Void?>>(threadExecutor, postExecutionThread) {
+
+    public override fun buildUseCaseObservable(params: Request<Void?>): Single<${RESPONSE_DTO}> {
+        // return repository.get(params.headers)
+    }
+}

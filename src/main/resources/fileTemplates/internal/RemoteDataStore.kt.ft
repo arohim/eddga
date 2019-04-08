@@ -1,0 +1,12 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.data.shared.model.HeaderEntity
+import io.reactivex.Completable
+import io.reactivex.Single
+import javax.inject.Inject
+
+open class ${CLASS_NAME}RemoteDataStore @Inject constructor(private val remote: ${CLASS_NAME}Remote)
+    : ${CLASS_NAME}DataStore {
+
+    TODO("Implement the interface")
+}

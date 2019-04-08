@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.actions
+package com.robohorse.robopojogenerator.actions.pojo
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -10,7 +10,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.GenerationModel
 import javax.inject.Inject
 
-class DataLayerPOJOAction : AnAction() {
+class CacheLayerPOJOAction : AnAction() {
 
     @Inject
     lateinit var generatePOJOActionController: POJOGeneratorActionController
@@ -28,11 +28,11 @@ class DataLayerPOJOAction : AnAction() {
                 .setGettersAvailable(false)
                 .setToStringAvailable(false)
                 .setRewriteClasses(true)
-                .setPrefix("")
-                .setSuffix("Entity")
+                .setPrefix("Cached")
+                .setSuffix("")
                 .setFieldDTOFormat(ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO)
                 .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
-                .setDialogTitle("Data Layer POJO Generator")
+                .setDialogTitle("Cache POJO Generator")
                 .build()
 
         generatePOJOActionController.onActionHandled(e, generationModel)

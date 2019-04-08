@@ -1,0 +1,16 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.dealfish.base.BasePresenter
+import com.app.dealfish.base.BaseView
+
+#parse("File Header.java")
+interface ${CLASS_NAME}Contract {
+
+    interface View : BaseView<Presenter> {
+
+    }
+
+    interface Presenter : BasePresenter {
+
+    }
+}
