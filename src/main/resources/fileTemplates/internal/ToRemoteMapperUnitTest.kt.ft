@@ -8,13 +8,13 @@ import kotlin.test.assertEquals
 
 #parse("File Header.java")
 @RunWith(JUnit4::class)
-class ${CLASS_NAME}EntityMapperTest {
+class ${CLASS_NAME}ModelMapperTest {
 
-    private lateinit var mapper: ${CLASS_NAME}EntityMapper
+    private lateinit var mapper: ${CLASS_NAME}ModelMapper
 
     @Before
     fun setUp() {
-        mapper = ${CLASS_NAME}EntityMapper()
+        mapper = ${CLASS_NAME}ModelMapper()
     }
 
     @Test
@@ -27,7 +27,7 @@ class ${CLASS_NAME}EntityMapperTest {
 
         // THEN
         // assertEquals(entity.attrName, model.attrName)
-        TODO()
+        TODO("asserts")
     }
 }
 

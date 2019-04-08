@@ -37,6 +37,10 @@ public interface AppComponent {
 
     void inject(ToRemoteMapperAction item);
 
+    void inject(FromRemoteMapperUnitTestAction item);
+
+    void inject(ToRemoteMapperUnitTestAction item);
+
     CommonJavaPostProcessor newCommonJavaPostProcessor();
 
     AutoValueClassPostProcessor newAutoValueClassPostProcessor();
