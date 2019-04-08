@@ -14,6 +14,7 @@
           - Data POJO <br>
           - Cache POJO <br>
           - Remote POJO <br>
+          - Remote/Cache/Data mapper and unit testing template <br>
           And Generate mapper with Unit testing is coming soon.
 
           This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
@@ -21,7 +22,8 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    Update description
+    Added
+     - Remote/Cache/Data mapper and its unit testing template <br>
     ]]>
     </change-notes>
 
