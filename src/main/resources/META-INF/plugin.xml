@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -9,13 +9,12 @@
         this can be make you more productive<br>
 
            The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
-        Currently, Generate Kotlin POJO files from JSON <br>
+        Features.<br>
           - Domain POJO <br>
           - Data POJO <br>
           - Cache POJO <br>
           - Remote POJO <br>
-          - Remote/Cache/Data mapper and unit testing template <br>
-          And Generate mapper with Unit testing is coming soon.
+          - Remote/Cache/Data mapper and its unit testing template
 
           This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
           Thank you to Vadim Shchenev to make me easier to extend.
@@ -23,7 +22,7 @@
 
     <change-notes><![CDATA[
     Added
-     - Remote/Cache/Data mapper and its unit testing template <br>
+     - Data mapper and its unit testing template <br>
     ]]>
     </change-notes>
 
@@ -119,6 +118,21 @@
                 icon="/icons/pojo.png"
                 text="Cache Mapper Unit Test"
                 description="Cache Mapper Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataMapperAction" class="com.robohorse.robopojogenerator.actions.mapper.DataMapperAction"
+                icon="/icons/pojo.png"
+                text="Data Mapper"
+                description="Data Mapper">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataMapperUnitTestAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.DataMapperUnitTestAction"
+                icon="/icons/pojo.png"
+                text="Data Mapper Unit Test"
+                description="Data Mapper Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
     </actions>
