@@ -33,7 +33,9 @@ public interface AppComponent {
 
     void inject(CacheLayerPOJOAction item);
 
-    void inject(FromRemoteAction item);
+    void inject(FromRemoteMapperAction item);
+
+    void inject(ToRemoteMapperAction item);
 
     CommonJavaPostProcessor newCommonJavaPostProcessor();
 

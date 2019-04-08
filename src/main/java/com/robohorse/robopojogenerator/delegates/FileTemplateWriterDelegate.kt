@@ -11,8 +11,6 @@ open class FileTemplateWriterDelegate @Inject constructor() {
 
     private var instance: FileTemplateManager? = null
 
-    open val defaultProperties = this.instance?.defaultProperties
-
     open fun getInstance(project: Project): FileTemplateManager {
         if (instance == null)
             instance = FileTemplateManager.getInstance(project)

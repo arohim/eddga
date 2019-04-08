@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import javax.inject.Inject
 
-class FromRemoteAction : AnAction() {
+class FromRemoteMapperAction : AnAction() {
 
     @Inject
     lateinit var newMapperActionController: ClassNameTemplateActionController
@@ -20,7 +20,8 @@ class FromRemoteAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
                 "From remote mapper",
-                "FromRemoteMapper"
+                "FromRemoteMapper",
+                "EntityMapper"
         )
         newMapperActionController.onActionHandled(e, classNameTemplateModel)
     }

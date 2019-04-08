@@ -74,27 +74,34 @@
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="FromRemoteAction" class="com.robohorse.robopojogenerator.actions.FromRemoteAction"
+        <action id="FromRemoteAction" class="com.robohorse.robopojogenerator.actions.FromRemoteMapperAction"
                 icon="/icons/pojo.png"
                 text="From remote Mapper"
                 description="From remote Mapper">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="ToRemoteAction" class="com.robohorse.robopojogenerator.actions.ToRemoteMapperAction"
+                icon="/icons/pojo.png"
+                text="To remote Mapper"
+                description="To remote Mapper">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
-<!--    <actions>-->
-<!--        <group id="MyPlugin.TopMenu"-->
-<!--               text="Kaidee Plugin"-->
-<!--               description="Kaidee Plugin">-->
-<!--            <add-to-group group-id="MainMenu" anchor="last"/>-->
+    <!--    <actions>-->
+    <!--        <group id="MyPlugin.TopMenu"-->
+    <!--               text="Kaidee Plugin"-->
+    <!--               description="Kaidee Plugin">-->
+    <!--            <add-to-group group-id="MainMenu" anchor="last"/>-->
 
-<!--            <action id="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
-<!--                    icon="/icons/pojo.png"-->
-<!--                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
-<!--                    text="Core POJO &amp; Mapper Generator"-->
-<!--                    description="CorePOJOAction">-->
-<!--                <add-to-group group-id="NewGroup" anchor="last"/>-->
-<!--            </action>-->
-<!--        </group>-->
-<!--    </actions>-->
+    <!--            <action id="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
+    <!--                    icon="/icons/pojo.png"-->
+    <!--                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
+    <!--                    text="Core POJO &amp; Mapper Generator"-->
+    <!--                    description="CorePOJOAction">-->
+    <!--                <add-to-group group-id="NewGroup" anchor="last"/>-->
+    <!--            </action>-->
+    <!--        </group>-->
+    <!--    </actions>-->
 </idea-plugin>

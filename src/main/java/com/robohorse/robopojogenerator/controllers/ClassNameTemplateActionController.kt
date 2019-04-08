@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.controllers
 
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.ui.Messages
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
 import com.robohorse.robopojogenerator.delegates.FileTemplateWriterDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
@@ -36,11 +35,14 @@ open class ClassNameTemplateActionController @Inject constructor() {
         val projectModel = environmentDelegate.obtainProjectModel(event)
 
         viewBinder.bindView(event, classNameTemplateModel) { className ->
-            fileTemplateWriterDelegate.getInstance(projectModel.project)
-            val templateProperties = fileTemplateWriterDelegate.defaultProperties?.also {
+            if (className == null) return@bindView
+
+            val fileTemplateManager = fileTemplateWriterDelegate.getInstance(projectModel.project)
+            val templateProperties = fileTemplateManager.defaultProperties.also {
                 it["CLASS_NAME"] = className
             }
-            fileTemplateWriterDelegate.writeTemplate(projectModel.directory, className,
+            fileTemplateWriterDelegate.writeTemplate(projectModel.directory,
+                    className + classNameTemplateModel.fileNameSuffix,
                     classNameTemplateModel.templateName, templateProperties)
         }
     }
