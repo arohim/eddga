@@ -1,0 +1,15 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.cache.base.mapper.EntityMapper
+import javax.inject.Inject
+
+#parse("File Header.java")
+open class ${CLASS_NAME}EntityMapper @Inject constructor() : EntityMapper<Cached${CLASS_NAME}, ${CLASS_NAME}Entity> {
+    override fun mapFromCached(type: Cached${CLASS_NAME}): ${CLASS_NAME}Entity {
+        return ${CLASS_NAME}Entity()
+    }
+
+    override fun mapToCached(type: ${CLASS_NAME}Entity): Cached${CLASS_NAME} {
+        return ${CLASS_NAME}Feed()
+    }
+}

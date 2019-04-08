@@ -1,0 +1,16 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.data.base.mapper.EntityMapper
+import javax.inject.Inject
+
+#parse("File Header.java")
+open class ${CLASS_NAME}Mapper @Inject constructor()
+    : EntityMapper<${CLASS_NAME}Entity, ${CLASS_NAME}> {
+    override fun mapFromEntity(type: ${CLASS_NAME}Entity): ${CLASS_NAME} {
+        return ${CLASS_NAME}()
+    }
+
+    override fun mapToEntity(type: ${CLASS_NAME}): ${CLASS_NAME}Entity {
+        return ${CLASS_NAME}Entity()
+    }
+}

@@ -1,0 +1,12 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.data.shared.model.HeaderEntity
+import io.reactivex.Completable
+import io.reactivex.Single
+import javax.inject.Inject
+
+open class ${CLASS_NAME}CacheDataStore @Inject constructor(private val cache: ${CLASS_NAME}Cache)
+    : ${CLASS_NAME}DataStore {
+
+    TODO("Implement the interface")
+}

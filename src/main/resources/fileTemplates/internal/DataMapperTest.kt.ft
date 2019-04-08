@@ -1,0 +1,49 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+
+@RunWith(JUnit4::class)
+class ${CLASS_NAME}MapperTest {
+
+    private lateinit var mapper: ${CLASS_NAME}Mapper
+
+    @Before
+    fun setUp() {
+        mapper = ${CLASS_NAME}Mapper()
+    }
+
+    @Test
+    fun mapToEntityMapsData() {
+        // GIVEN
+        val domain = TODO("make a factory")
+
+        // WHEN
+        val entity = mapper.mapToEntity(domain)
+
+        // THEN
+        assertEqually(entity, domain)
+    }
+
+    @Test
+    fun mapFromEntityMapsData() {
+        // GIVEN
+        val entity = TODO("make a factory")
+
+        // WHEN
+        val domain = mapper.mapFromEntity(entity)
+
+        // THEN
+        assertEqually(entity, domain)
+    }
+
+    private fun assertEqually(entity: ${CLASS_NAME}Entity, domain: ${CLASS_NAME}) {
+        // assertEquals(domain.description, entity.description)
+        TODO("assert")
+    }
+
+}
