@@ -29,9 +29,15 @@ Select target package -> new -> Domain POJO from JSON
 Select target package -> new -> Data POJO from JSON
 Select target package -> new -> Cache POJO from JSON
 Select target package -> new -> Remote POJO from JSON
+Select target package -> new -> From remote mapper
+Select target package -> new -> From remote mapper unit test
+Select target package -> new -> To remote mapper
+Select target package -> new -> To remote mapper unit test
+Select target package -> new -> Cache mapper
+Select target package -> new -> Cache mapper unit test
 
 <p>
-Waiting for image
+<img src="images/functionality.png" height="200">
 </p>
 
 put JSON into window and select target POJO type
