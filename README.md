@@ -37,7 +37,7 @@ Select target package -> new -> Cache mapper
 Select target package -> new -> Cache mapper unit test
 
 <p>
-<img src="images/functionality.png" height="200">
+<img src="images/functionality.png" height="400">
 </p>
 
 put JSON into window and select target POJO type
