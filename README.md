@@ -5,11 +5,11 @@ This is an internal plugin but openly to use, I make for using very specific And
 # Road map
 The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
 Currently, Generate Kotlin POJO files from JSON <br>
-  - Domain POJO <br>
-  - Data POJO <br>
-  - Cache POJO <br>
-  - Remote POJO <br>
-  - And Generate mapper with Unit testing is coming soon.
+  - Domain POJO
+  - Data POJO
+  - Cache POJO
+  - Remote POJO
+  - Generate mapper with Unit testing template
       
 <p>
 ### Waiting for image
@@ -25,16 +25,16 @@ get it and install from <a href="https://plugins.jetbrains.com/plugin/12213-andr
 
 # How to use
 
-Select target package -> new -> Domain POJO from JSON
-Select target package -> new -> Data POJO from JSON
-Select target package -> new -> Cache POJO from JSON
-Select target package -> new -> Remote POJO from JSON
-Select target package -> new -> From remote mapper
-Select target package -> new -> From remote mapper unit test
-Select target package -> new -> To remote mapper
-Select target package -> new -> To remote mapper unit test
-Select target package -> new -> Cache mapper
-Select target package -> new -> Cache mapper unit test
+- Select target package -> new -> Domain POJO from JSON
+- Select target package -> new -> Data POJO from JSON
+- Select target package -> new -> Cache POJO from JSON
+- Select target package -> new -> Remote POJO from JSON
+- Select target package -> new -> From remote mapper
+- Select target package -> new -> From remote mapper unit test
+- Select target package -> new -> To remote mapper
+- Select target package -> new -> To remote mapper unit test
+- Select target package -> new -> Cache mapper
+- Select target package -> new -> Cache mapper unit test
 
 <p>
 <img src="images/functionality.png" height="400">
