@@ -1,0 +1,12 @@
+package com.kaidee.rogue2.services
+
+import com.kaidee.rogue2.header.HeaderModel
+import io.reactivex.Single
+
+#parse("File Header.java")
+interface ${CLASS_NAME}Service : BaseService {
+
+    fun list(headers: List<HeaderModel>): Single<${DTO_NAME}Model>
+
+}
+

@@ -1,0 +1,19 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.kaidee.rogue2.api.BaseURL
+import com.kaidee.rogue2.api.${CLASS_NAME}Gateway
+import com.kaidee.rogue2.header.HeaderModel
+import com.kaidee.rogue2.services.${CLASS_NAME}Service
+import com.kaidee.rogue2.services.gateWay
+import io.reactivex.Single
+import javax.inject.Inject
+
+#parse("File Header.java")
+open class ${CLASS_NAME}ServiceImpl @Inject constructor() : ${CLASS_NAME}Service {
+
+    override val baseUrl: String = BaseURL.HOST
+
+    override fun list(headers: List<HeaderModel>): Single<${DTO_NAME}Model> = gateWay<${CLASS_NAME}Gateway>(headers).list()
+
+}
+
