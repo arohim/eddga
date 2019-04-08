@@ -75,9 +75,9 @@
         </action>
 
 
-        <action id="TestTemplate" class="com.robohorse.robopojogenerator.actions.TestTemplateAction"
+        <action id="TestTemplate" class="com.robohorse.robopojogenerator.actions.FromRemoteAction"
                 icon="/icons/pojo.png"
-                text="Template"
+                text="From remote Mapper"
                 description="TestTemplate">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
