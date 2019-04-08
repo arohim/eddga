@@ -1,6 +1,14 @@
 package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.actions.*;
+import com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperAction;
+import com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperUnitTestAction;
+import com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperAction;
+import com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperUnitTestAction;
+import com.robohorse.robopojogenerator.actions.pojo.CacheLayerPOJOAction;
+import com.robohorse.robopojogenerator.actions.pojo.DataLayerPOJOAction;
+import com.robohorse.robopojogenerator.actions.pojo.DomainLayerPOJOAction;
+import com.robohorse.robopojogenerator.actions.pojo.RemotePOJOAction;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.CommonJavaPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDataClassPostProcessor;
