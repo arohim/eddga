@@ -7,12 +7,12 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew
+import com.robohorse.robopojogenerator.view.ui.CoreGeneratorVew
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import javax.inject.Inject
 
-open class MultiPOJOGenerateActionListener @Inject constructor(private val generatorVew: POJOGeneratorVew,
+open class MultiPOJOGenerateActionListener @Inject constructor(private val generatorVew: CoreGeneratorVew,
                                                                private val event: AnActionEvent,
                                                                private val generationModel: GenerationModel,
                                                                private val eventListener: GuiFormEventListener) : ActionListener {
@@ -29,15 +29,15 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
 
     override fun actionPerformed(e: ActionEvent) {
         val textArea = generatorVew.textArea
-        val textField = generatorVew.classNameTextField
+//        val textField = generatorVew.classNameTextField
 
         saveConfiguration()
-        var content = textArea?.text
-        val className = textField.text
+        var content = textArea.text
+//        val className = textField.text
         try {
             content = classGenerateHelper.validateJsonContent(content)
             generationModel.content = content
-            generationModel.rootClassName = className
+//            generationModel.rootClassName = className
             eventListener.onJsonDataObtained(generationModel)
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
@@ -47,6 +47,10 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
     private fun saveConfiguration() {
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
+            component.domainPath = generatorVew.domainPath.text
+            component.roguePath = generatorVew.roguePath.text
+            component.cachePath = generatorVew.cachePath.text
+            component.dataPath = generatorVew.dataPath.text
         }
     }
 }
