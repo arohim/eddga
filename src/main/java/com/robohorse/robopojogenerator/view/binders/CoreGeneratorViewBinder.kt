@@ -15,21 +15,25 @@ import javax.inject.Inject
 open class CoreGeneratorViewBinder @Inject constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: GuiFormEventListener) {
-        val generatorVew = CoreGeneratorVew()
+        val generatorView = CoreGeneratorVew()
         val basePath = event.project?.basePath
 
-        val actionListener = MultiPOJOGenerateActionListener(generatorVew, event, GenerationModel.Builder().build(), eventListener)
-        generatorVew.generateButton.addActionListener(actionListener)
+        val actionListener = MultiPOJOGenerateActionListener(generatorView, event, GenerationModel.Builder().build(), eventListener)
+        generatorView.generateButton.addActionListener(actionListener)
+        generatorView.domainPathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.domainPath))
+        generatorView.roguePathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.roguePath))
+        generatorView.cachePathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.cachePath))
+        generatorView.dataPathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.dataPath))
 
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
-            generatorVew.domainPath.text = component.domainPath
-            generatorVew.roguePath.text = component.roguePath
-            generatorVew.cachePath.text = component.cachePath
-            generatorVew.dataPath.text = component.dataPath
+            generatorView.domainPath.text = component.domainPath
+            generatorView.roguePath.text = component.roguePath
+            generatorView.cachePath.text = component.cachePath
+            generatorView.dataPath.text = component.dataPath
         }
 
-        builder.setCenterPanel(generatorVew.rootView)
+        builder.setCenterPanel(generatorView.rootView)
 //        builder.setTitle(generationModel.dialogTitle)
         builder.removeAllActions()
         builder.show()
