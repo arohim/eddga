@@ -47,8 +47,12 @@ public interface AppComponent {
     void inject(ToRemoteMapperUnitTestAction item);
 
     void inject(CacheMapperAction item);
-    
+
     void inject(CacheMapperUnitTestAction item);
+
+    void inject(DataMapperAction item);
+
+    void inject(DataMapperUnitTestAction item);
 
     CommonJavaPostProcessor newCommonJavaPostProcessor();
 

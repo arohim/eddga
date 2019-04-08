@@ -9,7 +9,7 @@ Currently, Generate Kotlin POJO files from JSON <br>
   - Data POJO
   - Cache POJO
   - Remote POJO
-  - Generate mapper with Unit testing template
+  - Remote/Cache/Data mapper and its unit testing template
       
 <p>
 ### Waiting for image
