@@ -6,7 +6,8 @@ import com.robohorse.robopojogenerator.delegates.*
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.binders.CorePOJOGeneratorViewBinder
+import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder
+import com.robohorse.robopojogenerator.view.binders.POJOGeneratorViewBinder
 import javax.inject.Inject
 
 open class POJOGeneratorActionController @Inject constructor() {
@@ -18,7 +19,7 @@ open class POJOGeneratorActionController @Inject constructor() {
     lateinit var messageDelegate: MessageDelegate
 
     @Inject
-    lateinit var coreGeneratorViewBinder: CorePOJOGeneratorViewBinder
+    lateinit var coreGeneratorViewBinder: POJOGeneratorViewBinder
 
     @Inject
     lateinit var generationDelegate: POJOGenerationDelegate

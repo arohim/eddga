@@ -135,6 +135,14 @@
                 description="Data Mapper Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="MultiDataModelsAction"
+                class="com.robohorse.robopojogenerator.actions.pojo.MultiDataModelsAction"
+                icon="/icons/pojo.png"
+                text="Multi Data Model"
+                description="Multi Data Model">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
     <!--    <actions>-->

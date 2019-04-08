@@ -12,13 +12,13 @@ import javax.inject.Inject
 /**
  * Created by vadim on 24.09.16.
  */
-open class CorePOJOGeneratorViewBinder @Inject constructor() {
+open class CoreGeneratorViewBinder @Inject constructor() {
 
-    fun bindView(builder: DialogBuilder, event: AnActionEvent, generationModel: GenerationModel, eventListener: GuiFormEventListener) {
+    fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: GuiFormEventListener) {
         val generatorVew = POJOGeneratorVew()
         val basePath = event.project?.basePath
 
-        val actionListener = POJOGenerateActionListener(generatorVew, event, generationModel, eventListener)
+        val actionListener = MultiPOJOGenerateActionListener(generatorVew, event, GenerationModel.Builder().build(), eventListener)
         generatorVew.generateButton.addActionListener(actionListener)
 
         event.project?.let {
@@ -26,7 +26,7 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
         }
 
         builder.setCenterPanel(generatorVew.rootView)
-        builder.setTitle(generationModel.dialogTitle)
+//        builder.setTitle(generationModel.dialogTitle)
         builder.removeAllActions()
         builder.show()
     }
