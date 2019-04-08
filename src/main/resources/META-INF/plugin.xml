@@ -74,14 +74,15 @@
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="FromRemoteAction" class="com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperAction"
+        <action id="FromRemoteMapperAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperAction"
                 icon="/icons/pojo.png"
                 text="From remote Mapper"
                 description="From remote Mapper">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="FromRemoteActionUnitTest"
+        <action id="FromRemoteMapperUnitTestAction"
                 class="com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperUnitTestAction"
                 icon="/icons/pojo.png"
                 text="From remote Mapper Unit Test"
@@ -89,19 +90,33 @@
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="ToRemoteAction" class="com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperAction"
+        <action id="ToRemoteMapperAction" class="com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperAction"
                 icon="/icons/pojo.png"
                 text="To remote Mapper"
                 description="To remote Mapper">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-
-        <action id="ToRemoteActionUnitTest"
+        <action id="ToRemoteMapperUnitTestAction"
                 class="com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperUnitTestAction"
                 icon="/icons/pojo.png"
                 text="To remote Mapper Unit Test"
                 description="To remote Mapper Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheMapperAction" class="com.robohorse.robopojogenerator.actions.mapper.CacheMapperAction"
+                icon="/icons/pojo.png"
+                text="Cache Mapper"
+                description="Cache Mapper">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheMapperUnitTestAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.CacheMapperUnitTestAction"
+                icon="/icons/pojo.png"
+                text="Cache Mapper Unit Test"
+                description="Cache Mapper Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
     </actions>

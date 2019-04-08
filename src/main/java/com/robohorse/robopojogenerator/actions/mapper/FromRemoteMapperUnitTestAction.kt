@@ -19,8 +19,8 @@ class FromRemoteMapperUnitTestAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
-                "From remote mapper Unit Test",
-                "FromRemoteMapperUnitTest",
+                "From remote mapper unit test",
+                "FromRemoteMapperTest",
                 "EntityMapperTest"
         )
         newMapperActionController.onActionHandled(e, classNameTemplateModel)
