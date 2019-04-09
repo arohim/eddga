@@ -27,10 +27,6 @@ class CoreGeneratorVew {
     lateinit var languageGroup: ButtonGroup
     lateinit var typeButtonGroup: ButtonGroup
 
-    fun getTextArea(): JTextArea? {
-        return textArea
-    }
-
     private fun createUIComponents() {
         textArea = RSyntaxTextArea()
         textArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JSON

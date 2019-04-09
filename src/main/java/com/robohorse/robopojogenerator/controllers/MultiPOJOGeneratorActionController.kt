@@ -2,6 +2,7 @@ package com.robohorse.robopojogenerator.controllers
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.DialogBuilder
+import com.robohorse.robopojogenerator.delegates.DirectoryCreatorDelegate
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
@@ -16,6 +17,9 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
     @Inject
     lateinit var environmentDelegate: EnvironmentDelegate
+
+    @Inject
+    lateinit var directoryCreatorDelegate: DirectoryCreatorDelegate
 
     @Inject
     lateinit var viewBinder: CoreGeneratorViewBinder
@@ -35,7 +39,11 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
         viewBinder.bindView(dialogBuilder, event, GuiFormEventListener { generationModel ->
             window.dispose()
-            // TODO()
+
+            event.project?.let {
+                directoryCreatorDelegate.createDirectory(it, projectModel.directory, "test")
+            }
         })
     }
+
 }
