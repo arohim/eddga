@@ -10,7 +10,7 @@ import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import javax.inject.Inject
 
 class DataMapperUnitTestAction : AnAction() {
-    
+
     @Inject
     lateinit var controller: MapperTestGeneratorActionController
 
@@ -21,7 +21,7 @@ class DataMapperUnitTestAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val mapperTestGeneratorModel = MapperTestGeneratorModel(
-                from = "cached",
+                from = "domain",
                 to = "entity",
                 fileNameSuffix = "MapperTest",
                 templateName = "DataMapperTest"
