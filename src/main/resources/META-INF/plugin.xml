@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -10,10 +10,11 @@
 
            The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
         Features.<br>
-          - Domain POJO <br>
-          - Data POJO <br>
-          - Cache POJO <br>
-          - Remote POJO <br>
+          - Domain POJO from JSON <br>
+          - Data POJO from JSON<br>
+          - Cache POJO from JSON<br>
+          - Remote POJO from JSON<br>
+          - Remote/Cache/Data mapper from JSON
           - Remote/Cache/Data mapper and its unit testing template
 
           This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
@@ -22,7 +23,7 @@
 
     <change-notes><![CDATA[
     Added
-     - Data mapper and its unit testing template <br>
+     - Remote/Cache/Data mapper from JSON<br>
     ]]>
     </change-notes>
 

@@ -7,10 +7,14 @@ import javax.inject.Inject
 open class ${CLASS_NAME}Mapper @Inject constructor()
     : EntityMapper<${CLASS_NAME}Entity, ${CLASS_NAME}> {
     override fun mapFromEntity(type: ${CLASS_NAME}Entity): ${CLASS_NAME} {
-        return ${CLASS_NAME}()
+        return ${CLASS_NAME}(
+            ${ENTITIES}
+        )
     }
 
     override fun mapToEntity(type: ${CLASS_NAME}): ${CLASS_NAME}Entity {
-        return ${CLASS_NAME}Entity()
+        return ${CLASS_NAME}Entity(
+            ${ENTITIES}
+        )
     }
 }

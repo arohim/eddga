@@ -3,14 +3,16 @@ package com.robohorse.robopojogenerator.actions.mapper
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.robohorse.robopojogenerator.controllers.ClassNameTemplateActionController
+import com.robohorse.robopojogenerator.controllers.MapperGeneratorActionController
 import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
+import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import javax.inject.Inject
 
 class ToRemoteMapperAction : AnAction() {
 
     @Inject
-    lateinit var newMapperActionController: ClassNameTemplateActionController
+    lateinit var mapperGeneratorActionController: MapperGeneratorActionController
 
     init {
         Injector.initModules()
@@ -18,11 +20,11 @@ class ToRemoteMapperAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        val classNameTemplateModel = ClassNameTemplateModel(
-                "To remote mapper",
-                "ToRemoteMapper",
-                "ModelMapper"
+        val mapperGeneratorModel = MapperGeneratorModel(
+                fileNameSuffix = "ModelMapper",
+                templateName = "ToRemoteMapper"
         )
-        newMapperActionController.onActionHandled(e, classNameTemplateModel)
+
+        mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)
     }
 }
