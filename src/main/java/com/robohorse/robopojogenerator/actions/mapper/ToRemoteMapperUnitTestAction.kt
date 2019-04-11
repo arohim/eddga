@@ -21,8 +21,8 @@ class ToRemoteMapperUnitTestAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val mapperTestGeneratorModel = MapperTestGeneratorModel(
-                from = "cached",
-                to = "entity",
+                from = "entity",
+                to = "model",
                 fileNameSuffix = "ModelMapperTest",
                 templateName = "ToRemoteMapperTest"
         )

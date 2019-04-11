@@ -21,7 +21,7 @@ class CacheMapperUnitTestAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val mapperTestGeneratorModel = MapperTestGeneratorModel(
-                from = "cached",
+                from = "domain",
                 to = "entity",
                 fileNameSuffix = "EntityMapperTest",
                 templateName = "CacheMapperTest"
