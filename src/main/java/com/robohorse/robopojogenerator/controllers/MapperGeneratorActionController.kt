@@ -26,9 +26,9 @@ open class MapperGeneratorActionController @Inject constructor() {
     @Inject
     lateinit var generationDelegate: MapperGeneratorDelegate
 
-    fun onActionHandled(event: AnActionEvent, mapperGeneratorModels: MapperGeneratorModel) {
+    fun onActionHandled(event: AnActionEvent, mapperGeneratorModel: MapperGeneratorModel) {
         try {
-            proceed(event, mapperGeneratorModels)
+            proceed(event, mapperGeneratorModel)
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
         }
