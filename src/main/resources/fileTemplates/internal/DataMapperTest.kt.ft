@@ -42,8 +42,7 @@ class ${CLASS_NAME}MapperTest {
     }
 
     private fun assertEqually(entity: ${CLASS_NAME}Entity, domain: ${CLASS_NAME}) {
-        // assertEquals(domain.description, entity.description)
-        TODO("assert")
+        ${ASSERTIONS}
     }
 
 }

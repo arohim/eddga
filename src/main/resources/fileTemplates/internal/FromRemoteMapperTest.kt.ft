@@ -26,7 +26,6 @@ class ${CLASS_NAME}EntityMapperTest {
         val entity = mapper.mapFromRemote(model)
 
         // THEN
-        // assertEquals(model.attrName, entity.attrName)
-        TODO("more asserts")
+        ${ASSERTIONS}
     }
 }
