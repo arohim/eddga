@@ -45,7 +45,7 @@ class ClassNameTemplateActionControllerTest {
         // GIVEN
         val projectModel = ProjectModel.Builder().build()
         val event = Mockito.mock(AnActionEvent::class.java)
-        val classNameTemplateModel = ClassNameTemplateModel("dialogTitle", "templateName")
+        val classNameTemplateModel = ClassNameTemplateModel("dialogTitle", "templateName", "")
         `when`(environmentDelegate.obtainProjectModel(any())).thenReturn(projectModel)
 
         // WHEN
@@ -60,7 +60,7 @@ class ClassNameTemplateActionControllerTest {
     fun onActionHandled_withError() {
         val exception = RoboPluginException("", "")
         val event = Mockito.mock(AnActionEvent::class.java)
-        val classNameTemplateModel = ClassNameTemplateModel("dialogTitle", "templateName")
+        val classNameTemplateModel = ClassNameTemplateModel("dialogTitle", "templateName", "")
 
         `when`(environmentDelegate.obtainProjectModel(event)).thenThrow(exception)
         classNameTemplateActionController.onActionHandled(event, classNameTemplateModel)
