@@ -43,8 +43,7 @@ class ${CLASS_NAME}EntityMapperTest {
     }
 
     private fun assertEqually(entity: ${CLASS_NAME}Entity, cached: Cached${CLASS_NAME}) {
-        // assertEquals(cached.description, entity.description)
-        TODO("assert")
+        ${ASSERTIONS}
     }
 
 }
