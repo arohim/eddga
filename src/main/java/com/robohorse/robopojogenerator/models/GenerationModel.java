@@ -13,8 +13,8 @@ public class GenerationModel {
     private AnnotationEnum annotationEnum;
     private String rootClassName;
     private String content;
-    private String suffix;
-    private String prefix;
+    private String suffix = "";
+    private String prefix = "";
     private boolean useSetters;
     private boolean useGetters;
     private boolean useStrings;

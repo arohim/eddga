@@ -7,6 +7,8 @@ import javax.inject.Inject
 open class ${CLASS_NAME}ModelMapper @Inject constructor()
     : ModelMapper<${CLASS_NAME}Entity, ${CLASS_NAME}Model> {
     override fun mapToRemote(type: ${CLASS_NAME}Entity): ${CLASS_NAME}Model {
-        return ${CLASS_NAME}Model()
+        return ${CLASS_NAME}Model(
+            ${ENTITIES}
+        )
     }
 }
