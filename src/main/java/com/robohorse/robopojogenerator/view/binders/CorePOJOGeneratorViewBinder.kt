@@ -23,6 +23,9 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
 
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
+            if (component.lastPath.isEmpty()) {
+                generatorVew.classNameTextField.text = component.lastPath
+            }
         }
 
         builder.setCenterPanel(generatorVew.rootView)
