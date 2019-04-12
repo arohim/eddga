@@ -1,6 +1,10 @@
 package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.actions.*;
+import com.robohorse.robopojogenerator.actions.factory.CacheFactoryAction;
+import com.robohorse.robopojogenerator.actions.factory.DataFactoryAction;
+import com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction;
+import com.robohorse.robopojogenerator.actions.factory.RemoteFactoryAction;
 import com.robohorse.robopojogenerator.actions.mapper.*;
 import com.robohorse.robopojogenerator.actions.pojo.CacheLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.DataLayerPOJOAction;
@@ -12,6 +16,7 @@ import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDat
 import com.robohorse.robopojogenerator.listeners.POJOGenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import dagger.Component;
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Singleton;
 
@@ -59,4 +64,12 @@ public interface AppComponent {
     AutoValueClassPostProcessor newAutoValueClassPostProcessor();
 
     KotlinDataClassPostProcessor newKotlinDataClassPostProcessor();
+
+    void inject(@NotNull RemoteFactoryAction cacheFactoryAction);
+
+    void inject(@NotNull CacheFactoryAction cacheFactoryAction);
+
+    void inject(@NotNull DataFactoryAction dataFactoryAction);
+
+    void inject(@NotNull DomainFactoryAction domainFactoryAction);
 }

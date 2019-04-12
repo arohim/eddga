@@ -40,12 +40,12 @@ public class ClassField {
     }
 
     public String getJavaItem() {
-        return null != classField ? wrapListJava() :
+        return isListField() ? wrapListJava() :
                 (null != className ? className : classEnum.getPrimitive());
     }
 
     public String getKotlinItem() {
-        return null != classField ? wrapListKotlin() :
+        return isListField() ? wrapListKotlin() :
                 (null != className ? className : classEnum.getKotlin());
     }
 
@@ -58,7 +58,19 @@ public class ClassField {
     }
 
     private String getJavaBoxed() {
-        return null != classField ? wrapListJava() :
+        return isListField() ? wrapListJava() :
                 (null != className ? className : classEnum.getBoxed());
+    }
+
+    boolean isListField() {
+        return null != classField;
+    }
+
+    public ClassEnum getClassEnum() {
+        return classEnum;
+    }
+
+    public String getClassName() {
+        return className;
     }
 }

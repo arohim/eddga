@@ -20,7 +20,7 @@ class ${CLASS_NAME}ModelMapperTest {
     @Test
     fun `map to remote`() {
         // GIVEN
-        val entity = TODO("make a factory")
+        val entity = ${CLASS_NAME}Factory.make${CLASS_NAME}Entity()
 
         // WHEN
         val model = mapper.mapToRemote(entity)
