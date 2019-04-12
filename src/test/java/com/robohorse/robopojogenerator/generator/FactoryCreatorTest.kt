@@ -39,7 +39,7 @@ class FactoryCreatorTest {
                 "\t\tavailable = randomBoolean(),\n" +
                 "\t\tcost = randomLong()\n" +
                 "\t)\n" +
-                "}"
+                "}\n\n"
 
         assertEquals(expected, actual)
     }
