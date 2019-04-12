@@ -2,6 +2,7 @@ package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.actions.*;
 import com.robohorse.robopojogenerator.actions.api.ApiGateWayAction;
+import com.robohorse.robopojogenerator.actions.api.ApiRemoteImplAction;
 import com.robohorse.robopojogenerator.actions.api.ApiServiceImplAction;
 import com.robohorse.robopojogenerator.actions.api.ApiServiceInterfaceAction;
 import com.robohorse.robopojogenerator.actions.factory.CacheFactoryAction;
@@ -81,4 +82,6 @@ public interface AppComponent {
     void inject(@NotNull ApiGateWayAction apiGateWayAction);
 
     void inject(@NotNull ApiServiceInterfaceAction apiServiceInterfaceAction);
+
+    void inject(@NotNull ApiRemoteImplAction apiRemoteImplAction);
 }

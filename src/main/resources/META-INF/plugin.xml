@@ -193,6 +193,14 @@
                 description="Api Service Impl">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="ApiRemoteImplAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiRemoteImplAction"
+                icon="/icons/pojo.png"
+                text="Api Remote Impl"
+                description="Api Remote Impl">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
     <!--    <actions>-->
