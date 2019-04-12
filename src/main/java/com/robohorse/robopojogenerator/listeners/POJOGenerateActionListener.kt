@@ -42,6 +42,7 @@ open class POJOGenerateActionListener @Inject constructor(private val generatorV
             generationModel.content = content
             generationModel.rootClassName = className
             eventListener.onJsonDataObtained(generationModel)
+
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
         }
@@ -50,6 +51,7 @@ open class POJOGenerateActionListener @Inject constructor(private val generatorV
     private fun saveConfiguration() {
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
+            component.lastPath = generatorVew.classNameTextField.text
         }
     }
 }
