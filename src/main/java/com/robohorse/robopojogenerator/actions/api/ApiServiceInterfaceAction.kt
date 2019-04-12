@@ -26,3 +26,4 @@ class ApiServiceInterfaceAction : AnAction() {
         controller.onActionHandled(e, classNameTemplateModel)
     }
 }
+˚
