@@ -169,6 +169,30 @@
                 description="Data Factory">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="ApiGateWayAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiGateWayAction"
+                icon="/icons/pojo.png"
+                text="Api Gateway"
+                description="Api Gateway">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ApiServiceInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiServiceInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Api Service Interface"
+                description="Api Service Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ApiServiceImplAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiServiceImplAction"
+                icon="/icons/pojo.png"
+                text="Api Service Impl"
+                description="Api Service Impl">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
     <!--    <actions>-->

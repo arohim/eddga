@@ -2,10 +2,8 @@ package com.robohorse.robopojogenerator.actions.mapper
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.robohorse.robopojogenerator.controllers.ClassNameTemplateActionController
 import com.robohorse.robopojogenerator.controllers.MapperGeneratorActionController
 import com.robohorse.robopojogenerator.injections.Injector
-import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import javax.inject.Inject
 
