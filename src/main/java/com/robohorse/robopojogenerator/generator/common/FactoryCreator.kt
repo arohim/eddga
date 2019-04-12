@@ -169,8 +169,14 @@ open class FactoryCreator @Inject constructor() {
             ClassEnum.BOOLEAN -> {
                 "randomBoolean()"
             }
-            ClassEnum.LONG, ClassEnum.FLOAT, ClassEnum.DOUBLE -> {
+            ClassEnum.LONG -> {
                 "randomLong()"
+            }
+            ClassEnum.FLOAT -> {
+                "randomFloat()"
+            }
+            ClassEnum.DOUBLE -> {
+                "randomDouble()"
             }
             else -> {
                 val className = getClassName(prefix, classField.className, suffix)

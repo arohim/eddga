@@ -1,6 +1,10 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 
-import com.app.kaidee.remote.test.factory.DataFactory.Factory.*
+import com.app.kaidee.remote.test.factory.DataFactory.Factory.randomBoolean
+import com.app.kaidee.remote.test.factory.DataFactory.Factory.randomDouble
+import com.app.kaidee.remote.test.factory.DataFactory.Factory.randomLong
+import com.app.kaidee.remote.test.factory.DataFactory.Factory.randomInt
+import com.app.kaidee.remote.test.factory.DataFactory.Factory.randomUuid
 
 #parse("File Header.java")
 class ${CLASS_NAME}Factory {

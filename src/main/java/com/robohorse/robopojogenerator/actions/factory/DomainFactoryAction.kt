@@ -20,7 +20,7 @@ class DomainFactoryAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val factoryGeneratorModel = FactoryGeneratorModel(
                 fileNameSuffix = "Factory",
-                templateName = "RemoteFactory",
+                templateName = "DomainFactory",
                 remote = false,
                 cache = false,
                 data = false,

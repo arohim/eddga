@@ -20,7 +20,7 @@ class DataFactoryAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val factoryGeneratorModel = FactoryGeneratorModel(
                 fileNameSuffix = "Factory",
-                templateName = "RemoteFactory",
+                templateName = "DataFactory",
                 remote = false,
                 cache = false,
                 data = true,
