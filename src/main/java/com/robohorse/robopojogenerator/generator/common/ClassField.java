@@ -2,6 +2,8 @@ package com.robohorse.robopojogenerator.generator.common;
 
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
 
+import static com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM;
+
 /**
  * Created by vadim on 29.10.16.
  */
@@ -9,7 +11,7 @@ public class ClassField {
     private ClassEnum classEnum;
     private String className;
     private ClassField classField;
-    private String listFormat;
+    private String listFormat = NON_NULL_LIST_OF_ITEM;
 
     public ClassField() {
     }
