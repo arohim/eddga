@@ -1,0 +1,14 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.remote.test.factory.DataFactory.Factory.*
+
+#parse("File Header.java")
+class ${CLASS_NAME}Factory {
+
+    companion object Factory {
+
+        ${METHODS}
+
+    }
+
+}
