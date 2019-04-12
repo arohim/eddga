@@ -138,10 +138,34 @@
         </action>
 
         <action id="RemoteFactoryAction"
-                class="com.robohorse.robopojogenerator.actions.mapper.RemoteFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.RemoteFactoryAction"
                 icon="/icons/pojo.png"
                 text="Remote Factory"
                 description="Remote Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.CacheFactoryAction"
+                icon="/icons/pojo.png"
+                text="Cache Factory"
+                description="Cache Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DomainFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction"
+                icon="/icons/pojo.png"
+                text="Domain Factory"
+                description="Domain Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.DataFactoryAction"
+                icon="/icons/pojo.png"
+                text="Data Factory"
+                description="Data Factory">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
     </actions>

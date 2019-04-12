@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.actions.mapper
+package com.robohorse.robopojogenerator.actions.factory
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -8,6 +8,7 @@ import com.robohorse.robopojogenerator.models.FactoryGeneratorModel
 import javax.inject.Inject
 
 class RemoteFactoryAction : AnAction() {
+
     @Inject
     lateinit var controller: FactoryGeneratorActionController
 
