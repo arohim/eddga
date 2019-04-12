@@ -41,11 +41,13 @@ open class FactoryCreator @Inject constructor() {
 
         if (isContainListClass(classItems)) {
             val classListType = getClassListType(classItems)
+            var isFirstClass = true
             classItems.forEach { classItem: ClassItem ->
-                methods += if (classListType.contains(classItem.className)) {
-                    generateMultipleAndSingleMethods(classItem)
+                if (classListType.contains(classItem.className)) {
+                    methods += generateMultipleAndSingleMethods(classItem)
                 } else {
-                    generateListMethod(classItem)
+                    methods += generateListMethod(classItem, isFirstClass)
+                    isFirstClass = false
                 }
             }
         } else {
@@ -84,9 +86,10 @@ open class FactoryCreator @Inject constructor() {
     private fun isContainListClass(classItems: MutableList<ClassItem>) =
             classItems.flatMap { it.classImports }.contains(ImportsTemplate.LIST)
 
-    private fun generateListMethod(classItem: ClassItem): String {
+    private fun generateListMethod(classItem: ClassItem, isFirstClass: Boolean): String {
         var result = ""
-        result += "fun make${classItem.className}Model(repeat: Int): ${classItem.className}Model {\n"
+        val param = if (isFirstClass) "repeat: Int" else ""
+        result += "fun make${classItem.className}Model($param): ${classItem.className}Model {\n"
         result += generateFields(classItem)
         result += "}\n\n"
         return result
@@ -146,7 +149,11 @@ open class FactoryCreator @Inject constructor() {
                 "randomLong()"
             }
             else -> {
-                "make${classField.className}Models(repeat)"
+                if (classField.isListField) {
+                    "make${classField.className}Models(repeat)"
+                } else {
+                    "make${classField.className}Model()"
+                }
             }
         }
     }

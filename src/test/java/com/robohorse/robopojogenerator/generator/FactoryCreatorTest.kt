@@ -120,7 +120,8 @@ class FactoryCreatorTest {
         // THEN
         val expected = "fun makeClassNameModel(repeat: Int): ClassNameModel {\n" +
                 "\treturn ClassNameModel(\n" +
-                "\t\tdata = makeDataItemModels(repeat)\n" +
+                "\t\tdata = makeDataItemModels(repeat),\n" +
+                "\t\tdata2 = makeDataItem2Model()\n" +
                 "\t)\n" +
                 "}\n" +
                 "\n" +
@@ -136,7 +137,14 @@ class FactoryCreatorTest {
                 "\treturn DataItemModel(\n" +
                 "\t\tvalue = randomInt()\n" +
                 "\t)\n" +
-                "}\n\n"
+                "}\n" +
+                "\n" +
+                "fun makeDataItem2Model(): DataItem2Model {\n" +
+                "\treturn DataItem2Model(\n" +
+                "\t\tvalue = randomInt()\n" +
+                "\t)\n" +
+                "}\n" +
+                "\n"
 
         assertEquals(expected, actual)
     }
