@@ -19,7 +19,11 @@ class RemoteFactoryAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val factoryGeneratorModel = FactoryGeneratorModel(
                 fileNameSuffix = "Factory",
-                templateName = "RemoteFactory"
+                templateName = "RemoteFactory",
+                remote = true,
+                cache = false,
+                data = false,
+                domain = false
         )
 
         controller.onActionHandled(e, factoryGeneratorModel)

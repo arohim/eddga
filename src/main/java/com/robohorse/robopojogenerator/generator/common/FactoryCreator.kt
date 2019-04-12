@@ -7,7 +7,6 @@ import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
 import com.robohorse.robopojogenerator.models.FactoryGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import javax.inject.Inject
 
@@ -27,7 +26,7 @@ open class FactoryCreator @Inject constructor() {
         val fileTemplateManager = fileTemplateWriterDelegate.getInstance(projectModel.project)
         val templateProperties = fileTemplateManager.defaultProperties
         templateProperties["CLASS_NAME"] = generationModel.rootClassName
-        templateProperties["METHODS"] = generateMethods(classItemSet)
+        templateProperties["METHODS"] = generateMethods(classItemSet, factoryGeneratorModel)
         val fileName = generationModel.rootClassName + factoryGeneratorModel.fileNameSuffix
         fileTemplateWriterDelegate.writeTemplate(
                 projectModel.directory,
@@ -37,42 +36,59 @@ open class FactoryCreator @Inject constructor() {
         )
     }
 
-    fun generateMethods(classItems: MutableList<ClassItem>): String {
+    fun generateMethods(classItems: MutableList<ClassItem>, factoryGeneratorModel: FactoryGeneratorModel): String {
         var methods = ""
 
+        if (factoryGeneratorModel.domain)
+            methods += generateDomainMethods(classItems, "", "")
+
+        if (factoryGeneratorModel.remote)
+            methods += generateDomainMethods(classItems, "", "Model")
+
+        if (factoryGeneratorModel.data)
+            methods += generateDomainMethods(classItems, "", "Entity")
+
+        if (factoryGeneratorModel.cache)
+            methods += generateDomainMethods(classItems, "Cached", "")
+
+        return methods
+    }
+
+    private fun generateDomainMethods(classItems: MutableList<ClassItem>, prefix: String, suffix: String): String {
+        var result = ""
         if (isContainListClass(classItems)) {
             val classListType = getClassListType(classItems)
             var isFirstClass = true
             classItems.forEach { classItem: ClassItem ->
                 if (classListType.contains(classItem.className)) {
-                    methods += generateMultipleAndSingleMethods(classItem)
+                    result += generateMultipleAndSingleMethods(classItem, prefix, suffix)
                 } else {
-                    methods += generateListMethod(classItem, isFirstClass)
+                    result += generateListMethod(classItem, isFirstClass, prefix, suffix)
                     isFirstClass = false
                 }
             }
         } else {
             classItems.forEach { classItem: ClassItem ->
-                methods += generateNonListMethod(classItem)
+                result += generateNonListMethod(classItem, prefix, suffix)
             }
         }
-
-        return methods
+        return result
     }
 
-    private fun generateMultipleAndSingleMethods(classItem: ClassItem): String {
+    private fun generateMultipleAndSingleMethods(classItem: ClassItem, prefix: String, suffix: String): String {
         var result = ""
 
-        result += "private fun make${classItem.className}Models(repeat: Int): List<${classItem.className}Model> {\n"
-        result += "\tval contents = mutableListOf<${classItem.className}Model>()\n" +
+        val className = getClassName(prefix, classItem.className, suffix)
+        result += "private fun make${className}s(repeat: Int): List<${className}> {\n"
+        result += "\tval contents = mutableListOf<${className}>()\n" +
                 "\tkotlin.repeat(repeat) {\n" +
-                "\t\tcontents.add(make${classItem.className}Model())\n" +
+                "\t\tcontents.add(make${className}())\n" +
                 "\t}\n" +
                 "\treturn contents\n"
         result += "}\n\n"
 
-        result += "private fun make${classItem.className}Model(): ${classItem.className}Model {\n"
-        result += generateFields(classItem)
+        result += "private fun make${className}(): ${className} {\n"
+        result += generateFields(classItem, prefix, suffix)
         result += "}\n\n"
         return result
     }
@@ -87,28 +103,33 @@ open class FactoryCreator @Inject constructor() {
     private fun isContainListClass(classItems: MutableList<ClassItem>) =
             classItems.flatMap { it.classImports }.contains(ImportsTemplate.LIST)
 
-    private fun generateListMethod(classItem: ClassItem, isFirstClass: Boolean): String {
+    private fun generateListMethod(classItem: ClassItem, isFirstClass: Boolean, prefix: String, suffix: String): String {
         var result = ""
         val param = if (isFirstClass) "repeat: Int" else ""
-        result += "fun make${classItem.className}Model($param): ${classItem.className}Model {\n"
-        result += generateFields(classItem)
+        val className = getClassName(prefix, classItem.className, suffix)
+
+        result += "fun make${className}($param): ${className} {\n"
+        result += generateFields(classItem, prefix, suffix)
         result += "}\n\n"
         return result
     }
 
-    private fun generateNonListMethod(classItem: ClassItem): String {
+    private fun generateNonListMethod(classItem: ClassItem, prefix: String, suffix: String): String {
         var result = ""
-        result += "fun make${classItem.className}Model(): ${classItem.className}Model {\n"
-        result += generateFields(classItem)
+        val className = prefix + classItem.className + suffix
+
+        result += "fun make${className}(): ${className} {\n"
+        result += generateFields(classItem, prefix, suffix)
         result += "}\n\n"
         return result
     }
 
-    private fun generateFields(classItem: ClassItem): String {
+    private fun generateFields(classItem: ClassItem, prefix: String, suffix: String): String {
         var result = ""
         var counter = 0
         classItem.classFields.forEach { classField: Map.Entry<String, ClassField> ->
-            val classType: String? = generateValue(classField.value)
+            val classType: String? = generateValue(classField.value, prefix, suffix)
+            val className = getClassName(prefix, classItem.className, suffix)
             when {
                 counter == classItem.classFields.size - 1 && classItem.classFields.size > 1 -> {
                     // end the return command
@@ -116,13 +137,13 @@ open class FactoryCreator @Inject constructor() {
                             "\t)\n"
                 }
                 counter == 0 && classItem.classFields.size == 1 -> {
-                    result += "\treturn ${classItem.className}Model(\n" +
+                    result += "\treturn ${className}(\n" +
                             "\t\t${classField.key} = $classType\n" +
                             "\t)\n"
                 }
                 counter == 0 -> {
                     // first
-                    result += "\treturn ${classItem.className}Model(\n" +
+                    result += "\treturn ${className}(\n" +
                             "\t\t${classField.key} = $classType,\n"
                 }
                 else -> {
@@ -135,7 +156,9 @@ open class FactoryCreator @Inject constructor() {
         return result
     }
 
-    private fun generateValue(classField: ClassField): String {
+    private fun getClassName(prefix: String, className: String, suffix: String) = prefix + className + suffix
+
+    private fun generateValue(classField: ClassField, prefix: String, suffix: String): String {
         return when (classField.classEnum) {
             ClassEnum.STRING -> {
                 "randomUuid()"
@@ -150,10 +173,11 @@ open class FactoryCreator @Inject constructor() {
                 "randomLong()"
             }
             else -> {
+                val className = getClassName(prefix, classField.className, suffix)
                 if (classField.isListField) {
-                    "make${classField.className}Models(repeat)"
+                    "make${className}s(repeat)"
                 } else {
-                    "make${classField.className}Model()"
+                    "make$className()"
                 }
             }
         }

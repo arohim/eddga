@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.generator.common.FactoryCreator
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
+import com.robohorse.robopojogenerator.models.FactoryGeneratorModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,9 +30,10 @@ class FactoryCreatorTest {
         classItem.addClassField("cost", ClassField(ClassEnum.DOUBLE))
 
         val classItems = mutableListOf(classItem)
+        val factoryGeneratorModel = FactoryGeneratorModel("", "", true)
 
         // WHEN
-        val actual = factory.generateMethods(classItems)
+        val actual = factory.generateMethods(classItems, factoryGeneratorModel)
 
         // THEN
         val expected = "fun makeClassNameModel(): ClassNameModel {\n" +
@@ -62,9 +64,10 @@ class FactoryCreatorTest {
         classItem.addClassField("data", dataItemField)
 
         val classItems = mutableListOf(classItem, dataItemClass)
+        val factoryGeneratorModel = FactoryGeneratorModel("", "", true)
 
         // WHEN
-        val actual = factory.generateMethods(classItems)
+        val actual = factory.generateMethods(classItems, factoryGeneratorModel)
 
         // THEN
         val expected = "fun makeClassNameModel(repeat: Int): ClassNameModel {\n" +
@@ -113,9 +116,10 @@ class FactoryCreatorTest {
         classItem.addClassField("data2", dataItemField2)
 
         val classItems = mutableListOf(classItem, dataItemClass1, dataItemClass2)
+        val factoryGeneratorModel = FactoryGeneratorModel("", "", true)
 
         // WHEN
-        val actual = factory.generateMethods(classItems)
+        val actual = factory.generateMethods(classItems, factoryGeneratorModel)
 
         // THEN
         val expected = "fun makeClassNameModel(repeat: Int): ClassNameModel {\n" +
