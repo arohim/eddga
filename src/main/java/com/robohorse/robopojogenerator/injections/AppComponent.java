@@ -12,6 +12,7 @@ import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDat
 import com.robohorse.robopojogenerator.listeners.POJOGenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import dagger.Component;
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Singleton;
 
@@ -59,4 +60,6 @@ public interface AppComponent {
     AutoValueClassPostProcessor newAutoValueClassPostProcessor();
 
     KotlinDataClassPostProcessor newKotlinDataClassPostProcessor();
+
+    void inject(@NotNull RemoteFactoryAction cacheFactoryAction);
 }

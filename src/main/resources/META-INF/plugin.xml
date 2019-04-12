@@ -136,6 +136,14 @@
                 description="Data Mapper Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="RemoteFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.mapper.RemoteFactoryAction"
+                icon="/icons/pojo.png"
+                text="Remote Factory"
+                description="Remote Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
     <!--    <actions>-->

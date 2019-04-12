@@ -5,6 +5,7 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
+import com.robohorse.robopojogenerator.models.FactoryGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
@@ -21,17 +22,17 @@ open class FactoryCreator @Inject constructor() {
     @Throws(RoboPluginException::class)
     fun generateFiles(generationModel: GenerationModel,
                       projectModel: ProjectModel,
-                      mapperTestGeneratorModel: MapperTestGeneratorModel) {
+                      factoryGeneratorModel: FactoryGeneratorModel) {
         val classItemSet = roboPOJOGenerator.generate(generationModel).toMutableList()
         val fileTemplateManager = fileTemplateWriterDelegate.getInstance(projectModel.project)
         val templateProperties = fileTemplateManager.defaultProperties
         templateProperties["CLASS_NAME"] = generationModel.rootClassName
         templateProperties["METHODS"] = generateMethods(classItemSet)
-        val fileName = generationModel.rootClassName + mapperTestGeneratorModel.fileNameSuffix
+        val fileName = generationModel.rootClassName + factoryGeneratorModel.fileNameSuffix
         fileTemplateWriterDelegate.writeTemplate(
                 projectModel.directory,
                 fileName,
-                mapperTestGeneratorModel.templateName,
+                factoryGeneratorModel.templateName,
                 templateProperties
         )
     }
