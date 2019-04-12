@@ -11,16 +11,16 @@ import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.LinkedHashMap
-import javax.inject.Inject
+import kotlin.collections.HashSet
+import kotlin.collections.MutableMap
+import kotlin.collections.set
 
 @RunWith(MockitoJUnitRunner::class)
 class MapperCreatorTest {

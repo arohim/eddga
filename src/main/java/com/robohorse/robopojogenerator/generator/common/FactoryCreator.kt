@@ -4,6 +4,7 @@ import com.robohorse.robopojogenerator.delegates.FileTemplateWriterDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
+import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
@@ -37,29 +38,87 @@ open class FactoryCreator @Inject constructor() {
 
     fun generateMethods(classItems: MutableList<ClassItem>): String {
         var methods = ""
-        classItems.forEach { classItem: ClassItem ->
-            methods += "fun make${classItem.className}Model(): ${classItem.className}Model {\n"
-            methods = generateFields(classItem, methods)
-            methods += "}\n\n"
+
+        if (isContainListClass(classItems)) {
+            val classListType = getClassListType(classItems)
+            classItems.forEach { classItem: ClassItem ->
+                methods += if (classListType.contains(classItem.className)) {
+                    generateMultipleAndSingleMethods(classItem)
+                } else {
+                    generateListMethod(classItem)
+                }
+            }
+        } else {
+            classItems.forEach { classItem: ClassItem ->
+                methods += generateNonListMethod(classItem)
+            }
         }
+
         return methods
     }
 
-    private fun generateFields(classItem: ClassItem, methods: String): String {
-        var result = methods
+    private fun generateMultipleAndSingleMethods(classItem: ClassItem): String {
+        var result = ""
+
+        result += "private fun make${classItem.className}Models(repeat: Int): List<${classItem.className}Model> {\n"
+        result += "\tval contents = mutableListOf<${classItem.className}Model>()\n" +
+                "\tkotlin.repeat(repeat) {\n" +
+                "\t\tcontents.add(make${classItem.className}Model())\n" +
+                "\t}\n" +
+                "\treturn contents\n"
+        result += "}\n\n"
+
+        result += "private fun make${classItem.className}Model(): ${classItem.className}Model {\n"
+        result += generateFields(classItem)
+        result += "}\n\n"
+        return result
+    }
+
+    private fun getClassListType(classItems: MutableList<ClassItem>): List<String> {
+        return classItems
+                .flatMap { it.classFields.values }
+                .filter { it.isListField }
+                .map { it.className }
+    }
+
+    private fun isContainListClass(classItems: MutableList<ClassItem>) =
+            classItems.flatMap { it.classImports }.contains(ImportsTemplate.LIST)
+
+    private fun generateListMethod(classItem: ClassItem): String {
+        var result = ""
+        result += "fun make${classItem.className}Model(repeat: Int): ${classItem.className}Model {\n"
+        result += generateFields(classItem)
+        result += "}\n\n"
+        return result
+    }
+
+    private fun generateNonListMethod(classItem: ClassItem): String {
+        var result = ""
+        result += "fun make${classItem.className}Model(): ${classItem.className}Model {\n"
+        result += generateFields(classItem)
+        result += "}\n\n"
+        return result
+    }
+
+    private fun generateFields(classItem: ClassItem): String {
+        var result = ""
         var counter = 0
         classItem.classFields.forEach { classField: Map.Entry<String, ClassField> ->
-            result += ""
-            val classType = generateValue(classField.value.kotlinItem)
-            when (counter) {
-                classItem.classFields.size - 1 -> {
+            val classType: String? = generateValue(classField.value)
+            when {
+                counter == classItem.classFields.size - 1 && classItem.classFields.size > 1 -> {
                     // end the return command
                     result += "\t\t${classField.key} = $classType\n" +
                             "\t)\n"
                 }
-                0 -> {
+                counter == 0 && classItem.classFields.size == 1 -> {
+                    result += "\treturn ${classItem.className}Model(\n" +
+                            "\t\t${classField.key} = $classType\n" +
+                            "\t)\n"
+                }
+                counter == 0 -> {
                     // first
-                    result += "\treturn ${classItem.className}(\n" +
+                    result += "\treturn ${classItem.className}Model(\n" +
                             "\t\t${classField.key} = $classType,\n"
                 }
                 else -> {
@@ -72,21 +131,23 @@ open class FactoryCreator @Inject constructor() {
         return result
     }
 
-    private fun generateValue(classType: String): String {
-        return when (classType) {
-            ClassEnum.STRING.kotlin -> {
+    private fun generateValue(classField: ClassField): String {
+        return when (classField.classEnum) {
+            ClassEnum.STRING -> {
                 "randomUuid()"
             }
-            ClassEnum.INTEGER.kotlin -> {
+            ClassEnum.INTEGER -> {
                 "randomInt()"
             }
-            ClassEnum.BOOLEAN.kotlin -> {
+            ClassEnum.BOOLEAN -> {
                 "randomBoolean()"
             }
-            ClassEnum.LONG.kotlin, ClassEnum.FLOAT.kotlin, ClassEnum.DOUBLE.kotlin -> {
+            ClassEnum.LONG, ClassEnum.FLOAT, ClassEnum.DOUBLE -> {
                 "randomLong()"
             }
-            else -> ""
+            else -> {
+                "make${classField.className}Models(repeat)"
+            }
         }
     }
 }
