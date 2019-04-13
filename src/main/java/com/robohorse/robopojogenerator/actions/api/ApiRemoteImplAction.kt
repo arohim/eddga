@@ -21,7 +21,7 @@ class ApiRemoteImplAction : AnAction() {
         val classNameTemplateModel = ClassNameTemplateModel(
                 dialogTitle = "Api Remote Impl",
                 templateName = "ApiRemoteImpl",
-                fileNameSuffix = ""
+                fileNameSuffix = "RemoteImpl"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }

@@ -1,10 +1,7 @@
 package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.actions.*;
-import com.robohorse.robopojogenerator.actions.api.ApiGateWayAction;
-import com.robohorse.robopojogenerator.actions.api.ApiRemoteImplAction;
-import com.robohorse.robopojogenerator.actions.api.ApiServiceImplAction;
-import com.robohorse.robopojogenerator.actions.api.ApiServiceInterfaceAction;
+import com.robohorse.robopojogenerator.actions.api.*;
 import com.robohorse.robopojogenerator.actions.factory.CacheFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.DataFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction;
@@ -14,6 +11,7 @@ import com.robohorse.robopojogenerator.actions.pojo.CacheLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.DataLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.DomainLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.RemotePOJOAction;
+import com.robohorse.robopojogenerator.actions.cache.CacheImplAction;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.CommonJavaPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDataClassPostProcessor;
@@ -84,4 +82,6 @@ public interface AppComponent {
     void inject(@NotNull ApiServiceInterfaceAction apiServiceInterfaceAction);
 
     void inject(@NotNull ApiRemoteImplAction apiRemoteImplAction);
+
+    void inject(@NotNull CacheImplAction cacheImplAction);
 }

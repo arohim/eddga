@@ -21,7 +21,7 @@ class ApiServiceImplAction : AnAction() {
         val classNameTemplateModel = ClassNameTemplateModel(
                 dialogTitle = "Api Service Impl",
                 templateName = "ApiServiceImpl",
-                fileNameSuffix = ""
+                fileNameSuffix = "ServiceImpl"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }

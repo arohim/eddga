@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.actions.api
+package com.robohorse.robopojogenerator.actions.cache
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import javax.inject.Inject
 
-class ApiGateWayAction : AnAction() {
+class CacheImplAction : AnAction() {
 
     @Inject
     lateinit var controller: ClassNameTemplateActionController
@@ -19,9 +19,9 @@ class ApiGateWayAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
-                dialogTitle = "Api Gateway",
-                templateName = "ApiGateWay",
-                fileNameSuffix = "GateWay"
+                dialogTitle = "Cache Impl",
+                templateName = "CacheImpl",
+                fileNameSuffix = "CacheImpl"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }

@@ -201,6 +201,13 @@
                 description="Api Remote Impl">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="CacheImplAction"
+                class="com.robohorse.robopojogenerator.actions.cache.CacheImplAction"
+                icon="/icons/pojo.png"
+                text="Cache Impl">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
     <!--    <actions>-->
