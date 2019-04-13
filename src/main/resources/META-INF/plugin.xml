@@ -304,14 +304,14 @@
         <action id="TrackerInterfaceAction"
                 class="com.robohorse.robopojogenerator.actions.tracking.TrackerInterfaceAction"
                 icon="/icons/pojo.png"
-                text="Dagger module">
+                text="Tracker Interface">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
         <action id="TrackerImplAction"
                 class="com.robohorse.robopojogenerator.actions.tracking.TrackerImplAction"
                 icon="/icons/pojo.png"
-                text="Dagger module">
+                text="Tracker Impl">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
     </actions>
