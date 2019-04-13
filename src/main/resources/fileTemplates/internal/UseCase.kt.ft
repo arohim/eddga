@@ -7,11 +7,13 @@ import com.app.kaidee.domain.base.executor.ThreadExecutor
 import com.app.kaidee.domain.shared.model.Request
 import javax.inject.Inject
 
-class ${CLASS_NAME} @Inject constructor(threadExecutor: ThreadExecutor,
+#parse("File Header.java")
+class ${CLASS_NAME} @Inject constructor(private val repository: ${CLASS_NAME}Repository,
+                                            threadExecutor: ThreadExecutor,
                                             postExecutionThread: PostExecutionThread) :
-        SingleUseCase<${RESPONSE_DTO}, Request<Void?>>(threadExecutor, postExecutionThread) {
+        SingleUseCase<${CLASS_NAME}Response, Request<Void?>>(threadExecutor, postExecutionThread) {
 
-    public override fun buildUseCaseObservable(params: Request<Void?>): Single<${RESPONSE_DTO}> {
-        // return repository.get(params.headers)
+    public override fun buildUseCaseObservable(params: Request<Void?>): Single<${CLASS_NAME}Response> {
+        return repository.getList(params.headers)
     }
 }

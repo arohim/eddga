@@ -16,11 +16,24 @@ open class ${CLASS_NAME}Fragment @Inject constructor() : Fragment(), ${CLASS_NAM
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
+        initListeners()
         TODO("not implemented")
     }
 
     override fun setPresenter(presenter: ${CLASS_NAME}Contract.Presenter) {
         myPresenter = presenter
+    }
+
+
+    private fun initToolbar() {
+        toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+    }
+
+    private fun initListeners() {
+
     }
 
     override fun onStart() {

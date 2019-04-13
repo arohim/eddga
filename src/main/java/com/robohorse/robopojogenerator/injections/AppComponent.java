@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.injections;
 import com.robohorse.robopojogenerator.actions.*;
 import com.robohorse.robopojogenerator.actions.api.*;
 import com.robohorse.robopojogenerator.actions.data.*;
+import com.robohorse.robopojogenerator.actions.domain.UseCaseAction;
 import com.robohorse.robopojogenerator.actions.factory.CacheFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.DataFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction;
@@ -13,6 +14,9 @@ import com.robohorse.robopojogenerator.actions.pojo.DataLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.DomainLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.RemotePOJOAction;
 import com.robohorse.robopojogenerator.actions.cache.CacheImplAction;
+import com.robohorse.robopojogenerator.actions.presentation.*;
+import com.robohorse.robopojogenerator.actions.tracking.TrackerImplAction;
+import com.robohorse.robopojogenerator.actions.tracking.TrackerInterfaceAction;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.CommonJavaPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDataClassPostProcessor;
@@ -99,4 +103,20 @@ public interface AppComponent {
     void inject(@NotNull RemoteInterfaceAction remoteInterfaceAction);
 
     void inject(@NotNull DataStoreInterfaceAction dataStoreInterfaceAction);
+
+    void inject(@NotNull UseCaseAction useCaseAction);
+
+    void inject(@NotNull ContractInterfaceAction contractInterfaceAction);
+
+    void inject(@NotNull PresenterAction presenterAction);
+
+    void inject(@NotNull FragmentAction fragmentAction);
+
+    void inject(@NotNull DaggerModuleAction daggerModuleAction);
+
+    void inject(@NotNull ActivityAction activityAction);
+
+    void inject(@NotNull TrackerInterfaceAction trackerInterfaceAction);
+
+    void inject(@NotNull TrackerImplAction trackerImplAction);
 }
