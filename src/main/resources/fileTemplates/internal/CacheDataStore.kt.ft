@@ -5,8 +5,16 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
+#parse("File Header.java")
 open class ${CLASS_NAME}CacheDataStore @Inject constructor(private val cache: ${CLASS_NAME}Cache)
     : ${CLASS_NAME}DataStore {
 
-    TODO("Implement the interface")
+    override fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}ResponseEntity): Completable {
+        return cache.save${CLASS_NAME}ToCache(data)
+    }
+
+    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}ResponseEntity> {
+        return cache.getList()
+    }
+
 }
