@@ -4,7 +4,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 #parse("File Header.java")
-interface ${CLASS_NAME}Cache {
+interface ${CLASS_NAME}Remote {
 
     fun getList(): Single<${CLASS_NAME}ResponseEntity>
 

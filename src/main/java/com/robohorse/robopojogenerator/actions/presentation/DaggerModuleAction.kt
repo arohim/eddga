@@ -21,7 +21,7 @@ class DaggerModuleAction : AnAction() {
         val classNameTemplateModel = ClassNameTemplateModel(
                 dialogTitle = "Dagger Module",
                 templateName = "DaggerModule",
-                fileNameSuffix = "rModule"
+                fileNameSuffix = "Module"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }

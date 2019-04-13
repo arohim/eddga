@@ -20,7 +20,7 @@ class ContractInterfaceAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
                 dialogTitle = "Contract Interface",
-                templateName = "Contract",
+                templateName = "ContractInterface",
                 fileNameSuffix = "Contract"
         )
         controller.onActionHandled(e, classNameTemplateModel)
