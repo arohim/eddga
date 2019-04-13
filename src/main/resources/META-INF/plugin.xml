@@ -208,6 +208,55 @@
                 text="Cache Impl">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
+
+        <action id="DataRepositoryAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataRepositoryAction"
+                icon="/icons/pojo.png"
+                text="Data Repository">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="RemoteDataStoreAction"
+                class="com.robohorse.robopojogenerator.actions.data.RemoteDataStoreAction"
+                icon="/icons/pojo.png"
+                text="Remote Data Store">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheDataStoreAction"
+                class="com.robohorse.robopojogenerator.actions.data.CacheDataStoreAction"
+                icon="/icons/pojo.png"
+                text="Cache Data Store">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataStoreFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataStoreFactoryAction"
+                icon="/icons/pojo.png"
+                text="Data Store Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.data.CacheInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Cache Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="RemoteInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.data.RemoteInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Remote Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataStoreInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataStoreInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Data Store Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
     </actions>
 
     <!--    <actions>-->
