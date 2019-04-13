@@ -6,7 +6,7 @@ import com.app.dealfish.models.pixel.TrackingPixelEventManager
 import javax.inject.Inject
 
 #parse("File Header.java")
-class HomeFeedTrackerImpl @Inject constructor(val context: Context, var pixel: TrackingPixelService, var at: ATTrackerService) : HomeFeedTracker {
+class ${CLASS_NAME}TrackerImpl @Inject constructor(val context: Context, var pixel: TrackingPixelService, var at: ATTrackerService) : ${CLASS_NAME}Tracker {
 
 
     private fun sampleSendTrackingPixel(behavior: String, display: String, placement: String,
