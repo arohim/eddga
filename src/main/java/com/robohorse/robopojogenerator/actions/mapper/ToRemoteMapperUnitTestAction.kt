@@ -2,15 +2,15 @@ package com.robohorse.robopojogenerator.actions.mapper
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.robohorse.robopojogenerator.controllers.ClassNameTemplateActionController
+import com.robohorse.robopojogenerator.controllers.MapperTestGeneratorActionController
 import com.robohorse.robopojogenerator.injections.Injector
-import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
+import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import javax.inject.Inject
 
 class ToRemoteMapperUnitTestAction : AnAction() {
 
     @Inject
-    lateinit var newMapperActionController: ClassNameTemplateActionController
+    lateinit var controller: MapperTestGeneratorActionController
 
     init {
         Injector.initModules()
@@ -18,11 +18,12 @@ class ToRemoteMapperUnitTestAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        val classNameTemplateModel = ClassNameTemplateModel(
-                "To remote mapper unit test",
-                "ToRemoteMapperTest",
-                "ModelMapperTest"
+        val mapperTestGeneratorModel = MapperTestGeneratorModel(
+                from = "entity",
+                to = "model",
+                fileNameSuffix = "ModelMapperTest",
+                templateName = "ToRemoteMapperTest"
         )
-        newMapperActionController.onActionHandled(e, classNameTemplateModel)
+        controller.onActionHandled(e, mapperTestGeneratorModel)
     }
 }

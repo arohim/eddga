@@ -20,7 +20,7 @@ class ${CLASS_NAME}MapperTest {
     @Test
     fun mapToEntityMapsData() {
         // GIVEN
-        val domain = TODO("make a factory")
+        val domain = ${CLASS_NAME}Factory.make${CLASS_NAME}()
 
         // WHEN
         val entity = mapper.mapToEntity(domain)
@@ -32,7 +32,7 @@ class ${CLASS_NAME}MapperTest {
     @Test
     fun mapFromEntityMapsData() {
         // GIVEN
-        val entity = TODO("make a factory")
+        val entity = ${CLASS_NAME}Factory.make${CLASS_NAME}Entity()
 
         // WHEN
         val domain = mapper.mapFromEntity(entity)
@@ -42,8 +42,7 @@ class ${CLASS_NAME}MapperTest {
     }
 
     private fun assertEqually(entity: ${CLASS_NAME}Entity, domain: ${CLASS_NAME}) {
-        // assertEquals(domain.description, entity.description)
-        TODO("assert")
+        ${ASSERTIONS}
     }
 
 }

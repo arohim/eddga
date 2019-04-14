@@ -1,0 +1,23 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.data.shared.model.HeaderEntity
+import com.app.kaidee.remote.shared.mapper.HeaderModelMapper
+import com.kaidee.rogue2.services.${CLASS_NAME}Service
+import io.reactivex.Single
+import javax.inject.Inject
+
+#parse("File Header.java")
+class ${CLASS_NAME}RemoteImpl @Inject constructor(private val service: ${CLASS_NAME}Service,
+                                              private val responseEntityMapper: ${CLASS_NAME}ResponseEntityMapper,
+                                              private val headerModelMapper: HeaderModelMapper
+) : ${CLASS_NAME}Remote {
+
+    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}ResponseEntity> {
+        val headerModels = headers.map { headerModelMapper.mapToRemote(it) }
+        return service.getList(headerModels)
+                .map {
+                    responseEntityMapper.mapFromRemote(it)
+                }
+    }
+
+}

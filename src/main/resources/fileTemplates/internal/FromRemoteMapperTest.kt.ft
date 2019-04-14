@@ -20,13 +20,12 @@ class ${CLASS_NAME}EntityMapperTest {
     @Test
     fun `map from remote`() {
         // GIVEN
-        val model = TODO("make a factory")
+        val model = ${CLASS_NAME}Factory.make${CLASS_NAME}Model()
 
         // WHEN
         val entity = mapper.mapFromRemote(model)
 
         // THEN
-        // assertEquals(model.attrName, entity.attrName)
-        TODO("more asserts")
+        ${ASSERTIONS}
     }
 }

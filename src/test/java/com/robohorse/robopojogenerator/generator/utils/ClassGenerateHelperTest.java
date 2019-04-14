@@ -4,6 +4,8 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.common.ClassField;
 import org.junit.Test;
 
+import static com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM;
+import static com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate.NULLABLE_LIST_OF_ITEM;
 import static org.junit.Assert.*;
 
 /**
@@ -101,6 +103,7 @@ public class ClassGenerateHelperTest {
         final String type = "Double";
         ClassField classField = new ClassField();
         classField.setClassField(new ClassField(type));
+        classField.setListFormat(NON_NULL_LIST_OF_ITEM);
         assertEquals("List<" + type + ">", classField.getJavaItem());
     }
 
@@ -108,8 +111,13 @@ public class ClassGenerateHelperTest {
     public void testResolveMajorTypeWithDoubleCount_isCorrect() throws Exception {
         final String type = "Double";
         ClassField classField = new ClassField();
-        classField.setClassField(new ClassField());
-        classField.setClassField(new ClassField(type));
+        ClassField decorator1 = new ClassField();
+        decorator1.setListFormat(NON_NULL_LIST_OF_ITEM);
+        classField.setClassField(decorator1);
+        ClassField decorator = new ClassField(type);
+        decorator.setListFormat(NON_NULL_LIST_OF_ITEM);
+        classField.setClassField(decorator);
+        classField.setListFormat(NON_NULL_LIST_OF_ITEM);
         assertEquals("List<List<" + type + ">>", classField.getJavaItem());
     }
 

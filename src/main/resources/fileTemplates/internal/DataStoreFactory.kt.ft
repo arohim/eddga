@@ -17,4 +17,5 @@ open class ${CLASS_NAME}DataStoreFactory @Inject constructor(
      open fun retrieveCacheDataStore(): ${CLASS_NAME}DataStore {
         return cache
      }
+
 }

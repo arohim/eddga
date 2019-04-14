@@ -2,14 +2,15 @@ package com.robohorse.robopojogenerator.actions.mapper
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.robohorse.robopojogenerator.controllers.ClassNameTemplateActionController
+import com.robohorse.robopojogenerator.controllers.MapperGeneratorActionController
 import com.robohorse.robopojogenerator.injections.Injector
-import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
+import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import javax.inject.Inject
 
 class DataMapperAction : AnAction() {
+
     @Inject
-    lateinit var newMapperActionController: ClassNameTemplateActionController
+    lateinit var mapperGeneratorActionController: MapperGeneratorActionController
 
     init {
         Injector.initModules()
@@ -17,11 +18,11 @@ class DataMapperAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        val classNameTemplateModel = ClassNameTemplateModel(
-                "Data mapper unit test",
-                "DataMapper",
-                "Mapper"
+        val mapperGeneratorModel = MapperGeneratorModel(
+                fileNameSuffix = "Mapper",
+                templateName = "DataMapper"
         )
-        newMapperActionController.onActionHandled(e, classNameTemplateModel)
+
+        mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)
     }
 }

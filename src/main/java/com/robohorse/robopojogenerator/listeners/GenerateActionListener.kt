@@ -117,9 +117,6 @@ open class GenerateActionListener(private val generatorVew: POJOGeneratorVew,
             CoreLayerEnum.Cache -> {
                 ""
             }
-            else -> {
-                ""
-            }
         }
     }
 
@@ -136,9 +133,6 @@ open class GenerateActionListener(private val generatorVew: POJOGeneratorVew,
             }
             CoreLayerEnum.Cache -> {
                 "Cached"
-            }
-            else -> {
-                ""
             }
         }
     }

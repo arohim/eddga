@@ -1,0 +1,12 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.kaidee.rogue2.header.HeaderModel
+import io.reactivex.Single
+
+#parse("File Header.java")
+interface ChameleonService : BaseService {
+
+    fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}ResponseModel>
+
+}
+

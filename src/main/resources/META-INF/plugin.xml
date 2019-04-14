@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>1.2.0</version>
+    <version>1.6.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -10,11 +10,14 @@
 
            The road map of this project is generate the whole things from plain JSON all the way through to Domain Layer and this plugin will be extended to generate android UI template
         Features.<br>
-          - Domain POJO <br>
-          - Data POJO <br>
-          - Cache POJO <br>
-          - Remote POJO <br>
-          - Remote/Cache/Data mapper and its unit testing template
+          - Domain POJO from JSON <br>
+          - Data POJO from JSON<br>
+          - Cache POJO from JSON<br>
+          - Remote POJO from JSON<br>
+          - Remote/Cache/Data mapper from JSON
+          - Remote/Cache/Data mapper unit testing from JSON
+          - Remote/Cache/Data/Domain Factory from JSON
+          - View/Presentation/Domain/Cache/Data/remote template
 
           This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
           Thank you to Vadim Shchenev to make me easier to extend.
@@ -22,7 +25,7 @@
 
     <change-notes><![CDATA[
     Added
-     - Data mapper and its unit testing template <br>
+     - Remote/Cache/Data/Domain Factory from JSON<br>
     ]]>
     </change-notes>
 
@@ -141,6 +144,182 @@
                 icon="/icons/pojo.png"
                 text="Multi Data Model"
                 description="Multi Data Model">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="RemoteFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.RemoteFactoryAction"
+                icon="/icons/pojo.png"
+                text="Remote Factory"
+                description="Remote Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.CacheFactoryAction"
+                icon="/icons/pojo.png"
+                text="Cache Factory"
+                description="Cache Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DomainFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction"
+                icon="/icons/pojo.png"
+                text="Domain Factory"
+                description="Domain Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.factory.DataFactoryAction"
+                icon="/icons/pojo.png"
+                text="Data Factory"
+                description="Data Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ApiGateWayAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiGateWayAction"
+                icon="/icons/pojo.png"
+                text="Api Gateway"
+                description="Api Gateway">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ApiServiceInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiServiceInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Api Service Interface"
+                description="Api Service Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ApiServiceImplAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiServiceImplAction"
+                icon="/icons/pojo.png"
+                text="Api Service Impl"
+                description="Api Service Impl">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ApiRemoteImplAction"
+                class="com.robohorse.robopojogenerator.actions.api.ApiRemoteImplAction"
+                icon="/icons/pojo.png"
+                text="Api Remote Impl"
+                description="Api Remote Impl">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheImplAction"
+                class="com.robohorse.robopojogenerator.actions.cache.CacheImplAction"
+                icon="/icons/pojo.png"
+                text="Cache Impl">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataRepositoryAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataRepositoryAction"
+                icon="/icons/pojo.png"
+                text="Data Repository">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="RemoteDataStoreAction"
+                class="com.robohorse.robopojogenerator.actions.data.RemoteDataStoreAction"
+                icon="/icons/pojo.png"
+                text="Remote Data Store">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheDataStoreAction"
+                class="com.robohorse.robopojogenerator.actions.data.CacheDataStoreAction"
+                icon="/icons/pojo.png"
+                text="Cache Data Store">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataStoreFactoryAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataStoreFactoryAction"
+                icon="/icons/pojo.png"
+                text="Data Store Factory">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.data.CacheInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Cache Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="RemoteInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.data.RemoteInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Remote Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataStoreInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataStoreInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Data Store Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="UseCaseAction"
+                class="com.robohorse.robopojogenerator.actions.domain.UseCaseAction"
+                icon="/icons/pojo.png"
+                text="Use case">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ContractInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.presentation.ContractInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Contract Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="PresenterAction"
+                class="com.robohorse.robopojogenerator.actions.presentation.PresenterAction"
+                icon="/icons/pojo.png"
+                text="Presenter">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="FragmentAction"
+                class="com.robohorse.robopojogenerator.actions.presentation.FragmentAction"
+                icon="/icons/pojo.png"
+                text="Fragment">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="ActivityAction"
+                class="com.robohorse.robopojogenerator.actions.presentation.ActivityAction"
+                icon="/icons/pojo.png"
+                text="Activity">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DaggerModuleAction"
+                class="com.robohorse.robopojogenerator.actions.presentation.DaggerModuleAction"
+                icon="/icons/pojo.png"
+                text="Dagger module">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="TrackerInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.tracking.TrackerInterfaceAction"
+                icon="/icons/pojo.png"
+                text="Tracker Interface">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="TrackerImplAction"
+                class="com.robohorse.robopojogenerator.actions.tracking.TrackerImplAction"
+                icon="/icons/pojo.png"
+                text="Tracker Impl">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
     </actions>
