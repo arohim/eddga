@@ -1,0 +1,27 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import com.app.kaidee.tracking.pixel.TrackingPixelService
+import com.app.kaidee.tracking.pixel.ATTrackerService
+import com.app.dealfish.models.pixel.TrackingPixelEventManager
+import javax.inject.Inject
+
+#parse("File Header.java")
+class ${CLASS_NAME}TrackerImpl @Inject constructor(val context: Context, var pixel: TrackingPixelService, var at: ATTrackerService) : ${CLASS_NAME}Tracker {
+
+
+    private fun sampleSendTrackingPixel(behavior: String, display: String, placement: String,
+                                  itemType: String?,
+                                  itemIds: String) {
+        pixel.put(TrackingPixelEventManager.KEY.PLACEMENT, placement)
+        pixel.put(TrackingPixelEventManager.KEY.ITEM_TYPE, itemType)
+        pixel.put(TrackingPixelEventManager.KEY.ITEM_ID, itemIds)
+        pixel.put(TrackingPixelEventManager.KEY.S, TrackingPixelEventManager.SERVICE_NAME.DISPLAY_CHAMELEON)
+        pixel.put(TrackingPixelEventManager.KEY.T, TrackingPixelEventManager.TYPE.CHAMELEON_TRACKING)
+        pixel.put(TrackingPixelEventManager.KEY.B, behavior)
+        pixel.put(TrackingPixelEventManager.KEY.DISPLAY, "chameleon %s".format(display))
+        pixel.send(context, true)
+    }
+
+    private fun sampleSendAT() {
+    }
+}

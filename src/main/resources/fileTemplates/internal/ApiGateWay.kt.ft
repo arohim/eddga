@@ -1,0 +1,13 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+package com.kaidee.rogue2.api
+
+import io.reactivex.Single
+import retrofit2.http.POST
+
+#parse("File Header.java")
+interface ${CLASS_NAME}Gateway {
+
+    @POST("v1/list")
+    fun getList(): Single<${CLASS_NAME}ResponseModel>
+}

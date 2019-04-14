@@ -12,15 +12,27 @@ open class ${CLASS_NAME}Fragment @Inject constructor() : Fragment(), ${CLASS_NAM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.${LAYOUT_RES_ID}, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
+        initListeners()
         TODO("not implemented")
     }
 
     override fun setPresenter(presenter: ${CLASS_NAME}Contract.Presenter) {
         myPresenter = presenter
+    }
+
+
+    private fun initToolbar() {
+        toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+    }
+
+    private fun initListeners() {
+
     }
 
     override fun onStart() {
@@ -33,7 +45,7 @@ open class ${CLASS_NAME}Fragment @Inject constructor() : Fragment(), ${CLASS_NAM
         myPresenter.stop()
     }
 
-     companion object {
+    companion object {
 
         fun newInstance(): ${CLASS_NAME}Fragment {
             val fragment = ${CLASS_NAME}Fragment()
@@ -42,5 +54,5 @@ open class ${CLASS_NAME}Fragment @Inject constructor() : Fragment(), ${CLASS_NAM
             return fragment
         }
 
-     }
+    }
 }
