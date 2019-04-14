@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * Created by vadim on 24.09.16.
  */
-open class POJOGeneratorViewBinder @Inject constructor() {
+open class CorePOJOGeneratorViewBinder @Inject constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, generationModel: GenerationModel, eventListener: GuiFormEventListener) {
         val generatorVew = POJOGeneratorVew()
