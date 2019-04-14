@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiManager;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.PathException;
 import com.robohorse.robopojogenerator.models.ProjectModel;
@@ -24,6 +25,7 @@ public class EnvironmentDelegate {
 
     public ProjectModel obtainProjectModel(AnActionEvent event) throws RoboPluginException {
         final PsiDirectory directory = checkPath(event);
+        final PsiDirectory projectDirectory = PsiManager.getInstance(event.getProject()).findDirectory(getProjectPath(event).getBaseDir());
         final Project project = event.getProject();
         final VirtualFile virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE);
 
@@ -34,6 +36,8 @@ public class EnvironmentDelegate {
         return new ProjectModel.Builder()
                 .setDirectory(directory)
                 .setDirectoryPath(directory.getVirtualFile().getPath())
+                .setProjectDirectory(projectDirectory)
+                .setProjectDirectoryPath(projectDirectory.getVirtualFile().getPath())
                 .setPackageName(packageName)
                 .setProject(project)
                 .setVirtualFolder(virtualFolder)
@@ -45,12 +49,24 @@ public class EnvironmentDelegate {
         projectModel.getVirtualFolder().refresh(false, true);
     }
 
+    public void refreshRootProject(ProjectModel projectModel) {
+        projectModel.getProjectDirectory().getVirtualFile().refresh(false, true);
+    }
+
     private PsiDirectory checkPath(AnActionEvent event) throws RoboPluginException {
         Object pathItem = event.getData(CommonDataKeys.NAVIGATABLE);
         if (pathItem != null) {
             if (pathItem instanceof PsiDirectory) {
                 return (PsiDirectory) pathItem;
             }
+        }
+        throw new PathException();
+    }
+
+    private Project getProjectPath(AnActionEvent event) throws RoboPluginException {
+        Project pathItem = event.getData(CommonDataKeys.PROJECT);
+        if (pathItem != null) {
+            return pathItem;
         }
         throw new PathException();
     }

@@ -13,6 +13,8 @@ public class ProjectModel {
     private VirtualFile virtualFolder;
     private Project project;
     private String directoryPath;
+    private PsiDirectory projectDirectory;
+    private String projectDirectoryPath;
 
     public PsiDirectory getDirectory() {
         return directory;
@@ -34,8 +36,16 @@ public class ProjectModel {
         return directoryPath;
     }
 
+    public String getProjectDirectoryPath() {
+        return projectDirectoryPath;
+    }
+
     public void setDirectoryPath(String directoryPath) {
         this.directoryPath = directoryPath;
+    }
+
+    public PsiDirectory getProjectDirectory() {
+        return projectDirectory;
     }
 
     public static class Builder {
@@ -52,6 +62,16 @@ public class ProjectModel {
 
         public Builder setDirectoryPath(String directory) {
             instance.directoryPath = directory;
+            return this;
+        }
+
+        public Builder setProjectDirectory(PsiDirectory directory) {
+            instance.projectDirectory = directory;
+            return this;
+        }
+
+        public Builder setProjectDirectoryPath(String directory) {
+            instance.projectDirectoryPath = directory;
             return this;
         }
 

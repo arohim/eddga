@@ -6,7 +6,8 @@ import com.robohorse.robopojogenerator.delegates.DirectoryCreatorDelegate
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
-import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
+import com.robohorse.robopojogenerator.listeners.CoreGeneratorFormEventListener
+import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder
 import javax.inject.Inject
 
@@ -37,13 +38,32 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
         val dialogBuilder = DialogBuilder()
         val window = dialogBuilder.window
 
-        viewBinder.bindView(dialogBuilder, event, GuiFormEventListener { generationModel ->
-            window.dispose()
+        with(viewBinder) {
+            bindView(dialogBuilder, event, projectModel, object : CoreGeneratorFormEventListener {
+                override fun onJsonDataObtained(model: CoreGeneratorModel) {
+                    window.dispose()
+                    event.project?.let {
+                        // create domain directories
+                        val domainPath = projectModel.projectDirectoryPath + model.domainPath
+                        directoryCreatorDelegate.createDirectory(it, projectModel.projectDirectory, domainPath)
 
-            event.project?.let {
-                directoryCreatorDelegate.createDirectory(it, projectModel.directory, "test")
-            }
-        })
+                        // create data directories
+                        val dataPath = projectModel.projectDirectoryPath + model.dataPath
+                        directoryCreatorDelegate.createDirectory(it, projectModel.projectDirectory, dataPath)
+
+                        // create cache directories
+                        val cachePath = projectModel.projectDirectoryPath + model.cachePath
+                        directoryCreatorDelegate.createDirectory(it, projectModel.projectDirectory, cachePath)
+
+                        // create remote directories
+                        val roguePath = projectModel.projectDirectoryPath + model.roguePath
+                        directoryCreatorDelegate.createDirectory(it, projectModel.projectDirectory, roguePath)
+
+                        environmentDelegate.refreshRootProject(projectModel)
+                    }
+                }
+            })
+        }
     }
 
 }

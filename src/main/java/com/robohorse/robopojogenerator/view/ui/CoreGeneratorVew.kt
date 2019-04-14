@@ -17,15 +17,13 @@ class CoreGeneratorVew {
     lateinit var genDomainCheckBox: JCheckBox
     lateinit var genCacheCheckBox: JCheckBox
     lateinit var domainPath: JTextField
-    lateinit var domainPathButton: JButton
     lateinit var dataPath: JTextField
-    lateinit var dataPathButton: JButton
     lateinit var cachePath: JTextField
-    lateinit var cachePathButton: JButton
     lateinit var roguePath: JTextField
-    lateinit var roguePathButton: JButton
+    lateinit var classNameTextField: JTextField
     lateinit var languageGroup: ButtonGroup
     lateinit var typeButtonGroup: ButtonGroup
+    lateinit var basePath: JLabel
 
     private fun createUIComponents() {
         textArea = RSyntaxTextArea()
