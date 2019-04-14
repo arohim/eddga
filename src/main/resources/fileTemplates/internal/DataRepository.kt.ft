@@ -7,8 +7,49 @@ import javax.inject.Inject
 
 open class ${CLASS_NAME}DataRepository @Inject constructor(
         private val factory: ${CLASS_NAME}DataStoreFactory,
+        private val responseMapper: ${CLASS_NAME}ResponseMapper,
         private val headerMapper: HeaderMapper)
     : ${CLASS_NAME}Repository {
 
-    TODO("Implement the interface")
+    /**
+    override fun clearBufferoos(): Completable {
+        return factory.retrieveCacheDataStore().clearBufferoos()
+    }
+
+    override fun saveBufferoos(bufferoos: List<Bufferoo>): Completable {
+        val bufferooEntities = bufferoos.map { bufferooMapper.mapToEntity(it) }
+        return saveBufferooEntities(bufferooEntities)
+    }
+
+    private fun saveBufferooEntities(bufferoos: List<BufferooEntity>): Completable {
+            return factory.retrieveCacheDataStore().saveBufferoos(bufferoos)
+    }
+
+    override fun getBufferoos(headers: List<Header>): Single<List<Bufferoo>> {
+        val dataStore = factory.retrieveDataStore()
+        val headerEntity = headers.map { headerMapper.mapToEntity(it) }
+        return dataStore.getBufferoos(headerEntity)
+                .flatMap {
+                    if (dataStore is BufferooRemoteDataStore) {
+                        saveBufferooEntities(it).toSingle { it }
+                    } else {
+                        Single.just(it)
+                    }
+                }
+                .map { list ->
+                    list.map { listItem ->
+                        bufferooMapper.mapFromEntity(listItem)
+                    }
+                }
+    }
+
+    **/
+
+    fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}Response> {
+        val headerEntity = headers.map { headerMapper.mapToEntity(it) }
+        return factory.retrieveRemoteDataStore().getList(headerEntity)
+               .map {
+                    responseMapper.mapFromEntity(it)
+               }
+    }
 }

@@ -1,0 +1,55 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+
+import android.content.Context
+import android.content.SharedPreferences
+import com.app.kaidee.cache.base.JsonLoaderManager
+import com.app.kaidee.data.chameleon.repository.${CLASS_NAME}Cache
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import io.reactivex.Completable
+import io.reactivex.Single
+import javax.inject.Inject
+
+class ${CLASS_NAME}CacheImpl @Inject constructor(private val context: Context,
+                                             private val sharedPreferences: SharedPreferences,
+                                             private val responseEntityMapper: ${CLASS_NAME}ResponseEntityMapper)
+    : ChameleonCache {
+
+    override fun getList(): Single<${CLASS_NAME}ResponseEntity> {
+        val cachedJsonString = sharedPreferences.getString(${CLASS_NAME}_CACHE_KEY, null)
+        if (cachedJsonString.isNullOrEmpty())
+            return Single.create {
+                val cachedData = load${CLASS_NAME}FromLocal()
+                val entity = responseEntityMapper.mapFromCached(cachedData)
+                it.onSuccess(entity)
+            }
+
+        return Single.create {
+            val cachedData = Gson().fromJson(cachedJsonString, Cached${CLASS_NAME}Response::class.java)
+            val entity = responseEntityMapper.mapFromCached(cachedData)
+            it.onSuccess(entity)
+        }
+    }
+
+    override fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}ResponseEntity): Completable {
+        return Completable.defer {
+            val cached = responseEntityMapper.mapToCached(data)
+            sharedPreferences.edit().apply {
+                val jsonString: String = Gson().toJson(cached, Cached${CLASS_NAME}Response::class.java)
+                putString(${CLASS_NAME}_CACHE_KEY, jsonString)
+                apply()
+            }
+            Completable.complete()
+        }
+    }
+
+    private fun load${CLASS_NAME}FromLocal(): Cached${CLASS_NAME}Response {
+        val type = object : TypeToken<Cached${CLASS_NAME}Response>() {}.type
+        val jsonString = JsonLoaderManager.loadJSONFromAssetAndroid(context, "${CLASS_NAME}Response.json")
+        return Gson().fromJson<Cached${CLASS_NAME}Response>(jsonString, type)
+    }
+
+    companion object {
+        const val ${CLASS_NAME}_CACHE_KEY = "${CLASS_NAME}_CACHE_KEY"
+    }
+}
