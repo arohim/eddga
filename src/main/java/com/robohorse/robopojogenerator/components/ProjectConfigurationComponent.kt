@@ -19,6 +19,7 @@ class ProjectConfigurationComponent(project: Project? = null) :
     var dataPath: String = ""
     var domainPath: String = ""
     var roguePath: String = ""
+    var remotePath: String = ""
     var lastPath: String = ""
 
     override fun getState(): ProjectConfigurationComponent? = this

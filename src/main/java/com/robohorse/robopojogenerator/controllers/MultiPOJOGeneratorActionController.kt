@@ -55,9 +55,13 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
                         val cachePath = projectModel.projectDirectoryPath + model.cachePath
                         directoryCreatorDelegate.createDirectory(it, projectModel.projectDirectory, cachePath)
 
-                        // create remote directories
+                        // create rogue directories
                         val roguePath = projectModel.projectDirectoryPath + model.roguePath
                         directoryCreatorDelegate.createDirectory(it, projectModel.projectDirectory, roguePath)
+
+                        // create remote directories
+                        val remotePath = projectModel.projectDirectoryPath + model.remotePath
+                        directoryCreatorDelegate.createDirectory(it, projectModel.projectDirectory, remotePath)
 
                         environmentDelegate.refreshRootProject(projectModel)
                     }

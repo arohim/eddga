@@ -34,6 +34,7 @@ open class CoreGeneratorViewBinder @Inject constructor() {
             generatorView.roguePath.text = component.roguePath
             generatorView.cachePath.text = component.cachePath
             generatorView.dataPath.text = component.dataPath
+            generatorView.remotePath.text = component.remotePath
         }
 
         builder.setCenterPanel(generatorView.rootView)

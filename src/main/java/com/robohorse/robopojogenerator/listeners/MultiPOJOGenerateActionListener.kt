@@ -42,6 +42,7 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
             coreGeneratorModel.roguePath = generatorView.roguePath.text
             coreGeneratorModel.cachePath = generatorView.cachePath.text
             coreGeneratorModel.dataPath = generatorView.dataPath.text
+            coreGeneratorModel.remotePath = generatorView.remotePath.text
             eventListener.onJsonDataObtained(coreGeneratorModel)
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
@@ -55,6 +56,7 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
             component.roguePath = generatorView.roguePath.text
             component.cachePath = generatorView.cachePath.text
             component.dataPath = generatorView.dataPath.text
+            component.remotePath = generatorView.remotePath.text
         }
     }
 }
