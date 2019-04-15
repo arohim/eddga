@@ -68,7 +68,7 @@ public interface AppComponent {
 
     void inject(DataMapperUnitTestAction item);
 
-    void inject(MultiDataModelsAction item);
+    void inject(MultiPOJOAction item);
 
     void inject(MultiPOJOGenerateActionListener item);
 

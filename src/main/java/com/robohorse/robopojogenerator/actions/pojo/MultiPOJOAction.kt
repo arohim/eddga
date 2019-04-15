@@ -6,7 +6,7 @@ import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionContr
 import com.robohorse.robopojogenerator.injections.Injector
 import javax.inject.Inject
 
-class MultiDataModelsAction : AnAction() {
+class MultiPOJOAction : AnAction() {
 
     @Inject
     lateinit var controller: MultiPOJOGeneratorActionController
