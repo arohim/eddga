@@ -67,8 +67,8 @@ open class DataCreatorDelegate @Inject constructor() {
                 .build()
 
         val mapperGeneratorModel = MapperGeneratorModel(
-                fileNameSuffix = "EntityMapper",
-                templateName = "CacheMapper"
+                fileNameSuffix = "Mapper",
+                templateName = "DataMapper"
         )
 
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, mapperGeneratorModel)
