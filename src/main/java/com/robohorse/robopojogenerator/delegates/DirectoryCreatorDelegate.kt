@@ -16,17 +16,18 @@ open class DirectoryCreatorDelegate @Inject constructor() {
 
     open fun createDirectory(projectModel: ProjectModel, parent: PsiDirectory, packageName: String): PsiDirectory? {
         var directoryCreated: PsiDirectory? = null
-        for (dir in parent.subdirectories) {
-            if (dir.name.equals(packageName, ignoreCase = true)) {
-                directoryCreated = dir
-                return directoryCreated
-            }
+
+        LocalFileSystem.getInstance().findFileByPath(packageName)?.let {
+            directoryCreated = PsiManager.getInstance(projectModel.project).findDirectory(it)
+            return directoryCreated
         }
+
         val runnable = Runnable {
             val file = File(packageName)
             val result = file.mkdirs()
             System.out.print("created : $result")
             environmentDelegate.refreshProject(projectModel)
+            Thread.sleep(1000)
         }
         WriteCommandAction.runWriteCommandAction(projectModel.project, runnable)
         LocalFileSystem.getInstance().findFileByPath(packageName)?.let {

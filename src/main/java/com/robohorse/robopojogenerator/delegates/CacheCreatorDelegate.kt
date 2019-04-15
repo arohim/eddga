@@ -2,7 +2,6 @@ package com.robohorse.robopojogenerator.delegates
 
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiManager
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MAPPER_PATH
 import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MODEL_PATH
 import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
@@ -10,11 +9,10 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemp
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import javax.inject.Inject
 
-open class DataCreatorDelegate @Inject constructor() {
+open class CacheCreatorDelegate @Inject constructor() {
 
     @Inject
     lateinit var directoryCreatorDelegate: DirectoryCreatorDelegate
@@ -22,12 +20,9 @@ open class DataCreatorDelegate @Inject constructor() {
     @Inject
     lateinit var pOJOGenerationDelegate: POJOGenerationDelegate
 
-    @Inject
-    lateinit var mapperGenerationDelegate: MapperGeneratorDelegate
-
     fun runGenerationTask(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generatePOJO(projectModel, coreGeneratorModel)
-        generateMapper(projectModel, coreGeneratorModel)
+//        generateMapper(generationModel, projectModel)
 //        generateFactory(generationModel, projectModel)
 //        generateMapperUnitTest(generationModel, projectModel)
 //        generateUseCase(generationModel, projectModel)
@@ -45,39 +40,15 @@ open class DataCreatorDelegate @Inject constructor() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
-                ?: throw PathException()
-        val path = projectModel.project.basePath + coreGeneratorModel.dataPath + MAPPER_PATH
-        val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, path)
-                ?: throw PathException()
-
-        val regenProjectModel = ProjectModel.Builder()
-                .setDirectory(directory)
-                .setDirectoryPath(directory.virtualFile.path)
-                .setPackageName(projectModel.packageName)
-                .setProject(projectModel.project)
-                .setVirtualFolder(projectModel.virtualFolder)
-                .build()
-
-        val generationModel = GenerationModel.Builder()
-                .setContent(coreGeneratorModel.content)
-                .setRootClassName(coreGeneratorModel.rootClassName)
-                .build()
-
-        val mapperGeneratorModel = MapperGeneratorModel(
-                fileNameSuffix = "EntityMapper",
-                templateName = "CacheMapper"
-        )
-
-        mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, mapperGeneratorModel)
+    private fun generateMapper(generationModel: GenerationModel, projectModel: ProjectModel) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun generatePOJO(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
                 ?: throw PathException()
 
-        val path = projectModel.project.basePath + coreGeneratorModel.dataPath + MODEL_PATH
+        val path = projectModel.project.basePath + coreGeneratorModel.cachePath + MODEL_PATH
         val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, path)
                 ?: throw PathException()
 
@@ -88,13 +59,13 @@ open class DataCreatorDelegate @Inject constructor() {
                 .setGettersAvailable(false)
                 .setToStringAvailable(false)
                 .setRewriteClasses(true)
-                .setPrefix("")
-                .setSuffix("Entity")
+                .setPrefix("Cached")
+                .setSuffix("")
                 .setContent(coreGeneratorModel.content)
                 .setRootClassName(coreGeneratorModel.rootClassName)
                 .setFieldDTOFormat(ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO)
                 .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
-                .setDialogTitle("Data Layer POJO Generator")
+                .setDialogTitle("Cache POJO Generator")
                 .build()
 
         val regenProjectModel = ProjectModel.Builder()
