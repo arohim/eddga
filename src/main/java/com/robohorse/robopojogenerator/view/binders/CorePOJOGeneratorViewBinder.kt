@@ -3,10 +3,10 @@ package com.robohorse.robopojogenerator.view.binders
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.DialogBuilder
 import com.robohorse.robopojogenerator.components.ProjectConfigurationComponent
-import com.robohorse.robopojogenerator.listeners.*
+import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
+import com.robohorse.robopojogenerator.listeners.POJOGenerateActionListener
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.view.ui.POJOGeneratorVew
-
 import javax.inject.Inject
 
 /**
@@ -33,4 +33,5 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
         builder.removeAllActions()
         builder.show()
     }
+
 }

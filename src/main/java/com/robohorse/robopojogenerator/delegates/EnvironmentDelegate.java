@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiManager;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.PathException;
 import com.robohorse.robopojogenerator.models.ProjectModel;
@@ -45,12 +46,24 @@ public class EnvironmentDelegate {
         projectModel.getVirtualFolder().refresh(false, true);
     }
 
+    public void refreshRootProject(ProjectModel projectModel) {
+        projectModel.getProject().getBaseDir().refresh(false, true);
+    }
+
     private PsiDirectory checkPath(AnActionEvent event) throws RoboPluginException {
         Object pathItem = event.getData(CommonDataKeys.NAVIGATABLE);
         if (pathItem != null) {
             if (pathItem instanceof PsiDirectory) {
                 return (PsiDirectory) pathItem;
             }
+        }
+        throw new PathException();
+    }
+
+    private Project getProjectPath(AnActionEvent event) throws RoboPluginException {
+        Project pathItem = event.getData(CommonDataKeys.PROJECT);
+        if (pathItem != null) {
+            return pathItem;
         }
         throw new PathException();
     }
