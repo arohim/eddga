@@ -5,12 +5,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogBuilder
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.psi.PsiManager
-import com.robohorse.robopojogenerator.delegates.DirectoryCreatorDelegate
-import com.robohorse.robopojogenerator.delegates.MessageDelegate
-import com.robohorse.robopojogenerator.delegates.POJOGenerationDelegate
-import com.robohorse.robopojogenerator.delegates.ProjectEnvironmentDelegate
+import com.robohorse.robopojogenerator.delegates.*
 import com.robohorse.robopojogenerator.errors.RoboPluginException
-import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
@@ -36,7 +32,16 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
     lateinit var viewBinder: CoreGeneratorViewBinder
 
     @Inject
-    lateinit var generationDelegate: POJOGenerationDelegate
+    lateinit var pOJOGenerationDelegate: POJOGenerationDelegate
+
+    @Inject
+    lateinit var mapperGenerationDelegate: MapperGeneratorDelegate
+
+    @Inject
+    lateinit var domainCreatorDelegate: DomainCreatorDelegate
+
+    @Inject
+    lateinit var dataCreatorDelegate: DataCreatorDelegate
 
     fun onActionHandled(event: AnActionEvent) {
         try {
@@ -55,8 +60,11 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
             bindView(dialogBuilder, event, projectModel, object : CoreGeneratorFormEventListener {
                 override fun onJsonDataObtained(coreGeneratorModel: CoreGeneratorModel) {
                     event.project?.let {
-                        generateFolders(it, projectModel, coreGeneratorModel)
-                        generatePOJOs(it, projectModel, coreGeneratorModel)
+                        domainCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
+                        dataCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
+//                        generateFolders(it, projectModel, coreGeneratorModel)
+//                        generatePOJOs(it, projectModel, coreGeneratorModel)
+//                        generateMappers(it, projectModel, coreGeneratorModel)
                     }
                     window.dispose()
                 }
@@ -64,8 +72,22 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
         }
     }
 
+    private fun generateMappers(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+//        val cachePath = projectModel.project.basePath + coreGeneratorModel.cachePath
+//        val cacheGenerationModel = GenerationModel.Builder()
+//                .setContent(coreGeneratorModel.content)
+//                .setRootClassName(coreGeneratorModel.rootClassName)
+//                .build()
+//        val cacheMapperGeneratorModel = MapperGeneratorModel(
+//                fileNameSuffix = "EntityMapper",
+//                templateName = "CacheMapper"
+//        )
+//
+//        mapperGenerationDelegate.runGenerationTask(cacheGenerationModel, projectModel, cacheMapperGeneratorModel)
+    }
+
     private fun generatePOJOs(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val domainPath = projectModel.project.basePath + coreGeneratorModel.domainPath + MODEL_PATH
+        val domainPath = projectModel.project.basePath + coreGeneratorModel.domainPath
         val domainGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -83,7 +105,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
         generatePOJO(domainPath, domainGenerationModel, project, projectModel)
 
-        val cachePath = projectModel.project.basePath + coreGeneratorModel.cachePath + MODEL_PATH
+        val cachePath = projectModel.project.basePath + coreGeneratorModel.cachePath
         val cacheGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -102,7 +124,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
         generatePOJO(cachePath, cacheGenerationModel, project, projectModel)
 
-        val dataPath = projectModel.project.basePath + coreGeneratorModel.dataPath + MODEL_PATH
+        val dataPath = projectModel.project.basePath + coreGeneratorModel.dataPath
         val dataGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -121,7 +143,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
         generatePOJO(dataPath, dataGenerationModel, project, projectModel)
 
-        val roguePath = projectModel.project.basePath + coreGeneratorModel.roguePath + MODEL_PATH
+        val roguePath = projectModel.project.basePath + coreGeneratorModel.roguePath
         val rogueGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.GSON)
@@ -153,34 +175,34 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
                 .setVirtualFolder(projectModel.virtualFolder)
                 .build()
 
-        generationDelegate.runGenerationTask(generationModel, regenProjectModel)
+        pOJOGenerationDelegate.runGenerationTask(generationModel, regenProjectModel)
     }
 
-    private fun generateFolders(project: Project, projectModel: ProjectModel, model: CoreGeneratorModel) {
-        val projectDir = PsiManager.getInstance(project).findDirectory(projectModel.project.baseDir)
-                ?: throw PathException()
-
-        // create domain directories
-        val domainPath = projectModel.project.basePath + model.domainPath
-        directoryCreatorDelegate.createDirectory(project, projectDir, domainPath)
-
-        // create data directories
-        val dataPath = projectModel.project.basePath + model.dataPath
-        directoryCreatorDelegate.createDirectory(project, projectDir, dataPath)
-
-        // create cache directories
-        val cachePath = projectModel.project.basePath + model.cachePath
-        directoryCreatorDelegate.createDirectory(project, projectDir, cachePath)
-
-        // create rogue directories
-        val roguePath = projectModel.project.basePath + model.roguePath
-        directoryCreatorDelegate.createDirectory(project, projectDir, roguePath)
-
-        // create remote directories
-        val remotePath = projectModel.project.basePath + model.remotePath
-        directoryCreatorDelegate.createDirectory(project, projectDir, remotePath)
-
-        environmentDelegate.refreshProject(projectModel)
+    private fun generateFolders(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+//        val projectDir = PsiManager.getInstance(project).findDirectory(projectModel.project.baseDir)
+//                ?: throw PathException()
+//
+//        // create domain directories
+//        val domainPath = projectModel.project.basePath + coreGeneratorModel.domainPath
+//        directoryCreatorDelegate.createDirectory(, projectDir, domainPath)
+//
+//        // create data directories
+//        val dataPath = projectModel.project.basePath + coreGeneratorModel.dataPath
+//        directoryCreatorDelegate.createDirectory(, projectDir, dataPath)
+//
+//        // create cache directories
+//        val cachePath = projectModel.project.basePath + coreGeneratorModel.cachePath
+//        directoryCreatorDelegate.createDirectory(, projectDir, cachePath)
+//
+//        // create rogue directories
+//        val roguePath = projectModel.project.basePath + coreGeneratorModel.roguePath
+//        directoryCreatorDelegate.createDirectory(, projectDir, roguePath)
+//
+//        // create remote directories
+//        val remotePath = projectModel.project.basePath + coreGeneratorModel.remotePath
+//        directoryCreatorDelegate.createDirectory(, projectDir, remotePath)
+//
+//        environmentDelegate.refreshProject(projectModel)
     }
 
     companion object {
