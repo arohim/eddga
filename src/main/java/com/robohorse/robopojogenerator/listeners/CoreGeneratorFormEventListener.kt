@@ -4,6 +4,6 @@ import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 
 interface CoreGeneratorFormEventListener {
 
-    fun onJsonDataObtained(model: CoreGeneratorModel)
+    fun onJsonDataObtained(coreGeneratorModel: CoreGeneratorModel)
     
 }

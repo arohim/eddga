@@ -65,7 +65,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
     }
 
     private fun generatePOJOs(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val domainPath = projectModel.project.basePath + coreGeneratorModel.domainPath
+        val domainPath = projectModel.project.basePath + coreGeneratorModel.domainPath + MODEL_PATH
         val domainGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -83,7 +83,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
         generatePOJO(domainPath, domainGenerationModel, project, projectModel)
 
-        val cachePath = projectModel.project.basePath + coreGeneratorModel.cachePath
+        val cachePath = projectModel.project.basePath + coreGeneratorModel.cachePath + MODEL_PATH
         val cacheGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -102,7 +102,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
         generatePOJO(cachePath, cacheGenerationModel, project, projectModel)
 
-        val dataPath = projectModel.project.basePath + coreGeneratorModel.dataPath
+        val dataPath = projectModel.project.basePath + coreGeneratorModel.dataPath + MODEL_PATH
         val dataGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -121,7 +121,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
         generatePOJO(dataPath, dataGenerationModel, project, projectModel)
 
-        val roguePath = projectModel.project.basePath + coreGeneratorModel.roguePath
+        val roguePath = projectModel.project.basePath + coreGeneratorModel.roguePath + MODEL_PATH
         val rogueGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.GSON)
@@ -145,7 +145,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
     private fun generatePOJO(path: String, generationModel: GenerationModel, project: Project, projectModel: ProjectModel) {
         val virtualFile = LocalFileSystem.getInstance().findFileByPath(path)!!
         val directory = PsiManager.getInstance(project).findDirectory(virtualFile)
-        val projectModel = ProjectModel.Builder()
+        val regenProjectModel = ProjectModel.Builder()
                 .setDirectory(directory)
                 .setDirectoryPath(directory?.virtualFile?.path)
                 .setPackageName(projectModel.packageName)
@@ -153,7 +153,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
                 .setVirtualFolder(projectModel.virtualFolder)
                 .build()
 
-        generationDelegate.runGenerationTask(generationModel, projectModel)
+        generationDelegate.runGenerationTask(generationModel, regenProjectModel)
     }
 
     private fun generateFolders(project: Project, projectModel: ProjectModel, model: CoreGeneratorModel) {
@@ -183,4 +183,8 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
         environmentDelegate.refreshProject(projectModel)
     }
 
+    companion object {
+        const val MODEL_PATH = "/model"
+        const val MAPPER_PATH = "/mapper"
+    }
 }
