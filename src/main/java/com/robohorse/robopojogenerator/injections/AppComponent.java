@@ -9,6 +9,7 @@ import com.robohorse.robopojogenerator.actions.factory.DataFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.RemoteFactoryAction;
 import com.robohorse.robopojogenerator.actions.mapper.*;
+import com.robohorse.robopojogenerator.actions.pojo.*;
 import com.robohorse.robopojogenerator.actions.pojo.CacheLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.DataLayerPOJOAction;
 import com.robohorse.robopojogenerator.actions.pojo.DomainLayerPOJOAction;
@@ -20,6 +21,7 @@ import com.robohorse.robopojogenerator.actions.tracking.TrackerInterfaceAction;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.CommonJavaPostProcessor;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDataClassPostProcessor;
+import com.robohorse.robopojogenerator.listeners.MultiPOJOGenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.POJOGenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import dagger.Component;
@@ -65,6 +67,10 @@ public interface AppComponent {
     void inject(DataMapperAction item);
 
     void inject(DataMapperUnitTestAction item);
+
+    void inject(MultiPOJOAction item);
+
+    void inject(MultiPOJOGenerateActionListener item);
 
     CommonJavaPostProcessor newCommonJavaPostProcessor();
 

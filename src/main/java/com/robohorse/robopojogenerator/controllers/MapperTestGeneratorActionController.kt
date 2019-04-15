@@ -40,9 +40,11 @@ open class MapperTestGeneratorActionController @Inject constructor() {
         val window = dialogBuilder.window
 
         val generationModel = GenerationModel()
-        coreGeneratorViewBinder.bindView(dialogBuilder, event, generationModel, GuiFormEventListener { generationModel ->
-            window.dispose()
-            mapperTestGeneratorDelegate.runGenerationTask(generationModel, projectModel, mapperTestGeneratorModel)
-        })
+        with(coreGeneratorViewBinder) {
+            bindView(dialogBuilder, event, generationModel, GuiFormEventListener { generationModel ->
+                window.dispose()
+                mapperTestGeneratorDelegate.runGenerationTask(generationModel, projectModel, mapperTestGeneratorModel)
+            })
+        }
     }
 }
