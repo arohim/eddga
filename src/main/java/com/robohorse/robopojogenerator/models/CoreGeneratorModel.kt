@@ -7,5 +7,9 @@ data class CoreGeneratorModel(
         var roguePath: String? = null,
         var remotePath: String? = null,
         var content: String? = null,
-        var rootClassName: String? = null
+        var rootClassName: String? = null,
+        var domainTestPath: String? = null,
+        var cacheTestPath: String? = null,
+        var dataTestPath: String? = null,
+        var remoteTestPath: String? = null
 )

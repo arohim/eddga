@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.DialogBuilder
 import com.robohorse.robopojogenerator.components.ProjectConfigurationComponent
 import com.robohorse.robopojogenerator.listeners.*
-import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import com.robohorse.robopojogenerator.view.ui.CoreGeneratorVew
 
@@ -28,16 +27,76 @@ open class CoreGeneratorViewBinder @Inject constructor() {
         event.project?.let {
             generatorView.basePath.text = it.basePath
             val component = ProjectConfigurationComponent.getInstance(it)
-            generatorView.domainPath.text = component.domainPath
-            generatorView.roguePath.text = component.roguePath
-            generatorView.cachePath.text = component.cachePath
-            generatorView.dataPath.text = component.dataPath
-            generatorView.remotePath.text = component.remotePath
+            bindPath(component, generatorView)
+            bindCheckBox(component, generatorView)
         }
 
         builder.setCenterPanel(generatorView.rootView)
 //        builder.setTitle(generationModel.dialogTitle)
         builder.removeAllActions()
         builder.show()
+    }
+
+    private fun bindPath(component: ProjectConfigurationComponent, generatorView: CoreGeneratorVew) {
+        component.domainPath?.let {
+            generatorView.domainPath.text = it
+        }
+        component.roguePath?.let {
+            generatorView.roguePath.text = it
+        }
+        component.cachePath?.let {
+            generatorView.cachePath.text = it
+        }
+        component.dataPath?.let {
+            generatorView.dataPath.text = it
+        }
+        component.remotePath?.let {
+            generatorView.remotePath.text = it
+        }
+        component.domainTestPath?.let {
+            generatorView.domainTestPath.text = it
+        }
+        component.cacheTestPath?.let {
+            generatorView.cacheTestPath.text = it
+        }
+        component.dataTestPath?.let {
+            generatorView.dataTestPath.text = it
+        }
+        component.remoteTestPath?.let {
+            generatorView.remoteTestPath.text = it
+        }
+        component.rootClassNameTextField?.let {
+            generatorView.rootClassNameTextField.text = it
+        }
+    }
+
+    private fun bindCheckBox(component: ProjectConfigurationComponent, generatorView: CoreGeneratorVew) {
+        component.domainCheckBox.let {
+            generatorView.genDomainCheckBox.isBorderPaintedFlat = it
+        }
+        component.rogueCheckBox.let {
+            generatorView.genRogueCheckBox.isBorderPaintedFlat = it
+        }
+        component.cacheCheckBox.let {
+            generatorView.genCacheCheckBox.isBorderPaintedFlat = it
+        }
+        component.dataCheckBox.let {
+            generatorView.genDataCheckBox.isBorderPaintedFlat = it
+        }
+        component.remoteCheckBox.let {
+            generatorView.genRemoteCheckBox.isBorderPaintedFlat = it
+        }
+        component.domainTestCheckBox.let {
+            generatorView.genDomainTestCheckBox.isBorderPaintedFlat = it
+        }
+        component.dataTestCheckBox.let {
+            generatorView.genDataTestCheckBox.isBorderPaintedFlat = it
+        }
+        component.cacheTestCheckBox.let {
+            generatorView.genCacheTestCheckBox.isBorderPaintedFlat = it
+        }
+        component.remoteTestCheckBox.let {
+            generatorView.genRemoteTestCheckBox.isBorderPaintedFlat = it
+        }
     }
 }

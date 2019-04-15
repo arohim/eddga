@@ -28,7 +28,7 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
 
     override fun actionPerformed(e: ActionEvent) {
         val textArea = generatorView.textArea
-        val textField = generatorView.classNameTextField
+        val textField = generatorView.rootClassNameTextField
 
         val coreGeneratorModel = CoreGeneratorModel()
         saveConfiguration()
@@ -43,6 +43,11 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
             coreGeneratorModel.cachePath = generatorView.cachePath.text
             coreGeneratorModel.dataPath = generatorView.dataPath.text
             coreGeneratorModel.remotePath = generatorView.remotePath.text
+
+            coreGeneratorModel.domainTestPath = generatorView.domainTestPath.text
+            coreGeneratorModel.cacheTestPath = generatorView.cacheTestPath.text
+            coreGeneratorModel.dataTestPath = generatorView.dataTestPath.text
+            coreGeneratorModel.remoteTestPath = generatorView.remoteTestPath.text
             eventListener.onJsonDataObtained(coreGeneratorModel)
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
@@ -57,6 +62,24 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
             component.cachePath = generatorView.cachePath.text
             component.dataPath = generatorView.dataPath.text
             component.remotePath = generatorView.remotePath.text
+
+            component.domainTestPath = generatorView.domainTestPath.text
+            component.cacheTestPath = generatorView.cacheTestPath.text
+            component.dataTestPath = generatorView.dataTestPath.text
+            component.remoteTestPath = generatorView.remoteTestPath.text
+
+            component.rootClassNameTextField = generatorView.rootClassNameTextField.text
+
+            component.domainCheckBox = generatorView.genDomainCheckBox.isBorderPaintedFlat
+            component.rogueCheckBox = generatorView.genRogueCheckBox.isBorderPaintedFlat
+            component.cacheCheckBox = generatorView.genCacheCheckBox.isBorderPaintedFlat
+            component.dataCheckBox = generatorView.genDataCheckBox.isBorderPaintedFlat
+            component.remoteCheckBox = generatorView.genRemoteCheckBox.isBorderPaintedFlat
+
+            component.domainTestCheckBox = generatorView.genDomainTestCheckBox.isBorderPaintedFlat
+            component.cacheTestCheckBox = generatorView.genCacheTestCheckBox.isBorderPaintedFlat
+            component.dataTestCheckBox = generatorView.genDataTestCheckBox.isBorderPaintedFlat
+            component.remoteTestCheckBox = generatorView.genRemoteTestCheckBox.isBorderPaintedFlat
         }
     }
 }

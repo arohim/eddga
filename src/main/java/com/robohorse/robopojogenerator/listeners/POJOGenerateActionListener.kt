@@ -51,7 +51,7 @@ open class POJOGenerateActionListener @Inject constructor(private val generatorV
     private fun saveConfiguration() {
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
-            component.lastPath = generatorVew.classNameTextField.text
+            component.rootClassNameTextField = generatorVew.classNameTextField.text
         }
     }
 }

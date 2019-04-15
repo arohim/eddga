@@ -23,8 +23,8 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
 
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
-            if (component.lastPath.isNotEmpty()) {
-                generatorVew.classNameTextField.text = component.lastPath
+            if (component.rootClassNameTextField?.isNotEmpty() == true) {
+                generatorVew.classNameTextField.text = component.rootClassNameTextField
             }
         }
 

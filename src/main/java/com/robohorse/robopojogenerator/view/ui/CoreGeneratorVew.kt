@@ -17,12 +17,21 @@ class CoreGeneratorVew {
     lateinit var genDomainCheckBox: JCheckBox
     lateinit var genCacheCheckBox: JCheckBox
     lateinit var genRemoteCheckBox: JCheckBox
+    lateinit var genRogueTestCheckBox: JCheckBox
+    lateinit var genDataTestCheckBox: JCheckBox
+    lateinit var genDomainTestCheckBox: JCheckBox
+    lateinit var genCacheTestCheckBox: JCheckBox
+    lateinit var genRemoteTestCheckBox: JCheckBox
     lateinit var domainPath: JTextField
     lateinit var dataPath: JTextField
     lateinit var cachePath: JTextField
     lateinit var roguePath: JTextField
     lateinit var remotePath: JTextField
-    lateinit var classNameTextField: JTextField
+    lateinit var domainTestPath: JTextField
+    lateinit var dataTestPath: JTextField
+    lateinit var cacheTestPath: JTextField
+    lateinit var remoteTestPath: JTextField
+    lateinit var rootClassNameTextField: JTextField
     lateinit var languageGroup: ButtonGroup
     lateinit var typeButtonGroup: ButtonGroup
     lateinit var basePath: JLabel
