@@ -10,6 +10,7 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
+import java.io.File
 import javax.inject.Inject
 
 open class RogueCreatorDelegate @Inject constructor() {
@@ -48,7 +49,7 @@ open class RogueCreatorDelegate @Inject constructor() {
         val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
                 ?: throw PathException()
 
-        val path = projectModel.project.basePath + coreGeneratorModel.roguePath + MODEL_PATH
+        val path = projectModel.project.basePath + File.separator + coreGeneratorModel.roguePath + MODEL_PATH
         val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, path)
                 ?: throw PathException()
 

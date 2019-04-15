@@ -12,6 +12,7 @@ import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
+import java.io.File
 import javax.inject.Inject
 
 open class DataCreatorDelegate @Inject constructor() {
@@ -48,7 +49,7 @@ open class DataCreatorDelegate @Inject constructor() {
     private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
                 ?: throw PathException()
-        val path = projectModel.project.basePath + coreGeneratorModel.dataPath + MAPPER_PATH
+        val path = projectModel.project.basePath + File.separator + coreGeneratorModel.dataPath + MAPPER_PATH
         val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, path)
                 ?: throw PathException()
 
@@ -77,7 +78,7 @@ open class DataCreatorDelegate @Inject constructor() {
         val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
                 ?: throw PathException()
 
-        val path = projectModel.project.basePath + coreGeneratorModel.dataPath + MODEL_PATH
+        val path = projectModel.project.basePath + File.separator + coreGeneratorModel.dataPath + MODEL_PATH
         val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, path)
                 ?: throw PathException()
 

@@ -3,7 +3,6 @@ package com.robohorse.robopojogenerator.delegates
 import com.intellij.ide.projectView.ProjectView
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.psi.PsiManager
@@ -18,7 +17,7 @@ open class ProjectEnvironmentDelegate @Inject constructor() {
     fun obtainProjectModel(event: AnActionEvent): ProjectModel {
         val project = event.project ?: throw Exception("Unknown exception")
         val directory = PsiManager.getInstance(project).findDirectory(getProjectPath(event).baseDir)
-        val virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE)
+        val virtualFolder = directory?.virtualFile
 
         val packageName = ProjectRootManager
                 .getInstance(project)
@@ -26,10 +25,10 @@ open class ProjectEnvironmentDelegate @Inject constructor() {
                 .getPackageNameByDirectory(virtualFolder!!)
         return ProjectModel.Builder()
                 .setDirectory(directory)
-                .setDirectoryPath(directory?.virtualFile?.path)
+                .setDirectoryPath(directory.virtualFile.path)
+                .setVirtualFolder(virtualFolder)
                 .setPackageName(packageName)
                 .setProject(project)
-                .setVirtualFolder(virtualFolder)
                 .build()
     }
 

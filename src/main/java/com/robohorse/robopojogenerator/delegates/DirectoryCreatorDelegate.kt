@@ -1,11 +1,12 @@
 package com.robohorse.robopojogenerator.delegates
 
+import com.intellij.ide.util.DirectoryUtil
+import com.intellij.ide.util.PackageUtil
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiManager
 import com.robohorse.robopojogenerator.models.ProjectModel
-import java.io.File
 import javax.inject.Inject
 
 
@@ -15,25 +16,20 @@ open class DirectoryCreatorDelegate @Inject constructor() {
     lateinit var environmentDelegate: ProjectEnvironmentDelegate
 
     open fun createDirectory(projectModel: ProjectModel, parent: PsiDirectory, packageName: String): PsiDirectory? {
-        var directoryCreated: PsiDirectory? = null
+        var directory: PsiDirectory? = null
+        val file = LocalFileSystem.getInstance().findFileByPath(packageName)
 
-        LocalFileSystem.getInstance().findFileByPath(packageName)?.let {
-            directoryCreated = PsiManager.getInstance(projectModel.project).findDirectory(it)
-            return directoryCreated
+        if (file != null) {
+            directory = PsiManager.getInstance(projectModel.project).findDirectory(file)
+            return directory
         }
 
         val runnable = Runnable {
-            val file = File(packageName)
-            val result = file.mkdirs()
-            System.out.print("created : $result")
-            environmentDelegate.refreshProject(projectModel)
-            Thread.sleep(1000)
+            directory = DirectoryUtil.mkdirs(PsiManager.getInstance(projectModel.project), packageName)
         }
         WriteCommandAction.runWriteCommandAction(projectModel.project, runnable)
-        LocalFileSystem.getInstance().findFileByPath(packageName)?.let {
-            directoryCreated = PsiManager.getInstance(projectModel.project).findDirectory(it)
-        }
-        return directoryCreated
+        environmentDelegate.refreshProject(projectModel)
+        return directory
     }
 
 }
