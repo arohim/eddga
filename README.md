@@ -10,6 +10,11 @@ Currently, Generate Kotlin POJO files from JSON <br>
   - Cache POJO
   - Remote POJO
   - Remote/Cache/Data mapper and its unit testing template
+  - Remote/Cache/Data mapper from JSON
+  - Remote/Cache/Data mapper unit testing from JSON
+  - Remote/Cache/Data/Domain Factory from JSON
+  - View/Presentation/Domain/Cache/Data/remote template
+  - Multi POJOs and Mappers
       
 <p>
 ### Waiting for image
