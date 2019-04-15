@@ -82,6 +82,64 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
                 .build()
 
         generatePOJO(domainPath, domainGenerationModel, project, projectModel)
+
+        val cachePath = projectModel.project.basePath + coreGeneratorModel.cachePath
+        val cacheGenerationModel = GenerationModel.Builder()
+                .useKotlin(true)
+                .setAnnotationItem(AnnotationEnum.NONE)
+                .setSettersAvailable(false)
+                .setGettersAvailable(false)
+                .setToStringAvailable(false)
+                .setRewriteClasses(true)
+                .setPrefix("Cached")
+                .setSuffix("")
+                .setContent(coreGeneratorModel.content)
+                .setRootClassName(coreGeneratorModel.rootClassName)
+                .setFieldDTOFormat(ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .setDialogTitle("Cache POJO Generator")
+                .build()
+
+        generatePOJO(cachePath, cacheGenerationModel, project, projectModel)
+
+        val dataPath = projectModel.project.basePath + coreGeneratorModel.dataPath
+        val dataGenerationModel = GenerationModel.Builder()
+                .useKotlin(true)
+                .setAnnotationItem(AnnotationEnum.NONE)
+                .setSettersAvailable(false)
+                .setGettersAvailable(false)
+                .setToStringAvailable(false)
+                .setRewriteClasses(true)
+                .setPrefix("")
+                .setSuffix("Entity")
+                .setContent(coreGeneratorModel.content)
+                .setRootClassName(coreGeneratorModel.rootClassName)
+                .setFieldDTOFormat(ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .setDialogTitle("Data Layer POJO Generator")
+                .build()
+
+        generatePOJO(dataPath, dataGenerationModel, project, projectModel)
+
+        val roguePath = projectModel.project.basePath + coreGeneratorModel.roguePath
+        val rogueGenerationModel = GenerationModel.Builder()
+                .useKotlin(true)
+                .setAnnotationItem(AnnotationEnum.GSON)
+                .setSettersAvailable(false)
+                .setGettersAvailable(false)
+                .setToStringAvailable(false)
+                .setRewriteClasses(true)
+                .setPrefix("")
+                .setSuffix("Model")
+                .setContent(coreGeneratorModel.content)
+                .setRootClassName(coreGeneratorModel.rootClassName)
+                .setFieldDTOFormat(ClassTemplate.NULLABLE_FIELD_KOTLIN_DTO)
+                .setListFormat(ArrayItemsTemplate.NULLABLE_LIST_OF_ITEM)
+                .setDialogTitle("Rogue POJO Generator")
+                .build()
+
+        generatePOJO(roguePath, rogueGenerationModel, project, projectModel)
+
     }
 
     private fun generatePOJO(path: String, generationModel: GenerationModel, project: Project, projectModel: ProjectModel) {
