@@ -34,7 +34,6 @@ public class ProjectModel {
         return directoryPath;
     }
 
-
     public void setDirectoryPath(String directoryPath) {
         this.directoryPath = directoryPath;
     }

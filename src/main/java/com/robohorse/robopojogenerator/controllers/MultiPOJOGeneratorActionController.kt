@@ -3,14 +3,20 @@ package com.robohorse.robopojogenerator.controllers
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogBuilder
+import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.psi.PsiManager
 import com.robohorse.robopojogenerator.delegates.DirectoryCreatorDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.POJOGenerationDelegate
 import com.robohorse.robopojogenerator.delegates.ProjectEnvironmentDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.errors.custom.PathException
+import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
+import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.listeners.CoreGeneratorFormEventListener
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
+import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder
 import javax.inject.Inject
@@ -28,6 +34,9 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
 
     @Inject
     lateinit var viewBinder: CoreGeneratorViewBinder
+
+    @Inject
+    lateinit var generationDelegate: POJOGenerationDelegate
 
     fun onActionHandled(event: AnActionEvent) {
         try {
@@ -47,7 +56,7 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
                 override fun onJsonDataObtained(coreGeneratorModel: CoreGeneratorModel) {
                     event.project?.let {
                         generateFolders(it, projectModel, coreGeneratorModel)
-                        generatePOJO(it, projectModel, coreGeneratorModel)
+                        generatePOJOs(it, projectModel, coreGeneratorModel)
                     }
                     window.dispose()
                 }
@@ -55,8 +64,38 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
         }
     }
 
-    private fun generatePOJO(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+    private fun generatePOJOs(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val domainPath = projectModel.project.basePath + coreGeneratorModel.domainPath
+        val domainGenerationModel = GenerationModel.Builder()
+                .useKotlin(true)
+                .setAnnotationItem(AnnotationEnum.NONE)
+                .setSettersAvailable(false)
+                .setGettersAvailable(false)
+                .setToStringAvailable(false)
+                .setRewriteClasses(true)
+                .setPrefix("")
+                .setSuffix("")
+                .setContent(coreGeneratorModel.content)
+                .setRootClassName(coreGeneratorModel.rootClassName)
+                .setFieldDTOFormat(ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .build()
 
+        generatePOJO(domainPath, domainGenerationModel, project, projectModel)
+    }
+
+    private fun generatePOJO(path: String, generationModel: GenerationModel, project: Project, projectModel: ProjectModel) {
+        val virtualFile = LocalFileSystem.getInstance().findFileByPath(path)!!
+        val directory = PsiManager.getInstance(project).findDirectory(virtualFile)
+        val projectModel = ProjectModel.Builder()
+                .setDirectory(directory)
+                .setDirectoryPath(directory?.virtualFile?.path)
+                .setPackageName(projectModel.packageName)
+                .setProject(project)
+                .setVirtualFolder(projectModel.virtualFolder)
+                .build()
+
+        generationDelegate.runGenerationTask(generationModel, projectModel)
     }
 
     private fun generateFolders(project: Project, projectModel: ProjectModel, model: CoreGeneratorModel) {
