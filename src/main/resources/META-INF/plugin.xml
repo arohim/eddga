@@ -139,14 +139,6 @@
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
-        <action id="MultiDataModelsAction"
-                class="com.robohorse.robopojogenerator.actions.pojo.MultiDataModelsAction"
-                icon="/icons/pojo.png"
-                text="Multi Data Model"
-                description="Multi Data Model">
-            <add-to-group group-id="NewGroup" anchor="last"/>
-        </action>
-
         <action id="RemoteFactoryAction"
                 class="com.robohorse.robopojogenerator.actions.factory.RemoteFactoryAction"
                 icon="/icons/pojo.png"
@@ -324,19 +316,19 @@
         </action>
     </actions>
 
-    <!--    <actions>-->
-    <!--        <group id="MyPlugin.TopMenu"-->
-    <!--               text="Kaidee Plugin"-->
-    <!--               description="Kaidee Plugin">-->
-    <!--            <add-to-group group-id="MainMenu" anchor="last"/>-->
+    <actions>
+        <group id="MyPlugin.TopMenu"
+               text="Kaidee Plugin"
+               description="Kaidee Plugin">
+            <add-to-group group-id="MainMenu" anchor="last"/>
 
-    <!--            <action id="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
-    <!--                    icon="/icons/pojo.png"-->
-    <!--                    class="com.robohorse.robopojogenerator.actions.CoreGeneratorAction"-->
-    <!--                    text="Core POJO &amp; Mapper Generator"-->
-    <!--                    description="CorePOJOAction">-->
-    <!--                <add-to-group group-id="NewGroup" anchor="last"/>-->
-    <!--            </action>-->
-    <!--        </group>-->
-    <!--    </actions>-->
+            <action id="MultiDataModelsAction"
+                    class="com.robohorse.robopojogenerator.actions.pojo.MultiDataModelsAction"
+                    icon="/icons/pojo.png"
+                    text="Multi Data Model"
+                    description="Multi Data Model">
+                <add-to-group group-id="NewGroup" anchor="last"/>
+            </action>
+        </group>
+    </actions>
 </idea-plugin>

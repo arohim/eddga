@@ -19,6 +19,7 @@ import java.io.IOException;
 public class FileWriterDelegate {
     @Inject
     MessageDelegate messageDelegate;
+    
     @Inject
     PostProcessorFactory factory;
 

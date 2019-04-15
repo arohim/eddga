@@ -17,7 +17,6 @@ open class CoreGeneratorViewBinder @Inject constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, projectModel: ProjectModel, eventListener: CoreGeneratorFormEventListener) {
         val generatorView = CoreGeneratorVew()
-        val basePath = event.project?.basePath
 
         val actionListener = MultiPOJOGenerateActionListener(generatorView, event, eventListener)
         generatorView.generateButton.addActionListener(actionListener)
@@ -26,9 +25,8 @@ open class CoreGeneratorViewBinder @Inject constructor() {
 //        generatorView.cachePathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.cachePath))
 //        generatorView.dataPathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.dataPath))
 
-        generatorView.basePath.text = projectModel.projectDirectoryPath
-
         event.project?.let {
+            generatorView.basePath.text = it.basePath
             val component = ProjectConfigurationComponent.getInstance(it)
             generatorView.domainPath.text = component.domainPath
             generatorView.roguePath.text = component.roguePath
