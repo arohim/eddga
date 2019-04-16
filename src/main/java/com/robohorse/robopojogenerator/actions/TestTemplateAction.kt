@@ -5,11 +5,7 @@ import com.intellij.ide.fileTemplates.FileTemplateUtil
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.actionSystem.DataKey
-import com.intellij.openapi.command.WriteCommandAction
-import com.intellij.psi.JavaDirectoryService
 import com.intellij.psi.PsiDirectory
-import com.intellij.util.containers.HashMap
 
 class TestTemplateAction : AnAction() {
 

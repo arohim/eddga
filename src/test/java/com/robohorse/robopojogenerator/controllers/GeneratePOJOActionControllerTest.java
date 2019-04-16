@@ -51,7 +51,7 @@ public class GeneratePOJOActionControllerTest {
 
         when(environmentDelegate.obtainProjectModel(event)).thenReturn(projectModel);
         generatePOJOActionController.onActionHandled(event, generationModel);
-        verify(generatorViewBinder).bindView(any(), any(), any(), any());
+        verify(generatorViewBinder).bindView(any(), any(), any());
     }
 
     @Test

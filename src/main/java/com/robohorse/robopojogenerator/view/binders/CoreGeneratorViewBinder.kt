@@ -4,8 +4,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.DialogBuilder
 import com.robohorse.robopojogenerator.components.ProjectConfigurationComponent
 import com.robohorse.robopojogenerator.listeners.*
-import com.robohorse.robopojogenerator.models.ProjectModel
 import com.robohorse.robopojogenerator.view.ui.CoreGeneratorVew
+import java.io.File
 
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ import javax.inject.Inject
  */
 open class CoreGeneratorViewBinder @Inject constructor() {
 
-    fun bindView(builder: DialogBuilder, event: AnActionEvent, projectModel: ProjectModel, eventListener: CoreGeneratorFormEventListener) {
+    fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: CoreGeneratorFormEventListener) {
         val generatorView = CoreGeneratorVew()
 
         val actionListener = MultiPOJOGenerateActionListener(generatorView, event, eventListener)
@@ -25,7 +25,7 @@ open class CoreGeneratorViewBinder @Inject constructor() {
 //        generatorView.dataPathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.dataPath))
 
         event.project?.let {
-            generatorView.basePath.text = it.basePath
+            generatorView.basePath.text = it.basePath + File.separator
             val component = ProjectConfigurationComponent.getInstance(it)
             bindPath(component, generatorView)
             bindCheckBox(component, generatorView)

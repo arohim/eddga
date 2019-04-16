@@ -16,7 +16,6 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, generationModel: GenerationModel, eventListener: GuiFormEventListener) {
         val generatorVew = POJOGeneratorVew()
-        val basePath = event.project?.basePath
 
         val actionListener = POJOGenerateActionListener(generatorVew, event, generationModel, eventListener)
         generatorVew.generateButton.addActionListener(actionListener)

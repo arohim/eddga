@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.delegates
 
-import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiManager
 import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController
 import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MODEL_PATH
@@ -26,7 +25,7 @@ open class CacheCreatorDelegate @Inject constructor() {
     @Inject
     lateinit var mapperGenerationDelegate: MapperGeneratorDelegate
 
-    fun runGenerationTask(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+    fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generatePOJO(projectModel, coreGeneratorModel)
         generateMapper(projectModel, coreGeneratorModel)
 //        generateFactory(generationModel, projectModel)

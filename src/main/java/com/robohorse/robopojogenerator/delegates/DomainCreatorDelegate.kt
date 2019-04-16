@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.delegates
 
-import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiManager
 import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MODEL_PATH
 import com.robohorse.robopojogenerator.errors.custom.PathException
@@ -21,7 +20,7 @@ open class DomainCreatorDelegate @Inject constructor() {
     @Inject
     lateinit var pOJOGenerationDelegate: POJOGenerationDelegate
 
-    fun runGenerationTask(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+    fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generatePOJO(projectModel, coreGeneratorModel)
 //        generateMapper(generationModel, projectModel)
 //        generateFactory(generationModel, projectModel)
