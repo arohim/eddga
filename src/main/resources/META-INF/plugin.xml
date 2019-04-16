@@ -324,10 +324,10 @@
             <add-to-group group-id="MainMenu" anchor="last"/>
 
             <action id="MultiDataModelsAction"
-                    class="com.robohorse.robopojogenerator.actions.pojo.MultiPOJOAction"
+                    class="com.robohorse.robopojogenerator.actions.pojo.CoreGeneratorAction"
                     icon="/icons/pojo.png"
-                    text="Multi POJOs and Mappers"
-                    description="Multi POJOs and Mappers">
+                    text="New core"
+                    description="Generate remote, rogue, cache, data and domain">
                 <add-to-group group-id="NewGroup" anchor="last"/>
             </action>
         </group>

@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.intellij.psi.PsiManager
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
 import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.models.*
 import java.io.File
@@ -48,7 +48,7 @@ open class RemoteTestCreatorDelegate @Inject constructor() {
     }
 
     private fun generateMapperTest(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.remoteTestPath + MultiPOJOGeneratorActionController.MAPPER_PATH
+        val path = coreGeneratorModel.remoteTestPath + CoreGeneratorActionController.MAPPER_PATH
         val regenProjectModel = rejectProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()

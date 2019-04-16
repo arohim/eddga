@@ -1,8 +1,8 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.intellij.psi.PsiManager
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MAPPER_PATH
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MODEL_PATH
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MAPPER_PATH
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MODEL_PATH
 import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate

@@ -1,15 +1,15 @@
-package com.robohorse.robopojogenerator.actions
+package com.robohorse.robopojogenerator.actions.pojo
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.robohorse.robopojogenerator.controllers.POJOGeneratorActionController
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
 import com.robohorse.robopojogenerator.injections.Injector
 import javax.inject.Inject
 
 class CoreGeneratorAction : AnAction() {
 
     @Inject
-    lateinit var corePOJOGeneratorActionController: POJOGeneratorActionController
+    lateinit var controller: CoreGeneratorActionController
 
     init {
         Injector.initModules()
@@ -17,6 +17,6 @@ class CoreGeneratorAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-//        corePOJOGeneratorActionController.onActionHandled(e, generationModel)
+        controller.onActionHandled(e)
     }
 }

@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.intellij.psi.PsiManager
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
 import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
@@ -43,7 +43,7 @@ open class RemoteCreatorDelegate @Inject constructor() {
     private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
                 ?: throw PathException()
-        val path = projectModel.project.basePath + File.separator + coreGeneratorModel.remotePath + MultiPOJOGeneratorActionController.MAPPER_PATH
+        val path = projectModel.project.basePath + File.separator + coreGeneratorModel.remotePath + CoreGeneratorActionController.MAPPER_PATH
         val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, path)
                 ?: throw PathException()
 

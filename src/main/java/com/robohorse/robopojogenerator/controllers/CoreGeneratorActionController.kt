@@ -10,7 +10,7 @@ import com.robohorse.robopojogenerator.models.ProjectModel
 import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder
 import javax.inject.Inject
 
-open class MultiPOJOGeneratorActionController @Inject constructor() {
+open class CoreGeneratorActionController @Inject constructor() {
 
     @Inject
     lateinit var messageDelegate: MessageDelegate

@@ -1,8 +1,8 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.intellij.psi.PsiManager
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MODEL_PATH
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MODEL_PATH
 import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
@@ -48,7 +48,7 @@ open class CacheCreatorDelegate @Inject constructor() {
     private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
                 ?: throw PathException()
-        val path = projectModel.project.basePath + File.separator + coreGeneratorModel.dataPath + MultiPOJOGeneratorActionController.MAPPER_PATH
+        val path = projectModel.project.basePath + File.separator + coreGeneratorModel.dataPath + CoreGeneratorActionController.MAPPER_PATH
         val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, path)
                 ?: throw PathException()
 
