@@ -41,6 +41,9 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
     @Inject
     lateinit var remoteCreatorDelegate: RemoteCreatorDelegate
 
+    @Inject
+    lateinit var remoteTestCreatorDelegate: RemoteTestCreatorDelegate
+
     fun onActionHandled(event: AnActionEvent) {
         try {
             proceed(event)
@@ -55,14 +58,16 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
         val window = dialogBuilder.window
 
         with(viewBinder) {
-            bindView(dialogBuilder, event, projectModel, object : CoreGeneratorFormEventListener {
+            bindView(dialogBuilder, event, object : CoreGeneratorFormEventListener {
                 override fun onJsonDataObtained(coreGeneratorModel: CoreGeneratorModel) {
                     event.project?.let {
-                        domainCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                        dataCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                        cacheCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                        rogueCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
+                        domainCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+                        dataCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+                        cacheCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+                        rogueCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
                         remoteCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
+
+                        remoteTestCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
                     }
                     window.dispose()
                 }
