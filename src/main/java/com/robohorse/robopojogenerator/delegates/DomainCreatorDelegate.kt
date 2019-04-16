@@ -12,10 +12,7 @@ import com.robohorse.robopojogenerator.models.ProjectModel
 import java.io.File
 import javax.inject.Inject
 
-open class DomainCreatorDelegate @Inject constructor() {
-
-    @Inject
-    lateinit var directoryCreatorDelegate: DirectoryCreatorDelegate
+open class DomainCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
 
     @Inject
     lateinit var pOJOGenerationDelegate: POJOGenerationDelegate
@@ -45,13 +42,8 @@ open class DomainCreatorDelegate @Inject constructor() {
     }
 
     private fun generatePOJO(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
-                ?: throw PathException()
-
-        val domainPath = projectModel.project.basePath + File.separator + coreGeneratorModel.domainPath + MODEL_PATH
-        val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, domainPath)
-                ?: throw PathException()
-
+        val path = coreGeneratorModel.domainPath + MODEL_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
         val domainGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -65,14 +57,6 @@ open class DomainCreatorDelegate @Inject constructor() {
                 .setRootClassName(coreGeneratorModel.rootClassName)
                 .setFieldDTOFormat(ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO)
                 .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
-                .build()
-
-        val regenProjectModel = ProjectModel.Builder()
-                .setDirectory(directory)
-                .setDirectoryPath(directory.virtualFile.path)
-                .setPackageName(projectModel.packageName)
-                .setProject(projectModel.project)
-                .setVirtualFolder(projectModel.virtualFolder)
                 .build()
 
         pOJOGenerationDelegate.runGenerationTask(domainGenerationModel, regenProjectModel)
