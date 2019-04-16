@@ -11,5 +11,14 @@ data class CoreGeneratorModel(
         var domainTestPath: String? = null,
         var cacheTestPath: String? = null,
         var dataTestPath: String? = null,
-        var remoteTestPath: String? = null
+        var remoteTestPath: String? = null,
+        var isGenerateDomain: Boolean = false,
+        var isGenerateRogue: Boolean = false,
+        var isGenerateCache: Boolean = false,
+        var isGenerateData: Boolean = false,
+        var isGenerateRemote: Boolean = false,
+        var isGenerateDomainTest: Boolean = false,
+        var isGenerateCacheTest: Boolean = false,
+        var isGenerateDataTest: Boolean = false,
+        var isGenerateRemoteTest: Boolean = false
 )

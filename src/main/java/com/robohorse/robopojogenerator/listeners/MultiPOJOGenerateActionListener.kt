@@ -30,7 +30,7 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
         val textArea = generatorView.textArea
         val textField = generatorView.rootClassNameTextField
 
-        val coreGeneratorModel = CoreGeneratorModel()
+        val coreGeneratorModel = CoreGeneratorModel(isGenerateDomainTest = false, isGenerateCacheTest = false, isGenerateDataTest = false, isGenerateRemoteTest = false, isGenerateDomain = false, isGenerateRogue = false, isGenerateCache = false, isGenerateData = false, isGenerateRemote = false)
         saveConfiguration()
         var content = textArea.text
         val className = textField.text
@@ -48,6 +48,17 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
             coreGeneratorModel.cacheTestPath = generatorView.cacheTestPath.text
             coreGeneratorModel.dataTestPath = generatorView.dataTestPath.text
             coreGeneratorModel.remoteTestPath = generatorView.remoteTestPath.text
+
+            coreGeneratorModel.isGenerateDomain = generatorView.genDomainCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateRogue = generatorView.genRogueCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateCache = generatorView.genCacheCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateData = generatorView.genDataCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateRemote = generatorView.genRemoteCheckBox.isBorderPaintedFlat
+
+            coreGeneratorModel.isGenerateDomainTest = generatorView.genDomainTestCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateCacheTest = generatorView.genCacheTestCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateDataTest = generatorView.genDataTestCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateRemoteTest = generatorView.genRemoteTestCheckBox.isBorderPaintedFlat
             eventListener.onJsonDataObtained(coreGeneratorModel)
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
