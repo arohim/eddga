@@ -40,9 +40,11 @@ open class FactoryGeneratorActionController @Inject constructor() {
         val window = dialogBuilder.window
 
         val generationModel = GenerationModel()
-        coreGeneratorViewBinder.bindView(dialogBuilder, event, generationModel, GuiFormEventListener { generationModel ->
-            window.dispose()
-            generationDelegate.runGenerationTask(generationModel, projectModel, factoryGeneratorModel)
-        })
+        with(coreGeneratorViewBinder) {
+            bindView(dialogBuilder, event, generationModel, GuiFormEventListener { generationModel ->
+                window.dispose()
+                generationDelegate.runGenerationTask(generationModel, projectModel, factoryGeneratorModel)
+            })
+        }
     }
 }

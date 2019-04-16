@@ -15,12 +15,26 @@ class ProjectConfigurationComponent(project: Project? = null) :
         Serializable,
         PersistentStateComponent<ProjectConfigurationComponent> {
 
-    var cachePath: String = ""
-    var dataPath: String = ""
-    var domainPath: String = ""
-    var roguePath: String = ""
-    var remotePath: String = ""
-    var lastPath: String = ""
+    var cachePath: String? = null
+    var dataPath: String? = null
+    var domainPath: String? = null
+    var roguePath: String? = null
+    var remotePath: String? = null
+    var cacheTestPath: String? = null
+    var dataTestPath: String? = null
+    var domainTestPath: String? = null
+    var remoteTestPath: String? = null
+    var rootClassNameTextField: String? = null
+
+    var cacheCheckBox: Boolean = false
+    var dataCheckBox: Boolean = false
+    var domainCheckBox: Boolean = false
+    var rogueCheckBox: Boolean = false
+    var remoteCheckBox: Boolean = false
+    var cacheTestCheckBox: Boolean = false
+    var dataTestCheckBox: Boolean = false
+    var domainTestCheckBox: Boolean = false
+    var remoteTestCheckBox: Boolean = false
 
     override fun getState(): ProjectConfigurationComponent? = this
 
