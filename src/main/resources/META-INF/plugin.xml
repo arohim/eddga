@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>1.7.0</version>
+    <version>1.8.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -18,7 +18,7 @@
           - Remote/Cache/Data mapper unit testing from JSON
           - Remote/Cache/Data/Domain Factory from JSON
           - View/Presentation/Domain/Cache/Data/remote template
-          - Multi POJOs and Mappers
+          - Multi POJOs, Mappers and its Unit testing
 
           This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
           Thank you to Vadim Shchenev to make me easier to extend.
@@ -26,7 +26,7 @@
 
     <change-notes><![CDATA[
     Added
-        - Multi POJOs and Mappers<br>
+        - Multi POJOs, Mappers and its Unit testing<br>
     ]]>
     </change-notes>
 

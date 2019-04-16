@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="rootView" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="535" height="624"/>
+      <xy x="20" y="20" width="535" height="750"/>
     </constraints>
     <properties/>
     <border type="empty"/>
@@ -42,7 +42,7 @@
                   <text value="Generate"/>
                 </properties>
               </component>
-              <grid id="93144" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="93144" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -67,43 +67,43 @@
                     </constraints>
                     <properties>
                       <editable value="true"/>
-                      <text value="/core/domain/src/main/java/com/app/kaidee/domain"/>
+                      <text value="core/domain/src/main/java/com/app/kaidee/domain"/>
                     </properties>
                   </component>
                   <component id="ae5c0" class="javax.swing.JTextField" binding="dataPath">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="/core/data/src/main/java/com/app/kaidee/data"/>
-                    </properties>
-                  </component>
-                  <component id="cb0b9" class="javax.swing.JTextField" binding="cachePath">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="/core/cache/src/main/java/com/app/kaidee/cache"/>
+                      <text value="core/data/src/main/java/com/app/kaidee/data"/>
                     </properties>
                   </component>
-                  <component id="52e63" class="javax.swing.JTextField" binding="roguePath">
+                  <component id="cb0b9" class="javax.swing.JTextField" binding="cachePath">
                     <constraints>
                       <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
                     <properties>
+                      <text value="core/cache/src/main/java/com/app/kaidee/cache"/>
+                    </properties>
+                  </component>
+                  <component id="52e63" class="javax.swing.JTextField" binding="roguePath">
+                    <constraints>
+                      <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
                       <editable value="true"/>
-                      <text value="/core/rogue2/src/main/java/com/kaidee/rogue2"/>
+                      <text value="core/rogue2/src/main/java/com/kaidee/rogue2"/>
                     </properties>
                   </component>
                   <component id="f501b" class="javax.swing.JCheckBox" binding="genDataCheckBox">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <selected value="true"/>
@@ -112,7 +112,7 @@
                   </component>
                   <component id="2b85e" class="javax.swing.JCheckBox" binding="genCacheCheckBox">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <selected value="true"/>
@@ -121,7 +121,7 @@
                   </component>
                   <component id="eaca2" class="javax.swing.JCheckBox" binding="genRogueCheckBox">
                     <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <selected value="true"/>
@@ -130,7 +130,7 @@
                   </component>
                   <component id="8dc" class="javax.swing.JCheckBox" binding="genRemoteCheckBox">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <selected value="true"/>
@@ -139,12 +139,88 @@
                   </component>
                   <component id="6f579" class="javax.swing.JTextField" binding="remotePath">
                     <constraints>
+                      <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="core/remote/src/main/java/com/app/kaidee/remote"/>
+                    </properties>
+                  </component>
+                  <component id="1a297" class="javax.swing.JCheckBox" binding="genDomainTestCheckBox">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <selected value="true"/>
+                      <text value="Domain Test"/>
+                    </properties>
+                  </component>
+                  <component id="1d662" class="javax.swing.JTextField" binding="domainTestPath">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="core/domain/src/test/java/com/app/kaidee/domain"/>
+                    </properties>
+                  </component>
+                  <component id="b4c87" class="javax.swing.JTextField" binding="dataTestPath">
+                    <constraints>
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="/core/remote/src/main/java/com/app/kaidee/remote"/>
+                      <text value="core/data/src/test/java/com/app/kaidee/data"/>
+                    </properties>
+                  </component>
+                  <component id="c1c6a" class="javax.swing.JTextField" binding="cacheTestPath">
+                    <constraints>
+                      <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="core/cache/src/test/java/com/app/kaidee/cache"/>
+                    </properties>
+                  </component>
+                  <component id="c9705" class="javax.swing.JTextField" binding="remoteTestPath">
+                    <constraints>
+                      <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="core/remote/src/test/java/com/app/kaidee/remote"/>
+                    </properties>
+                  </component>
+                  <component id="a376e" class="javax.swing.JCheckBox" binding="genDataTestCheckBox">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <selected value="true"/>
+                      <text value="Data Test"/>
+                    </properties>
+                  </component>
+                  <component id="d1281" class="javax.swing.JCheckBox" binding="genCacheTestCheckBox">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <selected value="true"/>
+                      <text value="Cache Test"/>
+                    </properties>
+                  </component>
+                  <component id="def7d" class="javax.swing.JCheckBox" binding="genRemoteTestCheckBox">
+                    <constraints>
+                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <selected value="true"/>
+                      <text value="Remote Test"/>
                     </properties>
                   </component>
                 </children>
@@ -190,7 +266,7 @@
               <text value="Root Class Name :"/>
             </properties>
           </component>
-          <component id="a30eb" class="javax.swing.JTextField" binding="classNameTextField">
+          <component id="a30eb" class="javax.swing.JTextField" binding="rootClassNameTextField">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>

@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.delegates.*
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.listeners.CoreGeneratorFormEventListener
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
+import com.robohorse.robopojogenerator.models.ProjectModel
 import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder
 import javax.inject.Inject
 
@@ -41,6 +42,15 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
     @Inject
     lateinit var remoteCreatorDelegate: RemoteCreatorDelegate
 
+    @Inject
+    lateinit var remoteTestCreatorDelegate: RemoteTestCreatorDelegate
+
+    @Inject
+    lateinit var cacheCreatorTestDelegate: CacheTestCreatorDelegate
+
+    @Inject
+    lateinit var dataCreatorTestDelegate: DataTestCreatorDelegate
+
     fun onActionHandled(event: AnActionEvent) {
         try {
             proceed(event)
@@ -55,19 +65,32 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
         val window = dialogBuilder.window
 
         with(viewBinder) {
-            bindView(dialogBuilder, event, projectModel, object : CoreGeneratorFormEventListener {
+            bindView(dialogBuilder, event, object : CoreGeneratorFormEventListener {
                 override fun onJsonDataObtained(coreGeneratorModel: CoreGeneratorModel) {
-                    event.project?.let {
-                        domainCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                        dataCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                        cacheCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                        rogueCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                        remoteCreatorDelegate.runGenerationTask(it, projectModel, coreGeneratorModel)
-                    }
+                    generate(coreGeneratorModel, projectModel)
                     window.dispose()
                 }
             })
         }
+    }
+
+    private fun generate(coreGeneratorModel: CoreGeneratorModel, projectModel: ProjectModel) {
+        if (coreGeneratorModel.isGenerateDomain)
+            domainCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateData)
+            dataCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateCache)
+            cacheCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateRogue)
+            rogueCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateRemote)
+            remoteCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateRemoteTest)
+            remoteTestCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateCacheTest)
+            cacheCreatorTestDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateDataTest)
+            dataCreatorTestDelegate.runGenerationTask(projectModel, coreGeneratorModel)
     }
 
     companion object {

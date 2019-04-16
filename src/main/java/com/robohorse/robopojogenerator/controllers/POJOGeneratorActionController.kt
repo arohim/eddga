@@ -36,9 +36,11 @@ open class POJOGeneratorActionController @Inject constructor() {
         val dialogBuilder = DialogBuilder()
         val window = dialogBuilder.window
 
-        coreGeneratorViewBinder.bindView(dialogBuilder, event, generationModel, GuiFormEventListener { generationModel ->
-            window.dispose()
-            generationDelegate.runGenerationTask(generationModel, projectModel)
-        })
+        with(coreGeneratorViewBinder) {
+            bindView(dialogBuilder, event, generationModel, GuiFormEventListener { generationModel ->
+                window.dispose()
+                generationDelegate.runGenerationTask(generationModel, projectModel)
+            })
+        }
     }
 }

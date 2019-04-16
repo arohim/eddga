@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.delegates
 
-import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiManager
 import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController
 import com.robohorse.robopojogenerator.errors.custom.PathException
@@ -22,7 +21,7 @@ open class RemoteCreatorDelegate @Inject constructor() {
     @Inject
     lateinit var mapperGenerationDelegate: MapperGeneratorDelegate
 
-    fun runGenerationTask(project: Project, projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+    fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generateMapper(projectModel, coreGeneratorModel)
 //        generateFactory(generationModel, projectModel)
 //        generateMapperUnitTest(generationModel, projectModel)

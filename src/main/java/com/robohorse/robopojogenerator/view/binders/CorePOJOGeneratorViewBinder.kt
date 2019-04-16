@@ -16,15 +16,14 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
 
     fun bindView(builder: DialogBuilder, event: AnActionEvent, generationModel: GenerationModel, eventListener: GuiFormEventListener) {
         val generatorVew = POJOGeneratorVew()
-        val basePath = event.project?.basePath
 
         val actionListener = POJOGenerateActionListener(generatorVew, event, generationModel, eventListener)
         generatorVew.generateButton.addActionListener(actionListener)
 
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
-            if (component.lastPath.isNotEmpty()) {
-                generatorVew.classNameTextField.text = component.lastPath
+            if (component.rootClassNameTextField?.isNotEmpty() == true) {
+                generatorVew.classNameTextField.text = component.rootClassNameTextField
             }
         }
 
