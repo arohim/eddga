@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import javax.inject.Inject
 
-open class MultiPOJOGenerateActionListener @Inject constructor(private val generatorView: CoreGeneratorVew,
+class MultiPOJOGenerateActionListener @Inject constructor(private val generatorView: CoreGeneratorVew,
                                                                private val event: AnActionEvent,
                                                                private val eventListener: CoreGeneratorFormEventListener) : ActionListener {
 
@@ -49,16 +49,16 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
             coreGeneratorModel.dataTestPath = generatorView.dataTestPath.text
             coreGeneratorModel.remoteTestPath = generatorView.remoteTestPath.text
 
-            coreGeneratorModel.isGenerateDomain = generatorView.genDomainCheckBox.isBorderPaintedFlat
-            coreGeneratorModel.isGenerateRogue = generatorView.genRogueCheckBox.isBorderPaintedFlat
-            coreGeneratorModel.isGenerateCache = generatorView.genCacheCheckBox.isBorderPaintedFlat
-            coreGeneratorModel.isGenerateData = generatorView.genDataCheckBox.isBorderPaintedFlat
-            coreGeneratorModel.isGenerateRemote = generatorView.genRemoteCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateDomain = generatorView.genDomainCheckBox.isSelected
+            coreGeneratorModel.isGenerateRogue = generatorView.genRogueCheckBox.isSelected
+            coreGeneratorModel.isGenerateCache = generatorView.genCacheCheckBox.isSelected
+            coreGeneratorModel.isGenerateData = generatorView.genDataCheckBox.isSelected
+            coreGeneratorModel.isGenerateRemote = generatorView.genRemoteCheckBox.isSelected
 
-            coreGeneratorModel.isGenerateDomainTest = generatorView.genDomainTestCheckBox.isBorderPaintedFlat
-            coreGeneratorModel.isGenerateCacheTest = generatorView.genCacheTestCheckBox.isBorderPaintedFlat
-            coreGeneratorModel.isGenerateDataTest = generatorView.genDataTestCheckBox.isBorderPaintedFlat
-            coreGeneratorModel.isGenerateRemoteTest = generatorView.genRemoteTestCheckBox.isBorderPaintedFlat
+            coreGeneratorModel.isGenerateDomainTest = generatorView.genDomainTestCheckBox.isSelected
+            coreGeneratorModel.isGenerateCacheTest = generatorView.genCacheTestCheckBox.isSelected
+            coreGeneratorModel.isGenerateDataTest = generatorView.genDataTestCheckBox.isSelected
+            coreGeneratorModel.isGenerateRemoteTest = generatorView.genRemoteTestCheckBox.isSelected
             eventListener.onJsonDataObtained(coreGeneratorModel)
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
@@ -81,16 +81,16 @@ open class MultiPOJOGenerateActionListener @Inject constructor(private val gener
 
             component.rootClassNameTextField = generatorView.rootClassNameTextField.text
 
-            component.domainCheckBox = generatorView.genDomainCheckBox.isBorderPaintedFlat
-            component.rogueCheckBox = generatorView.genRogueCheckBox.isBorderPaintedFlat
-            component.cacheCheckBox = generatorView.genCacheCheckBox.isBorderPaintedFlat
-            component.dataCheckBox = generatorView.genDataCheckBox.isBorderPaintedFlat
-            component.remoteCheckBox = generatorView.genRemoteCheckBox.isBorderPaintedFlat
+            component.domainCheckBox = generatorView.genDomainCheckBox.isSelected
+            component.rogueCheckBox = generatorView.genRogueCheckBox.isSelected
+            component.cacheCheckBox = generatorView.genCacheCheckBox.isSelected
+            component.dataCheckBox = generatorView.genDataCheckBox.isSelected
+            component.remoteCheckBox = generatorView.genRemoteCheckBox.isSelected
 
-            component.domainTestCheckBox = generatorView.genDomainTestCheckBox.isBorderPaintedFlat
-            component.cacheTestCheckBox = generatorView.genCacheTestCheckBox.isBorderPaintedFlat
-            component.dataTestCheckBox = generatorView.genDataTestCheckBox.isBorderPaintedFlat
-            component.remoteTestCheckBox = generatorView.genRemoteTestCheckBox.isBorderPaintedFlat
+            component.domainTestCheckBox = generatorView.genDomainTestCheckBox.isSelected
+            component.cacheTestCheckBox = generatorView.genCacheTestCheckBox.isSelected
+            component.dataTestCheckBox = generatorView.genDataTestCheckBox.isSelected
+            component.remoteTestCheckBox = generatorView.genRemoteTestCheckBox.isSelected
         }
     }
 }

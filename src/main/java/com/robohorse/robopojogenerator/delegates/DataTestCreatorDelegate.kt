@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.models.*
 import java.io.File
 import javax.inject.Inject
 
-open class CacheTestCreatorDelegate @Inject constructor() {
+open class DataTestCreatorDelegate @Inject constructor() {
 
     @Inject
     lateinit var directoryCreatorDelegate: DirectoryCreatorDelegate
@@ -27,7 +27,7 @@ open class CacheTestCreatorDelegate @Inject constructor() {
     }
 
     private fun generateFactory(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.cacheTestPath ?: throw PathException()
+        val path = coreGeneratorModel.dataTestPath ?: throw PathException()
         val regenProjectModel = rejectProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()
@@ -37,18 +37,18 @@ open class CacheTestCreatorDelegate @Inject constructor() {
 
         val factoryGeneratorModel = FactoryGeneratorModel(
                 fileNameSuffix = "Factory",
-                templateName = "CacheFactory",
+                templateName = "DataFactory",
                 remote = false,
-                cache = true,
+                cache = false,
                 data = true,
-                domain = false
+                domain = true
         )
 
         factoryGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, factoryGeneratorModel)
     }
 
     private fun generateMapperTest(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.cacheTestPath + MultiPOJOGeneratorActionController.MAPPER_PATH
+        val path = coreGeneratorModel.dataTestPath + MultiPOJOGeneratorActionController.MAPPER_PATH
         val regenProjectModel = rejectProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()
@@ -57,10 +57,10 @@ open class CacheTestCreatorDelegate @Inject constructor() {
                 .build()
 
         val mapperTestGeneratorModel = MapperTestGeneratorModel(
-                from = "cached",
+                from = "domain",
                 to = "entity",
-                fileNameSuffix = "EntityMapperTest",
-                templateName = "CacheMapperTest"
+                fileNameSuffix = "MapperTest",
+                templateName = "DataMapperTest"
         )
 
         mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, mapperTestGeneratorModel)

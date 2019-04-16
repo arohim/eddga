@@ -45,6 +45,12 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
     @Inject
     lateinit var remoteTestCreatorDelegate: RemoteTestCreatorDelegate
 
+    @Inject
+    lateinit var cacheCreatorTestDelegate: CacheTestCreatorDelegate
+
+    @Inject
+    lateinit var dataCreatorTestDelegate: DataTestCreatorDelegate
+
     fun onActionHandled(event: AnActionEvent) {
         try {
             proceed(event)
@@ -81,6 +87,10 @@ open class MultiPOJOGeneratorActionController @Inject constructor() {
             remoteCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
         if (coreGeneratorModel.isGenerateRemoteTest)
             remoteTestCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateCacheTest)
+            cacheCreatorTestDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateDataTest)
+            dataCreatorTestDelegate.runGenerationTask(projectModel, coreGeneratorModel)
     }
 
     companion object {

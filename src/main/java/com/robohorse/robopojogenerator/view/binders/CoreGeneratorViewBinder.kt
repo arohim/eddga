@@ -19,10 +19,6 @@ open class CoreGeneratorViewBinder @Inject constructor() {
 
         val actionListener = MultiPOJOGenerateActionListener(generatorView, event, eventListener)
         generatorView.generateButton.addActionListener(actionListener)
-//        generatorView.domainPathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.domainPath))
-//        generatorView.roguePathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.roguePath))
-//        generatorView.cachePathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.cachePath))
-//        generatorView.dataPathButton.addActionListener(ChooseFileActionListener(basePath, generatorView.dataPath))
 
         event.project?.let {
             generatorView.basePath.text = it.basePath + File.separator
@@ -32,7 +28,7 @@ open class CoreGeneratorViewBinder @Inject constructor() {
         }
 
         builder.setCenterPanel(generatorView.rootView)
-//        builder.setTitle(generationModel.dialogTitle)
+        builder.setTitle("Core Generator")
         builder.removeAllActions()
         builder.show()
     }
@@ -71,32 +67,14 @@ open class CoreGeneratorViewBinder @Inject constructor() {
     }
 
     private fun bindCheckBox(component: ProjectConfigurationComponent, generatorView: CoreGeneratorVew) {
-        component.domainCheckBox.let {
-            generatorView.genDomainCheckBox.isBorderPaintedFlat = it
-        }
-        component.rogueCheckBox.let {
-            generatorView.genRogueCheckBox.isBorderPaintedFlat = it
-        }
-        component.cacheCheckBox.let {
-            generatorView.genCacheCheckBox.isBorderPaintedFlat = it
-        }
-        component.dataCheckBox.let {
-            generatorView.genDataCheckBox.isBorderPaintedFlat = it
-        }
-        component.remoteCheckBox.let {
-            generatorView.genRemoteCheckBox.isBorderPaintedFlat = it
-        }
-        component.domainTestCheckBox.let {
-            generatorView.genDomainTestCheckBox.isBorderPaintedFlat = it
-        }
-        component.dataTestCheckBox.let {
-            generatorView.genDataTestCheckBox.isBorderPaintedFlat = it
-        }
-        component.cacheTestCheckBox.let {
-            generatorView.genCacheTestCheckBox.isBorderPaintedFlat = it
-        }
-        component.remoteTestCheckBox.let {
-            generatorView.genRemoteTestCheckBox.isBorderPaintedFlat = it
-        }
+        generatorView.genDomainCheckBox.isSelected = component.domainCheckBox
+        generatorView.genRogueCheckBox.isSelected = component.rogueCheckBox
+        generatorView.genCacheCheckBox.isSelected = component.rogueCheckBox
+        generatorView.genDataCheckBox.isSelected = component.dataCheckBox
+        generatorView.genRemoteCheckBox.isSelected = component.remoteCheckBox
+        generatorView.genDomainTestCheckBox.isSelected = component.domainTestCheckBox
+        generatorView.genDataTestCheckBox.isSelected = component.dataTestCheckBox
+        generatorView.genCacheTestCheckBox.isSelected = component.cacheTestCheckBox
+        generatorView.genRemoteTestCheckBox.isSelected = component.remoteTestCheckBox
     }
 }
