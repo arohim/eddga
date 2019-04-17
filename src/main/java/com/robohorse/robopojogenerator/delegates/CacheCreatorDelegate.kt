@@ -40,7 +40,7 @@ open class CacheCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
     }
 
     private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.MAPPER_PATH
+        val path = coreGeneratorModel.cachePath + CoreGeneratorActionController.MAPPER_PATH
         val regenProjectModel = regenProjectModel(projectModel, path)
         val generationModel = GenerationModel.Builder()
                 .setContent(coreGeneratorModel.content)

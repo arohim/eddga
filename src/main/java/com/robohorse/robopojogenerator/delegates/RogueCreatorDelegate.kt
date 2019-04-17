@@ -16,26 +16,11 @@ open class RogueCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
 
     fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generatePOJO(projectModel, coreGeneratorModel)
-//        generateMapper(generationModel, projectModel)
-//        generateFactory(generationModel, projectModel)
-//        generateMapperUnitTest(generationModel, projectModel)
-//        generateUseCase(generationModel, projectModel)
+        generateGateWay(projectModel, coreGeneratorModel)
     }
 
-    private fun generateUseCase(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private fun generateGateWay(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
 
-    private fun generateMapperUnitTest(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun generateFactory(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun generateMapper(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun generatePOJO(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
