@@ -1,15 +1,12 @@
 package com.robohorse.robopojogenerator.delegates
 
-import com.intellij.psi.PsiManager
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MODEL_PATH
-import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
-import java.io.File
 import javax.inject.Inject
 
 open class DomainCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
