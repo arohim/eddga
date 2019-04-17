@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>1.8.1</version>
+    <version>1.9.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -26,10 +26,8 @@
 
     <change-notes><![CDATA[
     Added
-        Fixed bugs<br>
-        - removed unused semi-colon after package name<br>
-        - format field name in the mapper<br>
-        - create cache mapper invalid path<br>
+        Improved<br>
+        - added injectors in mappers and its unit tests<br>
     ]]>
     </change-notes>
 
