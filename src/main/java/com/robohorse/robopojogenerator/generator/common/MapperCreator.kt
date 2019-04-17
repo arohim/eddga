@@ -30,6 +30,7 @@ open class MapperCreator @Inject constructor() {
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
             templateProperties["ENTITIES"] = generateMappingFieldString(classItem.classFields)
+            templateProperties["INJECTORS"] = generateInjectors(classItem.classFields, mapperGeneratorModel.fileNameSuffix)
             val fileName = classItem.className + mapperGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
                     projectModel.directory,
@@ -38,6 +39,23 @@ open class MapperCreator @Inject constructor() {
                     templateProperties
             )
         }
+    }
+
+    fun generateInjectors(classFields: Map<String, ClassField>, suffix: String): String {
+        var injectors = ""
+        val classFieldClasses = classFields.filter { it.value.className != null }
+        var counter = classFieldClasses.size
+        classFieldClasses.forEach {
+            val fieldName = generateHelper.formatClassField("${it.key}$suffix")
+            val className = generateHelper.formatClassName("${it.key}$suffix")
+            injectors += "private val $fieldName: $className"
+
+            if (counter > 1) {
+                injectors += ",\n"
+            }
+            counter--
+        }
+        return injectors
     }
 
     fun generateMappingFieldString(classFields: MutableMap<String, ClassField>): String {
