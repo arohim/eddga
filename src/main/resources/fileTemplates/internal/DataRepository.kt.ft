@@ -1,4 +1,4 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME};#end
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
 
 import com.app.kaidee.data.shared.mapper.HeaderMapper
 import com.app.kaidee.domain.shared.model.Header

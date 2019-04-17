@@ -5,6 +5,7 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.models.FactoryGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
@@ -17,6 +18,9 @@ open class FactoryCreator @Inject constructor() {
 
     @Inject
     lateinit var fileTemplateWriterDelegate: FileTemplateWriterDelegate
+
+    @Inject
+    lateinit var generateHelper: ClassGenerateHelper
 
     @Throws(RoboPluginException::class)
     fun generateFiles(generationModel: GenerationModel,
@@ -130,25 +134,26 @@ open class FactoryCreator @Inject constructor() {
         classItem.classFields.forEach { classField: Map.Entry<String, ClassField> ->
             val classType: String? = generateValue(classField.value, prefix, suffix)
             val className = getClassName(prefix, classItem.className, suffix)
+            val fileName = generateHelper.formatClassField(classField.key)
             when {
                 counter == classItem.classFields.size - 1 && classItem.classFields.size > 1 -> {
                     // end the return command
-                    result += "\t\t${classField.key} = $classType\n" +
+                    result += "\t\t$fileName = $classType\n" +
                             "\t)\n"
                 }
                 counter == 0 && classItem.classFields.size == 1 -> {
                     result += "\treturn ${className}(\n" +
-                            "\t\t${classField.key} = $classType\n" +
+                            "\t\t$fileName = $classType\n" +
                             "\t)\n"
                 }
                 counter == 0 -> {
                     // first
                     result += "\treturn ${className}(\n" +
-                            "\t\t${classField.key} = $classType,\n"
+                            "\t\t$fileName = $classType,\n"
                 }
                 else -> {
                     // middle
-                    result += "\t\t${classField.key} = $classType,\n"
+                    result += "\t\t$fileName = $classType,\n"
                 }
             }
             counter++
