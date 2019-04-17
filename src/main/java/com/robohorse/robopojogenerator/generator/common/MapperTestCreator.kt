@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.generator.common
 import com.robohorse.robopojogenerator.delegates.FileTemplateWriterDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
@@ -16,6 +17,9 @@ open class MapperTestCreator @Inject constructor() {
 
     @Inject
     lateinit var fileTemplateWriterDelegate: FileTemplateWriterDelegate
+
+    @Inject
+    lateinit var generateHelper: ClassGenerateHelper
 
     @Throws(RoboPluginException::class)
     fun generateFiles(generationModel: GenerationModel,
@@ -41,7 +45,8 @@ open class MapperTestCreator @Inject constructor() {
         var asserts = ""
         var counter = 0
         classFields.forEach {
-            asserts += "assertEquals($from.${it.key}, $to.${it.key})"
+            val fileName = generateHelper.formatClassField(it.key)
+            asserts += "assertEquals($from.$fileName, $to.$fileName)"
             if (counter < classFields.size - 1) {
                 asserts += "\n"
             }

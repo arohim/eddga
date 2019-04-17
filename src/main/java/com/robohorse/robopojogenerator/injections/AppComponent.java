@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.injections;
 
-import com.robohorse.robopojogenerator.actions.*;
 import com.robohorse.robopojogenerator.actions.api.*;
 import com.robohorse.robopojogenerator.actions.data.*;
 import com.robohorse.robopojogenerator.actions.domain.UseCaseAction;
@@ -10,10 +9,6 @@ import com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.RemoteFactoryAction;
 import com.robohorse.robopojogenerator.actions.mapper.*;
 import com.robohorse.robopojogenerator.actions.pojo.*;
-import com.robohorse.robopojogenerator.actions.pojo.CacheLayerPOJOAction;
-import com.robohorse.robopojogenerator.actions.pojo.DataLayerPOJOAction;
-import com.robohorse.robopojogenerator.actions.pojo.DomainLayerPOJOAction;
-import com.robohorse.robopojogenerator.actions.pojo.RemotePOJOAction;
 import com.robohorse.robopojogenerator.actions.cache.CacheImplAction;
 import com.robohorse.robopojogenerator.actions.presentation.*;
 import com.robohorse.robopojogenerator.actions.tracking.TrackerImplAction;
@@ -67,8 +62,6 @@ public interface AppComponent {
     void inject(DataMapperAction item);
 
     void inject(DataMapperUnitTestAction item);
-
-    void inject(MultiPOJOAction item);
 
     void inject(MultiPOJOGenerateActionListener item);
 

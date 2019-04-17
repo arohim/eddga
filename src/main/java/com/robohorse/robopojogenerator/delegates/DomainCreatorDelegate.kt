@@ -1,21 +1,15 @@
 package com.robohorse.robopojogenerator.delegates
 
-import com.intellij.psi.PsiManager
-import com.robohorse.robopojogenerator.controllers.MultiPOJOGeneratorActionController.Companion.MODEL_PATH
-import com.robohorse.robopojogenerator.errors.custom.PathException
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MODEL_PATH
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
-import java.io.File
 import javax.inject.Inject
 
-open class DomainCreatorDelegate @Inject constructor() {
-
-    @Inject
-    lateinit var directoryCreatorDelegate: DirectoryCreatorDelegate
+open class DomainCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
 
     @Inject
     lateinit var pOJOGenerationDelegate: POJOGenerationDelegate
@@ -45,13 +39,8 @@ open class DomainCreatorDelegate @Inject constructor() {
     }
 
     private fun generatePOJO(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val projectDir = PsiManager.getInstance(projectModel.project).findDirectory(projectModel.project.baseDir)
-                ?: throw PathException()
-
-        val domainPath = projectModel.project.basePath + File.separator + coreGeneratorModel.domainPath + MODEL_PATH
-        val directory = directoryCreatorDelegate.createDirectory(projectModel, projectDir, domainPath)
-                ?: throw PathException()
-
+        val path = coreGeneratorModel.domainPath + MODEL_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
         val domainGenerationModel = GenerationModel.Builder()
                 .useKotlin(true)
                 .setAnnotationItem(AnnotationEnum.NONE)
@@ -65,14 +54,6 @@ open class DomainCreatorDelegate @Inject constructor() {
                 .setRootClassName(coreGeneratorModel.rootClassName)
                 .setFieldDTOFormat(ClassTemplate.NON_NULL_FIELD_KOTLIN_DTO)
                 .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
-                .build()
-
-        val regenProjectModel = ProjectModel.Builder()
-                .setDirectory(directory)
-                .setDirectoryPath(directory.virtualFile.path)
-                .setPackageName(projectModel.packageName)
-                .setProject(projectModel.project)
-                .setVirtualFolder(projectModel.virtualFolder)
                 .build()
 
         pOJOGenerationDelegate.runGenerationTask(domainGenerationModel, regenProjectModel)
