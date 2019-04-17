@@ -23,7 +23,7 @@ class RemoteFactoryAction : AnAction() {
                 templateName = "RemoteFactory",
                 remote = true,
                 cache = false,
-                data = false,
+                data = true,
                 domain = false
         )
 

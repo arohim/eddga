@@ -1,10 +1,8 @@
 package com.robohorse.robopojogenerator.delegates
 
-import com.intellij.psi.PsiManager
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
 import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.models.*
-import java.io.File
 import javax.inject.Inject
 
 open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
@@ -37,7 +35,7 @@ open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate
                 templateName = "RemoteFactory",
                 remote = true,
                 cache = false,
-                data = false,
+                data = true,
                 domain = false
         )
 

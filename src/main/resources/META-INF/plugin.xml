@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>1.8.0</version>
+    <version>1.8.1</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -26,7 +26,10 @@
 
     <change-notes><![CDATA[
     Added
-        - Multi POJOs, Mappers and its Unit testing<br>
+        Fixed bugs<br>
+        - removed unused semi-colon after package name<br>
+        - format field name in the mapper<br>
+        - create cache mapper invalid path<br>
     ]]>
     </change-notes>
 
@@ -320,7 +323,7 @@
     <actions>
         <group id="MyPlugin.TopMenu"
                text="Kaidee Plugin"
-               description="Kaidee Plugin">
+               description="EddGa">
             <add-to-group group-id="MainMenu" anchor="last"/>
 
             <action id="MultiDataModelsAction"
