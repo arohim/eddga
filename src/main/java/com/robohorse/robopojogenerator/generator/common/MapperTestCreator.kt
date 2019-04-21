@@ -55,7 +55,7 @@ open class MapperTestCreator @Inject constructor() {
     }
 
     fun generateAssertions(classFields: MutableMap<String, ClassField>, from: String, to: String): String {
-        var asserts = mutableListOf<String>()
+        val asserts = mutableListOf<String>()
         classFields.forEach {
             val fileName = generateHelper.formatClassField(it.key)
             if (isClassField(it.value)) {
