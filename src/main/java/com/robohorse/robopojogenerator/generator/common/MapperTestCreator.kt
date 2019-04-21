@@ -30,6 +30,7 @@ open class MapperTestCreator @Inject constructor() {
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
             templateProperties["ASSERTIONS"] = generateAssertions(classItem.classFields, mapperTestGeneratorModel.from, mapperTestGeneratorModel.to)
+            templateProperties["PROPERTIES"] = generateProperties(classItem.classFields, mapperTestGeneratorModel.fileNameSuffix)
             val fileName = classItem.className + mapperTestGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
                     projectModel.directory,
@@ -40,10 +41,15 @@ open class MapperTestCreator @Inject constructor() {
         }
     }
 
-    fun generateProperties(classFields: Map<String, ClassField>): String {
+    fun generateProperties(classFields: Map<String, ClassField>, suffix: String): String {
+        var properties = ""
         val classItems = classFields.filter { isClassField(it.value) }
-
-        return ""
+        classItems.forEach { classItem ->
+            val fieldName = generateHelper.formatClassField(classItem.key) + suffix
+            val className = generateHelper.formatClassName(classItem.key) + suffix
+            properties += "private lateinit var $fieldName: $className\n\n"
+        }
+        return properties
     }
 
     fun generateAssertions(classFields: MutableMap<String, ClassField>, from: String, to: String): String {

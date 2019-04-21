@@ -65,9 +65,23 @@ class MapperTestCreatorTest {
     @Test
     fun generateProperties() {
         // GIVEN
+        val classFields: MutableMap<String, ClassField> = LinkedHashMap()
+        classFields["ClassA"] = ClassField("ClassA")
+        classFields["ClassB"] = ClassField("ClassB")
+        classFields["propC"] = ClassField(ClassEnum.STRING)
+        Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
+        Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        Mockito.`when`(generateHelper.formatClassName("ClassA")).thenReturn("ClassA")
+        Mockito.`when`(generateHelper.formatClassName("ClassB")).thenReturn("ClassB")
+        val suffix = "EntityMapper"
 
         // WHEN
+        val actual = mapperTestCreator.generateProperties(classFields, suffix)
 
         // THEN
+        val expected = "private lateinit var classAEntityMapper: ClassAEntityMapper\n\n" +
+                "private lateinit var classBEntityMapper: ClassBEntityMapper\n\n"
+
+        assertEquals(expected, actual)
     }
 }
