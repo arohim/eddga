@@ -21,8 +21,8 @@ class CacheMapperAction : AnAction() {
         val mapperGeneratorModel = MapperGeneratorModel(
                 fileNameSuffix = "EntityMapper",
                 templateName = "CacheMapper",
-                mapToMethodName = "mapFromCached",
-                mapFromMethodName = "mapToCached"
+                mapToMethodName = "mapToCached",
+                mapFromMethodName = "mapFromCached"
         )
 
         mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)
