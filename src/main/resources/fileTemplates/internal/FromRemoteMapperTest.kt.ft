@@ -12,9 +12,12 @@ class ${CLASS_NAME}EntityMapperTest {
 
     private lateinit var mapper: ${CLASS_NAME}EntityMapper
 
+    ${PROPERTIES}
+
     @Before
     fun setUp() {
-        mapper = ${CLASS_NAME}EntityMapper()
+        ${PROPERTIES_INITIALIZATION}
+        mapper = ${CLASS_NAME}EntityMapper(${PROPERTY_PARAMETERS})
     }
 
     @Test

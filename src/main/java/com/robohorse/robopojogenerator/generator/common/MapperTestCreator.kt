@@ -30,9 +30,9 @@ open class MapperTestCreator @Inject constructor() {
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
             templateProperties["ASSERTIONS"] = generateAssertions(classItem.classFields, mapperTestGeneratorModel.from, mapperTestGeneratorModel.to)
-            templateProperties["PROPERTIES"] = generateProperties(classItem.classFields, mapperTestGeneratorModel.fileNameSuffix)
-            templateProperties["PROPERTY_PARAMETERS"] = generatePropertyParameters(classItem.classFields, mapperTestGeneratorModel.fileNameSuffix)
-            templateProperties["PROPERTIES_INITIALIZATION"] = generatePropertiesInitialization(classItem, mapperTestGeneratorModel.fileNameSuffix)
+            templateProperties["PROPERTIES"] = generateProperties(classItem.classFields, mapperTestGeneratorModel.classNameSuffix)
+            templateProperties["PROPERTY_PARAMETERS"] = generatePropertyParameters(classItem.classFields, mapperTestGeneratorModel.classNameSuffix)
+            templateProperties["PROPERTIES_INITIALIZATION"] = generatePropertiesInitialization(classItem, mapperTestGeneratorModel.classNameSuffix)
             val fileName = classItem.className + mapperTestGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
                     projectModel.directory,

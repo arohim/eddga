@@ -12,9 +12,12 @@ class ${CLASS_NAME}ModelMapperTest {
 
     private lateinit var mapper: ${CLASS_NAME}ModelMapper
 
+    ${PROPERTIES}
+
     @Before
     fun setUp() {
-        mapper = ${CLASS_NAME}ModelMapper()
+        ${PROPERTIES_INITIALIZATION}
+        mapper = ${CLASS_NAME}ModelMapper(${PROPERTY_PARAMETERS})
     }
 
     @Test
