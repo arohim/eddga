@@ -4,11 +4,11 @@ import com.app.kaidee.remote.base.mapper.ModelMapper
 import javax.inject.Inject
 
 #parse("File Header.java")
-open class ${CLASS_NAME}ModelMapper @Inject constructor()
+open class ${CLASS_NAME}ModelMapper @Inject constructor(${INJECTORS})
     : ModelMapper<${CLASS_NAME}Entity, ${CLASS_NAME}Model> {
     override fun mapToRemote(type: ${CLASS_NAME}Entity): ${CLASS_NAME}Model {
         return ${CLASS_NAME}Model(
-            ${ENTITIES}
+            ${MAP_TO_ENTITIES}
         )
     }
 }
