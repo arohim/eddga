@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import javax.inject.Inject
 
-class UseCaseAction : AnAction() {
+class UseCaseTestAction : AnAction() {
 
     @Inject
     lateinit var controller: ClassNameTemplateActionController
@@ -19,9 +19,9 @@ class UseCaseAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
-                dialogTitle = "Use Case",
-                templateName = "UseCase",
-                fileNameSuffix = ""
+                dialogTitle = "Use Case Unit Test",
+                templateName = "UseCaseTest",
+                fileNameSuffix = "UseCaseTest"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }
