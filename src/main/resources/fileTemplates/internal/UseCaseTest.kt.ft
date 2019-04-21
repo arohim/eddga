@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 #parse("File Header.java")
-class GetFullCategoriesTest {
+class Get${CLASS_NAME}Test {
 
     lateinit var useCase: ${CLASS_NAME}
 
