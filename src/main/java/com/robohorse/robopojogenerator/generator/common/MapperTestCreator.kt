@@ -48,7 +48,7 @@ open class MapperTestCreator @Inject constructor() {
         val classItems = classFields.filter { isClassField(it.value) }
         classItems.forEach { classItem ->
             val fieldName = generateHelper.formatClassField(classItem.key) + suffix
-            val className = generateHelper.formatClassName(classItem.key) + suffix
+            val className = classItem.value.className + suffix
             properties += "private lateinit var $fieldName: $className\n\n"
         }
         return properties
@@ -87,7 +87,7 @@ open class MapperTestCreator @Inject constructor() {
         val fields = classItem.classFields.filter { isClassField(it.value) }
         fields.forEach { field ->
             val fieldName = generateHelper.formatClassField(field.key) + suffix
-            val className = generateHelper.formatClassName(field.key) + suffix
+            val className = field.value.className + suffix
             initialization.add("$fieldName = $className()")
         }
         return initialization.joinToString("\n")

@@ -71,8 +71,6 @@ class MapperTestCreatorTest {
         classFields["propC"] = ClassField(ClassEnum.STRING)
         Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
         Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
-        Mockito.`when`(generateHelper.formatClassName("ClassA")).thenReturn("ClassA")
-        Mockito.`when`(generateHelper.formatClassName("ClassB")).thenReturn("ClassB")
         val suffix = "EntityMapper"
 
         // WHEN
@@ -119,8 +117,6 @@ class MapperTestCreatorTest {
 
         Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
         Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
-        Mockito.`when`(generateHelper.formatClassName("ClassA")).thenReturn("ClassA")
-        Mockito.`when`(generateHelper.formatClassName("ClassB")).thenReturn("ClassB")
         val suffix = "EntityMapper"
 
         // WHEN
