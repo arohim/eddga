@@ -4,7 +4,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 
 #parse("File Header.java")
 @RunWith(JUnit4::class)
@@ -12,9 +13,12 @@ class ${CLASS_NAME}EntityMapperTest {
 
     private lateinit var mapper: ${CLASS_NAME}EntityMapper
 
+    ${PROPERTIES}
+
     @Before
     fun setUp() {
-        mapper = ${CLASS_NAME}EntityMapper()
+        ${PROPERTIES_INITIALIZATION}
+        mapper = ${CLASS_NAME}EntityMapper(${PROPERTY_PARAMETERS})
     }
 
     @Test

@@ -4,17 +4,20 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 
 @RunWith(JUnit4::class)
 class ${CLASS_NAME}MapperTest {
 
     private lateinit var mapper: ${CLASS_NAME}Mapper
 
+    ${PROPERTIES}
+
     @Before
     fun setUp() {
-        mapper = ${CLASS_NAME}Mapper()
+        ${PROPERTIES_INITIALIZATION}
+        mapper = ${CLASS_NAME}Mapper(${PROPERTY_PARAMETERS})
     }
 
     @Test

@@ -5,7 +5,6 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import javax.inject.Inject
@@ -31,6 +30,9 @@ open class MapperTestCreator @Inject constructor() {
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
             templateProperties["ASSERTIONS"] = generateAssertions(classItem.classFields, mapperTestGeneratorModel.from, mapperTestGeneratorModel.to)
+            templateProperties["PROPERTIES"] = generateProperties(classItem.classFields, mapperTestGeneratorModel.classNameSuffix)
+            templateProperties["PROPERTY_PARAMETERS"] = generatePropertyParameters(classItem.classFields, mapperTestGeneratorModel.classNameSuffix)
+            templateProperties["PROPERTIES_INITIALIZATION"] = generatePropertiesInitialization(classItem, mapperTestGeneratorModel.classNameSuffix)
             val fileName = classItem.className + mapperTestGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
                     projectModel.directory,
@@ -41,17 +43,53 @@ open class MapperTestCreator @Inject constructor() {
         }
     }
 
+    fun generateProperties(classFields: Map<String, ClassField>, suffix: String): String {
+        var properties = ""
+        val classItems = classFields.filter { isClassField(it.value) }
+        classItems.forEach { classItem ->
+            val fieldName = generateHelper.formatClassField(classItem.key) + suffix
+            val className = classItem.value.className + suffix
+            properties += "private lateinit var $fieldName: $className\n\n"
+        }
+        return properties
+    }
+
     fun generateAssertions(classFields: MutableMap<String, ClassField>, from: String, to: String): String {
-        var asserts = ""
-        var counter = 0
+        val asserts = mutableListOf<String>()
         classFields.forEach {
             val fileName = generateHelper.formatClassField(it.key)
-            asserts += "assertEquals($from.$fileName, $to.$fileName)"
-            if (counter < classFields.size - 1) {
-                asserts += "\n"
+            if (isClassField(it.value)) {
+                asserts.add("assertNotNull($from.$fileName)")
+                asserts.add("assertNotNull($to.$fileName)")
+            } else {
+                asserts.add("assertEquals($from.$fileName, $to.$fileName)")
             }
-            counter++
         }
-        return asserts
+        return asserts.joinToString("\n")
+    }
+
+    private fun isClassField(value: ClassField): Boolean {
+        return value.className != null
+    }
+
+    fun generatePropertyParameters(classFields: MutableMap<String, ClassField>, suffix: String): String {
+        val parameters = mutableListOf<String>()
+        val classItems = classFields.filter { isClassField(it.value) }
+        classItems.forEach { classItem ->
+            val fieldName = generateHelper.formatClassField(classItem.key) + suffix
+            parameters.add(fieldName)
+        }
+        return parameters.joinToString(", ")
+    }
+
+    fun generatePropertiesInitialization(classItem: ClassItem, suffix: String): String {
+        val initialization = mutableListOf<String>()
+        val fields = classItem.classFields.filter { isClassField(it.value) }
+        fields.forEach { field ->
+            val fieldName = generateHelper.formatClassField(field.key) + suffix
+            val className = field.value.className + suffix
+            initialization.add("$fieldName = $className()")
+        }
+        return initialization.joinToString("\n")
     }
 }

@@ -4,16 +4,17 @@ import com.app.kaidee.cache.base.mapper.EntityMapper
 import javax.inject.Inject
 
 #parse("File Header.java")
-open class ${CLASS_NAME}EntityMapper @Inject constructor() : EntityMapper<Cached${CLASS_NAME}, ${CLASS_NAME}Entity> {
+open class ${CLASS_NAME}EntityMapper @Inject constructor(${INJECTORS})
+: EntityMapper<Cached${CLASS_NAME}, ${CLASS_NAME}Entity> {
     override fun mapFromCached(type: Cached${CLASS_NAME}): ${CLASS_NAME}Entity {
         return ${CLASS_NAME}Entity(
-            ${ENTITIES}
+            ${MAP_FROM_ENTITIES}
         )
     }
 
     override fun mapToCached(type: ${CLASS_NAME}Entity): Cached${CLASS_NAME} {
         return Cached${CLASS_NAME}(
-            ${ENTITIES}
+            ${MAP_TO_ENTITIES}
         )
     }
 }

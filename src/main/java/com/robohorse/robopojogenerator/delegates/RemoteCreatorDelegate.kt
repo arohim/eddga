@@ -44,14 +44,18 @@ open class RemoteCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
 
         val fromMapperGeneratorModel = MapperGeneratorModel(
                 fileNameSuffix = "EntityMapper",
-                templateName = "FromRemoteMapper"
+                templateName = "FromRemoteMapper",
+                mapToMethodName = "mapToRemote",
+                mapFromMethodName = "mapFromRemote"
         )
 
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, fromMapperGeneratorModel)
 
         val toMapperGeneratorModel = MapperGeneratorModel(
                 fileNameSuffix = "ModelMapper",
-                templateName = "ToRemoteMapper"
+                templateName = "ToRemoteMapper",
+                mapToMethodName = "mapToRemote",
+                mapFromMethodName = "mapFromRemote"
         )
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, toMapperGeneratorModel)
     }
