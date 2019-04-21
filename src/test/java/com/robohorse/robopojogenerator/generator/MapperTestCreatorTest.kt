@@ -45,9 +45,11 @@ class MapperTestCreatorTest {
         classFields["propA"] = ClassField(ClassEnum.STRING)
         classFields["propB"] = ClassField(ClassEnum.STRING)
         classFields["propC"] = ClassField(ClassEnum.STRING)
+        classFields["ClassD"] = ClassField("ClassD")
         Mockito.`when`(generateHelper.formatClassField("propA")).thenReturn("propA")
         Mockito.`when`(generateHelper.formatClassField("propB")).thenReturn("propB")
         Mockito.`when`(generateHelper.formatClassField("propC")).thenReturn("propC")
+        Mockito.`when`(generateHelper.formatClassField("ClassD")).thenReturn("classD")
 
         val from = "cached"
         val to = "entity"
@@ -58,7 +60,9 @@ class MapperTestCreatorTest {
         // THEN
         val expected = "assertEquals(cached.propA, entity.propA)\n" +
                 "assertEquals(cached.propB, entity.propB)\n" +
-                "assertEquals(cached.propC, entity.propC)"
+                "assertEquals(cached.propC, entity.propC)\n" +
+                "assertNotNull(cached.classD)\n" +
+                "assertNotNull(entity.classD)"
         assertEquals(expected, actual)
     }
 

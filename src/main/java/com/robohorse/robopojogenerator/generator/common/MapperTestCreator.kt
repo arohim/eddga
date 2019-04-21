@@ -55,17 +55,17 @@ open class MapperTestCreator @Inject constructor() {
     }
 
     fun generateAssertions(classFields: MutableMap<String, ClassField>, from: String, to: String): String {
-        var asserts = ""
-        var counter = 0
+        var asserts = mutableListOf<String>()
         classFields.forEach {
             val fileName = generateHelper.formatClassField(it.key)
-            asserts += "assertEquals($from.$fileName, $to.$fileName)"
-            if (counter < classFields.size - 1) {
-                asserts += "\n"
+            if (isClassField(it.value)) {
+                asserts.add("assertNotNull($from.$fileName)")
+                asserts.add("assertNotNull($to.$fileName)")
+            } else {
+                asserts.add("assertEquals($from.$fileName, $to.$fileName)")
             }
-            counter++
         }
-        return asserts
+        return asserts.joinToString("\n")
     }
 
     private fun isClassField(value: ClassField): Boolean {
