@@ -20,7 +20,7 @@ class RemoteStoreTestAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
                 dialogTitle = "Remote Store Unit Test",
-                templateName = "RemoteStoreTest",
+                templateName = "RemoteDataStoreTest",
                 fileNameSuffix = "RemoteDataStoreTest"
         )
         controller.onActionHandled(e, classNameTemplateModel)
