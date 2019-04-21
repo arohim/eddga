@@ -17,21 +17,6 @@ open class RemoteCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
 
     fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generateMapper(projectModel, coreGeneratorModel)
-//        generateFactory(generationModel, projectModel)
-//        generateMapperUnitTest(generationModel, projectModel)
-//        generateUseCase(generationModel, projectModel)
-    }
-
-    private fun generateUseCase(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun generateMapperUnitTest(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun generateFactory(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
