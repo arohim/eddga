@@ -20,7 +20,9 @@ class DataMapperAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val mapperGeneratorModel = MapperGeneratorModel(
                 fileNameSuffix = "Mapper",
-                templateName = "DataMapper"
+                templateName = "DataMapper",
+                mapToMethodName = "mapToEntity",
+                mapFromMethodName = "mapFromEntity"
         )
 
         mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)

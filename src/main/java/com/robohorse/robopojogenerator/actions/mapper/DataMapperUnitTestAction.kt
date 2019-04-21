@@ -22,7 +22,8 @@ class DataMapperUnitTestAction : AnAction() {
                 from = "domain",
                 to = "entity",
                 fileNameSuffix = "MapperTest",
-                templateName = "DataMapperTest"
+                templateName = "DataMapperTest",
+                classNameSuffix = "Mapper"
         )
         controller.onActionHandled(e, mapperTestGeneratorModel)
     }

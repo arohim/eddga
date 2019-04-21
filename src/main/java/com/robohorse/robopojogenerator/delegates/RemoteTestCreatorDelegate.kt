@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
-import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.models.*
 import javax.inject.Inject
 
@@ -22,7 +21,7 @@ open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate
     }
 
     private fun generateFactory(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.remoteTestPath ?: throw PathException()
+        val path = coreGeneratorModel.remoteTestPath + CoreGeneratorActionController.FACTORY_PATH
         val regenProjectModel = regenProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()
@@ -55,7 +54,8 @@ open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate
                 from = "model",
                 to = "entity",
                 fileNameSuffix = "EntityMapperTest",
-                templateName = "FromRemoteMapperTest"
+                templateName = "FromRemoteMapperTest",
+                classNameSuffix = "EntityMapper"
         )
 
         mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, fromMapperTestGeneratorModel)
@@ -64,7 +64,8 @@ open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate
                 from = "entity",
                 to = "model",
                 fileNameSuffix = "ModelMapperTest",
-                templateName = "ToRemoteMapperTest"
+                templateName = "ToRemoteMapperTest",
+                classNameSuffix = "EntityMapper"
         )
 
         mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, toMapperTestGeneratorModel)

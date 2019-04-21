@@ -20,7 +20,9 @@ class FromRemoteMapperAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val mapperGeneratorModel = MapperGeneratorModel(
                 fileNameSuffix = "EntityMapper",
-                templateName = "FromRemoteMapper"
+                templateName = "FromRemoteMapper",
+                mapToMethodName = "",
+                mapFromMethodName = "mapFromRemote"
         )
 
         mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)
