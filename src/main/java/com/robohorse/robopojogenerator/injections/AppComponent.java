@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.injections;
 
-import com.robohorse.robopojogenerator.actions.api.*;
+import com.robohorse.robopojogenerator.actions.rogue2.*;
 import com.robohorse.robopojogenerator.actions.data.*;
 import com.robohorse.robopojogenerator.actions.domain.UseCaseAction;
 import com.robohorse.robopojogenerator.actions.domain.UseCaseTestAction;

@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -202,7 +202,7 @@
         </action>
 
         <action id="ApiGateWayAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiGateWayAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiGateWayAction"
                 icon="/icons/pojo.png"
                 text="Api Gateway"
                 description="Api Gateway">
@@ -210,7 +210,7 @@
         </action>
 
         <action id="ApiServiceInterfaceAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiServiceInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiServiceInterfaceAction"
                 icon="/icons/pojo.png"
                 text="Api Service Interface"
                 description="Api Service Interface">
@@ -218,7 +218,7 @@
         </action>
 
         <action id="ApiServiceImplAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiServiceImplAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiServiceImplAction"
                 icon="/icons/pojo.png"
                 text="Api Service Impl"
                 description="Api Service Impl">
@@ -226,7 +226,7 @@
         </action>
 
         <action id="ApiRemoteImplAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiRemoteImplAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiRemoteImplAction"
                 icon="/icons/pojo.png"
                 text="Api Remote Impl"
                 description="Api Remote Impl">

@@ -1,7 +1,9 @@
 package com.robohorse.robopojogenerator.delegates
 
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MAPPER_PATH
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MODEL_PATH
+import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
@@ -19,10 +21,95 @@ open class DataCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
     @Inject
     lateinit var mapperGenerationDelegate: MapperGeneratorDelegate
 
+    @Inject
+    lateinit var fileTemplateWriterDelegate: FileTemplateWriterDelegate
+
     fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generatePOJO(projectModel, coreGeneratorModel)
         generateMapper(projectModel, coreGeneratorModel)
+        generateDataRepository(projectModel, coreGeneratorModel)
+        generateCacheDataStore(projectModel, coreGeneratorModel)
+        generateDataStoreFactory(projectModel, coreGeneratorModel)
+        generateRemoteDataStore(projectModel, coreGeneratorModel)
     }
+
+
+    private fun generateRemoteDataStore(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.SOURCE_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "RemoteDataStore"
+        val fileNameSuffix = "RemoteDataStore"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
+    }
+
+    private fun generateDataStoreFactory(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.SOURCE_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "DataStoreFactory"
+        val fileNameSuffix = "DataStoreFactory"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
+    }
+
+    private fun generateCacheDataStore(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.SOURCE_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "CacheDataStore"
+        val fileNameSuffix = "CacheDataStore"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
+    }
+
+    private fun generateDataRepository(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.dataPath ?: throw PathException()
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "DataRepository"
+        val fileNameSuffix = "DataRepository"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
+    }
+
 
     private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         val path = coreGeneratorModel.dataPath + MAPPER_PATH
