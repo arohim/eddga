@@ -49,7 +49,9 @@ open class CacheCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
 
         val mapperGeneratorModel = MapperGeneratorModel(
                 fileNameSuffix = "EntityMapper",
-                templateName = "CacheMapper"
+                templateName = "CacheMapper",
+                mapToMethodName = "mapFromCached",
+                mapFromMethodName = "mapToCached"
         )
 
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, mapperGeneratorModel)

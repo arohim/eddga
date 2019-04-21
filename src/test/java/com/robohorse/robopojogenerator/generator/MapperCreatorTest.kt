@@ -13,13 +13,11 @@ import com.robohorse.robopojogenerator.models.ProjectModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.LinkedHashMap
-import javax.inject.Inject
 import kotlin.collections.HashSet
 import kotlin.collections.MutableMap
 import kotlin.collections.set
@@ -46,20 +44,56 @@ class MapperCreatorTest {
     lateinit var mapperCreator: MapperCreator
 
     @Test
-    fun `Generate mapping field string`() {
+    fun `Generate mapping to field string`() {
         // GIVEN
+        val suffix = "EntityMapper"
         val classFields: MutableMap<String, ClassField> = LinkedHashMap()
         classFields["propA"] = ClassField(ClassEnum.STRING)
         classFields["propB"] = ClassField(ClassEnum.STRING)
         classFields["propC"] = ClassField(ClassEnum.STRING)
+        classFields["class_d"] = ClassField("ClassD")
+        `when`(generateHelper.formatClassField("propA")).thenReturn("propA")
+        `when`(generateHelper.formatClassField("propB")).thenReturn("propB")
+        `when`(generateHelper.formatClassField("propC")).thenReturn("propC")
+        `when`(generateHelper.formatClassField("class_d")).thenReturn("classD")
+        `when`(generateHelper.formatClassField("class_d$suffix")).thenReturn("classDEntityMapper")
+        val mapperMethod = "mapToEntity"
 
         // WHEN
-        val actual = mapperCreator.generateMappingFieldString(classFields)
+        val actual = mapperCreator.generateMappingFieldString(classFields, suffix, mapperMethod)
 
         // THEN
         val expected = "propA = type.propA,\n" +
                 "propB = type.propB,\n" +
-                "propC = type.propC"
+                "propC = type.propC,\n" +
+                "classD = classDEntityMapper.mapToEntity(type.classD)"
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `Generate mapping from field string`() {
+        // GIVEN
+        val suffix = "EntityMapper"
+        val classFields: MutableMap<String, ClassField> = LinkedHashMap()
+        classFields["propA"] = ClassField(ClassEnum.STRING)
+        classFields["propB"] = ClassField(ClassEnum.STRING)
+        classFields["propC"] = ClassField(ClassEnum.STRING)
+        classFields["class_d"] = ClassField("ClassD")
+        `when`(generateHelper.formatClassField("propA")).thenReturn("propA")
+        `when`(generateHelper.formatClassField("propB")).thenReturn("propB")
+        `when`(generateHelper.formatClassField("propC")).thenReturn("propC")
+        `when`(generateHelper.formatClassField("class_d")).thenReturn("classD")
+        `when`(generateHelper.formatClassField("class_d$suffix")).thenReturn("classDEntityMapper")
+        val mapperMethod = "mapFromEntity"
+
+        // WHEN
+        val actual = mapperCreator.generateMappingFieldString(classFields, suffix, mapperMethod)
+
+        // THEN
+        val expected = "propA = type.propA,\n" +
+                "propB = type.propB,\n" +
+                "propC = type.propC,\n" +
+                "classD = classDEntityMapper.mapFromEntity(type.classD)"
         assertEquals(expected, actual)
     }
 
@@ -68,12 +102,11 @@ class MapperCreatorTest {
         // GIVEN
         val generationModel = GenerationModel.Builder().build()
         val projectModel = ProjectModel.Builder().build()
-        val mapperGeneratorModel = MapperGeneratorModel(fileNameSuffix = "", templateName = "")
+        val mapperGeneratorModel = MapperGeneratorModel(fileNameSuffix = "", templateName = "", mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity")
         val classItems = HashSet<ClassItem>()
-        `when`(roboPOJOGenerator.generate(generationModel)).thenReturn(classItems)
 
         // WHEN
-        mapperCreator.generateFiles(generationModel, projectModel, mapperGeneratorModel)
+//        mapperCreator.generateFiles(generationModel, projectModel, mapperGeneratorModel)
 
         // THEN
 

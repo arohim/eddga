@@ -20,7 +20,9 @@ class CacheMapperAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val mapperGeneratorModel = MapperGeneratorModel(
                 fileNameSuffix = "EntityMapper",
-                templateName = "CacheMapper"
+                templateName = "CacheMapper",
+                mapToMethodName = "mapFromCached",
+                mapFromMethodName = "mapToCached"
         )
 
         mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)

@@ -29,7 +29,8 @@ open class MapperCreator @Inject constructor() {
             val fileTemplateManager = fileTemplateWriterDelegate.getInstance(projectModel.project)
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
-            templateProperties["ENTITIES"] = generateMappingFieldString(classItem.classFields)
+            templateProperties["MAP_TO_ENTITIES"] = generateMappingFieldString(classItem.classFields, mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapToMethodName)
+            templateProperties["MAP_FROM_ENTITIES"] = generateMappingFieldString(classItem.classFields, mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapFromMethodName)
             templateProperties["INJECTORS"] = generateInjectors(classItem.classFields, mapperGeneratorModel.fileNameSuffix)
             val fileName = classItem.className + mapperGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
@@ -58,17 +59,26 @@ open class MapperCreator @Inject constructor() {
         return injectors
     }
 
-    fun generateMappingFieldString(classFields: MutableMap<String, ClassField>): String {
+    fun generateMappingFieldString(classFields: MutableMap<String, ClassField>, suffix: String, mapperMethod: String): String {
         var asserts = ""
         var counter = 0
         classFields.forEach {
-            val fileName = generateHelper.formatClassField(it.key)
-            asserts += "$fileName = type.$fileName"
+            val fieldName = generateHelper.formatClassField(it.key)
+
+            asserts += if (isClassField(it.value)) {
+                val mapperName = generateHelper.formatClassField("${it.key}$suffix")
+                "$fieldName = $mapperName.$mapperMethod(type.$fieldName)"
+            } else
+                "$fieldName = type.$fieldName"
             if (counter < classFields.size - 1) {
                 asserts += ",\n"
             }
             counter++
         }
         return asserts
+    }
+
+    private fun isClassField(value: ClassField): Boolean {
+        return value.className != null
     }
 }
