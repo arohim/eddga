@@ -44,7 +44,7 @@ open class MapperCreator @Inject constructor() {
 
     fun generateInjectors(classFields: Map<String, ClassField>, suffix: String): String {
         var injectors = ""
-        val classFieldClasses = classFields.filter { it.value.className != null }
+        val classFieldClasses = classFields.filter { isClassField(it.value) }
         var counter = classFieldClasses.size
         classFieldClasses.forEach {
             val fieldName = generateHelper.formatClassField("${it.key}$suffix")

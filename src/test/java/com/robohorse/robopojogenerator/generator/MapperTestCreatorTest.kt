@@ -13,6 +13,7 @@ import org.junit.Assert.*
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.LinkedHashMap
 
@@ -31,6 +32,9 @@ class MapperTestCreatorTest {
     @Mock
     lateinit var fileTemplateWriterDelegate: FileTemplateWriterDelegate
 
+    @Mock
+    lateinit var generateHelper: ClassGenerateHelper
+
     @InjectMocks
     lateinit var mapperTestCreator: MapperTestCreator
 
@@ -41,6 +45,10 @@ class MapperTestCreatorTest {
         classFields["propA"] = ClassField(ClassEnum.STRING)
         classFields["propB"] = ClassField(ClassEnum.STRING)
         classFields["propC"] = ClassField(ClassEnum.STRING)
+        Mockito.`when`(generateHelper.formatClassField("propA")).thenReturn("propA")
+        Mockito.`when`(generateHelper.formatClassField("propB")).thenReturn("propB")
+        Mockito.`when`(generateHelper.formatClassField("propC")).thenReturn("propC")
+
         val from = "cached"
         val to = "entity"
 
@@ -52,5 +60,14 @@ class MapperTestCreatorTest {
                 "assertEquals(cached.propB, entity.propB)\n" +
                 "assertEquals(cached.propC, entity.propC)"
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun generateProperties() {
+        // GIVEN
+
+        // WHEN
+
+        // THEN
     }
 }

@@ -5,7 +5,6 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.models.MapperGeneratorModel
 import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import javax.inject.Inject
@@ -41,6 +40,12 @@ open class MapperTestCreator @Inject constructor() {
         }
     }
 
+    fun generateProperties(classFields: Map<String, ClassField>): String {
+        val classItems = classFields.filter { isClassField(it.value) }
+
+        return ""
+    }
+
     fun generateAssertions(classFields: MutableMap<String, ClassField>, from: String, to: String): String {
         var asserts = ""
         var counter = 0
@@ -53,5 +58,9 @@ open class MapperTestCreator @Inject constructor() {
             counter++
         }
         return asserts
+    }
+
+    private fun isClassField(value: ClassField): Boolean {
+        return value.className != null
     }
 }

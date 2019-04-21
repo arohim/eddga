@@ -24,7 +24,7 @@ public interface ImportsTemplate {
     String GSON_IMPORT = "import com.google.gson.Gson;";
 
     interface GSON {
-        String[] IMPORTS = {GENERATED, SERIALIZED_NAME};
+        String[] IMPORTS = {SERIALIZED_NAME};
     }
 
     interface LOGAN_SQUARE {
@@ -43,7 +43,7 @@ public interface ImportsTemplate {
         String[] IMPORTS = {GENERATED, FAST_JSON_PROPERTY};
     }
 
-    interface MOSHI{
+    interface MOSHI {
         String[] IMPORTS = {GENERATED, MOSHI_PROPERTY};
     }
 }
