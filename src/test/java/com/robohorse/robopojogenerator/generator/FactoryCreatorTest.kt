@@ -39,7 +39,6 @@ class FactoryCreatorTest {
         `when`(generateHelper.formatClassField("available")).thenReturn("available")
         `when`(generateHelper.formatClassField("cost")).thenReturn("cost")
 
-        val classItems = mutableListOf(classItem)
         val factoryGeneratorModel = FactoryGeneratorModel("", "", true)
 
         // WHEN
@@ -97,11 +96,6 @@ class FactoryCreatorTest {
     @Test
     fun `mixed non and list methods`() {
         // GIVEN
-        val dataItemClass1 = ClassItem("DataItem")
-        dataItemClass1.addClassField("value", ClassField(ClassEnum.INTEGER).also { it.listFormat = NON_NULL_LIST_OF_ITEM })
-        val dataItemClass2 = ClassItem("DataItem2")
-        dataItemClass2.addClassField("value", ClassField(ClassEnum.INTEGER).also { it.listFormat = NON_NULL_LIST_OF_ITEM })
-
         val className = "ClassName"
         val classItem = ClassItem(className)
         classItem.addClassImport(ImportsTemplate.LIST)
@@ -116,8 +110,9 @@ class FactoryCreatorTest {
         classItem.addClassField("data", dataItemField)
         classItem.addClassField("data2", dataItemField2)
 
-        val classItems = mutableListOf(classItem, dataItemClass1, dataItemClass2)
         val factoryGeneratorModel = FactoryGeneratorModel("", "", true)
+        `when`(generateHelper.formatClassField("data")).thenReturn("data")
+        `when`(generateHelper.formatClassField("data2")).thenReturn("data2")
 
         // WHEN
         val actual = factory.generateMethods(classItem, factoryGeneratorModel)
@@ -136,20 +131,7 @@ class FactoryCreatorTest {
                 "\t\tcontents.add(makeDataItemModel())\n" +
                 "\t}\n" +
                 "\treturn contents\n" +
-                "}\n" +
-                "\n" +
-                "private fun makeDataItemModel(): DataItemModel {\n" +
-                "\treturn DataItemModel(\n" +
-                "\t\tvalue = randomInt()\n" +
-                "\t)\n" +
-                "}\n" +
-                "\n" +
-                "fun makeDataItem2Model(): DataItem2Model {\n" +
-                "\treturn DataItem2Model(\n" +
-                "\t\tvalue = randomInt()\n" +
-                "\t)\n" +
-                "}\n" +
-                "\n"
+                "}\n"
 
         assertEquals(expected, actual)
     }
