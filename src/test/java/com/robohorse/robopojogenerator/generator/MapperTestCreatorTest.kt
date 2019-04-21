@@ -2,7 +2,7 @@ package com.robohorse.robopojogenerator.generator
 
 import com.robohorse.robopojogenerator.delegates.FileTemplateWriterDelegate
 import com.robohorse.robopojogenerator.generator.common.ClassField
-import com.robohorse.robopojogenerator.generator.common.MapperCreator
+import com.robohorse.robopojogenerator.generator.common.ClassItem
 import com.robohorse.robopojogenerator.generator.common.MapperTestCreator
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
@@ -81,6 +81,54 @@ class MapperTestCreatorTest {
         // THEN
         val expected = "private lateinit var classAEntityMapper: ClassAEntityMapper\n\n" +
                 "private lateinit var classBEntityMapper: ClassBEntityMapper\n\n"
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun generatePropertyParameters() {
+        // GIVEN
+        val classFields: MutableMap<String, ClassField> = LinkedHashMap()
+        classFields["ClassA"] = ClassField("ClassA")
+        classFields["ClassB"] = ClassField("ClassB")
+        classFields["propC"] = ClassField(ClassEnum.STRING)
+        Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
+        Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        val suffix = "EntityMapper"
+
+        // WHEN
+        val actual = mapperTestCreator.generatePropertyParameters(classFields, suffix)
+
+        // THEN
+        val expected = "classAEntityMapper, classBEntityMapper"
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun generatePropertiesInitialization() {
+        // GIVEN
+        val classFields: MutableMap<String, ClassField> = LinkedHashMap()
+        classFields["ClassA"] = ClassField("ClassA")
+        classFields["ClassB"] = ClassField("ClassB")
+        classFields["propC"] = ClassField(ClassEnum.STRING)
+        val classItem = ClassItem("ClassName")
+        classFields.forEach { field ->
+            classItem.addClassField(field.key, field.value)
+        }
+
+        Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
+        Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        Mockito.`when`(generateHelper.formatClassName("ClassA")).thenReturn("ClassA")
+        Mockito.`when`(generateHelper.formatClassName("ClassB")).thenReturn("ClassB")
+        val suffix = "EntityMapper"
+
+        // WHEN
+        val actual = mapperTestCreator.generatePropertiesInitialization(classItem, suffix)
+
+        // THEN
+        val expected = "classAEntityMapper = ClassAEntityMapper()\n" +
+                "classBEntityMapper = ClassBEntityMapper()"
 
         assertEquals(expected, actual)
     }

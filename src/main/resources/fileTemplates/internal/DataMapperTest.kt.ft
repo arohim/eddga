@@ -16,7 +16,8 @@ class ${CLASS_NAME}MapperTest {
 
     @Before
     fun setUp() {
-        mapper = ${CLASS_NAME}Mapper()
+        ${PROPERTIES_INITIALIZATION}
+        mapper = ${CLASS_NAME}Mapper(${PROPERTY_PARAMETERS})
     }
 
     @Test

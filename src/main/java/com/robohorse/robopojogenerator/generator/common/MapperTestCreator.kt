@@ -31,6 +31,8 @@ open class MapperTestCreator @Inject constructor() {
             templateProperties["CLASS_NAME"] = classItem.className
             templateProperties["ASSERTIONS"] = generateAssertions(classItem.classFields, mapperTestGeneratorModel.from, mapperTestGeneratorModel.to)
             templateProperties["PROPERTIES"] = generateProperties(classItem.classFields, mapperTestGeneratorModel.fileNameSuffix)
+            templateProperties["PROPERTY_PARAMETERS"] = generatePropertyParameters(classItem.classFields, mapperTestGeneratorModel.fileNameSuffix)
+            templateProperties["PROPERTIES_INITIALIZATION"] = generatePropertiesInitialization(classItem, mapperTestGeneratorModel.fileNameSuffix)
             val fileName = classItem.className + mapperTestGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
                     projectModel.directory,
@@ -68,5 +70,26 @@ open class MapperTestCreator @Inject constructor() {
 
     private fun isClassField(value: ClassField): Boolean {
         return value.className != null
+    }
+
+    fun generatePropertyParameters(classFields: MutableMap<String, ClassField>, suffix: String): String {
+        val parameters = mutableListOf<String>()
+        val classItems = classFields.filter { isClassField(it.value) }
+        classItems.forEach { classItem ->
+            val fieldName = generateHelper.formatClassField(classItem.key) + suffix
+            parameters.add(fieldName)
+        }
+        return parameters.joinToString(", ")
+    }
+
+    fun generatePropertiesInitialization(classItem: ClassItem, suffix: String): String {
+        val initialization = mutableListOf<String>()
+        val fields = classItem.classFields.filter { isClassField(it.value) }
+        fields.forEach { field ->
+            val fieldName = generateHelper.formatClassField(field.key) + suffix
+            val className = generateHelper.formatClassName(field.key) + suffix
+            initialization.add("$fieldName = $className()")
+        }
+        return initialization.joinToString("\n")
     }
 }
