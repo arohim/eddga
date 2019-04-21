@@ -30,9 +30,10 @@ open class FactoryCreator @Inject constructor() {
         val fileTemplateManager = fileTemplateWriterDelegate.getInstance(projectModel.project)
         val templateProperties = fileTemplateManager.defaultProperties
         classItemSet.forEach { classItem: ClassItem ->
-            templateProperties["CLASS_NAME"] = generationModel.rootClassName
+            val className = classItem.className
+            templateProperties["CLASS_NAME"] = className
             templateProperties["METHODS"] = generateMethods(classItem, factoryGeneratorModel)
-            val fileName = generationModel.rootClassName + factoryGeneratorModel.fileNameSuffix
+            val fileName = className + factoryGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
                     projectModel.directory,
                     fileName,

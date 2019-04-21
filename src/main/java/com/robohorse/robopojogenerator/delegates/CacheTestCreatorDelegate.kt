@@ -22,7 +22,7 @@ open class CacheTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate(
     }
 
     private fun generateFactory(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.cacheTestPath ?: throw PathException()
+        val path = coreGeneratorModel.cacheTestPath + CoreGeneratorActionController.FACTORY_PATH
         val regenProjectModel = regenProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()

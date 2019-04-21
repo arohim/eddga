@@ -22,7 +22,7 @@ open class DataTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate()
     }
 
     private fun generateFactory(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.dataTestPath ?: throw PathException()
+        val path = coreGeneratorModel.dataTestPath + CoreGeneratorActionController.FACTORY_PATH
         val regenProjectModel = regenProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()

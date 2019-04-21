@@ -22,7 +22,7 @@ open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate
     }
 
     private fun generateFactory(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.remoteTestPath ?: throw PathException()
+        val path = coreGeneratorModel.remoteTestPath + CoreGeneratorActionController.FACTORY_PATH
         val regenProjectModel = regenProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()
