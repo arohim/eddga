@@ -2,7 +2,6 @@
 
 import com.app.kaidee.domain.base.executor.PostExecutionThread
 import com.app.kaidee.domain.base.executor.ThreadExecutor
-import com.app.kaidee.domain.repository.XXXRepository
 import com.app.kaidee.domain.shared.model.Header
 import com.app.kaidee.domain.shared.model.Request
 import com.nhaarman.mockito_kotlin.any
@@ -28,7 +27,7 @@ class Get${CLASS_NAME}Test {
     lateinit var mockPostExecutionThread: PostExecutionThread
 
     @Mock
-    lateinit var repository: XXXRepository
+    lateinit var repository: ${CLASS_NAME}Repository
 
     @Before
     fun setUp() {
@@ -45,7 +44,7 @@ class Get${CLASS_NAME}Test {
         useCase.buildUseCaseObservable(request)
 
         // THEN
-        verify(chameleonRepository).getList(request.headers)
+        verify(repository).getList(request.headers)
     }
 
     @Test
@@ -53,7 +52,7 @@ class Get${CLASS_NAME}Test {
         // GIVEN
         val headers = listOf<Header>()
         val request = Request<Void?>(headers = headers)
-        stubChameleonRepositoryGetSuggest(Single.just(${CLASS_NAME}Factory.make${CLASS_NAME}(2)))
+        stubRepositoryGetList(Single.just(make${CLASS_NAME}(2)))
 
         // WHEN
         val testObserver = useCase.buildUseCaseObservable(request).test()
@@ -67,7 +66,7 @@ class Get${CLASS_NAME}Test {
         // GIVEN
         val headers = listOf<Header>()
         val request = Request<Void?>(headers = headers)
-        val data = ${CLASS_NAME}Factory.make${CLASS_NAME}(2)
+        val data = make${CLASS_NAME}(2)
         stubRepositoryGetList(Single.just(data))
 
         // WHEN

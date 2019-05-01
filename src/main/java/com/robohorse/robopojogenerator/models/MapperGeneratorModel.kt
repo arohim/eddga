@@ -4,5 +4,6 @@ data class MapperGeneratorModel(
         val fileNameSuffix: String,
         val templateName: String,
         val mapToMethodName: String,
-        val mapFromMethodName: String
+        val mapFromMethodName: String,
+        val isNullable: Boolean
 )

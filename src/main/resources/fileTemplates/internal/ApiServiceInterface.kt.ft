@@ -4,7 +4,7 @@ import com.kaidee.rogue2.header.HeaderModel
 import io.reactivex.Single
 
 #parse("File Header.java")
-interface ChameleonService : BaseService {
+interface ${CLASS_NAME}Service : BaseService {
 
     fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}ResponseModel>
 

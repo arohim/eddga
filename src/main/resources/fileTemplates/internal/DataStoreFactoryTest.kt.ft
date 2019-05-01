@@ -14,10 +14,13 @@ class ${CLASS_NAME}DataStoreFactoryTest {
 
     lateinit var remoteDataStore: ${CLASS_NAME}RemoteDataStore
 
+    lateinit var cacheDataStore: ${CLASS_NAME}CacheDataStore
+
     @Before
     fun setup() {
         remoteDataStore = mock()
-        dataStore = ${CLASS_NAME}DataStoreFactory(remoteDataStore)
+        cacheDataStore = mock()
+        dataStore = ${CLASS_NAME}DataStoreFactory(remoteDataStore, cacheDataStore)
     }
 
     @Test

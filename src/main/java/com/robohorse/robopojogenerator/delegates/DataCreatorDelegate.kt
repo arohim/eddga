@@ -31,8 +31,67 @@ open class DataCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
         generateCacheDataStore(projectModel, coreGeneratorModel)
         generateDataStoreFactory(projectModel, coreGeneratorModel)
         generateRemoteDataStore(projectModel, coreGeneratorModel)
+        generateDataStoreInterface(projectModel, coreGeneratorModel)
+        generateRemoteInterface(projectModel, coreGeneratorModel)
+        generateCacheInterface(projectModel, coreGeneratorModel)
     }
 
+    private fun generateDataStoreInterface(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.REPOSITORY_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "DataStoreInterface"
+        val fileNameSuffix = "DataStore"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
+    }
+
+    private fun generateRemoteInterface(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.REPOSITORY_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "RemoteInterface"
+        val fileNameSuffix = "Remote"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
+    }
+
+    private fun generateCacheInterface(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.REPOSITORY_PATH
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "CacheInterface"
+        val fileNameSuffix = "Cache"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
+    }
 
     private fun generateRemoteDataStore(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         val path = coreGeneratorModel.dataPath + CoreGeneratorActionController.SOURCE_PATH
@@ -110,7 +169,6 @@ open class DataCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
                 templateName, templateProperties)
     }
 
-
     private fun generateMapper(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         val path = coreGeneratorModel.dataPath + MAPPER_PATH
         val regenProjectModel = regenProjectModel(projectModel, path)
@@ -122,7 +180,8 @@ open class DataCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
                 fileNameSuffix = "Mapper",
                 templateName = "DataMapper",
                 mapToMethodName = "mapToEntity",
-                mapFromMethodName = "mapFromEntity"
+                mapFromMethodName = "mapFromEntity",
+                isNullable = false
         )
 
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, mapperGeneratorModel)

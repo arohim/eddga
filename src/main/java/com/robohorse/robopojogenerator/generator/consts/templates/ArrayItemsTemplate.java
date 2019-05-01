@@ -5,7 +5,7 @@ package com.robohorse.robopojogenerator.generator.consts.templates;
  */
 public interface ArrayItemsTemplate {
 
-    String ITEM_NAME = "%sItem";
+    String ITEM_NAME = "%s";
 
     String NON_NULL_LIST_OF_ITEM = "List<%s>";
 

@@ -7,13 +7,16 @@ import com.robohorse.robopojogenerator.generator.common.MapperTestCreator
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
+import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.internal.Classes
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.LinkedHashMap
 
@@ -46,21 +49,65 @@ class MapperTestCreatorTest {
         classFields["propB"] = ClassField(ClassEnum.STRING)
         classFields["propC"] = ClassField(ClassEnum.STRING)
         classFields["ClassD"] = ClassField("ClassD")
-        Mockito.`when`(generateHelper.formatClassField("propA")).thenReturn("propA")
-        Mockito.`when`(generateHelper.formatClassField("propB")).thenReturn("propB")
-        Mockito.`when`(generateHelper.formatClassField("propC")).thenReturn("propC")
-        Mockito.`when`(generateHelper.formatClassField("ClassD")).thenReturn("classD")
+        `when`(generateHelper.formatClassField("propA")).thenReturn("propA")
+        `when`(generateHelper.formatClassField("propB")).thenReturn("propB")
+        `when`(generateHelper.formatClassField("propC")).thenReturn("propC")
+        `when`(generateHelper.formatClassField("ClassD")).thenReturn("classD")
 
         val from = "cached"
         val to = "entity"
+        val mapperTestGeneratorModel = MapperTestGeneratorModel(
+                from = from,
+                to = to,
+                fileNameSuffix = "EntityMapperTest",
+                templateName = "FromRemoteMapperTest",
+                classNameSuffix = "EntityMapper",
+                isNullable = false
+        )
 
         // WHEN
-        val actual = mapperTestCreator.generateAssertions(classFields, from, to)
+        val actual = mapperTestCreator.generateAssertions(classFields, mapperTestGeneratorModel)
 
         // THEN
         val expected = "assertEquals(cached.propA, entity.propA)\n" +
                 "assertEquals(cached.propB, entity.propB)\n" +
                 "assertEquals(cached.propC, entity.propC)\n" +
+                "assertNotNull(cached.classD)\n" +
+                "assertNotNull(entity.classD)"
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun generateNullAbleAssertions() {
+        // GIVEN
+        val classFields: MutableMap<String, ClassField> = LinkedHashMap()
+        classFields["propA"] = ClassField(ClassEnum.STRING)
+        classFields["propB"] = ClassField(ClassEnum.STRING)
+        classFields["propC"] = ClassField(ClassEnum.STRING)
+        classFields["ClassD"] = ClassField("ClassD")
+        `when`(generateHelper.formatClassField("propA")).thenReturn("propA")
+        `when`(generateHelper.formatClassField("propB")).thenReturn("propB")
+        `when`(generateHelper.formatClassField("propC")).thenReturn("propC")
+        `when`(generateHelper.formatClassField("ClassD")).thenReturn("classD")
+
+        val from = "cached"
+        val to = "entity"
+        val mapperTestGeneratorModel = MapperTestGeneratorModel(
+                from = from,
+                to = to,
+                fileNameSuffix = "EntityMapperTest",
+                templateName = "FromRemoteMapperTest",
+                classNameSuffix = "EntityMapper",
+                isNullable = true
+        )
+
+        // WHEN
+        val actual = mapperTestCreator.generateAssertions(classFields, mapperTestGeneratorModel)
+
+        // THEN
+        val expected = "assertEquals(cached?.propA, entity.propA)\n" +
+                "assertEquals(cached?.propB, entity.propB)\n" +
+                "assertEquals(cached?.propC, entity.propC)\n" +
                 "assertNotNull(cached.classD)\n" +
                 "assertNotNull(entity.classD)"
         assertEquals(expected, actual)
@@ -73,8 +120,8 @@ class MapperTestCreatorTest {
         classFields["ClassA"] = ClassField("ClassA")
         classFields["ClassB"] = ClassField("ClassB")
         classFields["propC"] = ClassField(ClassEnum.STRING)
-        Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
-        Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        `when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
+        `when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
         val suffix = "EntityMapper"
 
         // WHEN
@@ -94,15 +141,18 @@ class MapperTestCreatorTest {
         classFields["ClassA"] = ClassField("ClassA")
         classFields["ClassB"] = ClassField("ClassB")
         classFields["propC"] = ClassField(ClassEnum.STRING)
-        Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
-        Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        classFields["propD"] = ClassField()
+        classFields["propD"]?.classField = ClassField(ClassEnum.OBJECT)
+        `when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
+        `when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        `when`(generateHelper.formatClassField("propD")).thenReturn("propD")
         val suffix = "EntityMapper"
 
         // WHEN
         val actual = mapperTestCreator.generatePropertyParameters(classFields, suffix)
 
         // THEN
-        val expected = "classAEntityMapper, classBEntityMapper"
+        val expected = "classAEntityMapper, classBEntityMapper, propDEntityMapper"
 
         assertEquals(expected, actual)
     }
@@ -114,13 +164,16 @@ class MapperTestCreatorTest {
         classFields["ClassA"] = ClassField("ClassA")
         classFields["ClassB"] = ClassField("ClassB")
         classFields["propC"] = ClassField(ClassEnum.STRING)
+        classFields["propD"] = ClassField()
+        classFields["propD"]?.classField = ClassField(ClassEnum.OBJECT)
         val classItem = ClassItem("ClassName")
         classFields.forEach { field ->
             classItem.addClassField(field.key, field.value)
         }
 
-        Mockito.`when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
-        Mockito.`when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        `when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
+        `when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
+        `when`(generateHelper.formatClassField("propD")).thenReturn("propD")
         val suffix = "EntityMapper"
 
         // WHEN
@@ -128,7 +181,8 @@ class MapperTestCreatorTest {
 
         // THEN
         val expected = "classAEntityMapper = ClassAEntityMapper()\n" +
-                "classBEntityMapper = ClassBEntityMapper()"
+                "classBEntityMapper = ClassBEntityMapper()\n" +
+                "propDEntityMapper = propDEntityMapper()"
 
         assertEquals(expected, actual)
     }

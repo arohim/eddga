@@ -55,7 +55,8 @@ open class RemoteCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
                 fileNameSuffix = "EntityMapper",
                 templateName = "FromRemoteMapper",
                 mapToMethodName = "mapToRemote",
-                mapFromMethodName = "mapFromRemote"
+                mapFromMethodName = "mapFromRemote",
+                isNullable = true
         )
 
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, fromMapperGeneratorModel)
@@ -64,7 +65,8 @@ open class RemoteCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
                 fileNameSuffix = "ModelMapper",
                 templateName = "ToRemoteMapper",
                 mapToMethodName = "mapToRemote",
-                mapFromMethodName = "mapFromRemote"
+                mapFromMethodName = "mapFromRemote",
+                isNullable = false
         )
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, toMapperGeneratorModel)
     }

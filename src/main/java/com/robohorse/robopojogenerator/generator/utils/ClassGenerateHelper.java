@@ -17,7 +17,7 @@ import javax.inject.Inject;
  * Created by vadim on 25.09.16.
  */
 public class ClassGenerateHelper {
-    
+
     @Inject
     public ClassGenerateHelper() {
     }

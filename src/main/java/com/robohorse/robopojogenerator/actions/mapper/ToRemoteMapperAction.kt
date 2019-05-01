@@ -22,7 +22,8 @@ class ToRemoteMapperAction : AnAction() {
                 fileNameSuffix = "ModelMapper",
                 templateName = "ToRemoteMapper",
                 mapToMethodName = "mapToRemote",
-                mapFromMethodName = ""
+                mapFromMethodName = "",
+                isNullable = false
         )
 
         mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)
