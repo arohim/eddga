@@ -1,0 +1,60 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
+
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Single
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+
+@RunWith(JUnit4::class)
+#parse("File Header.java")
+class ${CLASS_NAME}RemoteDataStoreTest {
+
+    lateinit var remoteDataStore: ${CLASS_NAME}RemoteDataStore
+
+    lateinit var remote: ${CLASS_NAME}Remote
+
+    @Before
+    fun setup() {
+        remote = mock()
+        remoteDataStore = ${CLASS_NAME}RemoteDataStore(remote)
+    }
+
+    @Test
+    fun `Save ${CLASS_NAME}`() {
+        // GIVEN
+        val requestEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}RequestEntity(10)
+        val responseEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(10)
+        stub${CLASS_NAME}RemoteDataStore${CLASS_NAME}(Single.just(responseEntity), requestEntity)
+
+        // WHEN
+        val testObserver = remoteDataStore.save{CLASS_NAME}(listOf(), requestEntity).test()
+
+        // THEN
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun `Get ${CLASS_NAME}`() {
+        // GIVEN
+        val requestEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(10)
+        stub${CLASS_NAME}RemoteDataStoreGet${CLASS_NAME}(Single.just(requestEntity))
+
+        // WHEN
+        val testObserver = remoteDataStore.get${CLASS_NAME}(listOf()).test()
+
+        // THEN
+        testObserver.assertComplete()
+    }
+
+    private fun stub${CLASS_NAME}RemoteDataStoreCreateCriteria(single: Single<${CLASS_NAME}ResponseEntity>,
+        requestEntity: ${CLASS_NAME}RequestEntity) {
+        whenever(remoteDataStore.save${CLASS_NAME}(listOf(), requestEntity)).thenReturn(single)
+    }
+
+    private fun stub${CLASS_NAME}RemoteDataStoreGet{CLASS_NAME}(single: Single<${CLASS_NAME}ResponseEntity>) {
+        whenever(remoteDataStore.get${CLASS_NAME}(listOf())).thenReturn(single)
+    }
+}

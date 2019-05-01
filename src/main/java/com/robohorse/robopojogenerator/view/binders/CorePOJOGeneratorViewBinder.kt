@@ -24,6 +24,7 @@ open class CorePOJOGeneratorViewBinder @Inject constructor() {
             val component = ProjectConfigurationComponent.getInstance(it)
             if (component.rootClassNameTextField?.isNotEmpty() == true) {
                 generatorVew.classNameTextField.text = component.rootClassNameTextField
+                generatorVew.textArea.text = component.json
             }
         }
 

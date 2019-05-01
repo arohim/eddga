@@ -91,6 +91,7 @@ class MultiPOJOGenerateActionListener @Inject constructor(private val generatorV
             component.cacheTestCheckBox = generatorView.genCacheTestCheckBox.isSelected
             component.dataTestCheckBox = generatorView.genDataTestCheckBox.isSelected
             component.remoteTestCheckBox = generatorView.genRemoteTestCheckBox.isSelected
+            component.json = generatorView.textArea.text
         }
     }
 }

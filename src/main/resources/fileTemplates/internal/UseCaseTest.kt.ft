@@ -1,0 +1,83 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
+
+import com.app.kaidee.domain.base.executor.PostExecutionThread
+import com.app.kaidee.domain.base.executor.ThreadExecutor
+import com.app.kaidee.domain.repository.XXXRepository
+import com.app.kaidee.domain.shared.model.Header
+import com.app.kaidee.domain.shared.model.Request
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Single
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
+
+@RunWith(MockitoJUnitRunner::class)
+#parse("File Header.java")
+class Get${CLASS_NAME}Test {
+
+    lateinit var useCase: ${CLASS_NAME}
+
+    @Mock
+    lateinit var mockThreadExecutor: ThreadExecutor
+
+    @Mock
+    lateinit var mockPostExecutionThread: PostExecutionThread
+
+    @Mock
+    lateinit var repository: XXXRepository
+
+    @Before
+    fun setUp() {
+        useCase = ${CLASS_NAME}(repository, mockThreadExecutor, mockPostExecutionThread)
+    }
+
+    @Test
+    fun buildUseCaseObservableCallsRepository() {
+        // GIVEN
+        val headers = listOf<Header>()
+        val request = Request<Void?>(headers = headers)
+
+        // WHEN
+        useCase.buildUseCaseObservable(request)
+
+        // THEN
+        verify(chameleonRepository).getList(request.headers)
+    }
+
+    @Test
+    fun buildUseCaseObservableCompletes() {
+        // GIVEN
+        val headers = listOf<Header>()
+        val request = Request<Void?>(headers = headers)
+        stubChameleonRepositoryGetSuggest(Single.just(${CLASS_NAME}Factory.make${CLASS_NAME}(2)))
+
+        // WHEN
+        val testObserver = useCase.buildUseCaseObservable(request).test()
+
+        // THEN
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun buildUseCaseObservableReturnsData() {
+        // GIVEN
+        val headers = listOf<Header>()
+        val request = Request<Void?>(headers = headers)
+        val data = ${CLASS_NAME}Factory.make${CLASS_NAME}(2)
+        stubRepositoryGetList(Single.just(data))
+
+        // WHEN
+        val testObserver = this.useCase.buildUseCaseObservable(request).test()
+
+        // THEN
+        testObserver.assertValue(data)
+    }
+
+    private fun stubRepositoryGetList(single: Single<${CLASS_NAME}>) {
+        whenever(repository.getList(any())).thenReturn(single)
+    }
+}

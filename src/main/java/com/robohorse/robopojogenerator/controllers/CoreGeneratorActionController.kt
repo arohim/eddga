@@ -51,6 +51,9 @@ open class CoreGeneratorActionController @Inject constructor() {
     @Inject
     lateinit var dataCreatorTestDelegate: DataTestCreatorDelegate
 
+    @Inject
+    lateinit var domainTestCreatorDelegate: DomainTestCreatorDelegate
+
     fun onActionHandled(event: AnActionEvent) {
         try {
             proceed(event)
@@ -91,9 +94,12 @@ open class CoreGeneratorActionController @Inject constructor() {
             cacheCreatorTestDelegate.runGenerationTask(projectModel, coreGeneratorModel)
         if (coreGeneratorModel.isGenerateDataTest)
             dataCreatorTestDelegate.runGenerationTask(projectModel, coreGeneratorModel)
+        if (coreGeneratorModel.isGenerateDomainTest)
+            domainTestCreatorDelegate.runGenerationTask(projectModel, coreGeneratorModel)
     }
 
     companion object {
+        const val SOURCE_PATH = "/source"
         const val FACTORY_PATH = "/factory"
         const val MODEL_PATH = "/model"
         const val MAPPER_PATH = "/mapper"

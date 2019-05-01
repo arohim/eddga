@@ -24,7 +24,9 @@ class ProjectConfigurationComponent(project: Project? = null) :
     var dataTestPath: String? = null
     var domainTestPath: String? = null
     var remoteTestPath: String? = null
+
     var rootClassNameTextField: String? = null
+    var json: String? = null
 
     var cacheCheckBox: Boolean = false
     var dataCheckBox: Boolean = false

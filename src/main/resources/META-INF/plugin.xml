@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>1.9.0</version>
+    <version>2.2.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -19,15 +19,16 @@
           - Remote/Cache/Data/Domain Factory from JSON
           - View/Presentation/Domain/Cache/Data/remote template
           - Multi POJOs, Mappers and its Unit testing
+          - Auto generate implement and unit testing classes for domain/data/remote/cache and rogue2
 
           This project is on top of https://github.com/robohorse/RoboPOJOGenerator <br>
           Thank you to Vadim Shchenev to make me easier to extend.
     ]]></description>
 
     <change-notes><![CDATA[
-    Added
-        Improved<br>
-        - added injectors in mappers and its unit tests<br>
+    Added <br>
+        - Fix creating factory classes failure<br>
+        - Save the last json for next using<br>
     ]]>
     </change-notes>
 
@@ -83,31 +84,31 @@
         <action id="FromRemoteMapperAction"
                 class="com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperAction"
                 icon="/icons/pojo.png"
-                text="From remote Mapper"
-                description="From remote Mapper">
+                text="From Remote Mapper"
+                description="From Remote Mapper">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
         <action id="FromRemoteMapperUnitTestAction"
                 class="com.robohorse.robopojogenerator.actions.mapper.FromRemoteMapperUnitTestAction"
                 icon="/icons/pojo.png"
-                text="From remote Mapper Unit Test"
-                description="From remote Mapper Unit Test">
+                text="From Remote Mapper Unit Test"
+                description="From Remote Mapper Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
         <action id="ToRemoteMapperAction" class="com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperAction"
                 icon="/icons/pojo.png"
-                text="To remote Mapper"
-                description="To remote Mapper">
+                text="To Remote Mapper"
+                description="To Remote Mapper">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
         <action id="ToRemoteMapperUnitTestAction"
                 class="com.robohorse.robopojogenerator.actions.mapper.ToRemoteMapperUnitTestAction"
                 icon="/icons/pojo.png"
-                text="To remote Mapper Unit Test"
-                description="To remote Mapper Unit Test">
+                text="To Remote Mapper Unit Test"
+                description="To Remote Mapper Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
@@ -121,8 +122,15 @@
         <action id="CacheMapperUnitTestAction"
                 class="com.robohorse.robopojogenerator.actions.mapper.CacheMapperUnitTestAction"
                 icon="/icons/pojo.png"
-                text="Cache Mapper Unit Test"
+                text="Cache mapper unit test"
                 description="Cache Mapper Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="CacheDataStoreTestAction"
+                class="com.robohorse.robopojogenerator.actions.data.CacheDataStoreTestAction"
+                icon="/icons/pojo.png"
+                text="Cache Data Store Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
@@ -138,6 +146,27 @@
                 icon="/icons/pojo.png"
                 text="Data Mapper Unit Test"
                 description="Data Mapper Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataRepositoryTestAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataRepositoryTestAction"
+                icon="/icons/pojo.png"
+                text="Data Repository Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DataStoreTestAction"
+                class="com.robohorse.robopojogenerator.actions.data.DataStoreFactoryTestAction"
+                icon="/icons/pojo.png"
+                text="Data Store Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="RemoteStoreTestAction"
+                class="com.robohorse.robopojogenerator.actions.data.RemoteStoreTestAction"
+                icon="/icons/pojo.png"
+                text="Remote Store Unit Test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
@@ -174,7 +203,7 @@
         </action>
 
         <action id="ApiGateWayAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiGateWayAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiGateWayAction"
                 icon="/icons/pojo.png"
                 text="Api Gateway"
                 description="Api Gateway">
@@ -182,7 +211,7 @@
         </action>
 
         <action id="ApiServiceInterfaceAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiServiceInterfaceAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiServiceInterfaceAction"
                 icon="/icons/pojo.png"
                 text="Api Service Interface"
                 description="Api Service Interface">
@@ -190,7 +219,7 @@
         </action>
 
         <action id="ApiServiceImplAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiServiceImplAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiServiceImplAction"
                 icon="/icons/pojo.png"
                 text="Api Service Impl"
                 description="Api Service Impl">
@@ -198,7 +227,7 @@
         </action>
 
         <action id="ApiRemoteImplAction"
-                class="com.robohorse.robopojogenerator.actions.api.ApiRemoteImplAction"
+                class="com.robohorse.robopojogenerator.actions.rogue2.ApiRemoteImplAction"
                 icon="/icons/pojo.png"
                 text="Api Remote Impl"
                 description="Api Remote Impl">
@@ -254,6 +283,14 @@
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
+
+        <action id="RemoteImplTestAction"
+                class="com.robohorse.robopojogenerator.actions.remote.RemoteImplTestAction"
+                icon="/icons/pojo.png"
+                text="Remote Impl Unit Test">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
         <action id="DataStoreInterfaceAction"
                 class="com.robohorse.robopojogenerator.actions.data.DataStoreInterfaceAction"
                 icon="/icons/pojo.png"
@@ -264,7 +301,14 @@
         <action id="UseCaseAction"
                 class="com.robohorse.robopojogenerator.actions.domain.UseCaseAction"
                 icon="/icons/pojo.png"
-                text="Use case">
+                text="Use Case">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="UseCaseTestAction"
+                class="com.robohorse.robopojogenerator.actions.domain.UseCaseTestAction"
+                icon="/icons/pojo.png"
+                text="Use Case Unit test">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
@@ -299,7 +343,7 @@
         <action id="DaggerModuleAction"
                 class="com.robohorse.robopojogenerator.actions.presentation.DaggerModuleAction"
                 icon="/icons/pojo.png"
-                text="Dagger module">
+                text="Dagger Module">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 
@@ -328,7 +372,7 @@
                     class="com.robohorse.robopojogenerator.actions.pojo.CoreGeneratorAction"
                     icon="/icons/pojo.png"
                     text="New core"
-                    description="Generate remote, rogue, cache, data and domain">
+                    description="Generate Remote, rogue, cache, Data and domain">
                 <add-to-group group-id="NewGroup" anchor="last"/>
             </action>
         </group>

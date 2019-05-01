@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.actions.api
+package com.robohorse.robopojogenerator.actions.data
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import javax.inject.Inject
 
-class ApiServiceImplAction : AnAction() {
+class DataRepositoryTestAction : AnAction() {
 
     @Inject
     lateinit var controller: ClassNameTemplateActionController
@@ -19,9 +19,9 @@ class ApiServiceImplAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
-                dialogTitle = "Api Service Impl",
-                templateName = "ApiServiceImpl",
-                fileNameSuffix = "ServiceImpl"
+                dialogTitle = "Data Repository Unit Test",
+                templateName = "DataRepositoryTest",
+                fileNameSuffix = "DataRepositoryTest"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }

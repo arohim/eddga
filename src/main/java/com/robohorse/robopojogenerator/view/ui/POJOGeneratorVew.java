@@ -40,7 +40,7 @@ public class POJOGeneratorVew {
     }
 
     private void createUIComponents() {
-        textArea = new RSyntaxTextArea();
+        textArea = new RSyntaxTextArea(20, 20);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JSON);
         textArea.setCodeFoldingEnabled(true);
         scrollView = new JScrollPane(textArea);

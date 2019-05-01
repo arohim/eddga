@@ -5,24 +5,24 @@ import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.models.*
 import javax.inject.Inject
 
-open class CacheTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
+open class DomainTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
 
     @Inject
     lateinit var pOJOGenerationDelegate: POJOGenerationDelegate
 
     @Inject
-    lateinit var mapperTestGeneratorDelegate: MapperTestGeneratorDelegate
+    lateinit var fileTemplateWriterDelegate: FileTemplateWriterDelegate
 
     @Inject
     lateinit var factoryGenerationDelegate: FactoryGeneratorDelegate
 
     fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        generateMapperTest(projectModel, coreGeneratorModel)
+        generateUseCaseTest(projectModel, coreGeneratorModel)
         generateFactory(projectModel, coreGeneratorModel)
     }
 
     private fun generateFactory(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.cacheTestPath + CoreGeneratorActionController.FACTORY_PATH
+        val path = coreGeneratorModel.domainTestPath + CoreGeneratorActionController.FACTORY_PATH
         val regenProjectModel = regenProjectModel(projectModel, path)
 
         val generationModel = GenerationModel.Builder()
@@ -32,34 +32,33 @@ open class CacheTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate(
 
         val factoryGeneratorModel = FactoryGeneratorModel(
                 fileNameSuffix = "Factory",
-                templateName = "CacheFactory",
+                templateName = "DomainFactory",
                 remote = false,
-                cache = true,
-                data = true,
-                domain = false
+                cache = false,
+                data = false,
+                domain = true
         )
 
         factoryGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, factoryGeneratorModel)
     }
 
-    private fun generateMapperTest(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
-        val path = coreGeneratorModel.cacheTestPath + CoreGeneratorActionController.MAPPER_PATH
+    private fun generateUseCaseTest(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.domainTestPath ?: throw PathException()
         val regenProjectModel = regenProjectModel(projectModel, path)
 
-        val generationModel = GenerationModel.Builder()
-                .setContent(coreGeneratorModel.content)
-                .setRootClassName(coreGeneratorModel.rootClassName)
-                .build()
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
 
-        val mapperTestGeneratorModel = MapperTestGeneratorModel(
-                from = "cached",
-                to = "entity",
-                fileNameSuffix = "EntityMapperTest",
-                templateName = "CacheMapperTest",
-                classNameSuffix = "EntityMapper"
-        )
+        val templateName = "UseCaseTest"
+        val fileNameSuffix = "UseCaseTest"
 
-        mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, mapperTestGeneratorModel)
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
     }
 
 }
