@@ -54,12 +54,11 @@ open class MapperCreator @Inject constructor() {
     }
 
     fun generateMappingFieldString(classFields: MutableMap<String, ClassField>, suffix: String, mapperMethod: String): String {
-        var asserts = ""
-        var counter = 0
+        val asserts = mutableListOf<String>()
         classFields.forEach {
             val fieldName = generateHelper.formatClassField(it.key)
 
-            asserts += when {
+            val assert = when {
                 isClassField(it.value) -> {
                     val mapperName = generateHelper.formatClassField("${it.key}$suffix")
                     "$fieldName = $mapperName.$mapperMethod(type.$fieldName)"
@@ -72,12 +71,9 @@ open class MapperCreator @Inject constructor() {
                     "$fieldName = type.$fieldName"
                 }
             }
-            if (counter < classFields.size - 1) {
-                asserts += ",\n"
-            }
-            counter++
+            asserts.add(assert)
         }
-        return asserts
+        return asserts.joinToString(",\n")
     }
 
     private fun isClassField(value: ClassField): Boolean {
