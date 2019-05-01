@@ -73,4 +73,8 @@ public class ClassField {
     public String getClassName() {
         return className;
     }
+
+    public ClassField getClassField() {
+        return classField;
+    }
 }
