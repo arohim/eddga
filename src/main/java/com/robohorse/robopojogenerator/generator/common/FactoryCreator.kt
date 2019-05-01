@@ -87,8 +87,9 @@ open class FactoryCreator @Inject constructor() {
 
         val classFields = getListType(classItem)
 
-        classFields.forEach { classFieldName ->
-            val classFieldName = getClassName(prefix, classFieldName, suffix)
+        classFields.forEach { (key, _) ->
+            val methodName = generateHelper.formatClassName(key)
+            val classFieldName = getClassName(prefix, methodName, suffix)
             result += "private fun make${classFieldName}s(repeat: Int): List<$classFieldName> {\n"
             result += "\tval contents = mutableListOf<$classFieldName>()\n" +
                     "\tkotlin.repeat(repeat) {\n" +
@@ -106,11 +107,10 @@ open class FactoryCreator @Inject constructor() {
                 .isNotEmpty()
     }
 
-    private fun getListType(classItems: ClassItem): List<String> {
+    private fun getListType(classItems: ClassItem): Map<String, ClassField> {
         return classItems
-                .classFields.values
-                .filter { it.isListField }
-                .map { it.className }
+                .classFields
+                .filter { it.value.isListField }
     }
 
     private fun isContainListClass(classItems: ClassItem) =
@@ -131,7 +131,7 @@ open class FactoryCreator @Inject constructor() {
         var result = ""
         val className = prefix + classItem.className + suffix
 
-        result += "fun make${className}(): ${className} {\n"
+        result += "fun make$className(): $className {\n"
         result += generateFields(classItem, prefix, suffix)
         result += "}\n\n"
         return result
