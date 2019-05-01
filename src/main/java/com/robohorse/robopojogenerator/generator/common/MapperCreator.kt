@@ -43,20 +43,14 @@ open class MapperCreator @Inject constructor() {
     }
 
     fun generateInjectors(classFields: Map<String, ClassField>, suffix: String): String {
-        var injectors = ""
+        val injectors = mutableListOf<String>()
         val classFieldClasses = classFields.filter { isClassField(it.value) || it.value.isListField }
-        var counter = classFieldClasses.size
         classFieldClasses.forEach {
             val fieldName = generateHelper.formatClassField("${it.key}$suffix")
             val className = generateHelper.formatClassName("${it.key}$suffix")
-            injectors += "private val $fieldName: $className"
-
-            if (counter > 1) {
-                injectors += ",\n"
-            }
-            counter--
+            injectors.add("private val $fieldName: $className")
         }
-        return injectors
+        return injectors.joinToString(",\n")
     }
 
     fun generateMappingFieldString(classFields: MutableMap<String, ClassField>, suffix: String, mapperMethod: String): String {
