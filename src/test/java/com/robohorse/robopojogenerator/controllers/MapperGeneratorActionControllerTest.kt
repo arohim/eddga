@@ -47,7 +47,7 @@ class MapperGeneratorActionControllerTest {
         val projectModel = ProjectModel.Builder().build()
         val event = Mockito.mock(AnActionEvent::class.java)
         val mapperGeneratorModel = MapperGeneratorModel(fileNameSuffix = "templateName", templateName = "templateName",
-                mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity")
+                mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity", isNullable = false)
 
         `when`(environmentDelegate.obtainProjectModel(event)).thenReturn(projectModel)
         controller.onActionHandled(event, mapperGeneratorModel)
@@ -60,7 +60,7 @@ class MapperGeneratorActionControllerTest {
         val exception = RoboPluginException("", "")
         val event = Mockito.mock(AnActionEvent::class.java)
         val mapperGeneratorModel = MapperGeneratorModel(fileNameSuffix = "templateName", templateName = "templateName",
-                mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity")
+                mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity", isNullable = false)
 
         `when`(environmentDelegate.obtainProjectModel(event)).thenThrow(exception)
         controller.onActionHandled(event, mapperGeneratorModel)

@@ -31,9 +31,9 @@ open class MapperCreator @Inject constructor() {
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
             templateProperties["MAP_TO_ENTITIES"] = generateMappingFieldString(classItem.classFields,
-                    mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapToMethodName, false)
+                    mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapToMethodName, mapperGeneratorModel.isNullable)
             templateProperties["MAP_FROM_ENTITIES"] = generateMappingFieldString(classItem.classFields,
-                    mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapFromMethodName, false)
+                    mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapFromMethodName, mapperGeneratorModel.isNullable)
             templateProperties["INJECTORS"] = generateInjectors(classItem.classFields, mapperGeneratorModel.fileNameSuffix)
             val fileName = classItem.className + mapperGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(

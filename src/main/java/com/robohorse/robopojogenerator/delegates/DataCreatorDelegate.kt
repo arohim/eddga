@@ -180,7 +180,8 @@ open class DataCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
                 fileNameSuffix = "Mapper",
                 templateName = "DataMapper",
                 mapToMethodName = "mapToEntity",
-                mapFromMethodName = "mapFromEntity"
+                mapFromMethodName = "mapFromEntity",
+                isNullable = false
         )
 
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, mapperGeneratorModel)

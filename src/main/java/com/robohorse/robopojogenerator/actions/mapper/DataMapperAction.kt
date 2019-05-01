@@ -22,7 +22,8 @@ class DataMapperAction : AnAction() {
                 fileNameSuffix = "Mapper",
                 templateName = "DataMapper",
                 mapToMethodName = "mapToEntity",
-                mapFromMethodName = "mapFromEntity"
+                mapFromMethodName = "mapFromEntity",
+                isNullable = false
         )
 
         mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)

@@ -36,7 +36,8 @@ open class CacheCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
                 fileNameSuffix = "EntityMapper",
                 templateName = "CacheMapper",
                 mapToMethodName = "mapToCached",
-                mapFromMethodName = "mapFromCached"
+                mapFromMethodName = "mapFromCached",
+                isNullable = false
         )
 
         mapperGenerationDelegate.runGenerationTask(generationModel, regenProjectModel, mapperGeneratorModel)

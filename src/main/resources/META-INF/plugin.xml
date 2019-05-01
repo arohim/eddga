@@ -30,6 +30,7 @@
         - Fix invalid templates<br>
         - add more templates<br>
         - asset .size instead of object equals if the class field is a list<br>
+        - auto set default value when creating nullable fields<br>
     ]]>
     </change-notes>
 
