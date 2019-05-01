@@ -37,7 +37,7 @@ class CoreGeneratorVew {
     lateinit var basePath: JLabel
 
     private fun createUIComponents() {
-        textArea = RSyntaxTextArea()
+        textArea = RSyntaxTextArea(20, 20)
         textArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JSON
         textArea.isCodeFoldingEnabled = true
         scrollView = JScrollPane(textArea)

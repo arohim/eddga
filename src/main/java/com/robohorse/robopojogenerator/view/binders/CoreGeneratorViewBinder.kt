@@ -25,6 +25,7 @@ open class CoreGeneratorViewBinder @Inject constructor() {
             val component = ProjectConfigurationComponent.getInstance(it)
             bindPath(component, generatorView)
             bindCheckBox(component, generatorView)
+            generatorView.textArea.text = component.json
         }
 
         builder.setCenterPanel(generatorView.rootView)
