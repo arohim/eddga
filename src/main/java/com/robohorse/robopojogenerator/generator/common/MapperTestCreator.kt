@@ -46,7 +46,7 @@ open class MapperTestCreator @Inject constructor() {
 
     fun generateProperties(classFields: Map<String, ClassField>, suffix: String): String {
         var properties = ""
-        val classItems = classFields.filter { isClassField(it.value) }
+        val classItems = classFields.filter { isClassOrListField(it.value) }
         classItems.forEach { classItem ->
             val fieldName = generateHelper.formatClassField(classItem.key) + suffix
             val className = classItem.value.className + suffix
@@ -84,9 +84,13 @@ open class MapperTestCreator @Inject constructor() {
         return value.className != null
     }
 
+    private fun isClassOrListField(classField: ClassField): Boolean {
+        return classField.className != null || classField.isListField
+    }
+
     fun generatePropertyParameters(classFields: MutableMap<String, ClassField>, suffix: String): String {
         val parameters = mutableListOf<String>()
-        val classItems = classFields.filter { isClassField(it.value) }
+        val classItems = classFields.filter { isClassOrListField(it.value) }
         classItems.forEach { classItem ->
             val fieldName = generateHelper.formatClassField(classItem.key) + suffix
             parameters.add(fieldName)
@@ -96,11 +100,11 @@ open class MapperTestCreator @Inject constructor() {
 
     fun generatePropertiesInitialization(classItem: ClassItem, suffix: String): String {
         val initialization = mutableListOf<String>()
-        val fields = classItem.classFields.filter { isClassField(it.value) }
+        val fields = classItem.classFields.filter { isClassOrListField(it.value) }
         fields.forEach { field ->
-            val fieldName = generateHelper.formatClassField(field.key) + suffix
-            val className = field.value.className + suffix
-            initialization.add("$fieldName = $className()")
+            val fieldName = generateHelper.formatClassField(field.key)
+            val className = field.value.className ?: fieldName
+            initialization.add("$fieldName$suffix = $className$suffix()")
         }
         return initialization.joinToString("\n")
     }
