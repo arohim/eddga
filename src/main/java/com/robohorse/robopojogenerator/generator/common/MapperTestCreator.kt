@@ -61,6 +61,8 @@ open class MapperTestCreator @Inject constructor() {
             if (isClassField(it.value)) {
                 asserts.add("assertNotNull($from.$fileName)")
                 asserts.add("assertNotNull($to.$fileName)")
+            } else if (it.value.isListField) {
+                asserts.add("assertEquals($from.$fileName.size, $to.$fileName.size)")
             } else {
                 asserts.add("assertEquals($from.$fileName, $to.$fileName)")
             }
