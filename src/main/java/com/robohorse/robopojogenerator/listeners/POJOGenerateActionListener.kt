@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by vadim on 24.09.16.
  */
-open class POJOGenerateActionListener @Inject constructor(private val generatorVew: POJOGeneratorVew,
+open class POJOGenerateActionListener @Inject constructor(private val generatorView: POJOGeneratorVew,
                                                           private val event: AnActionEvent,
                                                           private val generationModel: GenerationModel,
                                                           private val eventListener: GuiFormEventListener) : ActionListener {
@@ -31,8 +31,8 @@ open class POJOGenerateActionListener @Inject constructor(private val generatorV
     }
 
     override fun actionPerformed(e: ActionEvent) {
-        val textArea = generatorVew.textArea
-        val textField = generatorVew.classNameTextField
+        val textArea = generatorView.textArea
+        val textField = generatorView.classNameTextField
 
         saveConfiguration()
         var content = textArea?.text
@@ -42,7 +42,6 @@ open class POJOGenerateActionListener @Inject constructor(private val generatorV
             generationModel.content = content
             generationModel.rootClassName = className
             eventListener.onJsonDataObtained(generationModel)
-
         } catch (exception: RoboPluginException) {
             messageDelegate.onPluginExceptionHandled(exception)
         }
@@ -51,7 +50,8 @@ open class POJOGenerateActionListener @Inject constructor(private val generatorV
     private fun saveConfiguration() {
         event.project?.let {
             val component = ProjectConfigurationComponent.getInstance(it)
-            component.rootClassNameTextField = generatorVew.classNameTextField.text
+            component.rootClassNameTextField = generatorView.classNameTextField.text
+            component.json = generatorView.textArea.text
         }
     }
 }
