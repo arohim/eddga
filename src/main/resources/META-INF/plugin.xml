@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.him.core.generator</id>
     <name>Android Clean Architecture Generator</name>
-    <version>2.2.2</version>
+    <version>2.3.0</version>
     <vendor email="a.rohim.sama@gmail.com" url="https://github.com/arohim/eddga">Edd Ga</vendor>
 
     <description><![CDATA[
@@ -27,7 +27,8 @@
 
     <change-notes><![CDATA[
     Added <br>
-        - Fix invalid factory's method name<br>
+        - Fix invalid templates<br>
+        - add more templates<br>
     ]]>
     </change-notes>
 
