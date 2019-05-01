@@ -44,7 +44,7 @@ class Get${CLASS_NAME}Test {
         useCase.buildUseCaseObservable(request)
 
         // THEN
-        verify(chameleonRepository).getList(request.headers)
+        verify(repository).getList(request.headers)
     }
 
     @Test
