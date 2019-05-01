@@ -98,6 +98,30 @@ class MapperCreatorTest {
     }
 
     @Test
+    fun `Generate list fields`() {
+        // GIVEN
+        val suffix = "EntityMapper"
+        val classFields: MutableMap<String, ClassField> = LinkedHashMap()
+        classFields["propA"] = ClassField()
+        classFields["propA"]?.classField = ClassField(ClassEnum.OBJECT)
+        classFields["propB"] = ClassField()
+        classFields["propB"]?.classField = ClassField(ClassEnum.OBJECT)
+        `when`(generateHelper.formatClassField("propA")).thenReturn("propA")
+        `when`(generateHelper.formatClassField("propB")).thenReturn("propB")
+        `when`(generateHelper.formatClassField("propAEntityMapper")).thenReturn("propAEntityMapper")
+        `when`(generateHelper.formatClassField("propBEntityMapper")).thenReturn("propBEntityMapper")
+        val mapperMethod = "mapFromEntity"
+
+        // WHEN
+        val actual = mapperCreator.generateMappingFieldString(classFields, suffix, mapperMethod)
+
+        // THEN
+        val expected = "propA = type.propA.map { propAEntityMapper.mapFromEntity(it) },\n" +
+                "propB = type.propB.map { propBEntityMapper.mapFromEntity(it) }"
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun `Generate file`() {
         // GIVEN
         val generationModel = GenerationModel.Builder().build()

@@ -68,6 +68,9 @@ open class MapperCreator @Inject constructor() {
             asserts += if (isClassField(it.value)) {
                 val mapperName = generateHelper.formatClassField("${it.key}$suffix")
                 "$fieldName = $mapperName.$mapperMethod(type.$fieldName)"
+            } else if (it.value.isListField) {
+                val mapperName = generateHelper.formatClassField("${it.key}$suffix")
+                "$fieldName = type.$fieldName.map { $mapperName.$mapperMethod(it) }"
             } else
                 "$fieldName = type.$fieldName"
             if (counter < classFields.size - 1) {
