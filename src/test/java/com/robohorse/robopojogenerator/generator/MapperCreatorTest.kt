@@ -122,21 +122,6 @@ class MapperCreatorTest {
     }
 
     @Test
-    fun `Generate file`() {
-        // GIVEN
-        val generationModel = GenerationModel.Builder().build()
-        val projectModel = ProjectModel.Builder().build()
-        val mapperGeneratorModel = MapperGeneratorModel(fileNameSuffix = "", templateName = "", mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity")
-        val classItems = HashSet<ClassItem>()
-
-        // WHEN
-//        mapperCreator.generateFiles(generationModel, projectModel, mapperGeneratorModel)
-
-        // THEN
-
-    }
-
-    @Test
     fun `Generate Injectors`() {
         // GIVEN
         val classFields: MutableMap<String, ClassField> = LinkedHashMap()
