@@ -87,8 +87,8 @@ open class FactoryCreator @Inject constructor() {
 
         val classFields = getListType(classItem)
 
-        classFields.forEach { (key, _) ->
-            val methodName = generateHelper.formatClassName(key)
+        classFields.forEach { classField ->
+            val methodName = generateHelper.formatClassName(getClassNameFromClassField(classField))
             val classFieldName = getClassName(prefix, methodName, suffix)
             result += "private fun make${classFieldName}s(repeat: Int): List<$classFieldName> {\n"
             result += "\tval contents = mutableListOf<$classFieldName>()\n" +
@@ -121,7 +121,7 @@ open class FactoryCreator @Inject constructor() {
         val param = if (isFirstClass) "repeat: Int" else ""
         val className = getClassName(prefix, classItem.className, suffix)
 
-        result += "fun make${className}($param): ${className} {\n"
+        result += "fun make$className($param): $className {\n"
         result += generateFields(classItem, prefix, suffix)
         result += "}\n\n"
         return result
@@ -193,7 +193,7 @@ open class FactoryCreator @Inject constructor() {
                 "randomDouble()"
             }
             else -> {
-                val rawClassName = generateHelper.formatClassName(classField.key)
+                val rawClassName = generateHelper.formatClassName(getClassNameFromClassField(classField))
                 val className = getClassName(prefix, rawClassName, suffix)
                 if (classField.value.isListField) {
                     "make${className}s(repeat)"
@@ -203,4 +203,9 @@ open class FactoryCreator @Inject constructor() {
             }
         }
     }
+
+    private fun getClassNameFromClassField(classField: Map.Entry<String, ClassField>) =
+            (classField.value?.className
+                    ?: classField.value?.classField?.className
+                    ?: classField.key)
 }

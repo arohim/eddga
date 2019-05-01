@@ -23,7 +23,8 @@ class FromRemoteMapperUnitTestAction : AnAction() {
                 to = "entity",
                 fileNameSuffix = "EntityMapperTest",
                 templateName = "FromRemoteMapperTest",
-                classNameSuffix = "EntityMapper"
+                classNameSuffix = "EntityMapper",
+                isNullable = true
         )
         controller.onActionHandled(e, mapperTestGeneratorModel)
     }

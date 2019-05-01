@@ -99,6 +99,7 @@ open class CoreGeneratorActionController @Inject constructor() {
     }
 
     companion object {
+        const val REPOSITORY_PATH = "/repository"
         const val SOURCE_PATH = "/source"
         const val FACTORY_PATH = "/factory"
         const val MODEL_PATH = "/model"

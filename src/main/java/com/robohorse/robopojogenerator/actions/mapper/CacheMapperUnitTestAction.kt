@@ -23,7 +23,8 @@ class CacheMapperUnitTestAction : AnAction() {
                 to = "entity",
                 fileNameSuffix = "EntityMapperTest",
                 templateName = "CacheMapperTest",
-                classNameSuffix = "EntityMapper"
+                classNameSuffix = "EntityMapper",
+                isNullable = false
         )
         controller.onActionHandled(e, mapperTestGeneratorModel)
     }

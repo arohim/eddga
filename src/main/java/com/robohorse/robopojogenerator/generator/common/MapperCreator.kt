@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.generator.common
 import com.robohorse.robopojogenerator.delegates.FileTemplateWriterDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.MapperGeneratorModel
@@ -29,8 +30,10 @@ open class MapperCreator @Inject constructor() {
             val fileTemplateManager = fileTemplateWriterDelegate.getInstance(projectModel.project)
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
-            templateProperties["MAP_TO_ENTITIES"] = generateMappingFieldString(classItem.classFields, mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapToMethodName)
-            templateProperties["MAP_FROM_ENTITIES"] = generateMappingFieldString(classItem.classFields, mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapFromMethodName)
+            templateProperties["MAP_TO_ENTITIES"] = generateMappingFieldString(classItem.classFields,
+                    mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapToMethodName, mapperGeneratorModel.isNullable)
+            templateProperties["MAP_FROM_ENTITIES"] = generateMappingFieldString(classItem.classFields,
+                    mapperGeneratorModel.fileNameSuffix, mapperGeneratorModel.mapFromMethodName, mapperGeneratorModel.isNullable)
             templateProperties["INJECTORS"] = generateInjectors(classItem.classFields, mapperGeneratorModel.fileNameSuffix)
             val fileName = classItem.className + mapperGeneratorModel.fileNameSuffix
             fileTemplateWriterDelegate.writeTemplate(
@@ -43,39 +46,69 @@ open class MapperCreator @Inject constructor() {
     }
 
     fun generateInjectors(classFields: Map<String, ClassField>, suffix: String): String {
-        var injectors = ""
-        val classFieldClasses = classFields.filter { isClassField(it.value) }
-        var counter = classFieldClasses.size
+        val injectors = mutableListOf<String>()
+        val classFieldClasses = classFields.filter { isClassField(it.value) || it.value.isListField }
         classFieldClasses.forEach {
             val fieldName = generateHelper.formatClassField("${it.key}$suffix")
             val className = generateHelper.formatClassName("${it.key}$suffix")
-            injectors += "private val $fieldName: $className"
-
-            if (counter > 1) {
-                injectors += ",\n"
-            }
-            counter--
+            injectors.add("private val $fieldName: $className")
         }
-        return injectors
+        return injectors.joinToString(",\n")
     }
 
-    fun generateMappingFieldString(classFields: MutableMap<String, ClassField>, suffix: String, mapperMethod: String): String {
-        var asserts = ""
-        var counter = 0
+    fun generateMappingFieldString(classFields: MutableMap<String, ClassField>, suffix: String, mapperMethod: String, isNullable: Boolean): String {
+        val nullSafety = if (isNullable) "?" else ""
+
+        val asserts = mutableListOf<String>()
         classFields.forEach {
             val fieldName = generateHelper.formatClassField(it.key)
+            val defaultValue = if (isNullable) getDefaultValue(it.value) else ""
 
-            asserts += if (isClassField(it.value)) {
-                val mapperName = generateHelper.formatClassField("${it.key}$suffix")
-                "$fieldName = $mapperName.$mapperMethod(type.$fieldName)"
-            } else
-                "$fieldName = type.$fieldName"
-            if (counter < classFields.size - 1) {
-                asserts += ",\n"
+            val assert = when {
+                isClassField(it.value) -> {
+                    val mapperName = generateHelper.formatClassField("${it.key}$suffix")
+                    "$fieldName = $mapperName.$mapperMethod(type$nullSafety.$fieldName)$defaultValue"
+                }
+                it.value.isListField -> {
+                    val mapperName = generateHelper.formatClassField("${it.key}$suffix")
+                    "$fieldName = type.$fieldName$nullSafety.map { $mapperName.$mapperMethod(it) }$defaultValue"
+                }
+                else -> {
+                    "$fieldName = type$nullSafety.$fieldName$defaultValue"
+                }
             }
-            counter++
+            asserts.add(assert)
         }
-        return asserts
+        return asserts.joinToString(",\n")
+    }
+
+    private fun getDefaultValue(classField: ClassField): String {
+        return when (classField.classEnum) {
+            ClassEnum.STRING -> {
+                " ?: defaultString"
+            }
+            ClassEnum.INTEGER -> {
+                " ?: defaultInt"
+            }
+            ClassEnum.BOOLEAN -> {
+                " ?: defaultBoolean"
+            }
+            ClassEnum.LONG -> {
+                " ?: defaultLong"
+            }
+            ClassEnum.FLOAT -> {
+                " ?: defaultFloat"
+            }
+            ClassEnum.DOUBLE -> {
+                " ?: defaultDouble"
+            }
+            else -> {
+                if (classField.isListField) {
+                    return " ?: listOf()"
+                }
+                ""
+            }
+        }
     }
 
     private fun isClassField(value: ClassField): Boolean {

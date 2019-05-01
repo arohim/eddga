@@ -22,31 +22,31 @@ class ${CLASS_NAME}RemoteImplTest {
 
     lateinit var service: ${CLASS_NAME}Service
 
-    lateinit var saveResponseEntityMapper: Save${CLASS_NAME}ResponseEntityMapper
+    lateinit var saveEntityMapper: Save${CLASS_NAME}EntityMapper
 
-    lateinit var getResponseEntityMapper: Get${CLASS_NAME}ResponseEntityMapper
+    lateinit var getEntityMapper: Get${CLASS_NAME}EntityMapper
 
     lateinit var headerModelMapper: HeaderModelMapper
 
     @Before
-    fun sutup() {
+    fun sutUp() {
         service = mock()
-        saveResponseEntityMapper = mock()
-        getResponseEntityMapper = mock()
+        saveEntityMapper = mock()
+        getEntityMapper = mock()
         headerModelMapper = mock()
-        remoteImpl = ${CLASS_NAME}RemoteImpl(service, saveResponseEntityMapper, getResponseEntityMapper, headerModelMapper)
+        remoteImpl = ${CLASS_NAME}RemoteImpl(service, saveEntityMapper, getEntityMapper, headerModelMapper)
     }
 
     @Test
     fun `Save ${CLASS_NAME}`() {
         // GIVEN
-        val requestEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}RequestEntity(10)
-        val responseModel = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseModel(10)
-        val responseEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(10)
+        val requestEntity = make${CLASS_NAME}RequestEntity(10)
+        val model = make${CLASS_NAME}Model(10)
+        val responseEntity = make${CLASS_NAME}Entity(10)
 
         stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeaderModel())
-        stub${CLASS_NAME}ServiceCreate(requestEntity, responseModel)
-        stubSave${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel, responseEntity)
+        stub${CLASS_NAME}ServiceCreate(requestEntity, model)
+        stubSave${CLASS_NAME}EntityMapperMapFromRemote(model, entity)
 
         // WHEN
         val testObserver = remoteImpl.save${CLASS_NAME}(listOf(), requestEntity).test()
@@ -58,36 +58,35 @@ class ${CLASS_NAME}RemoteImplTest {
     @Test
     fun `Get ${CLASS_NAME}`() {
         // GIVEN
-        val responseModel = ${CLASS_NAME}Factory.makeGet${CLASS_NAME}ResponseModel(2)
-        val responseEntity = ${CLASS_NAME}Factory.makeGet${CLASS_NAME}ResponseEntity(2)
+        val model = makeGet${CLASS_NAME}Model(2)
+        val entity = makeGet${CLASS_NAME}Entity(2)
 
         stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeaderModel())
-        stub${CLASS_NAME}ServiceSearch(responseModel)
-        stubGet${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel, responseEntity)
+        stub${CLASS_NAME}ServiceSearch(model)
+        stubGet${CLASS_NAME}EntityMapperMapFromRemote(model, entity)
 
         // WHEN
         val testObserver = remoteImpl.get${CLASS_NAME}(listOf()).test()
 
         // THEN
-        testObserver.assertValue(responseEntity)
+        testObserver.assertValue(entity)
     }
 
-    private fun stubGet${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel: Get${CLASS_NAME}ResponseModel,
-                                                                    responseEntity: Get${CLASS_NAME}ResponseEntity) {
-        whenever(getResponseEntityMapper.mapFromRemote(responseModel)).thenReturn(responseEntity)
+    private fun stubGet${CLASS_NAME}EntityMapperMapFromRemote(model: Get${CLASS_NAME}Model,
+                                                                    entity: Get${CLASS_NAME}Entity) {
+        whenever(getEntityMapper.mapFromRemote(model)).thenReturn(entity)
     }
 
-    private fun stub${CLASS_NAME}ServiceSearch(responseModel: Get${CLASS_NAME}ResponseModel) {
-        whenever(service.search(listOf())).thenReturn(Single.just(responseModel))
+    private fun stub${CLASS_NAME}ServiceSearch(model: Get${CLASS_NAME}Model) {
+        whenever(service.search(listOf())).thenReturn(Single.just(model))
     }
 
-    private fun stubSave${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel: Save${CLASS_NAME}ResponseModel,
-                responseEntity: Save${CLASS_NAME}ResponseEntity) {
-        whenever(save${CLASS_NAME}ResponseEntityMapper.mapFromRemote(responseModel)).thenReturn(responseEntity)
+    private fun stubSave${CLASS_NAME}EntityMapperMapFromRemote(model: Save${CLASS_NAME}Model, entity: Save${CLASS_NAME}Entity) {
+        whenever(save${CLASS_NAME}EntityMapper.mapFromRemote(model)).thenReturn(entity)
     }
 
-    private fun stubGet${CLASS_NAME}ServiceCreate(requestEntity: Save${CLASS_NAME}RequestEntity, responseModel: Save${CLASS_NAME}ResponseModel) {
-        whenever(service.get${CLASS_NAME}(listOf(), Gson().toJson(requestEntity))).thenReturn(Single.just(responseModel))
+    private fun stubGet${CLASS_NAME}ServiceCreate(requestEntity: Save${CLASS_NAME}RequestEntity, model: Save${CLASS_NAME}Model) {
+        whenever(service.get${CLASS_NAME}(listOf(), Gson().toJson(requestEntity))).thenReturn(Single.just(model))
     }
 
     private fun stubHeaderMapperMapToEntity(entity: HeaderEntity, headerModel: HeaderModel) {

@@ -22,7 +22,8 @@ class CacheMapperAction : AnAction() {
                 fileNameSuffix = "EntityMapper",
                 templateName = "CacheMapper",
                 mapToMethodName = "mapToCached",
-                mapFromMethodName = "mapFromCached"
+                mapFromMethodName = "mapFromCached",
+                isNullable = false
         )
 
         mapperGeneratorActionController.onActionHandled(e, mapperGeneratorModel)

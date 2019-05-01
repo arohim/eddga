@@ -139,7 +139,8 @@ open class DataTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate()
                 to = "entity",
                 fileNameSuffix = "MapperTest",
                 templateName = "DataMapperTest",
-                classNameSuffix = "Mapper"
+                classNameSuffix = "Mapper",
+                isNullable = false
         )
 
         mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, mapperTestGeneratorModel)
