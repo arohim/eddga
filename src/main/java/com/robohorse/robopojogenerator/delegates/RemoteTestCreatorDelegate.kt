@@ -79,7 +79,8 @@ open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate
                 to = "entity",
                 fileNameSuffix = "EntityMapperTest",
                 templateName = "FromRemoteMapperTest",
-                classNameSuffix = "EntityMapper"
+                classNameSuffix = "EntityMapper",
+                isNullable = true
         )
 
         mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, fromMapperTestGeneratorModel)
@@ -89,7 +90,8 @@ open class RemoteTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate
                 to = "model",
                 fileNameSuffix = "ModelMapperTest",
                 templateName = "ToRemoteMapperTest",
-                classNameSuffix = "EntityMapper"
+                classNameSuffix = "EntityMapper",
+                isNullable = false
         )
 
         mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, toMapperTestGeneratorModel)

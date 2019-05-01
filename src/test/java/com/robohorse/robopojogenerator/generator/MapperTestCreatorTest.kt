@@ -7,6 +7,7 @@ import com.robohorse.robopojogenerator.generator.common.MapperTestCreator
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
+import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -53,14 +54,58 @@ class MapperTestCreatorTest {
 
         val from = "cached"
         val to = "entity"
+        val mapperTestGeneratorModel = MapperTestGeneratorModel(
+                from = from,
+                to = to,
+                fileNameSuffix = "EntityMapperTest",
+                templateName = "FromRemoteMapperTest",
+                classNameSuffix = "EntityMapper",
+                isNullable = false
+        )
 
         // WHEN
-        val actual = mapperTestCreator.generateAssertions(classFields, from, to)
+        val actual = mapperTestCreator.generateAssertions(classFields, mapperTestGeneratorModel)
 
         // THEN
         val expected = "assertEquals(cached.propA, entity.propA)\n" +
                 "assertEquals(cached.propB, entity.propB)\n" +
                 "assertEquals(cached.propC, entity.propC)\n" +
+                "assertNotNull(cached.classD)\n" +
+                "assertNotNull(entity.classD)"
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun generateNullAbleAssertions() {
+        // GIVEN
+        val classFields: MutableMap<String, ClassField> = LinkedHashMap()
+        classFields["propA"] = ClassField(ClassEnum.STRING)
+        classFields["propB"] = ClassField(ClassEnum.STRING)
+        classFields["propC"] = ClassField(ClassEnum.STRING)
+        classFields["ClassD"] = ClassField("ClassD")
+        Mockito.`when`(generateHelper.formatClassField("propA")).thenReturn("propA")
+        Mockito.`when`(generateHelper.formatClassField("propB")).thenReturn("propB")
+        Mockito.`when`(generateHelper.formatClassField("propC")).thenReturn("propC")
+        Mockito.`when`(generateHelper.formatClassField("ClassD")).thenReturn("classD")
+
+        val from = "cached"
+        val to = "entity"
+        val mapperTestGeneratorModel = MapperTestGeneratorModel(
+                from = from,
+                to = to,
+                fileNameSuffix = "EntityMapperTest",
+                templateName = "FromRemoteMapperTest",
+                classNameSuffix = "EntityMapper",
+                isNullable = true
+        )
+
+        // WHEN
+        val actual = mapperTestCreator.generateAssertions(classFields, mapperTestGeneratorModel)
+
+        // THEN
+        val expected = "assertEquals(cached?.propA, entity.propA)\n" +
+                "assertEquals(cached?.propB, entity.propB)\n" +
+                "assertEquals(cached?.propC, entity.propC)\n" +
                 "assertNotNull(cached.classD)\n" +
                 "assertNotNull(entity.classD)"
         assertEquals(expected, actual)

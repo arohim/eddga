@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
-import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.models.*
 import javax.inject.Inject
 
@@ -56,7 +55,8 @@ open class CacheTestCreatorDelegate @Inject constructor() : CoreCreatorDelegate(
                 to = "entity",
                 fileNameSuffix = "EntityMapperTest",
                 templateName = "CacheMapperTest",
-                classNameSuffix = "EntityMapper"
+                classNameSuffix = "EntityMapper",
+                isNullable = false
         )
 
         mapperTestGeneratorDelegate.runGenerationTask(generationModel, regenProjectModel, mapperTestGeneratorModel)

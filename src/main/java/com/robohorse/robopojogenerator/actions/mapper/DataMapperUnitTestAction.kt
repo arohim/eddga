@@ -23,7 +23,8 @@ class DataMapperUnitTestAction : AnAction() {
                 to = "entity",
                 fileNameSuffix = "MapperTest",
                 templateName = "DataMapperTest",
-                classNameSuffix = "Mapper"
+                classNameSuffix = "Mapper",
+                isNullable = false
         )
         controller.onActionHandled(e, mapperTestGeneratorModel)
     }

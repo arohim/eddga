@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.generator.common
 import com.robohorse.robopojogenerator.delegates.FileTemplateWriterDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.MapperTestGeneratorModel
@@ -29,7 +30,7 @@ open class MapperTestCreator @Inject constructor() {
             val fileTemplateManager = fileTemplateWriterDelegate.getInstance(projectModel.project)
             val templateProperties = fileTemplateManager.defaultProperties
             templateProperties["CLASS_NAME"] = classItem.className
-            templateProperties["ASSERTIONS"] = generateAssertions(classItem.classFields, mapperTestGeneratorModel.from, mapperTestGeneratorModel.to)
+            templateProperties["ASSERTIONS"] = generateAssertions(classItem.classFields, mapperTestGeneratorModel)
             templateProperties["PROPERTIES"] = generateProperties(classItem.classFields, mapperTestGeneratorModel.classNameSuffix)
             templateProperties["PROPERTY_PARAMETERS"] = generatePropertyParameters(classItem.classFields, mapperTestGeneratorModel.classNameSuffix)
             templateProperties["PROPERTIES_INITIALIZATION"] = generatePropertiesInitialization(classItem, mapperTestGeneratorModel.classNameSuffix)
@@ -54,17 +55,26 @@ open class MapperTestCreator @Inject constructor() {
         return properties
     }
 
-    fun generateAssertions(classFields: MutableMap<String, ClassField>, from: String, to: String): String {
+    fun generateAssertions(classFields: MutableMap<String, ClassField>, mapperTestGeneratorModel: MapperTestGeneratorModel): String {
+        val from = mapperTestGeneratorModel.from
+        val to = mapperTestGeneratorModel.to
+        val isNullable = mapperTestGeneratorModel.isNullable
+        val nullSafety = if (isNullable) "?" else ""
+
         val asserts = mutableListOf<String>()
         classFields.forEach {
             val fileName = generateHelper.formatClassField(it.key)
-            if (isClassField(it.value)) {
-                asserts.add("assertNotNull($from.$fileName)")
-                asserts.add("assertNotNull($to.$fileName)")
-            } else if (it.value.isListField) {
-                asserts.add("assertEquals($from.$fileName.size, $to.$fileName.size)")
-            } else {
-                asserts.add("assertEquals($from.$fileName, $to.$fileName)")
+            when {
+                isClassField(it.value) -> {
+                    asserts.add("assertNotNull($from.$fileName)")
+                    asserts.add("assertNotNull($to.$fileName)")
+                }
+                it.value.isListField -> {
+                    asserts.add("assertEquals($from$nullSafety.$fileName$nullSafety.size, $to.$fileName.size)")
+                }
+                else -> {
+                    asserts.add("assertEquals($from$nullSafety.$fileName, $to.$fileName)")
+                }
             }
         }
         return asserts.joinToString("\n")
@@ -94,4 +104,5 @@ open class MapperTestCreator @Inject constructor() {
         }
         return initialization.joinToString("\n")
     }
+
 }
