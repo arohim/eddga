@@ -1,0 +1,58 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
+
+import com.app.kaidee.data.shared.model.HeaderEntity
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Completable
+import io.reactivex.Single
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+import org.mockito.Mockito.verify
+
+@RunWith(JUnit4::class)
+#parse("File Header.java")
+class ${CLASS_NAME}CacheDataStoreTest {
+
+    private lateinit var cacheDataStore: ${CLASS_NAME}CacheDataStore
+
+    private lateinit var cache: ${CLASS_NAME}Cache
+
+    @Before
+    fun setUp() {
+        cache = mock()
+        cacheDataStore = ${CLASS_NAME}CacheDataStore(cache)
+    }
+
+    @Test
+    fun `Save ${CLASS_NAME}`() {
+        // GIVEN
+        val data = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(2)
+        whenever(cache.save${CLASS_NAME}ToCache(any())).thenReturn(Completable.complete())
+
+        // WHEN
+        val testObserver = cacheDataStore.save${CLASS_NAME}ToCache(data).test()
+
+        // THEN
+        testObserver.assertComplete()
+        verify(cache).save${CLASS_NAME}ToCache(data)
+    }
+
+    @Test
+    fun `Get ${CLASS_NAME}`() {
+        // GIVEN
+        val headers = listOf<HeaderEntity>()
+        val data = HomeFeedFactory.make${CLASS_NAME}ResponseEntity(2)
+        whenever(cache.get${CLASS_NAME}()).thenReturn(Single.just(data))
+
+        // WHEN
+        val testObserver = cacheDataStore.get${CLASS_NAME}(headers).test()
+
+        // THEN
+        testObserver.assertValue(data)
+        verify(cache).get${CLASS_NAME}()
+    }
+
+}

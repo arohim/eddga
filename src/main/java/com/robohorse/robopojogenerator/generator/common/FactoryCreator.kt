@@ -141,7 +141,7 @@ open class FactoryCreator @Inject constructor() {
         var result = ""
         var counter = 0
         classItem.classFields.forEach { classField: Map.Entry<String, ClassField> ->
-            val classType: String? = generateValue(classField.value, prefix, suffix)
+            val classType: String? = generateValue(classField, prefix, suffix)
             val className = getClassName(prefix, classItem.className, suffix)
             val fileName = generateHelper.formatClassField(classField.key)
             when {
@@ -172,8 +172,8 @@ open class FactoryCreator @Inject constructor() {
 
     private fun getClassName(prefix: String, className: String, suffix: String) = prefix + className + suffix
 
-    private fun generateValue(classField: ClassField, prefix: String, suffix: String): String {
-        return when (classField.classEnum) {
+    private fun generateValue(classField: Map.Entry<String, ClassField>, prefix: String, suffix: String): String {
+        return when (classField.value.classEnum) {
             ClassEnum.STRING -> {
                 "randomUuid()"
             }
@@ -193,8 +193,9 @@ open class FactoryCreator @Inject constructor() {
                 "randomDouble()"
             }
             else -> {
-                val className = getClassName(prefix, classField.className, suffix)
-                if (classField.isListField) {
+                val rawClassName = generateHelper.formatClassName(classField.key)
+                val className = getClassName(prefix, rawClassName, suffix)
+                if (classField.value.isListField) {
                     "make${className}s(repeat)"
                 } else {
                     "make$className()"

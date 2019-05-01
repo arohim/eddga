@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.actions.api
+package com.robohorse.robopojogenerator.actions.rogue2
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent

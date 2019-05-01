@@ -1,0 +1,63 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
+
+import com.app.kaidee.data.shared.HeaderFactory
+import com.app.kaidee.data.shared.mapper.HeaderMapper
+import com.app.kaidee.data.shared.model.HeaderEntity
+import com.app.kaidee.domain.shared.model.Header
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Single
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+
+@RunWith(JUnit4::class)
+#parse("File Header.java")
+class ${CLASS_NAME}DataRepositoryTest {
+
+    private lateinit var repository: ${CLASS_NAME}DataRepository
+
+    lateinit var factory: ${CLASS_NAME}DataStoreFactory
+
+    lateinit var responseMapper: XXXXResponseMapper
+
+    lateinit var headerMapper: HeaderMapper
+
+    @Before
+    fun setUp() {
+        factory = mock()
+        responseMapper = mock()
+        headerMapper = mock()
+        repository = ${CLASS_NAME}DataRepository(factory, responseMapper, headerMapper)
+    }
+
+    @Test
+    fun `Get ${CLASS_NAME}`() {
+        // GIVEN
+        val domain = ${CLASS_NAME}Factory.make${CLASS_NAME}Response(2)
+        val entity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(2)
+        stub${CLASS_NAME}CacheDataStoreGetList(Single.just(entity))
+        stub${CLASS_NAME}ResponseMapperMapFromEntity(entity, domain)
+        stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeader())
+
+        // WHEN
+        val testObserver = repository.getList(listOf()).test()
+
+        // THEN
+        testObserver.assertValue(domain)
+    }
+
+    private fun stub${CLASS_NAME}CacheDataStoreGetList(single: Single<${CLASS_NAME}ResponseEntity>) {
+        whenever(factory.getList(listOf())).thenReturn(single)
+    }
+
+    private fun stub${CLASS_NAME}ResponseMapperMapFromEntity(responseMapperEntity: ${CLASS_NAME}ResponseEntity,
+                                                        response: ${CLASS_NAME}Response) {
+        whenever(responseMapper.mapFromEntity(responseMapperEntity)).thenReturn(response)
+    }
+
+    private fun stubHeaderMapperMapToEntity(entity: HeaderEntity, domain: Header) {
+        whenever(headerMapper.mapFromEntity(entity)).thenReturn(domain)
+    }
+}

@@ -1,0 +1,97 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
+
+import com.app.kaidee.data.shared.model.HeaderEntity
+import com.app.kaidee.remote.shared.HeaderFactory
+import com.app.kaidee.remote.shared.mapper.HeaderModelMapper
+import com.google.gson.Gson
+import com.kaidee.rogue2.header.HeaderModel
+import com.kaidee.rogue2.services.${CLASS_NAME}Service
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Single
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+
+@RunWith(JUnit4::class)
+#parse("File Header.java")
+class ${CLASS_NAME}RemoteImplTest {
+
+    lateinit var remoteImpl: ${CLASS_NAME}RemoteImpl
+
+    lateinit var service: ${CLASS_NAME}Service
+
+    lateinit var saveResponseEntityMapper: Save${CLASS_NAME}ResponseEntityMapper
+
+    lateinit var getResponseEntityMapper: Get${CLASS_NAME}ResponseEntityMapper
+
+    lateinit var headerModelMapper: HeaderModelMapper
+
+    @Before
+    fun sutup() {
+        service = mock()
+        saveResponseEntityMapper = mock()
+        getResponseEntityMapper = mock()
+        headerModelMapper = mock()
+        remoteImpl = ${CLASS_NAME}RemoteImpl(service, saveResponseEntityMapper, getResponseEntityMapper, headerModelMapper)
+    }
+
+    @Test
+    fun `Save ${CLASS_NAME}`() {
+        // GIVEN
+        val requestEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}RequestEntity(10)
+        val responseModel = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseModel(10)
+        val responseEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(10)
+
+        stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeaderModel())
+        stub${CLASS_NAME}ServiceCreate(requestEntity, responseModel)
+        stubSave${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel, responseEntity)
+
+        // WHEN
+        val testObserver = remoteImpl.save${CLASS_NAME}(listOf(), requestEntity).test()
+
+        // THEN
+        testObserver.assertValue(responseEntity)
+    }
+
+    @Test
+    fun `Get ${CLASS_NAME}`() {
+        // GIVEN
+        val responseModel = ${CLASS_NAME}Factory.makeGet${CLASS_NAME}ResponseModel(2)
+        val responseEntity = ${CLASS_NAME}Factory.makeGet${CLASS_NAME}ResponseEntity(2)
+
+        stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeaderModel())
+        stub${CLASS_NAME}ServiceSearch(responseModel)
+        stubGet${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel, responseEntity)
+
+        // WHEN
+        val testObserver = remoteImpl.get${CLASS_NAME}(listOf()).test()
+
+        // THEN
+        testObserver.assertValue(responseEntity)
+    }
+
+    private fun stubGet${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel: Get${CLASS_NAME}ResponseModel,
+                                                                    responseEntity: Get${CLASS_NAME}ResponseEntity) {
+        whenever(getResponseEntityMapper.mapFromRemote(responseModel)).thenReturn(responseEntity)
+    }
+
+    private fun stub${CLASS_NAME}ServiceSearch(responseModel: Get${CLASS_NAME}ResponseModel) {
+        whenever(service.search(listOf())).thenReturn(Single.just(responseModel))
+    }
+
+    private fun stubSave${CLASS_NAME}ResponseEntityMapperMapFromRemote(responseModel: Save${CLASS_NAME}ResponseModel,
+                responseEntity: Save${CLASS_NAME}ResponseEntity) {
+        whenever(save${CLASS_NAME}ResponseEntityMapper.mapFromRemote(responseModel)).thenReturn(responseEntity)
+    }
+
+    private fun stubGet${CLASS_NAME}ServiceCreate(requestEntity: Save${CLASS_NAME}RequestEntity, responseModel: Save${CLASS_NAME}ResponseModel) {
+        whenever(service.get${CLASS_NAME}(listOf(), Gson().toJson(requestEntity))).thenReturn(Single.just(responseModel))
+    }
+
+    private fun stubHeaderMapperMapToEntity(entity: HeaderEntity, headerModel: HeaderModel) {
+        whenever(headerModelMapper.mapToRemote(entity)).thenReturn(headerModel)
+    }
+
+}

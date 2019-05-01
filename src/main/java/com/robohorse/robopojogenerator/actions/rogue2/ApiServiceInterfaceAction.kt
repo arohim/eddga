@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.actions.domain
+package com.robohorse.robopojogenerator.actions.rogue2
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import javax.inject.Inject
 
-class UseCaseAction : AnAction() {
+class ApiServiceInterfaceAction : AnAction() {
 
     @Inject
     lateinit var controller: ClassNameTemplateActionController
@@ -19,9 +19,9 @@ class UseCaseAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
-                dialogTitle = "Use Case",
-                templateName = "UseCase",
-                fileNameSuffix = ""
+                dialogTitle = "Api Service Interface",
+                templateName = "ApiServiceInterface",
+                fileNameSuffix = "Service"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }

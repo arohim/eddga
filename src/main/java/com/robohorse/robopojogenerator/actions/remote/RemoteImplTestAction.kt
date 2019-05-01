@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.actions.api
+package com.robohorse.robopojogenerator.actions.remote
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -7,7 +7,7 @@ import com.robohorse.robopojogenerator.injections.Injector
 import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import javax.inject.Inject
 
-class ApiRemoteImplAction : AnAction() {
+class RemoteImplTestAction : AnAction() {
 
     @Inject
     lateinit var controller: ClassNameTemplateActionController
@@ -19,11 +19,10 @@ class ApiRemoteImplAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val classNameTemplateModel = ClassNameTemplateModel(
-                dialogTitle = "Api Remote Impl",
-                templateName = "ApiRemoteImpl",
-                fileNameSuffix = "RemoteImpl"
+                dialogTitle = "Remote impl unit test",
+                templateName = "RemoteImplTest",
+                fileNameSuffix = "RemoteImplTest"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }
-
 }

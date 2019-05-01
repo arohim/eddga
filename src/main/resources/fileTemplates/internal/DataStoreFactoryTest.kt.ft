@@ -1,0 +1,44 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
+
+import com.nhaarman.mockito_kotlin.mock
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+
+@RunWith(JUnit4::class)
+#parse("File Header.java")
+class ${CLASS_NAME}DataStoreFactoryTest {
+
+    lateinit var dataStore: ${CLASS_NAME}DataStoreFactory
+
+    lateinit var remoteDataStore: ${CLASS_NAME}RemoteDataStore
+
+    @Before
+    fun setup() {
+        remoteDataStore = mock()
+        dataStore = ${CLASS_NAME}DataStoreFactory(remoteDataStore)
+    }
+
+    @Test
+    fun retrieveRemoteDataStore() {
+        // GIVEN
+
+        // WHEN
+        val dataStore = dataStore.retrieveRemoteDataStore()
+
+        // THEN
+        assert(dataStore is ${CLASS_NAME}RemoteDataStore)
+    }
+
+    @Test
+    fun retrieveCacheDataStore() {
+        // GIVEN
+
+        // WHEN
+        val dataStore = dataStore.retrieveCacheDataStore()
+
+        // THEN
+        assert(dataStore is ${CLASS_NAME}CacheDataStore)
+    }
+}

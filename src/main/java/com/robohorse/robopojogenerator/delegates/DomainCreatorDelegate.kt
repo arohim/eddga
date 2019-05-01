@@ -1,9 +1,11 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MODEL_PATH
+import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
+import com.robohorse.robopojogenerator.models.ClassNameTemplateModel
 import com.robohorse.robopojogenerator.models.CoreGeneratorModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
@@ -14,28 +16,34 @@ open class DomainCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
     @Inject
     lateinit var pOJOGenerationDelegate: POJOGenerationDelegate
 
+    @Inject
+    lateinit var fileTemplateWriterDelegate: FileTemplateWriterDelegate
+
     fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generatePOJO(projectModel, coreGeneratorModel)
-//        generateMapper(generationModel, projectModel)
-//        generateFactory(generationModel, projectModel)
-//        generateMapperUnitTest(generationModel, projectModel)
-//        generateUseCase(generationModel, projectModel)
+        generateUseCase(projectModel, coreGeneratorModel)
     }
 
-    private fun generateUseCase(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private fun generateUseCase(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.domainPath ?: throw PathException()
+        val regenProjectModel = regenProjectModel(projectModel, path)
 
-    private fun generateMapperUnitTest(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
 
-    private fun generateFactory(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        val classNameTemplateModel = ClassNameTemplateModel(
+                dialogTitle = "Use Case",
+                templateName = "UseCase",
+                fileNameSuffix = ""
+        )
 
-    private fun generateMapper(generationModel: GenerationModel, projectModel: ProjectModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + classNameTemplateModel.fileNameSuffix,
+                classNameTemplateModel.templateName, templateProperties)
     }
 
     private fun generatePOJO(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {

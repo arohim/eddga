@@ -1,8 +1,9 @@
 package com.robohorse.robopojogenerator.injections;
 
-import com.robohorse.robopojogenerator.actions.api.*;
+import com.robohorse.robopojogenerator.actions.rogue2.*;
 import com.robohorse.robopojogenerator.actions.data.*;
 import com.robohorse.robopojogenerator.actions.domain.UseCaseAction;
+import com.robohorse.robopojogenerator.actions.domain.UseCaseTestAction;
 import com.robohorse.robopojogenerator.actions.factory.CacheFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.DataFactoryAction;
 import com.robohorse.robopojogenerator.actions.factory.DomainFactoryAction;
@@ -11,6 +12,7 @@ import com.robohorse.robopojogenerator.actions.mapper.*;
 import com.robohorse.robopojogenerator.actions.pojo.*;
 import com.robohorse.robopojogenerator.actions.cache.CacheImplAction;
 import com.robohorse.robopojogenerator.actions.presentation.*;
+import com.robohorse.robopojogenerator.actions.remote.RemoteImplTestAction;
 import com.robohorse.robopojogenerator.actions.tracking.TrackerImplAction;
 import com.robohorse.robopojogenerator.actions.tracking.TrackerInterfaceAction;
 import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
@@ -118,4 +120,16 @@ public interface AppComponent {
     void inject(@NotNull TrackerInterfaceAction trackerInterfaceAction);
 
     void inject(@NotNull TrackerImplAction trackerImplAction);
+
+    void inject(@NotNull UseCaseTestAction useCaseTestAction);
+
+    void inject(@NotNull CacheDataStoreTestAction cacheDataStoreTestAction);
+
+    void inject(@NotNull DataRepositoryTestAction dataRepositoryTestAction);
+
+    void inject(@NotNull DataStoreFactoryTestAction dataStoreTestAction);
+
+    void inject(@NotNull RemoteStoreTestAction remoteStoreTestAction);
+
+    void inject(@NotNull RemoteImplTestAction remoteImplTestAction);
 }
