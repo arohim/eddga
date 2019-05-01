@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.delegates
 
+import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController
 import com.robohorse.robopojogenerator.controllers.CoreGeneratorActionController.Companion.MODEL_PATH
 import com.robohorse.robopojogenerator.errors.custom.PathException
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
@@ -22,6 +23,26 @@ open class DomainCreatorDelegate @Inject constructor() : CoreCreatorDelegate() {
     fun runGenerationTask(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
         generatePOJO(projectModel, coreGeneratorModel)
         generateUseCase(projectModel, coreGeneratorModel)
+        generateRepositoryInterface(projectModel, coreGeneratorModel)
+    }
+
+    private fun generateRepositoryInterface(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
+        val path = coreGeneratorModel.domainPath ?: throw PathException()
+        val regenProjectModel = regenProjectModel(projectModel, path)
+
+        val fileTemplateManager = fileTemplateWriterDelegate.getInstance(regenProjectModel.project)
+        val className = coreGeneratorModel.rootClassName
+
+        val templateName = "RepositoryInterface"
+        val fileNameSuffix = "Repository"
+
+        val templateProperties = fileTemplateManager.defaultProperties.also {
+            it["CLASS_NAME"] = className
+        }
+
+        fileTemplateWriterDelegate.writeTemplate(regenProjectModel.directory,
+                className + fileNameSuffix,
+                templateName, templateProperties)
     }
 
     private fun generateUseCase(projectModel: ProjectModel, coreGeneratorModel: CoreGeneratorModel) {
