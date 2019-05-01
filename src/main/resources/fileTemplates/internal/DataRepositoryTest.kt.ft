@@ -20,12 +20,18 @@ class ${CLASS_NAME}DataRepositoryTest {
 
     lateinit var factory: ${CLASS_NAME}DataStoreFactory
 
-    lateinit var responseMapper: XXXXResponseMapper
+    lateinit var responseMapper: ${CLASS_NAME}Mapper
 
     lateinit var headerMapper: HeaderMapper
 
+    lateinit var cache: ${CLASS_NAME}CacheDataStore
+
+    lateinit var remote: ${CLASS_NAME}RemoteDataRepositoryDataStore
+
     @Before
     fun setUp() {
+        remote = mock()
+        cache = mock()
         factory = mock()
         responseMapper = mock()
         headerMapper = mock()
@@ -35,11 +41,11 @@ class ${CLASS_NAME}DataRepositoryTest {
     @Test
     fun `Get ${CLASS_NAME}`() {
         // GIVEN
-        val domain = ${CLASS_NAME}Factory.make${CLASS_NAME}Response(2)
-        val entity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(2)
+        val domain = make${CLASS_NAME}(2)
+        val entity = make${CLASS_NAME}Entity(2)
         stub${CLASS_NAME}CacheDataStoreGetList(Single.just(entity))
         stub${CLASS_NAME}ResponseMapperMapFromEntity(entity, domain)
-        stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeader())
+        stubHeaderMapperMapToEntity(makeHeaderEntity(), HeaderFactory.makeHeader())
 
         // WHEN
         val testObserver = repository.getList(listOf()).test()
@@ -48,13 +54,21 @@ class ${CLASS_NAME}DataRepositoryTest {
         testObserver.assertValue(domain)
     }
 
-    private fun stub${CLASS_NAME}CacheDataStoreGetList(single: Single<${CLASS_NAME}ResponseEntity>) {
+    private fun stubRemoteDataStore() {
+        whenever(factory.retrieveRemote()).thenReturn(remote)
+    }
+
+    private fun stubCacheDataStore() {
+        whenever(factory.retrieveCache()).thenReturn(cache)
+    }
+
+    private fun stub${CLASS_NAME}CacheDataStoreGetList(single: Single<${CLASS_NAME}Entity>) {
         whenever(factory.getList(listOf())).thenReturn(single)
     }
 
-    private fun stub${CLASS_NAME}ResponseMapperMapFromEntity(responseMapperEntity: ${CLASS_NAME}ResponseEntity,
+    private fun stub${CLASS_NAME}MapperMapFromEntity(mapperEntity: ${CLASS_NAME}Entity,
                                                         response: ${CLASS_NAME}Response) {
-        whenever(responseMapper.mapFromEntity(responseMapperEntity)).thenReturn(response)
+        whenever(responseMapper.mapFromEntity(mapperEntity)).thenReturn(response)
     }
 
     private fun stubHeaderMapperMapToEntity(entity: HeaderEntity, domain: Header) {

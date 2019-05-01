@@ -1,7 +1,5 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
 
-package com.kaidee.rogue2.api
-
 import io.reactivex.Single
 import retrofit2.http.POST
 
