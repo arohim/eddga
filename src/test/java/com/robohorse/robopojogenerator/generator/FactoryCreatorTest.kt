@@ -71,6 +71,7 @@ class FactoryCreatorTest {
 
         val factoryGeneratorModel = FactoryGeneratorModel("", "", true)
         `when`(generateHelper.formatClassField("data")).thenReturn("data")
+        `when`(generateHelper.formatClassName("data")).thenReturn("Data")
 
         // WHEN
         val actual = factory.generateMethods(classItem, factoryGeneratorModel)
@@ -78,14 +79,14 @@ class FactoryCreatorTest {
         // THEN
         val expected = "fun makeClassNameModel(repeat: Int): ClassNameModel {\n" +
                 "\treturn ClassNameModel(\n" +
-                "\t\tdata = makeDataItemModels(repeat)\n" +
+                "\t\tdata = makeDataModels(repeat)\n" +
                 "\t)\n" +
                 "}\n" +
                 "\n" +
-                "private fun makeDataItemModels(repeat: Int): List<DataItemModel> {\n" +
-                "\tval contents = mutableListOf<DataItemModel>()\n" +
+                "private fun makeDataModels(repeat: Int): List<DataModel> {\n" +
+                "\tval contents = mutableListOf<DataModel>()\n" +
                 "\tkotlin.repeat(repeat) {\n" +
-                "\t\tcontents.add(makeDataItemModel())\n" +
+                "\t\tcontents.add(makeDataModel())\n" +
                 "\t}\n" +
                 "\treturn contents\n" +
                 "}\n"
@@ -113,6 +114,8 @@ class FactoryCreatorTest {
         val factoryGeneratorModel = FactoryGeneratorModel("", "", true)
         `when`(generateHelper.formatClassField("data")).thenReturn("data")
         `when`(generateHelper.formatClassField("data2")).thenReturn("data2")
+        `when`(generateHelper.formatClassName("data")).thenReturn("Data")
+        `when`(generateHelper.formatClassName("data2")).thenReturn("Data2")
 
         // WHEN
         val actual = factory.generateMethods(classItem, factoryGeneratorModel)
@@ -120,15 +123,15 @@ class FactoryCreatorTest {
         // THEN
         val expected = "fun makeClassNameModel(repeat: Int): ClassNameModel {\n" +
                 "\treturn ClassNameModel(\n" +
-                "\t\tdata = makeDataItemModels(repeat),\n" +
-                "\t\tdata2 = makeDataItem2Model()\n" +
+                "\t\tdata = makeDataModels(repeat),\n" +
+                "\t\tdata2 = makeData2Model()\n" +
                 "\t)\n" +
                 "}\n" +
                 "\n" +
-                "private fun makeDataItemModels(repeat: Int): List<DataItemModel> {\n" +
-                "\tval contents = mutableListOf<DataItemModel>()\n" +
+                "private fun makeDataModels(repeat: Int): List<DataModel> {\n" +
+                "\tval contents = mutableListOf<DataModel>()\n" +
                 "\tkotlin.repeat(repeat) {\n" +
-                "\t\tcontents.add(makeDataItemModel())\n" +
+                "\t\tcontents.add(makeDataModel())\n" +
                 "\t}\n" +
                 "\treturn contents\n" +
                 "}\n"
