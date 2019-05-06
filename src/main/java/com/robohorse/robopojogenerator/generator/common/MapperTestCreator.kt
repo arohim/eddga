@@ -103,7 +103,7 @@ open class MapperTestCreator @Inject constructor() {
         val fields = classItem.classFields.filter { isClassOrListField(it.value) }
         fields.forEach { field ->
             val fieldName = generateHelper.formatClassField(field.key)
-            val className = field.value.className ?: fieldName
+            val className = field.value.className ?: generateHelper.formatClassName(field.key)
             initialization.add("$fieldName$suffix = $className$suffix()")
         }
         return initialization.joinToString("\n")

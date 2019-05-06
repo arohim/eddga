@@ -174,6 +174,7 @@ class MapperTestCreatorTest {
         `when`(generateHelper.formatClassField("ClassA")).thenReturn("classA")
         `when`(generateHelper.formatClassField("ClassB")).thenReturn("classB")
         `when`(generateHelper.formatClassField("propD")).thenReturn("propD")
+        `when`(generateHelper.formatClassName("propD")).thenReturn("PropD")
         val suffix = "EntityMapper"
 
         // WHEN
@@ -182,7 +183,7 @@ class MapperTestCreatorTest {
         // THEN
         val expected = "classAEntityMapper = ClassAEntityMapper()\n" +
                 "classBEntityMapper = ClassBEntityMapper()\n" +
-                "propDEntityMapper = propDEntityMapper()"
+                "propDEntityMapper = PropDEntityMapper()"
 
         assertEquals(expected, actual)
     }
