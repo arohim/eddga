@@ -1,11 +1,11 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
 
-import com.app.kaidee.domain.shared.model.Header
+import com.app.kaidee.data.shared.model.HeaderEntity
 import io.reactivex.Single
 
 #parse("File Header.java")
 interface ${CLASS_NAME}Repository {
 
-    fun getList(headers: List<Header>): Single<${CLASS_NAME}Response>
+    fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}Response>
 
 }
