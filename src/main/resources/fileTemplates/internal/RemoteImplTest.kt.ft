@@ -1,7 +1,8 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
 
 import com.app.kaidee.data.shared.model.HeaderEntity
-import com.app.kaidee.remote.shared.HeaderFactory
+import com.app.kaidee.remote.shared.HeaderFactory.makeHeaderModel
+import com.app.kaidee.remote.shared.HeaderFactory.makeHeaderEntity
 import com.app.kaidee.remote.shared.mapper.HeaderModelMapper
 import com.google.gson.Gson
 import com.kaidee.rogue2.header.HeaderModel
@@ -40,11 +41,11 @@ class ${CLASS_NAME}RemoteImplTest {
     @Test
     fun `Save ${CLASS_NAME}`() {
         // GIVEN
-        val requestEntity = make${CLASS_NAME}RequestEntity(10)
+        val requestEntity = make${CLASS_NAME}Entity(10)
         val model = make${CLASS_NAME}Model(10)
         val responseEntity = make${CLASS_NAME}Entity(10)
 
-        stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeaderModel())
+        stubHeaderMapperMapToEntity(makeHeaderEntity(), makeHeaderModel())
         stub${CLASS_NAME}ServiceCreate(requestEntity, model)
         stubSave${CLASS_NAME}EntityMapperMapFromRemote(model, entity)
 
@@ -61,7 +62,7 @@ class ${CLASS_NAME}RemoteImplTest {
         val model = makeGet${CLASS_NAME}Model(2)
         val entity = makeGet${CLASS_NAME}Entity(2)
 
-        stubHeaderMapperMapToEntity(HeaderFactory.makeHeaderEntity(), HeaderFactory.makeHeaderModel())
+        stubHeaderMapperMapToEntity(makeHeaderEntity(), makeHeaderModel())
         stub${CLASS_NAME}ServiceSearch(model)
         stubGet${CLASS_NAME}EntityMapperMapFromRemote(model, entity)
 
@@ -85,7 +86,7 @@ class ${CLASS_NAME}RemoteImplTest {
         whenever(save${CLASS_NAME}EntityMapper.mapFromRemote(model)).thenReturn(entity)
     }
 
-    private fun stubGet${CLASS_NAME}ServiceCreate(requestEntity: Save${CLASS_NAME}RequestEntity, model: Save${CLASS_NAME}Model) {
+    private fun stubGet${CLASS_NAME}ServiceCreate(requestEntity: Save${CLASS_NAME}Entity, model: Save${CLASS_NAME}Model) {
         whenever(service.get${CLASS_NAME}(listOf(), Gson().toJson(requestEntity))).thenReturn(Single.just(model))
     }
 
