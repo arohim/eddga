@@ -21,7 +21,7 @@ class ApiGateWayAction : AnAction() {
         val classNameTemplateModel = ClassNameTemplateModel(
                 dialogTitle = "Api Gateway",
                 templateName = "ApiGateWay",
-                fileNameSuffix = "GateWay"
+                fileNameSuffix = "Gateway"
         )
         controller.onActionHandled(e, classNameTemplateModel)
     }
