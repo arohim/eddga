@@ -70,7 +70,7 @@ open class CoreGeneratorViewBinder @Inject constructor() {
     private fun bindCheckBox(component: ProjectConfigurationComponent, generatorView: CoreGeneratorVew) {
         generatorView.genDomainCheckBox.isSelected = component.domainCheckBox
         generatorView.genRogueCheckBox.isSelected = component.rogueCheckBox
-        generatorView.genCacheCheckBox.isSelected = component.rogueCheckBox
+        generatorView.genCacheCheckBox.isSelected = component.cacheCheckBox
         generatorView.genDataCheckBox.isSelected = component.dataCheckBox
         generatorView.genRemoteCheckBox.isSelected = component.remoteCheckBox
         generatorView.genDomainTestCheckBox.isSelected = component.domainTestCheckBox
