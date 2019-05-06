@@ -25,8 +25,8 @@ class ${CLASS_NAME}RemoteDataStoreTest {
     @Test
     fun `Save ${CLASS_NAME}`() {
         // GIVEN
-        val requestEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}RequestEntity(10)
-        val responseEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(10)
+        val requestEntity = make${CLASS_NAME}Entity(10)
+        val responseEntity = make${CLASS_NAME}Entity(10)
         stub${CLASS_NAME}RemoteDataStore${CLASS_NAME}(Single.just(responseEntity), requestEntity)
 
         // WHEN
@@ -39,7 +39,7 @@ class ${CLASS_NAME}RemoteDataStoreTest {
     @Test
     fun `Get ${CLASS_NAME}`() {
         // GIVEN
-        val requestEntity = ${CLASS_NAME}Factory.make${CLASS_NAME}ResponseEntity(10)
+        val requestEntity = make${CLASS_NAME}Entity(10)
         stub${CLASS_NAME}RemoteDataStoreGet${CLASS_NAME}(Single.just(requestEntity))
 
         // WHEN
@@ -49,12 +49,12 @@ class ${CLASS_NAME}RemoteDataStoreTest {
         testObserver.assertComplete()
     }
 
-    private fun stub${CLASS_NAME}RemoteDataStoreCreateCriteria(single: Single<${CLASS_NAME}ResponseEntity>,
-        requestEntity: ${CLASS_NAME}RequestEntity) {
+    private fun stub${CLASS_NAME}RemoteDataStoreSave(single: Single<${CLASS_NAME}Entity>,
+        requestEntity: ${CLASS_NAME}Entity) {
         whenever(remoteDataStore.save${CLASS_NAME}(listOf(), requestEntity)).thenReturn(single)
     }
 
-    private fun stub${CLASS_NAME}RemoteDataStoreGet{CLASS_NAME}(single: Single<${CLASS_NAME}ResponseEntity>) {
+    private fun stub${CLASS_NAME}RemoteDataStoreGet${CLASS_NAME}(single: Single<${CLASS_NAME}Entity>) {
         whenever(remoteDataStore.get${CLASS_NAME}(listOf())).thenReturn(single)
     }
 }

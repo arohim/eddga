@@ -44,7 +44,7 @@ class ${CLASS_NAME}DataRepositoryTest {
         val domain = make${CLASS_NAME}(2)
         val entity = make${CLASS_NAME}Entity(2)
         stub${CLASS_NAME}CacheDataStoreGetList(Single.just(entity))
-        stub${CLASS_NAME}ResponseMapperMapFromEntity(entity, domain)
+        stub${CLASS_NAME}MapperMapFromEntity(entity, domain)
         stubHeaderMapperMapToEntity(makeHeaderEntity(), HeaderFactory.makeHeader())
 
         // WHEN
@@ -67,7 +67,7 @@ class ${CLASS_NAME}DataRepositoryTest {
     }
 
     private fun stub${CLASS_NAME}MapperMapFromEntity(mapperEntity: ${CLASS_NAME}Entity,
-                                                        response: ${CLASS_NAME}Response) {
+                                                        response: ${CLASS_NAME}) {
         whenever(responseMapper.mapFromEntity(mapperEntity)).thenReturn(response)
     }
 

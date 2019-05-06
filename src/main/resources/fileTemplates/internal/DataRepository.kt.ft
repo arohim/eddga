@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 open class ${CLASS_NAME}DataRepository @Inject constructor(
         private val factory: ${CLASS_NAME}DataStoreFactory,
-        private val responseMapper: ${CLASS_NAME}ResponseMapper,
+        private val mapper: ${CLASS_NAME}Mapper,
         private val headerMapper: HeaderMapper)
     : ${CLASS_NAME}Repository {
 
@@ -45,11 +45,11 @@ open class ${CLASS_NAME}DataRepository @Inject constructor(
 
     **/
 
-    fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}Response> {
+    fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}> {
         val headerEntity = headers.map { headerMapper.mapToEntity(it) }
         return factory.retrieveRemoteDataStore().getList(headerEntity)
                .map {
-                    responseMapper.mapFromEntity(it)
+                    mapper.mapFromEntity(it)
                }
     }
 }

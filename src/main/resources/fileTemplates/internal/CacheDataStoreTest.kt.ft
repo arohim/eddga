@@ -29,7 +29,7 @@ class ${CLASS_NAME}CacheDataStoreTest {
     @Test
     fun `Save ${CLASS_NAME}`() {
         // GIVEN
-        val data = make${CLASS_NAME}ResponseEntity(2)
+        val data = make${CLASS_NAME}Entity(2)
         whenever(cache.save${CLASS_NAME}ToCache(any())).thenReturn(Completable.complete())
 
         // WHEN
@@ -44,7 +44,7 @@ class ${CLASS_NAME}CacheDataStoreTest {
     fun `Get ${CLASS_NAME}`() {
         // GIVEN
         val headers = listOf<HeaderEntity>()
-        val data = make${CLASS_NAME}ResponseEntity(2)
+        val data = make${CLASS_NAME}Entity(2)
         whenever(cache.get${CLASS_NAME}()).thenReturn(Single.just(data))
 
         // WHEN

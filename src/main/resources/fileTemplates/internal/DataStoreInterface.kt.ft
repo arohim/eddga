@@ -6,8 +6,8 @@ import io.reactivex.Single
 #parse("File Header.java")
 interface ${CLASS_NAME}DataStore {
 
-    fun getList(): Single<${CLASS_NAME}ResponseEntity>
+    fun getList(): Single<${CLASS_NAME}Entity>
 
-    fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}ResponseEntity): Completable
+    fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}Entity): Completable
 
 }

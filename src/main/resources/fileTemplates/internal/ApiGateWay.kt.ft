@@ -7,5 +7,5 @@ import retrofit2.http.POST
 interface ${CLASS_NAME}Gateway {
 
     @POST("v1/list")
-    fun getList(): Single<${CLASS_NAME}ResponseModel>
+    fun getList(): Single<${CLASS_NAME}Model>
 }

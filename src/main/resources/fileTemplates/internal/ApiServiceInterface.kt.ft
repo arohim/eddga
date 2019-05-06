@@ -6,7 +6,7 @@ import io.reactivex.Single
 #parse("File Header.java")
 interface ${CLASS_NAME}Service : BaseService {
 
-    fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}ResponseModel>
+    fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}Model>
 
 }
 

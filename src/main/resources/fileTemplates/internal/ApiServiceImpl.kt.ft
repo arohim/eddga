@@ -13,6 +13,6 @@ open class ${CLASS_NAME}ServiceImpl @Inject constructor() : ${CLASS_NAME}Service
 
     override val baseUrl: String = BaseURL.HOST
 
-    override fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}ResponseModel> = gateWay<${CLASS_NAME}Gateway>(headers).getList()
+    override fun getList(headers: List<HeaderModel>): Single<${CLASS_NAME}Model> = gateWay<${CLASS_NAME}Gateway>(headers).getList()
 
 }

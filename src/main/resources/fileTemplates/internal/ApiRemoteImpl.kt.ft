@@ -8,15 +8,15 @@ import javax.inject.Inject
 
 #parse("File Header.java")
 class ${CLASS_NAME}RemoteImpl @Inject constructor(private val service: ${CLASS_NAME}Service,
-                                              private val responseEntityMapper: ${CLASS_NAME}ResponseEntityMapper,
+                                              private val entityMapper: ${CLASS_NAME}EntityMapper,
                                               private val headerModelMapper: HeaderModelMapper
 ) : ${CLASS_NAME}Remote {
 
-    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}ResponseEntity> {
+    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}Entity> {
         val headerModels = headers.map { headerModelMapper.mapToRemote(it) }
         return service.getList(headerModels)
                 .map {
-                    responseEntityMapper.mapFromRemote(it)
+                    entityMapper.mapFromRemote(it)
                 }
     }
 

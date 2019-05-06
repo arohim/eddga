@@ -8,15 +8,15 @@ import javax.inject.Inject
 open class ${CLASS_NAME}RemoteDataStore @Inject constructor(private val remote: ${CLASS_NAME}Remote)
     : ${CLASS_NAME}DataStore {
 
-    override fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}ResponseEntity): Completable {
+    override fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}Entity): Completable {
         throw UnsupportedOperationException()
     }
 
-    override fun getList(headers: List<HeaderEntity>, body: ${CLASS_NAME}RequestEntity): Single<${CLASS_NAME}ResponseEntity> {
+    override fun getList(headers: List<HeaderEntity>, body: ${CLASS_NAME}RequestEntity): Single<${CLASS_NAME}Entity> {
         return remote.getList(headers, body)
     }
 
-    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}ResponseEntity> {
+    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}Entity> {
         return remote.getList(headers, body)
     }
 

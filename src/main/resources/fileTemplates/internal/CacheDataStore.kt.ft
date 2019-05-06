@@ -9,11 +9,11 @@ import javax.inject.Inject
 open class ${CLASS_NAME}CacheDataStore @Inject constructor(private val cache: ${CLASS_NAME}Cache)
     : ${CLASS_NAME}DataStore {
 
-    override fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}ResponseEntity): Completable {
+    override fun save${CLASS_NAME}ToCache(data: ${CLASS_NAME}Entity): Completable {
         return cache.save${CLASS_NAME}ToCache(data)
     }
 
-    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}ResponseEntity> {
+    override fun getList(headers: List<HeaderEntity>): Single<${CLASS_NAME}Entity> {
         return cache.getList()
     }
 
