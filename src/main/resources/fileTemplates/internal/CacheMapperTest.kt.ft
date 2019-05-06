@@ -24,7 +24,7 @@ class ${CLASS_NAME}EntityMapperTest {
     @Test
     fun mapToCachedMapsData() {
         // GIVEN
-        val entity = ${CLASS_NAME}Factory.make${CLASS_NAME}Entity()
+        val entity = make${CLASS_NAME}Entity()
 
         // WHEN
         val cached = mapper.mapToCached(entity)
@@ -36,7 +36,7 @@ class ${CLASS_NAME}EntityMapperTest {
     @Test
     fun mapFromCachedMapsData() {
         // GIVEN
-        val cached = ${CLASS_NAME}Factory.makeCached${CLASS_NAME}()
+        val cached = makeCached${CLASS_NAME}()
 
         // WHEN
         val entity = mapper.mapFromCached(cached)

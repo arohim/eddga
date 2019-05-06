@@ -24,7 +24,7 @@ class ${CLASS_NAME}EntityMapperTest {
     @Test
     fun `map from remote`() {
         // GIVEN
-        val model = ${CLASS_NAME}Factory.make${CLASS_NAME}Model()
+        val model = make${CLASS_NAME}Model()
 
         // WHEN
         val entity = mapper.mapFromRemote(model)
