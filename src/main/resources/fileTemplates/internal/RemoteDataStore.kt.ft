@@ -12,7 +12,7 @@ open class ${CLASS_NAME}RemoteDataStore @Inject constructor(private val remote: 
         throw UnsupportedOperationException()
     }
 
-    override fun getList(headers: List<HeaderEntity>, body: ${CLASS_NAME}RequestEntity): Single<${CLASS_NAME}Entity> {
+    override fun getList(headers: List<HeaderEntity>, body: ${CLASS_NAME}eEntity): Single<${CLASS_NAME}Entity> {
         return remote.getList(headers, body)
     }
 
