@@ -132,4 +132,6 @@ public interface AppComponent {
     void inject(@NotNull RemoteStoreTestAction remoteStoreTestAction);
 
     void inject(@NotNull RemoteImplTestAction remoteImplTestAction);
+
+    void inject(@NotNull DaggerServiceModuleAction daggerServiceModuleAction);
 }

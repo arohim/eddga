@@ -29,8 +29,7 @@
     Added <br>
         - Fix invalid templates<br>
         - add more templates<br>
-        - asset .size instead of object equals if the class field is a list<br>
-        - auto set default value when creating nullable fields<br>
+        - Fix some bugs<br>
     ]]>
     </change-notes>
 
@@ -346,6 +345,13 @@
                 class="com.robohorse.robopojogenerator.actions.presentation.DaggerModuleAction"
                 icon="/icons/pojo.png"
                 text="Dagger Module">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+
+        <action id="DaggerServiceModuleAction"
+                class="com.robohorse.robopojogenerator.actions.presentation.DaggerServiceModuleAction"
+                icon="/icons/pojo.png"
+                text="Dagger Service Module">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
 

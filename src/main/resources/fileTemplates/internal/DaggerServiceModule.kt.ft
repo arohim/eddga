@@ -1,0 +1,31 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "") package ${PACKAGE_NAME}#end
+
+import com.app.dealfish.di.scopes.PerActivity
+import com.app.kaidee.data.shared.mapper.HeaderMapper
+import com.app.kaidee.domain.repository.HermesRepository
+import com.app.kaidee.remote.shared.mapper.HeaderModelMapper
+import dagger.Module
+import dagger.Provides
+
+#parse("File Header.java")
+@Module
+class ${CLASS_NAME}ServiceModule {
+
+    @Provides
+    @PerActivity
+    fun provide${CLASS_NAME}Service(impl: ${CLASS_NAME}ServiceImpl): ${CLASS_NAME}Service = impl
+
+    @Provides
+    @PerActivity
+    fun provide${CLASS_NAME}Remote(service: ${CLASS_NAME}Service,
+                            entityMapper: ${CLASS_NAME}EntityMapper,
+                            headerModelMapper: HeaderModelMapper)
+            : ${CLASS_NAME}Remote = ${CLASS_NAME}RemoteImpl(service, entityMapper, headerModelMapper)
+
+    @Provides
+    @PerActivity
+    internal fun provide${CLASS_NAME}Repository(factory: ${CLASS_NAME}DataStoreFactory,
+                                         mapper: ${CLASS_NAME}Mapper,
+                                         headerMapper: HeaderMapper)
+            : ${CLASS_NAME}Repository = ${CLASS_NAME}DataRepository(factory, mapper, headerMapper)
+}
