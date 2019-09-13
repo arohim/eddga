@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 open class ClassNameTemplateGeneratorViewBinder @Inject constructor() {
 
-    fun bindView(event: AnActionEvent, classNameTemplateModel: ClassNameTemplateModel, success: (className: String?) -> Unit) {
+    open fun bindView(event: AnActionEvent, classNameTemplateModel: ClassNameTemplateModel, success: (className: String?) -> Unit) {
         val className = Messages.showInputDialog(event.project,
                 "Enter Class Name",
                 classNameTemplateModel.dialogTitle,
