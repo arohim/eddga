@@ -7,6 +7,7 @@ import com.robohorse.robopojogenerator.generator.common.JsonItemArray
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
+import com.robohorse.robopojogenerator.models.GenerationModel
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -21,7 +22,7 @@ open class ClassProcessor @Inject constructor() {
     @Inject
     lateinit var classGenerateHelper: ClassGenerateHelper
 
-    open fun proceed(jsonItem: JsonItem, itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
+    open fun proceed(model: GenerationModel, jsonItem: JsonItem, itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
 
         val formatClassName = prefix + classGenerateHelper.formatClassName(jsonItem.key) + suffix
         val classItem = ClassItem(formatClassName)
@@ -40,7 +41,7 @@ open class ClassProcessor @Inject constructor() {
                     val item = JsonItem(jsonObject as JSONObject, jsonObjectKey)
 
                     classItem.addClassField(jsonObjectKey, classField)
-                    proceed(item, itemMap, prefix, suffix)
+                    proceed(model, item, itemMap, prefix, suffix)
                 }
 
                 override fun onJsonArrayIdentified() {
@@ -48,13 +49,13 @@ open class ClassProcessor @Inject constructor() {
                     classItem.addClassImport(ImportsTemplate.LIST)
 
                     val classField = ClassField()
+                    classField.listFormat = model.listFormat
                     if (jsonArray.length() == 0) {
-                        classField.setClassField(ClassField(ClassEnum.OBJECT))
+                        classField.classField = ClassField(ClassEnum.OBJECT)
                         classItem.addClassField(jsonObjectKey, classField)
-
                     } else {
                         val jsonItemArray = JsonItemArray(jsonObject, jsonObjectKey)
-                        proceedArray(jsonItemArray, classField, itemMap, prefix, suffix)
+                        proceedArray(model, jsonItemArray, classField, itemMap, prefix, suffix)
                         classItem.addClassField(jsonObjectKey, classField)
                     }
                 }
@@ -73,9 +74,9 @@ open class ClassProcessor @Inject constructor() {
         itemMap[className] = classItem
     }
 
-    private fun proceedArray(jsonItemArray: JsonItemArray,
-                             classField: ClassField,
-                             itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
+    private fun proceedArray(model: GenerationModel,
+                             jsonItemArray: JsonItemArray,
+                             classField: ClassField, itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
         val keyName = classGenerateHelper.getClassNameWithItemPostfix(jsonItemArray.key)
         val itemName = prefix + keyName + suffix
         if (jsonItemArray.jsonArray.length() != 0) {
@@ -83,7 +84,7 @@ open class ClassProcessor @Inject constructor() {
             val innerObjectResolver = object : InnerObjectResolver() {
 
                 override fun onInnerObjectIdentified(classType: ClassEnum) {
-                    classField.setClassField(ClassField(classType))
+                    classField.classField = ClassField(classType)
                 }
 
                 override fun onJsonObjectIdentified() {
@@ -92,22 +93,23 @@ open class ClassProcessor @Inject constructor() {
                     for (index in 0 until size) {
                         val jsonObject = jsonItemArray.jsonArray.get(index) as JSONObject
                         val jsonItem = JsonItem(jsonObject, keyName)
-                        proceed(jsonItem, innerItemsMap, prefix, suffix)
+                        proceed(model, jsonItem, innerItemsMap, prefix, suffix)
                     }
-                    classField.setClassField(ClassField(itemName))
+                    classField.classField = ClassField(itemName)
                     itemMap.putAll(innerItemsMap)
                 }
 
                 override fun onJsonArrayIdentified() {
-                    classField.setClassField(ClassField())
+                    classField.classField = ClassField()
+                    classField.listFormat = model.listFormat
                     val jsonItemArray = JsonItemArray(`object` as JSONArray, itemName)
-                    proceedArray(jsonItemArray, classField, itemMap, prefix, suffix)
+                    proceedArray(model, jsonItemArray, classField, itemMap, prefix, suffix)
                 }
             }
             innerObjectResolver.resolveClassType(`object`)
 
         } else {
-            classField.setClassField(ClassField(ClassEnum.OBJECT))
+            classField.classField = ClassField(ClassEnum.OBJECT)
         }
     }
 }
