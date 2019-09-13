@@ -50,7 +50,7 @@ jobs:
       - *restore-cache-gradle
       - run:
           name: Run Unit Tests
-          command: ./gradlew test
+          command: ./gradlew test jacoco
       - store_artifacts:
           path: build/reports/
           destination: /reports/
