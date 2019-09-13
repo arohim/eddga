@@ -21,7 +21,7 @@ open class ClassProcessor @Inject constructor() {
     @Inject
     lateinit var classGenerateHelper: ClassGenerateHelper
 
-    fun proceed(jsonItem: JsonItem, itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
+    open fun proceed(jsonItem: JsonItem, itemMap: MutableMap<String, ClassItem>, prefix: String?, suffix: String?) {
 
         val formatClassName = prefix + classGenerateHelper.formatClassName(jsonItem.key) + suffix
         val classItem = ClassItem(formatClassName)
