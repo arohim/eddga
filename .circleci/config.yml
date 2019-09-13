@@ -1,0 +1,87 @@
+version: 2
+aliases:
+  # Developer
+  - &save-cache-gradle
+    save_cache:
+      key: v1-eddga-{{ checksum "build.gradle" }}
+      paths:
+        - ~/.gradle
+        - /home/circleci/project/.gradle
+  - &restore-cache-gradle
+    restore_cache:
+      keys:
+        - v1-eddga-{{ checksum "build.gradle" }}-
+        - v1-eddga-
+  - &install-gradle-dependencies
+    run: ./gradlew dependencies -q
+  - &dependencies
+    - checkout
+    - *restore-cache-gradle
+    - *install-gradle-dependencies
+    - *save-cache-gradle
+
+  # Requirement groups
+  - &deps
+    - "Install Dependencies"
+
+## Declare jobs
+base_job: &base-job
+  machine: true
+  no_output_timeout: 2h
+
+jobs:
+  "Install Dependencies":
+    <<: *base-job
+    steps: *dependencies
+
+  "Lint":
+    <<: *base-job
+    steps:
+      - checkout
+      - *restore-cache-gradle
+      - run:
+          name: Run Lint
+          command: echo "No Lint Yet!"
+
+  "Unit Testing":
+    <<: *base-job
+    steps:
+      - checkout
+      - *restore-cache-gradle
+      - run:
+          name: Run Unit Tests
+          command: ./gradlew test jacocoTestReport
+      - store_artifacts:
+          path: build/reports/
+          destination: /reports/
+      - store_test_results:
+          path: build/test-results/
+          destination: /test-results/
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - "Install Dependencies":
+          filters:
+            branches:
+              only:
+                - /^feature\/.*/
+                - /^release\/v.*/
+                - /^hotfix\/v.*/
+      - "Lint":
+          requires: *deps
+          filters:
+            branches:
+              only:
+                - /^feature\/.*/
+                - /^release\/v.*/
+                - /^hotfix\/v.*/
+      - "Unit Testing":
+          requires: *deps
+          filters:
+            branches:
+              only:
+                - /^feature\/.*/
+                - /^release\/v.*/
+                - /^hotfix\/v.*/

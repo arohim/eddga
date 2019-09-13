@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/arohim/eddga/tree/develop.svg?style=svg)](https://circleci.com/gh/arohim/eddga/tree/develop)
+
 # Android Clean Architecture Generator
 
 This is an internal plugin but openly to use, I make for using very specific Android Clean Architecture [https://github.com/bufferapp/android-clean-architecture-boilerplate] <br>
