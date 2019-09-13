@@ -8,6 +8,7 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
 import com.robohorse.robopojogenerator.view.binders.CoreGeneratorViewBinder;
+import com.robohorse.robopojogenerator.view.binders.CorePOJOGeneratorViewBinder;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -26,15 +27,12 @@ public class GeneratePOJOActionControllerTest {
 
     @InjectMocks
     POJOGeneratorActionController generatePOJOActionController;
-
     @Mock
     EnvironmentDelegate environmentDelegate;
     @Mock
     MessageDelegate messageDelegate;
     @Mock
-    CoreGeneratorViewBinder generatorViewBinder;
-    @Mock
-    POJOGenerationDelegate generationDelegate;
+    CorePOJOGeneratorViewBinder corePOJOGeneratorViewBinder;
 
     @Before
     public void setUp() {
@@ -51,7 +49,7 @@ public class GeneratePOJOActionControllerTest {
 
         when(environmentDelegate.obtainProjectModel(event)).thenReturn(projectModel);
         generatePOJOActionController.onActionHandled(event, generationModel);
-        verify(generatorViewBinder).bindView(any(), any(), any());
+        verify(corePOJOGeneratorViewBinder).bindView(any(), any(), any(), any());
     }
 
     @Test

@@ -63,6 +63,7 @@ ext.daggerVersion = '2.6'
 
 dependencies {
     testCompile "junit:junit:4.12"
+    testCompile "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     testCompile 'org.mockito:mockito-core:2.27.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"

@@ -1,5 +1,8 @@
 package com.robohorse.robopojogenerator.generator
 
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.whenever
 import com.robohorse.robopojogenerator.generator.common.JsonItem
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
@@ -8,25 +11,20 @@ import junit.framework.Assert.assertNotNull
 import org.json.JSONObject
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 /**
  * Created by vadim on 22.10.16.
  */
 class RoboPOJOGeneratorTest {
+
     @InjectMocks
     lateinit var roboPOJOGenerator: RoboPOJOGenerator
 
     @Mock
     lateinit var classProcessor: ClassProcessor
-
-    @Mock
-    lateinit var classGenerateHelper: ClassGenerateHelper
 
     @Before
     fun setUp() {
@@ -43,8 +41,8 @@ class RoboPOJOGeneratorTest {
                 .build()
 
         val jsonItem = JsonItem(JSONObject(), "Response")
-//        `when`(classProcessor.proceed(any(), any(), any(), any())).thenReturn(null)
-        `when`(classGenerateHelper.formatClassName(anyString())).thenReturn("name")
+        whenever(classProcessor.proceed(anyOrNull(), anyOrNull(), anyOrNull(), anyOrNull())).then { }
+//        `when`(classGenerateHelper.formatClassName(anyString())).thenReturn("name")
 
         //        when(classProcessor.proceed(ArgumentMatchers.anyObject(), ArgumentMatchers.anyObject(),
         //                ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(null);

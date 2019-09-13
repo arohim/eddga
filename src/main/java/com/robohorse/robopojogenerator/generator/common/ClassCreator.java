@@ -14,6 +14,7 @@ import java.util.Set;
  * Created by vadim on 02.10.16.
  */
 public class ClassCreator {
+    
     @Inject
     RoboPOJOGenerator roboPOJOGenerator;
 
