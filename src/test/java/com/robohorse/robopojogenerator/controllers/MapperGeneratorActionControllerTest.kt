@@ -1,8 +1,9 @@
 package com.robohorse.robopojogenerator.controllers
 
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
-import com.robohorse.robopojogenerator.delegates.MapperGeneratorDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.models.MapperGeneratorModel
@@ -15,7 +16,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 
@@ -43,8 +43,13 @@ class MapperGeneratorActionControllerTest {
     fun onActionHandled() {
         val projectModel = ProjectModel.Builder().build()
         val event = Mockito.mock(AnActionEvent::class.java)
-        val mapperGeneratorModel = MapperGeneratorModel(fileNameSuffix = "templateName", templateName = "templateName",
-                mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity", isNullable = false)
+        val mapperGeneratorModel = MapperGeneratorModel(
+                fileNameSuffix = "templateName",
+                templateName = "templateName",
+                mapToMethodName = "mapToEntity",
+                mapFromMethodName = "mapFromEntity",
+                isNullable = false
+        )
 
         `when`(environmentDelegate.obtainProjectModel(event)).thenReturn(projectModel)
         controller.onActionHandled(event, mapperGeneratorModel)
@@ -56,8 +61,13 @@ class MapperGeneratorActionControllerTest {
     fun onActionHandled_withError() {
         val exception = RoboPluginException("", "")
         val event = Mockito.mock(AnActionEvent::class.java)
-        val mapperGeneratorModel = MapperGeneratorModel(fileNameSuffix = "templateName", templateName = "templateName",
-                mapToMethodName = "mapToEntity", mapFromMethodName = "mapFromEntity", isNullable = false)
+        val mapperGeneratorModel = MapperGeneratorModel(
+                fileNameSuffix = "templateName",
+                templateName = "templateName",
+                mapToMethodName = "mapToEntity",
+                mapFromMethodName = "mapFromEntity",
+                isNullable = false
+        )
 
         `when`(environmentDelegate.obtainProjectModel(event)).thenThrow(exception)
         controller.onActionHandled(event, mapperGeneratorModel)
