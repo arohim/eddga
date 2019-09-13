@@ -18,7 +18,7 @@ open class RoboPOJOGenerator @Inject constructor() {
     @Inject
     lateinit var processor: ClassProcessor
 
-    fun generate(model: GenerationModel): Set<ClassItem> {
+    open fun generate(model: GenerationModel): Set<ClassItem> {
         val jsonObject = JSONObject(model.content)
         val map = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, model.rootClassName)

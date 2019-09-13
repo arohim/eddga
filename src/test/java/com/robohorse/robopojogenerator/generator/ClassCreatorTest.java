@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.generator;
 import com.robohorse.robopojogenerator.generator.common.ClassCreator;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor;
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
 import com.robohorse.robopojogenerator.delegates.FileWriterDelegate;
@@ -32,13 +33,9 @@ public class ClassCreatorTest {
     @Mock
     FileWriterDelegate fileWriterDelegate;
 
-    @Mock
-    ClassProcessor classProcessor;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        roboPOJOGenerator.processor = classProcessor;
     }
 
     @Test
