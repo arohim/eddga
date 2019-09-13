@@ -14,7 +14,7 @@ import javax.inject.Inject
  */
 open class CoreGeneratorViewBinder @Inject constructor() {
 
-    fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: CoreGeneratorFormEventListener) {
+    open fun bindView(builder: DialogBuilder, event: AnActionEvent, eventListener: CoreGeneratorFormEventListener) {
         val generatorView = CoreGeneratorVew()
 
         val actionListener = MultiPOJOGenerateActionListener(generatorView, event, eventListener)
