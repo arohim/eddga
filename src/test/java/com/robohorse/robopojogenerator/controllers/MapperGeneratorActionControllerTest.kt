@@ -33,9 +33,6 @@ class MapperGeneratorActionControllerTest {
     @Mock
     lateinit var coreGeneratorViewBinder: CorePOJOGeneratorViewBinder
 
-    @Mock
-    lateinit var generationDelegate: MapperGeneratorDelegate
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
