@@ -2,7 +2,9 @@ package com.robohorse.robopojogenerator.generator.processing
 
 import com.robohorse.robopojogenerator.generator.common.ClassItem
 import com.robohorse.robopojogenerator.generator.common.JsonItem
+import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
+import com.robohorse.robopojogenerator.models.GenerationModel
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -19,6 +21,7 @@ import java.util.*
  */
 
 class ClassProcessorTest {
+
     private val jsonReader = JsonReader()
 
     @InjectMocks
@@ -39,12 +42,17 @@ class ClassProcessorTest {
         val name = "Response"
         val prefix = "Prefix"
         val suffix = "Suffix"
+        val generationModel = GenerationModel.Builder()
+                .setContent("")
+                .setRootClassName(name)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .build()
 
         `when`(classGenerateHelper.formatClassName(name)).thenReturn(name)
 
         val classItemMap = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, name)
-        classProcessor.proceed(jsonItem, classItemMap, prefix, suffix)
+        classProcessor.proceed(generationModel, jsonItem, classItemMap, prefix, suffix)
         assertTrue(classItemMap.size == 1)
 
         val iterator = classItemMap.values.iterator()
@@ -68,6 +76,11 @@ class ClassProcessorTest {
         val jsonObject = jsonReader.read("inner_json_object.json")
         val innerJsonObject = jsonObject.optJSONObject("data")
         val name = "Response"
+        val generationModel = GenerationModel.Builder()
+                .setContent("")
+                .setRootClassName(name)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .build()
 
         `when`(classGenerateHelper.formatClassName(name)).thenReturn(name)
         `when`(classGenerateHelper.formatClassName("data")).thenReturn("Data")
@@ -76,7 +89,7 @@ class ClassProcessorTest {
         val jsonItem = JsonItem(jsonObject, name)
 
         // WHEN
-        classProcessor.proceed(jsonItem, classItemMap, "", "")
+        classProcessor.proceed(generationModel, jsonItem, classItemMap, "", "")
 
         // THEN
         assertTrue(classItemMap.size == 2)
@@ -103,13 +116,17 @@ class ClassProcessorTest {
     fun testEmptyArrayGeneration_isCorrect() {
         val jsonObject = jsonReader.read("empty_array.json")
         val name = "Response"
+        val generationModel = GenerationModel.Builder()
+                .setContent("")
+                .setRootClassName(name)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .build()
 
-        `when`(classGenerateHelper!!.formatClassName(name))
-                .thenReturn(name)
+        `when`(classGenerateHelper.formatClassName(name)).thenReturn(name)
         val classItemMap = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, name)
 
-        classProcessor!!.proceed(jsonItem, classItemMap, "", "")
+        classProcessor.proceed(generationModel, jsonItem, classItemMap, "", "")
         assertTrue(classItemMap.size == 1)
 
         val iterator = classItemMap.values.iterator()
@@ -134,12 +151,17 @@ class ClassProcessorTest {
         val jsonObject = jsonReader.read("array_with_primitive.json")
         val name = "Response"
         val targetType = "List<Integer>"
+        val generationModel = GenerationModel.Builder()
+                .setContent("")
+                .setRootClassName(name)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .build()
 
         `when`(classGenerateHelper.formatClassName(name)).thenReturn(name)
 
         val classItemMap = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, name)
-        classProcessor.proceed(jsonItem, classItemMap, "", "")
+        classProcessor.proceed(generationModel, jsonItem, classItemMap, "", "")
 
         assertTrue(classItemMap.size == 1)
 
@@ -167,14 +189,20 @@ class ClassProcessorTest {
         val innerJsonObject = innerJsonArray.getJSONObject(0)
         val name = "Response"
         val targetType = "List<DataItem>"
+        val generationModel = GenerationModel.Builder()
+                .setContent("")
+                .setRootClassName(name)
+                .setListFormat(ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM)
+                .build()
 
-        `when`(classGenerateHelper!!.formatClassName(name))
+        `when`(classGenerateHelper.formatClassName(name))
                 .thenReturn(name)
-        `when`(classGenerateHelper!!.getClassNameWithItemPostfix(Mockito.anyString())).thenReturn("DataItem")
+        `when`(classGenerateHelper.getClassNameWithItemPostfix(Mockito.anyString())).thenReturn("DataItem")
 
         val classItemMap = HashMap<String, ClassItem>()
         val jsonItem = JsonItem(jsonObject, name)
-        classProcessor!!.proceed(jsonItem, classItemMap, "", "")
+
+        classProcessor.proceed(generationModel, jsonItem, classItemMap, "", "")
 
         assertTrue(classItemMap.size == 2)
 

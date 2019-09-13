@@ -4,8 +4,8 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.whenever
 import com.robohorse.robopojogenerator.generator.common.JsonItem
+import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate.NON_NULL_LIST_OF_ITEM
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
-import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
 import junit.framework.Assert.assertNotNull
 import org.json.JSONObject
@@ -38,14 +38,10 @@ class RoboPOJOGeneratorTest {
         val generationModel = GenerationModel.Builder()
                 .setContent(json)
                 .setRootClassName("Response")
+                .setListFormat(NON_NULL_LIST_OF_ITEM)
                 .build()
 
-        val jsonItem = JsonItem(JSONObject(), "Response")
-        whenever(classProcessor.proceed(anyOrNull(), anyOrNull(), anyOrNull(), anyOrNull())).then { }
-//        `when`(classGenerateHelper.formatClassName(anyString())).thenReturn("name")
-
-        //        when(classProcessor.proceed(ArgumentMatchers.anyObject(), ArgumentMatchers.anyObject(),
-        //                ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(null);
+        whenever(classProcessor.proceed(any(), anyOrNull(), anyOrNull(), anyOrNull(), anyOrNull())).then { }
         val classItemSet = roboPOJOGenerator.generate(generationModel)
         assertNotNull(classItemSet)
     }
