@@ -40,17 +40,17 @@ aliases:
     - "Install Dependencies"
 
 ## Declare jobs
-base_job: &base_job
+base_job: &base-job
   machine: true
   no_output_timeout: 2h
 
 jobs:
   "Install Dependencies":
-    <<: *base_job
+    <<: *base-job
     steps: *dependencies
 
   "Lint":
-    <<: *base_job
+    <<: *base-job
     steps:
       - checkout
       - *restore-cache-gem
@@ -61,7 +61,7 @@ jobs:
           command: echo "No Lint Yet!"
 
   "Unit Testing":
-    <<: *base_job
+    <<: *base-job
     steps:
       - checkout
       - *restore-cache-gem
