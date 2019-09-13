@@ -1,18 +1,6 @@
 version: 2
 aliases:
   # Developer
-  - &save-cache-gem
-    save_cache:
-      key: v1-gems-{{ checksum "Gemfile.lock" }}
-      paths:
-        - vendor/bundle
-  - &restore-cache-gem
-    restore_cache:
-      keys:
-        - v1-gems-{{ checksum "Gemfile.lock" }}
-        - v1-gems-
-  - &install-gem
-    run: bundle check || bundle install --path=vendor/bundle --jobs 4 --retry 3
   - &save-cache-gradle
     save_cache:
       key: v1-eddga-{{ checksum "build.gradle" }}
@@ -28,9 +16,6 @@ aliases:
     run: ./gradlew dependencies -q
   - &dependencies
     - checkout
-    - *restore-cache-gem
-    - *install-gem
-    - *save-cache-gem
     - *restore-cache-gradle
     - *install-gradle-dependencies
     - *save-cache-gradle
@@ -53,8 +38,6 @@ jobs:
     <<: *base-job
     steps:
       - checkout
-      - *restore-cache-gem
-      - *install-gem
       - *restore-cache-gradle
       - run:
           name: Run Lint
@@ -64,17 +47,15 @@ jobs:
     <<: *base-job
     steps:
       - checkout
-      - *restore-cache-gem
-      - *install-gem
       - *restore-cache-gradle
       - run:
           name: Run Unit Tests
-          command: bundle exec fastlane unit_test
+          command: ./gradlew test
       - store_artifacts:
-          path: legacy/build/reports/
+          path: build/reports/
           destination: /reports/
       - store_test_results:
-          path: legacy/build/test-results/
+          path: build/test-results/
           destination: /test-results/
 
 workflows:
